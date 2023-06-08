@@ -1,0 +1,44 @@
+*{
+    text-align: center;
+}
+
+td {
+    height: 30px;
+}
+
+.outer_table {
+    border: 2px solid black;
+    margin: 10px;
+    width: 300px;
+    border-collapse: collapse;
+}
+
+.ends_table td{   
+    border: 1px solid black;
+    width : 200px;
+    text-align: center;
+    font-variant: small-caps;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.inner_table td{   
+    border: 1px solid black;
+    width : 200px;
+    text-align: center;
+    font-variant: small-caps;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.input_column{
+    width: 100px;
+}
+
+.input_row{
+    border: 1px solid black;
+}
+
+.end{
+    background-color: lightgray;
+}
