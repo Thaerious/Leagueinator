@@ -25,10 +25,9 @@ namespace Leagueinator.Forms {
             if (File.Exists(Properties.Settings.Default.last_save_name)) {
                 loadFile(Properties.Settings.Default.last_save_name);                
             }
-
+                        
             this.eventsPanel.OnEventCardSelect += (s, e) => this.editEvent(e.LeagueEvent);            
-        }
-                
+        }                
 
         private void loadFile(string fullpath) {
             Properties.Settings.Default.save_dir = Path.GetDirectoryName(fullpath);
@@ -116,11 +115,13 @@ namespace Leagueinator.Forms {
         private void menuViewPlayers(object sender, EventArgs e) {
             this.playersPanel.Visible = true;
             this.eventsPanel.Visible = false;
+            this.editEventPanel.Visible = false;
         }
 
         private void menuViewEvents(object sender, EventArgs e) {
             this.playersPanel.Visible = false;
             this.eventsPanel.Visible = true;
+            this.editEventPanel.Visible = false;
         }
 
         private void editEvent(LeagueEvent leagueEvent) {
