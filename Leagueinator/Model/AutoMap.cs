@@ -9,12 +9,12 @@ namespace Leagueinator.Model {
 
         public new T this[K key] {
             get { 
-                if (!this.Keys.Contains(key)) {
-                    this[key] = new T();
+                if (!base.Keys.Contains(key)) {
+                    base[key] = new T();
                 }
-                return this[key]; 
+                return base[key]; 
             }
-            set { this[key] = value; }
+            set { base[key] = value; }
         }
 
     }

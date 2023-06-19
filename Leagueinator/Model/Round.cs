@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
 using Leagueinator.Components;
 
 namespace Leagueinator.Model {
@@ -21,6 +23,24 @@ namespace Leagueinator.Model {
             };
 
             return that;
+        }
+
+        public override string ToString() {
+            var idle = string.Join(",", this.IdlePlayers.ConvertAll<string>(p => p.Name));
+
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("{");
+            builder.AppendLine($"\tIdle: [{idle}]");
+            builder.AppendLine($"\tMatches: [");
+
+            foreach (int lane in this.Matches.Keys) {
+                builder.AppendLine($"\t\t{lane} : {this.Matches[lane]}");
+            }
+
+            builder.AppendLine($"\t]");
+            builder.AppendLine("}");
+
+            return builder.ToString();
         }
     }
 

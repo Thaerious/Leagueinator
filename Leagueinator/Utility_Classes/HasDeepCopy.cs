@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Leagueinator.Model;
 
-namespace Leagueinator.Model {
+namespace Leagueinator {
     public interface HasDeepCopy <T> {
         T DeepCopy ();
     }
@@ -15,6 +16,14 @@ namespace Leagueinator.Model {
         public static Dictionary<K,V> DeepCopy<K,V>(this Dictionary<K,V> that) where V : HasDeepCopy<V> {
             Dictionary<K,V> map = new Dictionary<K,V>();
             foreach(K key in that.Keys) {
+                map[key] = that[key].DeepCopy();
+            }
+            return map;
+        }
+
+        public static AutoMap<K, V> DeepCopy<K, V>(this AutoMap<K, V> that) where V : HasDeepCopy<V>, new() {
+            AutoMap<K, V> map = new AutoMap<K, V>();
+            foreach (K key in that.Keys) {
                 map[key] = that[key].DeepCopy();
             }
             return map;

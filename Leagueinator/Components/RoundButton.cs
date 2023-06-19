@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
-    internal class RoundButton : System.Windows.Forms.Button {
-        public readonly Round Round;
+    internal class RoundButton : System.Windows.Forms.Button, IModelRound {
+        public Round Round { get; set; }
 
 
         public bool Selected {

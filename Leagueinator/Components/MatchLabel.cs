@@ -11,7 +11,7 @@ using Leagueinator.Model;
 namespace Leagueinator.Components {
     public class MatchLabel : Label, IModelPlayer {
         public delegate void MatchLabelUpdate(object sender, MatchLabelArgs args);
-        public event MatchLabelUpdate Update;
+        public event MatchLabelUpdate OnUpdate;
 
 
         [Category("Misc"), Description("The team number for this label.")]
@@ -28,8 +28,8 @@ namespace Leagueinator.Components {
                 if (value == null) this.Text = "";
                 else this.Text = value.Name;
 
-                if (this.Update == null) return;
-                this.Update(this, new MatchLabelArgs {
+                if (this.OnUpdate == null) return;
+                this.OnUpdate(this, new MatchLabelArgs {
                     PlayerInfo = value,
                     Team = this.Team,
                     Position = this.Position
