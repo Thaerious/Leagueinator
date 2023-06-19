@@ -37,9 +37,9 @@
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.tableRoot = new System.Windows.Forms.TableLayoutPanel();
             this.panelContents = new System.Windows.Forms.Panel();
-            this.playersPanel = new Leagueinator.Components.PlayersPanel();
-            this.eventsPanel = new Leagueinator.Components.EventsPanel();
             this.editEventPanel = new Leagueinator.Components.EditEventPanel();
+            this.eventsPanel = new Leagueinator.Components.EventsPanel();
+            this.playersPanel = new Leagueinator.Components.PlayersPanel();
             this.menuStrip.SuspendLayout();
             this.tableRoot.SuspendLayout();
             this.panelContents.SuspendLayout();
@@ -60,33 +60,33 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(178, 34);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.menuFileNew);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(178, 34);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.menuFileLoad);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(178, 34);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.menuFileClose);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(267, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(175, 6);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(178, 34);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.menuSettings);
             // 
@@ -124,7 +124,7 @@
             // menuActionAddEvent
             // 
             this.menuActionAddEvent.Name = "menuActionAddEvent";
-            this.menuActionAddEvent.Size = new System.Drawing.Size(270, 34);
+            this.menuActionAddEvent.Size = new System.Drawing.Size(196, 34);
             this.menuActionAddEvent.Text = "Add Event";
             this.menuActionAddEvent.Click += new System.EventHandler(this.newEvent);
             // 
@@ -169,15 +169,14 @@
             this.panelContents.Size = new System.Drawing.Size(1254, 776);
             this.panelContents.TabIndex = 3;
             // 
-            // playersPanel
+            // editEventPanel
             // 
-            this.playersPanel.DBManager = null;
-            this.playersPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.playersPanel.Location = new System.Drawing.Point(0, 0);
-            this.playersPanel.Name = "playersPanel";
-            this.playersPanel.Size = new System.Drawing.Size(1254, 776);
-            this.playersPanel.TabIndex = 0;
-            this.playersPanel.Visible = false;
+            this.editEventPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.editEventPanel.Location = new System.Drawing.Point(0, 0);
+            this.editEventPanel.Name = "editEventPanel";
+            this.editEventPanel.Size = new System.Drawing.Size(1254, 776);
+            this.editEventPanel.TabIndex = 0;
+            this.editEventPanel.Visible = false;
             // 
             // eventsPanel
             // 
@@ -190,14 +189,14 @@
             this.eventsPanel.TabIndex = 1;
             this.eventsPanel.Visible = false;
             // 
-            // editEventPanel
+            // playersPanel
             // 
-            this.editEventPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.editEventPanel.Location = new System.Drawing.Point(0, 0);
-            this.editEventPanel.Name = "editEventPanel";
-            this.editEventPanel.Size = new System.Drawing.Size(1254, 776);
-            this.editEventPanel.TabIndex = 0;
-            this.editEventPanel.Visible = false;
+            this.playersPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.playersPanel.Location = new System.Drawing.Point(0, 0);
+            this.playersPanel.Name = "playersPanel";
+            this.playersPanel.Size = new System.Drawing.Size(1254, 776);
+            this.playersPanel.TabIndex = 0;
+            this.playersPanel.Visible = false;
             // 
             // FormMain
             // 

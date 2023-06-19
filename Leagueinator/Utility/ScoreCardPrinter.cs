@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using iText.Html2pdf;
 
-namespace Leagueinator.utility_classes {
+namespace Leagueinator.Utility {
     public class ScoreCardPrinter {
         public static void Print(RoundCollection roundCollection) {
             Queue<Match> matchList = new Queue<Match>();

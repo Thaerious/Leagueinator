@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Leagueinator.utility_classes {
+namespace Leagueinator.Utility {
     public class PlayerInfo {
         public long SQLIndex { get; }
         public string Name { get; set; }

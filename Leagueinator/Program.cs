@@ -18,10 +18,9 @@ namespace Leagueinator
         static void Main()
         {
             Debug.WriteLine("Starting Program");
-            var db = new DBManager("D://scratch/event.db");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMain());
+            Application.Run(new FormMain().DebugSetup());
         }
     }
 }

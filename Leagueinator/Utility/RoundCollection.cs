@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Leagueinator.utility_classes {
+namespace Leagueinator.Utility {
     public class RoundCollection {
         private readonly Dictionary<int, Round> rounds = new Dictionary<int, Round>();
         private HasPlayerInfo playerInfoSource;

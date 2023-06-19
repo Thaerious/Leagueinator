@@ -186,6 +186,10 @@
     <Compile Include="Components\BuyCard.Designer.cs">
       <DependentUpon>BuyCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\DragData.cs" />
+    <Compile Include="Components\MatchLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Components\EditEventPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -204,12 +208,29 @@
     <Compile Include="Components\EventsPanel.Designer.cs">
       <DependentUpon>EventsPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\MatchCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\MatchCard.Designer.cs">
+      <DependentUpon>MatchCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\MatchLabelData.cs" />
+    <Compile Include="Components\PlayerListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\PlayerListBox.Designer.cs">
+      <DependentUpon>PlayerListBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\PlayersPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Components\PlayersPanel.Designer.cs">
       <DependentUpon>PlayersPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\RoundButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Model\Settings.cs" />
     <Compile Include="Components\SettingsPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -228,35 +249,18 @@
     <Compile Include="Forms\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\AutoMap.cs" />
+    <Compile Include="Model\HasDeepCopy.cs" />
+    <Compile Include="Model\League.cs" />
+    <Compile Include="Model\Match.cs" />
+    <Compile Include="Model\Round.cs" />
     <Compile Include="Model\LeagueEvent.cs" />
-    <Compile Include="Utility_Classes\EventDB.cs" />
-    <Compile Include="Utility_Classes\Match.cs" />
-    <Compile Include="Utility_Classes\PlayerInfo.cs" />
-    <Compile Include="Components\PlayerInfoBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Model\Team.cs" />
+    <Compile Include="Model\PlayerInfo.cs" />
     <Compile Include="Utility_Classes\ToStringExtentions.cs" />
-    <Compile Include="Utility_Classes\Team.cs" />
-    <Compile Include="Utility_Classes\TeamCollection.cs" />
-    <Compile Include="Utility_Classes\Round.cs" />
-    <Compile Include="Forms\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Components\Matchpanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Components\Matchpanel.Designer.cs">
-      <DependentUpon>Matchpanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Utility_Classes\DBManager.cs" />
-    <Compile Include="Utility_Classes\RoundCollection.cs" />
     <Compile Include="Utility_Classes\StringInterpolator.cs" />
-    <Compile Include="Utility_Classes\ScoreCardPrinter.cs" />
     <Compile Include="Utility_Classes\RandomExtensions.cs" />
     <EmbeddedResource Include="Components\BuyCard.resx">
       <DependentUpon>BuyCard.cs</DependentUpon>
@@ -270,14 +274,14 @@
     <EmbeddedResource Include="Components\EventsPanel.resx">
       <DependentUpon>EventsPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\MatchCard.resx">
+      <DependentUpon>MatchCard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\PlayersPanel.resx">
       <DependentUpon>PlayersPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\SettingsPanel.resx">
       <DependentUpon>SettingsPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
@@ -294,9 +298,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Components\Matchpanel.resx">
-      <DependentUpon>Matchpanel.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Leagueinator_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

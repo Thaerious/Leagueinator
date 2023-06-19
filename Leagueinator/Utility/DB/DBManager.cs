@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Org.BouncyCastle.Asn1.X500;
 
-namespace Leagueinator.utility_classes {
+namespace Leagueinator.Utility {
     public class DBManager {
         private string dbfile;
 
@@ -17,7 +17,6 @@ namespace Leagueinator.utility_classes {
 
         public void CreateTables() {
             SQLiteConnection connection = CreateConnection();
-
 
             SQLiteCommand  command1 = connection.CreateCommand();
             command1.CommandText = @"CREATE TABLE IF NOT EXISTS players (
@@ -131,6 +130,11 @@ namespace Leagueinator.utility_classes {
         SQLiteConnection CreateConnection() {
             SQLiteConnection connection = new SQLiteConnection($"Data Source={this.dbfile}; Version = 3; New = True; Compress = True; ");
             connection.Open();
+
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = "PRAGMA journal_mode=WAL";
+            command.ExecuteNonQuery();
+
             return connection;
         }
     }
