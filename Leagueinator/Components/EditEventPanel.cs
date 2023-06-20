@@ -20,12 +20,13 @@ namespace Leagueinator.Components {
 
         private LeagueEvent leagueEvent = null;
         public LeagueEvent LeagueEvent {
+            get { return leagueEvent; }
             set {
                 if (value != null) {
                     this.flowRounds.Controls.Clear();
-                    this.listPlayers.Items.Clear();
+                    this.playerListBox.Items.Clear();
 
-                    this.leagueEvent = value.DeepCopy();
+                    this.leagueEvent = value;
                     this.leagueEvent.Rounds.ForEach(r => this.AddRound(r));
                     this.currentRoundButton = null;
                 }
@@ -33,44 +34,7 @@ namespace Leagueinator.Components {
         }
 
         private Round GetCurrentRound() {
-            Round round = new Round();
-
-            for (int lane = 1; lane <= FormMain.Settings.LaneCount; lane++) {
-                Control[] controls = this.Controls.Find($"matchCard{lane}", true);
-                MatchCard matchCard = controls[0] as MatchCard;
-
-                if (matchCard.Match.Players().Count > 0) {
-                    round.Matches.Add(lane - 1, matchCard.Match);
-                }
-            }
-
-            foreach (PlayerInfo player in this.listPlayers.Items) {
-                round.IdlePlayers.Add(player);
-            }
-
-            return round;
-        }
-
-        private void ShowRound(Round round) {
-            Debug.WriteLine($"Show Round");
-            Debug.WriteLine(round);
-            Debug.WriteLine("--------------------");
-
-            this.listPlayers.Items.Clear();
-            round.IdlePlayers.ForEach(p => this.listPlayers.Items.Add(p));
-
-            for (int lane = 1; lane <= FormMain.Settings.LaneCount; lane++) {
-                Control[] controls = this.Controls.Find($"matchCard{lane}", true);
-                MatchCard matchCard = controls[0] as MatchCard;
-
-                if (round.Matches.ContainsKey(lane)) {
-                    Debug.WriteLine($"round match has key {lane}");
-                    Debug.WriteLine(round.Matches[lane]);
-                    matchCard.Match = round.Matches[lane];
-                } else {
-                    matchCard.Clear();
-                }
-            }
+            return currentRoundButton.Round;
         }
 
         private void AddRound(Round round) {
@@ -96,7 +60,16 @@ namespace Leagueinator.Components {
             }
 
             this.currentRoundButton = button;
-            this.ShowRound(button.Round);
+            this.playerListBox.Round = currentRoundButton.Round;
+            this.PopulateMatches(button.Round);
+        }
+
+        private void PopulateMatches(Round round) {
+            for (int lane = 1; lane <= FormMain.Settings.LaneCount; lane++) {
+                Control[] controls = this.Controls.Find($"matchCard{lane}", true);
+                MatchCard matchCard = controls[0] as MatchCard;
+                matchCard.Match = round.Matches[lane - 1];
+            }
         }
 
         private void AddRoundHnd(object sender, EventArgs e) {

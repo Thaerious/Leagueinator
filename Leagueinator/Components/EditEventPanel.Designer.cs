@@ -23,21 +23,22 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.layoutRounds = new System.Windows.Forms.TableLayoutPanel();
             this.butAddRound = new System.Windows.Forms.Button();
             this.butRemoveRound = new System.Windows.Forms.Button();
             this.flowRounds = new System.Windows.Forms.FlowLayoutPanel();
             this.layoutRoot = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.listPlayers = new Leagueinator.Components.PlayerListBox();
-            this.matchCard1 = new Leagueinator.Components.MatchCard();
-            this.matchCard2 = new Leagueinator.Components.MatchCard();
-            this.matchCard3 = new Leagueinator.Components.MatchCard();
-            this.matchCard4 = new Leagueinator.Components.MatchCard();
             this.matchCard5 = new Leagueinator.Components.MatchCard();
             this.matchCard6 = new Leagueinator.Components.MatchCard();
             this.matchCard7 = new Leagueinator.Components.MatchCard();
             this.matchCard8 = new Leagueinator.Components.MatchCard();
+            this.matchCard3 = new Leagueinator.Components.MatchCard();
+            this.matchCard4 = new Leagueinator.Components.MatchCard();
+            this.matchCard2 = new Leagueinator.Components.MatchCard();
+            this.matchCard1 = new Leagueinator.Components.MatchCard();
+            this.playerListBox = new Leagueinator.Components.PlayerListBox(this.components);
             this.layoutRounds.SuspendLayout();
             this.layoutRoot.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -99,7 +100,7 @@
             this.layoutRoot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.layoutRoot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.layoutRoot.Controls.Add(this.panel1, 2, 0);
-            this.layoutRoot.Controls.Add(this.listPlayers, 0, 0);
+            this.layoutRoot.Controls.Add(this.playerListBox, 0, 0);
             this.layoutRoot.Controls.Add(this.layoutRounds, 0, 0);
             this.layoutRoot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutRoot.Location = new System.Drawing.Point(0, 0);
@@ -126,58 +127,12 @@
             this.panel1.Size = new System.Drawing.Size(354, 745);
             this.panel1.TabIndex = 1;
             // 
-            // listPlayers
-            // 
-            this.listPlayers.AllowDrop = true;
-            this.listPlayers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listPlayers.FormattingEnabled = true;
-            this.listPlayers.ItemHeight = 20;
-            this.listPlayers.Location = new System.Drawing.Point(379, 3);
-            this.listPlayers.Name = "listPlayers";
-            this.listPlayers.Size = new System.Drawing.Size(370, 745);
-            this.listPlayers.TabIndex = 0;
-            // 
-            // matchCard1
-            // 
-            this.matchCard1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.matchCard1.Lane = 1;
-            this.matchCard1.Location = new System.Drawing.Point(43, 19);
-            this.matchCard1.Name = "matchCard1";
-            this.matchCard1.Size = new System.Drawing.Size(273, 74);
-            this.matchCard1.TabIndex = 0;
-            // 
-            // matchCard2
-            // 
-            this.matchCard2.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.matchCard2.Lane = 2;
-            this.matchCard2.Location = new System.Drawing.Point(43, 99);
-            this.matchCard2.Name = "matchCard2";
-            this.matchCard2.Size = new System.Drawing.Size(273, 74);
-            this.matchCard2.TabIndex = 1;
-            // 
-            // matchCard3
-            // 
-            this.matchCard3.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.matchCard3.Lane = 4;
-            this.matchCard3.Location = new System.Drawing.Point(43, 259);
-            this.matchCard3.Name = "matchCard3";
-            this.matchCard3.Size = new System.Drawing.Size(273, 74);
-            this.matchCard3.TabIndex = 3;
-            // 
-            // matchCard4
-            // 
-            this.matchCard4.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.matchCard4.Lane = 3;
-            this.matchCard4.Location = new System.Drawing.Point(43, 179);
-            this.matchCard4.Name = "matchCard4";
-            this.matchCard4.Size = new System.Drawing.Size(273, 74);
-            this.matchCard4.TabIndex = 2;
-            // 
             // matchCard5
             // 
             this.matchCard5.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.matchCard5.Lane = 8;
             this.matchCard5.Location = new System.Drawing.Point(43, 579);
+            this.matchCard5.Match = null;
             this.matchCard5.Name = "matchCard5";
             this.matchCard5.Size = new System.Drawing.Size(273, 74);
             this.matchCard5.TabIndex = 7;
@@ -187,6 +142,7 @@
             this.matchCard6.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.matchCard6.Lane = 7;
             this.matchCard6.Location = new System.Drawing.Point(43, 499);
+            this.matchCard6.Match = null;
             this.matchCard6.Name = "matchCard6";
             this.matchCard6.Size = new System.Drawing.Size(273, 74);
             this.matchCard6.TabIndex = 6;
@@ -196,6 +152,7 @@
             this.matchCard7.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.matchCard7.Lane = 6;
             this.matchCard7.Location = new System.Drawing.Point(43, 419);
+            this.matchCard7.Match = null;
             this.matchCard7.Name = "matchCard7";
             this.matchCard7.Size = new System.Drawing.Size(273, 74);
             this.matchCard7.TabIndex = 5;
@@ -205,9 +162,62 @@
             this.matchCard8.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.matchCard8.Lane = 5;
             this.matchCard8.Location = new System.Drawing.Point(43, 339);
+            this.matchCard8.Match = null;
             this.matchCard8.Name = "matchCard8";
             this.matchCard8.Size = new System.Drawing.Size(273, 74);
             this.matchCard8.TabIndex = 4;
+            // 
+            // matchCard3
+            // 
+            this.matchCard3.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.matchCard3.Lane = 4;
+            this.matchCard3.Location = new System.Drawing.Point(43, 259);
+            this.matchCard3.Match = null;
+            this.matchCard3.Name = "matchCard3";
+            this.matchCard3.Size = new System.Drawing.Size(273, 74);
+            this.matchCard3.TabIndex = 3;
+            // 
+            // matchCard4
+            // 
+            this.matchCard4.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.matchCard4.Lane = 3;
+            this.matchCard4.Location = new System.Drawing.Point(43, 179);
+            this.matchCard4.Match = null;
+            this.matchCard4.Name = "matchCard4";
+            this.matchCard4.Size = new System.Drawing.Size(273, 74);
+            this.matchCard4.TabIndex = 2;
+            // 
+            // matchCard2
+            // 
+            this.matchCard2.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.matchCard2.Lane = 2;
+            this.matchCard2.Location = new System.Drawing.Point(43, 99);
+            this.matchCard2.Match = null;
+            this.matchCard2.Name = "matchCard2";
+            this.matchCard2.Size = new System.Drawing.Size(273, 74);
+            this.matchCard2.TabIndex = 1;
+            // 
+            // matchCard1
+            // 
+            this.matchCard1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.matchCard1.Lane = 1;
+            this.matchCard1.Location = new System.Drawing.Point(43, 19);
+            this.matchCard1.Match = null;
+            this.matchCard1.Name = "matchCard1";
+            this.matchCard1.Size = new System.Drawing.Size(273, 74);
+            this.matchCard1.TabIndex = 0;
+            // 
+            // listPlayers
+            // 
+            this.playerListBox.AllowDrop = true;
+            this.playerListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.playerListBox.FormattingEnabled = true;
+            this.playerListBox.ItemHeight = 20;
+            this.playerListBox.Location = new System.Drawing.Point(379, 3);
+            this.playerListBox.Name = "listPlayers";
+            this.playerListBox.PlayerInfo = null;
+            this.playerListBox.Size = new System.Drawing.Size(370, 745);
+            this.playerListBox.TabIndex = 0;
             // 
             // EditEventPanel
             // 
@@ -230,7 +240,7 @@
         private System.Windows.Forms.Button butRemoveRound;
         private System.Windows.Forms.FlowLayoutPanel flowRounds;
         private System.Windows.Forms.TableLayoutPanel layoutRoot;
-        private PlayerListBox listPlayers;
+        private PlayerListBox playerListBox;
         private System.Windows.Forms.Panel panel1;
         private MatchCard matchCard1;
         private MatchCard matchCard2;

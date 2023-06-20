@@ -1,26 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Text;
 
 namespace Leagueinator.Model {
-    public class LeagueEvent : HasDeepCopy<LeagueEvent> {
+    public class LeagueEvent {
         public readonly string Date;
+        public readonly Settings settings;
 
         public List<PlayerInfo> Players { get; private set; } = new List<PlayerInfo>();
 
         public List<Round> Rounds { get; private set; } = new List<Round>();
 
-        public LeagueEvent(string date) {
+        public LeagueEvent(string date, Settings settings) {
             this.Date = date;
+            this.settings = settings;
         }
 
-        public LeagueEvent(string date, List<PlayerInfo> players, List<Round> rounds) : this(date) {
-            Players = players.DeepCopy();
-            Rounds = rounds.DeepCopy();
-        }
-
-        public LeagueEvent() {
+        public LeagueEvent(Settings settings) {
             this.Date = DateTime.Today.ToString("yyyy-MM-dd");
+            this.settings = settings;
         }
 
         /// <summary>
@@ -36,19 +34,18 @@ namespace Leagueinator.Model {
         /// Add a new empty round to this event.
         /// </summary>
         public Round AddRound() {
-            var round = new Round(this.Players);
+            var round = new Round(this.Players, this.settings);
             this.Rounds.Add(round);
             return round;
         }
 
-        public LeagueEvent DeepCopy() {
-            
-            var that = new LeagueEvent(this.Date) {
-                Players = this.Players.DeepCopy(),
-                Rounds = this.Rounds.DeepCopy()
-            };
-
-            return that;
+        public override string ToString() {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Players [{this.Players.DelString()}]");
+            sb.AppendLine($"Rounds [");
+            this.Rounds.ForEach(i => sb.AppendLine(i.ToString()));
+            sb.AppendLine($"]");
+            return sb.ToString();
         }
     }
 

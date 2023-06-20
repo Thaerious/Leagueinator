@@ -9,37 +9,36 @@ using System.Windows.Forms;
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
-    public class MatchLabel : Label, IModelPlayer {
+    public class MatchLabel : Label, IModelPlayer{
         public delegate void MatchLabelUpdate(object sender, MatchLabelArgs args);
         public event MatchLabelUpdate OnUpdate;
 
 
         [Category("Misc"), Description("The team number for this label.")]
-        public int Team { get; set; } = 0;
+        public Team Team { get; set; }
 
         public int Position { get; set; } = 0;
 
         private PlayerInfo _playerInfo;
-
-        public PlayerInfo PlayerInfo { 
-            get => this._playerInfo;
+        public PlayerInfo PlayerInfo {
+            get { return _playerInfo; }
             set {
-                this._playerInfo = value;
-                if (value == null) this.Text = "";
-                else this.Text = value.Name;
+                _playerInfo = value;
+                this.Team.Players[this.Position] = value;
 
-                if (this.OnUpdate == null) return;
-                this.OnUpdate(this, new MatchLabelArgs {
-                    PlayerInfo = value,
-                    Team = this.Team,
-                    Position = this.Position
-                });
+                if (value == null) this.Text = "";
+                else this.Text = _playerInfo.Name;
             }
         }
 
-        public void SwapPlayers(IModelPlayer that) {
-            if (this == that) return;
-            (that.PlayerInfo, this.PlayerInfo) = (this.PlayerInfo, that.PlayerInfo);
+        public PlayerInfo AddPlayer(PlayerInfo playerInfo) {
+            PlayerInfo prev = this.PlayerInfo;
+            this.PlayerInfo = playerInfo;
+            return prev;
+        }
+
+        public void ClearPlayer(PlayerInfo playerInfo) {
+            if (this.PlayerInfo == playerInfo) this.PlayerInfo = null;
         }
     }
 

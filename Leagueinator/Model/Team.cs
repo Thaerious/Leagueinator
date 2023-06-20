@@ -1,21 +1,24 @@
 ﻿using System.Collections.Generic;
 
 namespace Leagueinator.Model {
-    public class Team : HasDeepCopy<Team> {
-        public Dictionary<int, PlayerInfo> Players { get; private set; } = new Dictionary<int, PlayerInfo>();
+    public class Team {
+        public readonly PlayerInfo[] Players;
 
-        public void AddPlayer(PlayerInfo playerInfo) {
-            this.Players.Add(Players.Count, playerInfo);
+        public Team(Settings settings) {
+            this.Players = new PlayerInfo[settings.TeamSize];
         }
 
-        public void AddPlayer(int index, PlayerInfo playerInfo) {
-            this.Players.Add(index, playerInfo);
-        }
-
-        public Team DeepCopy() {
-            return new Team {
-                Players = this.Players.DeepCopy()
-            };
+        /// <summary>
+        /// Set the player in a specific index.
+        /// Returns the player previously in that index.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="playerInfo"></param>
+        /// <returns></returns>
+        public PlayerInfo SetPlayer(int index, PlayerInfo playerInfo) {
+            PlayerInfo previousPlayer = Players[index];
+            Players[index] = playerInfo;
+            return previousPlayer;
         }
     }
 

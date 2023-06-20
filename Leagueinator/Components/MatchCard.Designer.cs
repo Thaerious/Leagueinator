@@ -49,11 +49,9 @@
             this.labelP3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelP3.Location = new System.Drawing.Point(155, 38);
             this.labelP3.Name = "labelP3";
-            this.labelP3.PlayerInfo = null;
             this.labelP3.Position = 1;
             this.labelP3.Size = new System.Drawing.Size(113, 29);
             this.labelP3.TabIndex = 3;
-            this.labelP3.Team = 1;
             this.labelP3.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDrop);
             this.labelP3.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnEnter);
             this.labelP3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StartDrag);
@@ -67,11 +65,9 @@
             this.labelP2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelP2.Location = new System.Drawing.Point(155, 9);
             this.labelP2.Name = "labelP2";
-            this.labelP2.PlayerInfo = null;
             this.labelP2.Position = 0;
             this.labelP2.Size = new System.Drawing.Size(113, 29);
             this.labelP2.TabIndex = 2;
-            this.labelP2.Team = 1;
             this.labelP2.OnUpdate += new Leagueinator.Components.MatchLabel.MatchLabelUpdate(this.LabelUpdate);
             this.labelP2.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDrop);
             this.labelP2.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnEnter);
@@ -86,11 +82,9 @@
             this.labelP1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelP1.Location = new System.Drawing.Point(3, 38);
             this.labelP1.Name = "labelP1";
-            this.labelP1.PlayerInfo = null;
             this.labelP1.Position = 1;
             this.labelP1.Size = new System.Drawing.Size(113, 29);
             this.labelP1.TabIndex = 1;
-            this.labelP1.Team = 0;
             this.labelP1.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDrop);
             this.labelP1.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnEnter);
             this.labelP1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StartDrag);
@@ -104,11 +98,9 @@
             this.labelP0.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelP0.Location = new System.Drawing.Point(3, 9);
             this.labelP0.Name = "labelP0";
-            this.labelP0.PlayerInfo = null;
             this.labelP0.Position = 0;
             this.labelP0.Size = new System.Drawing.Size(113, 29);
             this.labelP0.TabIndex = 0;
-            this.labelP0.Team = 0;
             this.labelP0.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDrop);
             this.labelP0.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnEnter);
             this.labelP0.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StartDrag);

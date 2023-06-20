@@ -15,8 +15,8 @@ namespace Leagueinator.Model {
             return new PlayerInfo(this.Name);
         }
     }
-        public interface IModelPlayer {
-        PlayerInfo PlayerInfo { get; set; }
-        void SwapPlayers(IModelPlayer that);
+    public interface IModelPlayer {
+        PlayerInfo AddPlayer(PlayerInfo playerInfo);
+        void ClearPlayer(PlayerInfo playerInfo);
     }
 }

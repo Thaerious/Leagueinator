@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -10,6 +11,21 @@ using Leagueinator.Model;
 
 namespace Leagueinator.Components {
     public partial class PlayerListBox : ListBox, IModelPlayer {
+
+        private Round _round = null;
+        public Round Round {
+            get {
+                return this._round;
+            }
+            set {
+                this._round = value;
+                this.Items.Clear();
+                foreach (PlayerInfo pi in value.IdlePlayers) {
+                    this.Items.Add(pi);
+                }
+            }
+        }
+
         public PlayerListBox() {
             InitializeComponent();
             this.AllowDrop = true;
@@ -48,24 +64,35 @@ namespace Leagueinator.Components {
             Debug.WriteLine($"Player List Box Start Drop");
             
             DragData dragData = (DragData)e.Data.GetData(typeof(DragData));
-            dest.SwapPlayers(dragData.Source);
-
+            dragData.SwapWith(this);
+            
             Debug.WriteLine("Player List Box Exit Drop");
         }
 
         public void OnDragStart(object sender, MouseEventArgs e) {
             Debug.WriteLine($"Player List Box Start Drag");
-            this.DoDragDrop(new DragData{ Source = this}, DragDropEffects.Move);
-            Debug.WriteLine("Player List Box Exit Drag");
+
+            this.DoDragDrop(
+                new DragData{ Source = this, PlayerInfo = (PlayerInfo)this.SelectedItem }
+                , DragDropEffects.Move
+            );
+  
+            Debug.WriteLine("Player List Box Exit Drag\n");
         }
 
         public void OnDragEnter(object sender, DragEventArgs e) {
             e.Effect = DragDropEffects.Move;
         }
 
-        public void SwapPlayers(IModelPlayer that) {
-            if (that == this) return;
-            (that.PlayerInfo, this.PlayerInfo) = (this.PlayerInfo, that.PlayerInfo);
+        public PlayerInfo AddPlayer(PlayerInfo playerInfo) {
+            this.Items.Add(playerInfo);
+            this.Round.IdlePlayers.Add(playerInfo);
+            return null;
+        }
+
+        public void ClearPlayer(PlayerInfo playerInfo) {
+            this.Items.Remove(playerInfo);
+            this.Round.IdlePlayers.Remove(playerInfo);
         }
     }
 }

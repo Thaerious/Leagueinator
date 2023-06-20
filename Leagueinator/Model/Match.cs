@@ -1,35 +1,33 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Leagueinator.Model {
-    public class Match : HasDeepCopy<Match>{
-        public AutoMap<int, Team> Teams { get; private set; } = new AutoMap<int, Team>();
+    public class Match {
+        public readonly Team[] Teams;
 
-        public void SetPlayer(int team, int pos) {
-            if (Teams[team] == null) Teams[team] = new Team();
+        public Match(Settings settings) {
+            this.Teams = new Team[settings.MatchSize];
+            for(int i = 0; i < this.Teams.Length; i++) {
+                this.Teams[i] = new Team(settings);
+            }
         }
 
-        public Match DeepCopy() {
-            return new Match() {
-                Teams = this.Teams.DeepCopy()
-            };
-        }
 
         public List<PlayerInfo> Players() {
             var list = new List<PlayerInfo>();
-            foreach (Team team in this.Teams.Values) {
-                list.AddRange(team.Players.Values);
+            foreach (Team team in this.Teams) {
+                if (team != null) list.AddRange(team.Players);
             }
             return list;
         }
 
         public override string ToString() {
-            var joined = string.Join(
-                ",",
-                this.Players().ConvertAll<string>(p => p.Name)
-            );
-
-            return $"Match [{joined}]";
+            StringBuilder sb = new StringBuilder();
+            foreach (Team team in this.Teams) {
+                sb.Append($"[{team.Players.DelString()}]");
+            }
+            return sb.ToString();
         }
     }
 

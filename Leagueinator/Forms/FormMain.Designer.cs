@@ -40,6 +40,8 @@
             this.editEventPanel = new Leagueinator.Components.EditEventPanel();
             this.eventsPanel = new Leagueinator.Components.EventsPanel();
             this.playersPanel = new Leagueinator.Components.PlayersPanel();
+            this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printCurrentEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.tableRoot.SuspendLayout();
             this.panelContents.SuspendLayout();
@@ -136,7 +138,8 @@
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.menuView,
-            this.menuEvents});
+            this.menuEvents,
+            this.actionsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1260, 33);
@@ -198,6 +201,21 @@
             this.playersPanel.TabIndex = 0;
             this.playersPanel.Visible = false;
             // 
+            // actionsToolStripMenuItem
+            // 
+            this.actionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.printCurrentEventToolStripMenuItem});
+            this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
+            this.actionsToolStripMenuItem.Size = new System.Drawing.Size(87, 29);
+            this.actionsToolStripMenuItem.Text = "Actions";
+            // 
+            // printCurrentEventToolStripMenuItem
+            // 
+            this.printCurrentEventToolStripMenuItem.Name = "printCurrentEventToolStripMenuItem";
+            this.printCurrentEventToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.printCurrentEventToolStripMenuItem.Text = "Print Current Event";
+            this.printCurrentEventToolStripMenuItem.Click += new System.EventHandler(this.menuPrintCurrentEvent);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -234,5 +252,7 @@
         private Components.PlayersPanel playersPanel;
         private Components.EventsPanel eventsPanel;
         private Components.EditEventPanel editEventPanel;
+        private System.Windows.Forms.ToolStripMenuItem actionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printCurrentEventToolStripMenuItem;
     }
 }

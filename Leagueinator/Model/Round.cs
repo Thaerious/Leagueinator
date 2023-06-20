@@ -5,24 +5,20 @@ using System.Text;
 using Leagueinator.Components;
 
 namespace Leagueinator.Model {
-    public class Round : HasDeepCopy<Round> {
+    public class Round {
         public List<PlayerInfo> IdlePlayers { get; private set; } = new List<PlayerInfo>();
-        public Dictionary<int, Match> Matches { get; private set; } = new Dictionary<int, Match>(); // Lane -> Match
+        public readonly Match[] Matches;
 
-        public Round() {}
-
-        public Round(List<PlayerInfo> idlePlayers) {
-            var copy = idlePlayers.DeepCopy();
-            this.IdlePlayers = copy;
+        public Round(Settings settings) {
+            this.Matches = new Match[settings.LaneCount];
+            for (int i = 0; i < this.Matches.Length; i++) {
+                Matches[i] = new Match(settings);
+            }
         }
 
-        public Round DeepCopy() {
-            var that = new Round() {
-                Matches = this.Matches.DeepCopy(),
-                IdlePlayers = this.IdlePlayers.DeepCopy()
-            };
-
-            return that;
+        public Round(List<PlayerInfo> idlePlayers, Settings settings) : this(settings) {
+            var copy = idlePlayers.DeepCopy();
+            this.IdlePlayers = copy;
         }
 
         public override string ToString() {
@@ -33,8 +29,8 @@ namespace Leagueinator.Model {
             builder.AppendLine($"\tIdle: [{idle}]");
             builder.AppendLine($"\tMatches: [");
 
-            foreach (int lane in this.Matches.Keys) {
-                builder.AppendLine($"\t\t{lane} : {this.Matches[lane]}");
+            for (int i = 0; i < this.Matches.Length; i++) {
+                builder.AppendLine($"\t\t{i} : {this.Matches[i]}");
             }
 
             builder.AppendLine($"\t]");

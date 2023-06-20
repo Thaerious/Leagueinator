@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace Leagueinator.Model {
-    public class League : HasDeepCopy<League> {
+    public class League {
         public List<PlayerInfo> Players { get; private set; } = new List<PlayerInfo>();
 
         public List<LeagueEvent> Events { get; private set; } = new List<LeagueEvent> ();
@@ -20,8 +20,8 @@ namespace Leagueinator.Model {
         /// Will add all current league players to the event.
         /// </summary>
         /// <returns></returns>
-        public LeagueEvent AddEvent() {
-            var lEvent = new LeagueEvent();
+        public LeagueEvent AddEvent(Settings settings) {
+            var lEvent = new LeagueEvent(settings);
             lEvent.AddPlayers(this.Players);
             this.Events.Add(lEvent);            
             return lEvent;
@@ -32,18 +32,11 @@ namespace Leagueinator.Model {
         /// Will add all current league players to the event.
         /// </summary>
         /// <returns></returns>
-        public LeagueEvent AddEvent(string date) {
-            var lEvent = new LeagueEvent(date);
+        public LeagueEvent AddEvent(string date, Settings settings) {
+            var lEvent = new LeagueEvent(date, settings);
             lEvent.AddPlayers(this.Players);
             this.Events.Add(lEvent);
             return lEvent;
-        }
-
-        public League DeepCopy() {
-            return new League() {
-                Players = this.Players.DeepCopy(),
-                Events = this.Events.DeepCopy()
-            };
         }
     }
 }

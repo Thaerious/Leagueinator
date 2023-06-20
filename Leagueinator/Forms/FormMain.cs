@@ -15,7 +15,11 @@ using Leagueinator.utility_classes;
 
 namespace Leagueinator.Forms {
     public partial class FormMain : Form {
-        public static Settings Settings = new Settings(true, 2, 8);
+        public static Settings Settings = new Settings(
+            teamSize : 2,
+            laneCount: 8,
+            matchSize: 2
+        );
 
         public FormMain() {
             InitializeComponent();
@@ -32,7 +36,7 @@ namespace Leagueinator.Forms {
             var league = new League();
 
             league.AddPlayers(new String[] { "Ed", "Tim", "Bill", "Steve" });
-            LeagueEvent leagueEvent = league.AddEvent();
+            LeagueEvent leagueEvent = league.AddEvent(FormMain.Settings);
             Round round = leagueEvent.AddRound();
 
             this.SetModel(league);
@@ -117,7 +121,7 @@ namespace Leagueinator.Forms {
         }
 
         private void newEvent(object sender, EventArgs e) {
-            this.eventsPanel.AddEvent(new LeagueEvent());
+            this.eventsPanel.AddEvent(new LeagueEvent(FormMain.Settings));
         }
 
         public void SetModel(League league) {
@@ -128,6 +132,10 @@ namespace Leagueinator.Forms {
             foreach (var lEvent in league.Events) {
                 this.eventsPanel.AddEvent(lEvent);
             }
+        }
+
+        private void menuPrintCurrentEvent(object sender, EventArgs e) {
+            Debug.WriteLine(this.editEventPanel.LeagueEvent);
         }
     }
 }
