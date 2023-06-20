@@ -30,7 +30,6 @@ namespace Leagueinator.Components {
                 return _match;
             }
             set {
-                Debug.WriteLine($"Match Card Set {value}");
                 if (value != null) {
                     this.labelP0.Team = value.Teams[0];
                     this.labelP1.Team = value.Teams[0];

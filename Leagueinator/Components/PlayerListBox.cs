@@ -85,6 +85,7 @@ namespace Leagueinator.Components {
         }
 
         public PlayerInfo AddPlayer(PlayerInfo playerInfo) {
+            if (playerInfo == null) return null;
             this.Items.Add(playerInfo);
             this.Round.IdlePlayers.Add(playerInfo);
             return null;

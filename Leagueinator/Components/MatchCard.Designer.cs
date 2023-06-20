@@ -68,7 +68,6 @@
             this.labelP2.Position = 0;
             this.labelP2.Size = new System.Drawing.Size(113, 29);
             this.labelP2.TabIndex = 2;
-            this.labelP2.OnUpdate += new Leagueinator.Components.MatchLabel.MatchLabelUpdate(this.LabelUpdate);
             this.labelP2.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDrop);
             this.labelP2.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnEnter);
             this.labelP2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StartDrag);

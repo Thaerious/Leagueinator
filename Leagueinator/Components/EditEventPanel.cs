@@ -65,7 +65,7 @@ namespace Leagueinator.Components {
         }
 
         private void PopulateMatches(Round round) {
-            for (int lane = 1; lane <= FormMain.Settings.LaneCount; lane++) {
+            for (int lane = 1; lane <= this.leagueEvent.settings.LaneCount; lane++) {
                 Control[] controls = this.Controls.Find($"matchCard{lane}", true);
                 MatchCard matchCard = controls[0] as MatchCard;
                 matchCard.Match = round.Matches[lane - 1];
@@ -81,6 +81,17 @@ namespace Leagueinator.Components {
                 this.flowRounds.Controls.Remove(this.currentRoundButton);
                 this.currentRoundButton = null;
             }
+        }
+
+        public void AddPlayer(PlayerInfo player) {
+            if (this.LeagueEvent == null) return;
+
+            this.LeagueEvent.Players.Add(player);
+            foreach(Round round in this.LeagueEvent.Rounds) {
+                round.IdlePlayers.Add(player);
+            }
+
+            this.playerListBox.Items.Add(player);
         }
     }
 }

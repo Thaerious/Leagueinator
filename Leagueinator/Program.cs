@@ -20,7 +20,7 @@ namespace Leagueinator
             Debug.WriteLine("Starting Program");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMain().DebugSetup());
+            Application.Run(new FormMain());
         }
     }
 }

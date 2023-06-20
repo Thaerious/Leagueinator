@@ -180,6 +180,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\FormAddEvent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAddEvent.Designer.cs">
+      <DependentUpon>FormAddEvent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\BuyCard.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -221,9 +227,7 @@
     <Compile Include="Components\PlayerListBox.Designer.cs">
       <DependentUpon>PlayerListBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\PlayersPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Components\PlayersPanel.cs" />
     <Compile Include="Components\PlayersPanel.Designer.cs">
       <DependentUpon>PlayersPanel.cs</DependentUpon>
     </Compile>
@@ -231,23 +235,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Model\Settings.cs" />
-    <Compile Include="Components\SettingsPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Components\SettingsPanel.Designer.cs">
-      <DependentUpon>SettingsPanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Settings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Settings.Designer.cs">
-      <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\AutoMap.cs" />
     <Compile Include="Utility_Classes\HasDeepCopy.cs" />
@@ -262,6 +254,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility_Classes\StringInterpolator.cs" />
     <Compile Include="Utility_Classes\RandomExtensions.cs" />
+    <EmbeddedResource Include="Forms\FormAddEvent.resx">
+      <DependentUpon>FormAddEvent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\BuyCard.resx">
       <DependentUpon>BuyCard.cs</DependentUpon>
     </EmbeddedResource>
@@ -280,14 +275,8 @@
     <EmbeddedResource Include="Components\PlayersPanel.resx">
       <DependentUpon>PlayersPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\SettingsPanel.resx">
-      <DependentUpon>SettingsPanel.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings.resx">
-      <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

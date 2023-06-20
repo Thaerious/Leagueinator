@@ -6,47 +6,52 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Leagueinator.Components;
 using Leagueinator.Model;
 using Leagueinator.utility_classes;
 
 namespace Leagueinator.Forms {
     public partial class FormMain : Form {
-        public static Settings Settings = new Settings(
-            teamSize : 2,
-            laneCount: 8,
-            matchSize: 2
-        );
+        private League _league;
+        public League League {
+            get { return _league; }
+            set {
+                this._league = value;
+                this.playersPanel.Visible = true;
+                this.editEventPanel.Visible = false;
+
+                foreach (var playerInfo in value.Players) {
+                    this.playersPanel.AddPlayer(playerInfo);
+                }
+
+                foreach (var lEvent in value.Events) {
+                    this.eventsPanel.AddEvent(lEvent);
+                }
+            }
+        }
 
         public FormMain() {
             InitializeComponent();
-                        
+
             if (File.Exists(Properties.Settings.Default.last_save_name)) {
-                loadFile(Properties.Settings.Default.last_save_name);                
+                loadFile(Properties.Settings.Default.last_save_name);
             }
-                        
-            this.eventsPanel.OnEventCardSelect += (s, e) => this.editEvent(e.LeagueEvent);            
-        }                
 
-        public FormMain DebugSetup() {
-            // TODO Remove this method in production.
-            var league = new League();
+            this.eventsPanel.OnEventCardSelect += (s, e) => this.editEvent(e.LeagueEvent);
+            this.playersPanel.PlayerAdded += (s, e) => {
+                this.League.Players.Add(e.PlayerInfo);
+                this.editEventPanel.AddPlayer(e.PlayerInfo);
+            };
 
+            // TODO REMOVE
+            League league = new League();
             league.AddPlayers(new String[] { "Ed", "Tim", "Bill", "Steve" });
-            LeagueEvent leagueEvent = league.AddEvent(FormMain.Settings);
-            Round round = leagueEvent.AddRound();
-
-            this.SetModel(league);
-            this.playersPanel.Visible = false;
-            this.eventsPanel.Visible = false;
-            this.editEventPanel.Visible = true;
-
-            this.editEventPanel.LeagueEvent = leagueEvent;
-
-            return this;
+            this.League = league;
         }
 
         private void loadFile(string fullpath) {
@@ -91,16 +96,6 @@ namespace Leagueinator.Forms {
             this.playersPanel.Visible = false;
         }
 
-        private void menuSettings(object sender, EventArgs e) {            
-            using (FormSettings form = new FormSettings()) {
-                form.Settings = FormMain.Settings;
-
-                if (form.ShowDialog() == DialogResult.OK) {
-                    FormMain.Settings = form.Settings;
-                }
-            }
-        }
-
         private void menuViewPlayers(object sender, EventArgs e) {
             this.playersPanel.Visible = true;
             this.eventsPanel.Visible = false;
@@ -120,22 +115,26 @@ namespace Leagueinator.Forms {
             this.editEventPanel.LeagueEvent = leagueEvent;
         }
 
-        private void newEvent(object sender, EventArgs e) {
-            this.eventsPanel.AddEvent(new LeagueEvent(FormMain.Settings));
-        }
+        private void menuEventsAdd(object sender, EventArgs e) {
+            FormAddEvent childForm = new FormAddEvent();
+            DialogResult result = childForm.ShowDialog();
+            if (result == DialogResult.Cancel) return;
 
-        public void SetModel(League league) {
-            foreach(var playerInfo in league.Players) {
-                this.playersPanel.AddPlayer(playerInfo);
-            }
+            this.playersPanel.Visible = false;
+            this.editEventPanel.Visible = true;
 
-            foreach (var lEvent in league.Events) {
-                this.eventsPanel.AddEvent(lEvent);
-            }
+            LeagueEvent lEvent = this._league.AddEvent(childForm.Settings);
+            lEvent.AddRound();
+            this.editEventPanel.LeagueEvent = lEvent;
         }
 
         private void menuPrintCurrentEvent(object sender, EventArgs e) {
             Debug.WriteLine(this.editEventPanel.LeagueEvent);
+        }
+
+        private void menuEventViewActive(object sender, EventArgs e) {
+            this.playersPanel.Visible = false;
+            this.editEventPanel.Visible = true;
         }
     }
 }

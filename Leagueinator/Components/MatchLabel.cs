@@ -10,10 +10,6 @@ using Leagueinator.Model;
 
 namespace Leagueinator.Components {
     public class MatchLabel : Label, IModelPlayer{
-        public delegate void MatchLabelUpdate(object sender, MatchLabelArgs args);
-        public event MatchLabelUpdate OnUpdate;
-
-
         [Category("Misc"), Description("The team number for this label.")]
         public Team Team { get; set; }
 

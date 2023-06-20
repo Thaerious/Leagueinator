@@ -4,7 +4,14 @@ using System.Windows.Forms;
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
+    public class PlayerArgs {
+        public PlayerInfo PlayerInfo { get; set; }
+    }
+
     public partial class PlayersPanel : UserControl {
+        public delegate void OnPlayerAdded(PlayersPanel source, PlayerArgs args);
+        public event OnPlayerAdded PlayerAdded;
+
         public PlayersPanel() {
             InitializeComponent();
         }
@@ -14,13 +21,15 @@ namespace Leagueinator.Components {
                 var playerInfo = new PlayerInfo(this.txtName.Text);
                 this.AddPlayer(playerInfo);
                 this.txtName.Text = "";
+                this.PlayerAdded?.Invoke(this, new PlayerArgs { PlayerInfo = playerInfo });
             }
         }
 
         public void AddPlayer(PlayerInfo playerInfo) {
             try {
+                if (this.listPlayers.Items.Contains(playerInfo)) return;
                 this.listPlayers.Items.Add(playerInfo);
-                txtPlayerName.Text = playerInfo.Name;
+                txtPlayerName.Text = playerInfo.Name;                
             }
             catch (Exception ex) {
                 Debug.WriteLine(ex.Message);

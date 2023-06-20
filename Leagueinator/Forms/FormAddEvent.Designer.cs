@@ -1,5 +1,5 @@
-﻿namespace Leagueinator.Forms {
-    partial class FormSettings {
+﻿namespace Leagueinator.Components {
+    partial class FormAddEvent {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -25,10 +25,13 @@
         private void InitializeComponent() {
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.butOK = new System.Windows.Forms.Button();
             this.spinLaneCount = new System.Windows.Forms.NumericUpDown();
             this.spinTeamSize = new System.Windows.Forms.NumericUpDown();
-            this.chkRegenerate = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.butCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.spinLaneCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinTeamSize)).BeginInit();
             this.SuspendLayout();
@@ -36,34 +39,34 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(161, 177);
+            this.label2.Location = new System.Drawing.Point(80, 180);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(131, 20);
-            this.label2.TabIndex = 11;
+            this.label2.TabIndex = 10;
             this.label2.Text = "Number of Lanes";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(161, 115);
+            this.label1.Location = new System.Drawing.Point(99, 105);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(84, 20);
-            this.label1.TabIndex = 10;
+            this.label1.TabIndex = 9;
             this.label1.Text = "Team Size";
             // 
-            // button1
+            // butOK
             // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(99, 253);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(193, 61);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "OK";
-            this.button1.UseVisualStyleBackColor = true;
+            this.butOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.butOK.Location = new System.Drawing.Point(63, 307);
+            this.butOK.Name = "butOK";
+            this.butOK.Size = new System.Drawing.Size(174, 45);
+            this.butOK.TabIndex = 8;
+            this.butOK.Text = "OK";
+            this.butOK.UseVisualStyleBackColor = true;
             // 
             // spinLaneCount
             // 
-            this.spinLaneCount.Location = new System.Drawing.Point(99, 175);
+            this.spinLaneCount.Location = new System.Drawing.Point(119, 203);
             this.spinLaneCount.Maximum = new decimal(new int[] {
             8,
             0,
@@ -76,16 +79,16 @@
             0});
             this.spinLaneCount.Name = "spinLaneCount";
             this.spinLaneCount.Size = new System.Drawing.Size(46, 26);
-            this.spinLaneCount.TabIndex = 8;
+            this.spinLaneCount.TabIndex = 7;
             this.spinLaneCount.Value = new decimal(new int[] {
-            4,
+            8,
             0,
             0,
             0});
             // 
             // spinTeamSize
             // 
-            this.spinTeamSize.Location = new System.Drawing.Point(99, 109);
+            this.spinTeamSize.Location = new System.Drawing.Point(119, 128);
             this.spinTeamSize.Maximum = new decimal(new int[] {
             4,
             0,
@@ -98,38 +101,62 @@
             0});
             this.spinTeamSize.Name = "spinTeamSize";
             this.spinTeamSize.Size = new System.Drawing.Size(46, 26);
-            this.spinTeamSize.TabIndex = 7;
+            this.spinTeamSize.TabIndex = 6;
             this.spinTeamSize.Value = new decimal(new int[] {
             2,
             0,
             0,
             0});
             // 
-            // chkRegenerate
+            // label3
             // 
-            this.chkRegenerate.AutoSize = true;
-            this.chkRegenerate.Checked = true;
-            this.chkRegenerate.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkRegenerate.Location = new System.Drawing.Point(99, 53);
-            this.chkRegenerate.Name = "chkRegenerate";
-            this.chkRegenerate.Size = new System.Drawing.Size(172, 24);
-            this.chkRegenerate.TabIndex = 6;
-            this.chkRegenerate.Text = "Regenerate Teams";
-            this.chkRegenerate.UseVisualStyleBackColor = true;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(99, 33);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(96, 20);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Event Name";
             // 
-            // FormSettings
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(44, 56);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(207, 26);
+            this.txtName.TabIndex = 12;
+            // 
+            // dateTimePicker
+            // 
+            this.dateTimePicker.Location = new System.Drawing.Point(51, 265);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.Size = new System.Drawing.Size(200, 26);
+            this.dateTimePicker.TabIndex = 13;
+            // 
+            // butCancel
+            // 
+            this.butCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.butCancel.Location = new System.Drawing.Point(63, 368);
+            this.butCancel.Name = "butCancel";
+            this.butCancel.Size = new System.Drawing.Size(174, 46);
+            this.butCancel.TabIndex = 14;
+            this.butCancel.Text = "Cancel";
+            this.butCancel.UseVisualStyleBackColor = true;
+            // 
+            // FormAddEvent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(399, 378);
+            this.ClientSize = new System.Drawing.Size(324, 437);
+            this.Controls.Add(this.butCancel);
+            this.Controls.Add(this.dateTimePicker);
+            this.Controls.Add(this.txtName);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.butOK);
             this.Controls.Add(this.spinLaneCount);
             this.Controls.Add(this.spinTeamSize);
-            this.Controls.Add(this.chkRegenerate);
-            this.Name = "FormSettings";
-            this.Text = "Settings";
+            this.Name = "FormAddEvent";
+            this.Text = "AddEventForm";
             ((System.ComponentModel.ISupportInitialize)(this.spinLaneCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinTeamSize)).EndInit();
             this.ResumeLayout(false);
@@ -141,9 +168,12 @@
 
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button butOK;
         private System.Windows.Forms.NumericUpDown spinLaneCount;
         private System.Windows.Forms.NumericUpDown spinTeamSize;
-        private System.Windows.Forms.CheckBox chkRegenerate;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.DateTimePicker dateTimePicker;
+        private System.Windows.Forms.Button butCancel;
     }
 }

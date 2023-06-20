@@ -2,15 +2,11 @@
 
 namespace Leagueinator.Model {
     public class Settings {
-        public readonly int TeamSize;
-        public readonly int LaneCount;
-        public readonly int MatchSize;
-
-        public Settings(int teamSize = 2, int laneCount = 8, int matchSize = 2) {
-            this.TeamSize = teamSize;
-            this.LaneCount = laneCount;
-            this.MatchSize = matchSize;
-        }
+        public int TeamSize;
+        public int LaneCount;
+        public int MatchSize;
+        public string Date;
+        public string Name; 
 
         public static Settings FromJSON(string json) {
             return JsonConvert.DeserializeObject<Settings>(json);
