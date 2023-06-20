@@ -57,5 +57,9 @@ namespace Leagueinator.Components {
             txtPlayerName.Text = "";
             lblIndex.Text = "";
         }
+
+        internal void Clear() {
+            this.listPlayers.Items.Clear();
+        }
     }
 }

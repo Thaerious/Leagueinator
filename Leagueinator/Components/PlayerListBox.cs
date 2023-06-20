@@ -17,9 +17,10 @@ namespace Leagueinator.Components {
             get {
                 return this._round;
             }
-            set {
+            set {                
                 this._round = value;
                 this.Items.Clear();
+                if (value == null) return;
                 foreach (PlayerInfo pi in value.IdlePlayers) {
                     this.Items.Add(pi);
                 }

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Leagueinator.Model {
+    [Serializable]
     public class Team {
         public readonly PlayerInfo[] Players;
 

@@ -1,6 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Leagueinator.Model {
+    [Serializable]
     public class Settings {
         public int TeamSize;
         public int LaneCount;

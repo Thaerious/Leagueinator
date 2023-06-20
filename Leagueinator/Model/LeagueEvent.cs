@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Leagueinator.Model {
+    [Serializable]
     public class LeagueEvent {
         public readonly string Date;
         public readonly Settings settings;
+        public readonly string Name;
 
         public List<PlayerInfo> Players { get; private set; } = new List<PlayerInfo>();
 
         public List<Round> Rounds { get; private set; } = new List<Round>();
 
-        public LeagueEvent(string date, Settings settings) {
+        public LeagueEvent(string date, String name, Settings settings) {
             this.Date = date;
+            this.Name = name;   
             this.settings = settings;
         }
 
         public LeagueEvent(Settings settings) {
             this.Date = DateTime.Today.ToString("yyyy-MM-dd");
+            this.Name = "Event";
             this.settings = settings;
         }
 

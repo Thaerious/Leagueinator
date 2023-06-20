@@ -234,6 +234,12 @@
     <Compile Include="Components\RoundButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\FormSelectEvent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSelectEvent.Designer.cs">
+      <DependentUpon>FormSelectEvent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Forms\FormMain.cs">
       <SubType>Form</SubType>
@@ -241,7 +247,6 @@
     <Compile Include="Forms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\AutoMap.cs" />
     <Compile Include="Utility_Classes\HasDeepCopy.cs" />
     <Compile Include="Model\League.cs" />
     <Compile Include="Model\Match.cs" />
@@ -277,6 +282,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSelectEvent.resx">
+      <DependentUpon>FormSelectEvent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -21,14 +21,6 @@ namespace Leagueinator {
             return map;
         }
 
-        public static AutoMap<K, V> DeepCopy<K, V>(this AutoMap<K, V> that) where V : HasDeepCopy<V>, new() {
-            AutoMap<K, V> map = new AutoMap<K, V>();
-            foreach (K key in that.Keys) {
-                map[key] = that[key].DeepCopy();
-            }
-            return map;
-        }
-
         public static List<T> ShallowCopy<T>(this List<T> that) {
             List<T> list = new List<T>();
             list.AddRange(that);

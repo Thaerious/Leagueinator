@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Leagueinator.Model {
+    [Serializable]
     public class League {
         public List<PlayerInfo> Players { get; private set; } = new List<PlayerInfo>();
 
@@ -32,11 +34,23 @@ namespace Leagueinator.Model {
         /// Will add all current league players to the event.
         /// </summary>
         /// <returns></returns>
-        public LeagueEvent AddEvent(string date, Settings settings) {
-            var lEvent = new LeagueEvent(date, settings);
+        public LeagueEvent AddEvent(string date, string name, Settings settings) {
+            var lEvent = new LeagueEvent(date, name, settings);
             lEvent.AddPlayers(this.Players);
             this.Events.Add(lEvent);
             return lEvent;
+        }
+
+        public override string ToString() {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Players : ");
+            foreach (var player in this.Players) {
+                sb.AppendLine(" - " + player.ToString());
+            }
+            foreach (var lEvent in this.Events) {
+                sb.AppendLine(lEvent.ToString());
+            }
+            return sb.ToString();
         }
     }
 }

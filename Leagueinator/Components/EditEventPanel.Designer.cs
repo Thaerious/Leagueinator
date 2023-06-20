@@ -207,15 +207,17 @@
             this.matchCard1.Size = new System.Drawing.Size(273, 74);
             this.matchCard1.TabIndex = 0;
             // 
-            // listPlayers
+            // playerListBox
             // 
             this.playerListBox.AllowDrop = true;
             this.playerListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.playerListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playerListBox.FormattingEnabled = true;
-            this.playerListBox.ItemHeight = 20;
+            this.playerListBox.ItemHeight = 32;
             this.playerListBox.Location = new System.Drawing.Point(379, 3);
-            this.playerListBox.Name = "listPlayers";
+            this.playerListBox.Name = "playerListBox";
             this.playerListBox.PlayerInfo = null;
+            this.playerListBox.Round = null;
             this.playerListBox.Size = new System.Drawing.Size(370, 745);
             this.playerListBox.TabIndex = 0;
             // 

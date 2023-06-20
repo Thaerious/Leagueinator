@@ -1,6 +1,9 @@
 ﻿
+using System;
+
 namespace Leagueinator.Model {
-    public class PlayerInfo : HasDeepCopy<PlayerInfo> {
+    [Serializable]
+    public class PlayerInfo : HasDeepCopy<PlayerInfo>{
         public string Name { get; set; }
 
         public PlayerInfo(string name) {

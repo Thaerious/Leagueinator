@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Leagueinator.Components;
 
 namespace Leagueinator.Model {
+    [Serializable]
     public class Round {
         public List<PlayerInfo> IdlePlayers { get; private set; } = new List<PlayerInfo>();
         public readonly Match[] Matches;
