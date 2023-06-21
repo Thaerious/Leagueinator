@@ -19,7 +19,11 @@ namespace Leagueinator.Model {
         public List<PlayerInfo> Players() {
             var list = new List<PlayerInfo>();
             foreach (Team team in this.Teams) {
-                if (team != null) list.AddRange(team.Players);
+                if (team == null) continue;
+                foreach(PlayerInfo player in team.Players) {
+                    if (player == null) continue;
+                    list.Add(player);
+                }
             }
             return list;
         }

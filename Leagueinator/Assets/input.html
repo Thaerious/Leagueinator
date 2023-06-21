@@ -9,6 +9,12 @@
             height: 30px;
         }
 
+        .root_table{
+/*          position: relative;
+            left: 50%;
+            transform: translateX(-50%);*/
+        }
+
         .outer_table {
             border: 2px solid black;
             margin: 10px;
@@ -48,14 +54,14 @@
     </style>
 </head>
 <body>
-    <table>
+    <table class="root_table">
         <tr>
             <td>
                 <table class="outer_table">
                     <tr><b>LANE ${M1LANE}</b></tr>
-                    <tr>                        
+                    <tr>
                         <td>
-                            <table class="inner_table">                                
+                            <table class="inner_table">
                                 <tr>
                                     <td>${M1T1P1}</td>
                                 </tr>
@@ -96,7 +102,7 @@
                 <table class="outer_table">
                     <tr><b>LANE ${M2LANE}</b></tr>
                     <tr>
-                        
+
                         <td>
                             <table class="inner_table">
                                 <tr>
@@ -137,12 +143,8 @@
             </td>
         </tr>
     </table>
-
-
-
     <br><br>
-
-    <table>
+    <table class="root_table">
         <tr>
             <td>
                 <table class="outer_table">
@@ -208,6 +210,95 @@
                                 </tr>
                                 <tr>
                                     <td>${M4T2P2}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <table class="ends_table outer_table">
+                    <tr>
+                        <th class="input_column">Shots</th>
+                        <th class="input_column">Total</th>
+                        <th>End</th>
+                        <th class="input_column">Shots</th>
+                        <th class="input_column">Total</th>
+                    </tr>
+                    <tr class="input_row"><td></td><td></td><td class="end">1</td><td></td><td></td></tr>
+                    <tr class="input_row"><td></td><td></td><td class="end">2</td><td></td><td></td></tr>
+                    <tr class="input_row"><td></td><td></td><td class="end">3</td><td></td><td></td></tr>
+                    <tr class="input_row"><td></td><td></td><td class="end">4</td><td></td><td></td></tr>
+                    <tr class="input_row"><td></td><td></td><td class="end">5</td><td></td><td></td></tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <br><br>
+    <table class="root_table">
+        <tr>
+            <td>
+                <table class="outer_table">
+                    <tr><b>LANE ${M5LANE}</b></tr>
+                    <tr>
+                        <td>
+                            <table class="inner_table">
+                                <tr>
+                                    <td>${M5T1P1}</td>
+                                </tr>
+                                <tr>
+                                    <td>${M5T1P2}</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>VS</td>
+                        <td>
+                            <table class="inner_table">
+                                <tr>
+                                    <td>${M5T2P1}</td>
+                                </tr>
+                                <tr>
+                                    <td>${M5T2P2}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <table class="ends_table outer_table">
+                    <tr>
+                        <th class="input_column">Shots</th>
+                        <th class="input_column">Total</th>
+                        <th>End</th>
+                        <th class="input_column">Shots</th>
+                        <th class="input_column">Total</th>
+                    </tr>
+                    <tr class="input_row"><td></td><td></td><td class="end">1</td><td></td><td></td></tr>
+                    <tr class="input_row"><td></td><td></td><td class="end">2</td><td></td><td></td></tr>
+                    <tr class="input_row"><td></td><td></td><td class="end">3</td><td></td><td></td></tr>
+                    <tr class="input_row"><td></td><td></td><td class="end">4</td><td></td><td></td></tr>
+                    <tr class="input_row"><td></td><td></td><td class="end">5</td><td></td><td></td></tr>
+                </table>
+            </td>
+            <td>
+                <table class="outer_table">
+                    <tr><b>LANE ${M6LANE}</b></tr>
+                    <tr>
+                        <td>
+                            <table class="inner_table">
+                                <tr>
+                                    <td>${M6T1P1}</td>
+                                </tr>
+                                <tr>
+                                    <td>${M6T1P2}</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>VS</td>
+                        <td>
+                            <table class="inner_table">
+                                <tr>
+                                    <td>${M6T2P1}</td>
+                                </tr>
+                                <tr>
+                                    <td>${M6T2P2}</td>
                                 </tr>
                             </table>
                         </td>

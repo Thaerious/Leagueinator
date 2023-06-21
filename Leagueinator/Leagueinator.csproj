@@ -234,6 +234,12 @@
     <Compile Include="Components\RoundButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\FormAddPlayer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAddPlayer.Designer.cs">
+      <DependentUpon>FormAddPlayer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormSelectEvent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -254,6 +260,7 @@
     <Compile Include="Model\LeagueEvent.cs" />
     <Compile Include="Model\Team.cs" />
     <Compile Include="Model\PlayerInfo.cs" />
+    <Compile Include="Utility_Classes\ScoreCardPrinter.cs" />
     <Compile Include="Utility_Classes\ToStringExtentions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -279,6 +286,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Components\PlayersPanel.resx">
       <DependentUpon>PlayersPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAddPlayer.resx">
+      <DependentUpon>FormAddPlayer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>

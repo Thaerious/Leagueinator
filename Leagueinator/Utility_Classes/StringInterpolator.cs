@@ -9,22 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Leagueinator.utility_classes {
-    public class StringInterpolator {
-        public string Content {
-            get;
-            private set;
-        }
+    public class StringInterpolator : Dictionary<string, string>{
 
-        public StringInterpolator(string input, Dictionary<string, string> dictionary) {
-            this.Content = input;
+        public string Interpolate(string input) {
+            string content = string.Copy(input);
 
-            foreach (string key in dictionary.Keys) {
-                this.Content = this.Content.Replace("${" + key + "}", dictionary[key]);
+            foreach (string key in this.Keys) {
+                content = content.Replace("${" + key + "}", this[key]);
             }
-        }
 
-        public override string ToString() {
-            return this.Content;
+            return content;
         }
     }
 }

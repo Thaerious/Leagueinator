@@ -211,9 +211,9 @@
             // 
             this.playerListBox.AllowDrop = true;
             this.playerListBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.playerListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playerListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playerListBox.FormattingEnabled = true;
-            this.playerListBox.ItemHeight = 32;
+            this.playerListBox.ItemHeight = 29;
             this.playerListBox.Location = new System.Drawing.Point(379, 3);
             this.playerListBox.Name = "playerListBox";
             this.playerListBox.PlayerInfo = null;

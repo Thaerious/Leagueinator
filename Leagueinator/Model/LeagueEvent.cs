@@ -34,6 +34,10 @@ namespace Leagueinator.Model {
             foreach (var playerInfo in players) this.Players.Add(playerInfo);
         }
 
+        public void AddPlayer(PlayerInfo playerInfo) {
+            this.Players.Add(playerInfo);
+        }
+
         /// <summary>
         /// Add a new empty round to this event.
         /// </summary>

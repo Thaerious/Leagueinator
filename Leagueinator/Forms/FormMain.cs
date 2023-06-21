@@ -1,22 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using Leagueinator.Components;
 using Leagueinator.Model;
-using Leagueinator.utility_classes;
+using Leagueinator.Utility_Classes;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Leagueinator.Forms {
@@ -29,41 +18,61 @@ namespace Leagueinator.Forms {
             set {
                 this._league = value;
                 this.playersPanel.Clear();
-                if (value == null) return;
+                
+                if (value == null) {
+                    this.menuView.Enabled = false;
+                    this.menuEvents.Enabled = false;
+                    this.playersPanel.Visible = false;
+                    this.editEventPanel.Visible = false;
+                    this.editEventPanel.LeagueEvent = null;
+                    return;
+                };
+
                 foreach (var playerInfo in value.Players) {
                     this.playersPanel.AddPlayer(playerInfo);
                 }
+
+                if (League.Events.Count > 0) {
+                    this.editEventPanel.LeagueEvent = League.Events[League.Events.Count - 1];
+                    this.playersPanel.Visible = false;
+                    this.editEventPanel.Visible = true;
+                } else {
+                    this.editEventPanel.LeagueEvent = null;
+                    this.playersPanel.Visible = true;
+                    this.editEventPanel.Visible = false;
+                }
+
+                this.menuEvents.Enabled = true;
+                this.menuView.Enabled = true;
+            }
+        }
+
+        private string LastSave {
+            get {
+                return Properties.Settings.Default.last_save_name;
+            }
+            set {
+                Properties.Settings.Default.last_save_name = value;
+                Properties.Settings.Default.Save();
             }
         }
 
         public FormMain() {
             InitializeComponent();
+            this.playersPanel.PlayerAdded += (s,a)=> this.League.Players.Add(a.PlayerInfo);
 
-            this.playersPanel.PlayerAdded += PlayersPanel_PlayerAdded;
-
-            //// TODO REMOVE
-            //League league = new League();
-            //league.AddPlayers(new String[] { "Ed", "Tim", "Bill", "Steve" });
-            //this.League = league;
+            if (this.LastSave != null && this.LastSave != "") {
+                this.load(this.LastSave);
+            }
         }
 
-        private void PlayersPanel_PlayerAdded(PlayersPanel source, PlayerArgs args) {
-            this.League.Players.Add(args.PlayerInfo);
+        private void menuFileNew(object sender, EventArgs e) {
+            this.League = new League();
         }
-
-        //private void menuFileNew(object sender, EventArgs e) {
-        //    using (SaveFileDialog saveFileDialog = new SaveFileDialog()) {
-        //        this.useDialog(saveFileDialog);
-        //    }
-        //}
 
         private void menuFileClose(object sender, EventArgs e) {
-            Properties.Settings.Default.last_save_name = "";
-            this.menuView.Enabled = false;
+            this.LastSave = "";
             this.Text = "Leagueinator";
-            this.playersPanel.Visible = false;
-            this.editEventPanel.Visible = false;
-            this.editEventPanel.LeagueEvent = null;
             this.League = null;
         }
 
@@ -93,10 +102,18 @@ namespace Leagueinator.Forms {
             Debug.WriteLine(this.editEventPanel.LeagueEvent);
         }
 
-        private void menuEventViewActive(object sender, EventArgs e) {
+        private void MenuViewEvent(object sender, EventArgs e) {
             if (this.editEventPanel.LeagueEvent == null) return;
             this.playersPanel.Visible = false;
-            this.editEventPanel.Visible = true;
+            this.editEventPanel.Visible = true;            
+        }
+
+        private void MenuEventAddPlayer(object sender, EventArgs e) {
+            var form = new FormAddPlayer();
+            if (form.ShowDialog() == DialogResult.OK) {
+                var playerInfo = this.League.AddPlayer(form.PlayerName);
+                this.editEventPanel.AddPlayer(playerInfo);
+            }
         }
 
         private void menuEventSelect(object sender, EventArgs e) {
@@ -119,46 +136,45 @@ namespace Leagueinator.Forms {
                     this.editEventPanel.Visible = false;
                     this.editEventPanel.LeagueEvent = null;
                 }
-            }
-            
+            }            
+        }
+
+        private void setupDialog(FileDialog dialog) {
+            dialog.InitialDirectory = Properties.Settings.Default.save_dir;
+            dialog.Filter = "league files (*.league)|*.league|All files (*.*)|*.*";
+            dialog.FilterIndex = 1;
+            dialog.RestoreDirectory = true;
+            dialog.FileName = this.LastSave;
         }
 
         private void menuFileLoad(object sender, EventArgs e) {
             using (OpenFileDialog dialog = new OpenFileDialog()) {
-                dialog.InitialDirectory = Properties.Settings.Default.save_dir;
-                dialog.Filter = "league files (*.league)|*.league|All files (*.*)|*.*";
-                dialog.FilterIndex = 1;
-                dialog.RestoreDirectory = true;
-                dialog.FileName = Properties.Settings.Default.last_save_name;
+                this.setupDialog(dialog);
 
                 if (dialog.ShowDialog() == DialogResult.OK) {
                     this.load(dialog.FileName);
+                    this.LastSave = dialog.FileName;
                 }
             }
         }
 
         private void menuFileSaveAs(object sender, EventArgs e) {
             using (SaveFileDialog dialog = new SaveFileDialog()) {
-                dialog.InitialDirectory = Properties.Settings.Default.save_dir;
-                dialog.Filter = "league files (*.league)|*.league|All files (*.*)|*.*";
-                dialog.FilterIndex = 1;
-                dialog.RestoreDirectory = true;
-                dialog.FileName = "my.league";
+                this.setupDialog(dialog);
 
                 if (dialog.ShowDialog() == DialogResult.OK) {
                     this.saveAs(dialog.FileName);
-                    Properties.Settings.Default.last_save_name = dialog.FileName;
+                    this.LastSave = dialog.FileName;
                     openFilename = dialog.FileName;
                 }
             }
         }
 
         private void menuFileSave(object sender, EventArgs e) {
-            Debug.WriteLine(Properties.Settings.Default.last_save_name);
-            if (openFilename == null) {
+            if (this.openFilename == null) {
                 menuFileSaveAs(sender, e);
             } else {
-                this.saveAs(openFilename);
+                this.saveAs(this.openFilename);
             }
         }
 
@@ -170,12 +186,15 @@ namespace Leagueinator.Forms {
         }
 
         private void load(string filename) {
-            BinaryFormatter formatter = new BinaryFormatter();
-            using (FileStream stream = new FileStream(filename, FileMode.Open)) {
-                this.League = (League)formatter.Deserialize(stream);
-                this.editEventPanel.LeagueEvent = null;
-                this.playersPanel.Visible = true;
-                this.editEventPanel.Visible = false;
+            Debug.WriteLine("Load " + filename);
+
+            try {
+                BinaryFormatter formatter = new BinaryFormatter();
+                using (FileStream stream = new FileStream(filename, FileMode.Open)) {
+                    this.League = (League)formatter.Deserialize(stream);
+                }
+            }catch (Exception ex) {
+                MessageBox.Show(ex.Message, "Excepion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -183,12 +202,10 @@ namespace Leagueinator.Forms {
             Debug.WriteLine(this.League);
         }
 
-        private void menuFileNew(object sender, EventArgs e) {
-            this.League = new League();
-            this.editEventPanel.LeagueEvent = null;
-            this.playersPanel.Visible = true;
-            this.editEventPanel.Visible = false;
-            this.openFilename = null;
+        private void menuFilePrint(object sender, EventArgs e) {
+            var round = this.editEventPanel.CurrentRound;
+            if (round == null) return;                
+            ScoreCardPrinter.Print(round);
         }
     }
 }

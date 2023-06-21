@@ -14,6 +14,13 @@ using Leagueinator.Model;
 namespace Leagueinator.Components {
     public partial class EditEventPanel : UserControl {
         RoundButton currentRoundButton = null;
+
+        public Round CurrentRound { 
+            get {
+                return currentRoundButton?.Round;
+            } 
+        }
+
         public EditEventPanel() {
             InitializeComponent();
         }
@@ -27,8 +34,9 @@ namespace Leagueinator.Components {
                     this.playerListBox.Items.Clear();
 
                     this.leagueEvent = value;
-                    this.leagueEvent.Rounds.ForEach(r => this.AddRound(r));
                     this.currentRoundButton = null;
+                    this.leagueEvent.Rounds.ForEach(r => this.AddRound(r));
+                   
                 }
             }
         }
@@ -44,6 +52,10 @@ namespace Leagueinator.Components {
             this.flowRounds.Controls.Add(button);
 
             button.Click += new EventHandler(RoundButtonClick);
+
+            if (this.currentRoundButton == null) {
+                this.RoundButtonClick(button, null);
+            }
         }
 
         private void RoundButtonClick(object source, EventArgs _) {
@@ -62,6 +74,8 @@ namespace Leagueinator.Components {
             this.currentRoundButton = button;
             this.playerListBox.Round = currentRoundButton.Round;
             this.PopulateMatches(button.Round);
+
+            Debug.WriteLine(this.currentRoundButton);
         }
 
         private void PopulateMatches(Round round) {

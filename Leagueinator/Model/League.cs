@@ -13,8 +13,14 @@ namespace Leagueinator.Model {
         /// Add to the default players of this League.
         /// </summary>
         /// <param name="players"></param>
-        public void AddPlayers(IEnumerable<String> players) {
+        public void AddPlayers(IEnumerable<string> players) {
             foreach (var name in players) this.Players.Add(new PlayerInfo(name));
+        }
+
+        public PlayerInfo AddPlayer(string playerName) {
+            var playerInfo = new PlayerInfo(playerName);
+            this.Players.Add(playerInfo);
+            return playerInfo;
         }
 
         /// <summary>
