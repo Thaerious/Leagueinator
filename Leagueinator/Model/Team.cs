@@ -1,26 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
     [Serializable]
     public class Team {
-        public readonly PlayerInfo[] Players;
+        private readonly PlayerInfo[] _players;
 
-        public Team(Settings settings) {
-            this.Players = new PlayerInfo[settings.TeamSize];
+        public PlayerInfo this[int key] {
+            get { return _players[key]; }
+            set { _players[key] = value; }
         }
 
-        /// <summary>
-        /// Set the player in a specific index.
-        /// Returns the player previously in that index.
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="playerInfo"></param>
-        /// <returns></returns>
-        public PlayerInfo SetPlayer(int index, PlayerInfo playerInfo) {
-            PlayerInfo previousPlayer = Players[index];
-            Players[index] = playerInfo;
-            return previousPlayer;
+        public List<PlayerInfo> Players {
+            get => new List<PlayerInfo>().AddUnique(this._players);
+        }
+
+
+        public Team(Settings settings) {
+            this._players = new PlayerInfo[settings.TeamSize];
+        }
+
+        public XMLStringBuilder ToXML() {
+            XMLStringBuilder xsb = new XMLStringBuilder();
+            xsb.InlineTag("Team", this.Players.DelString());
+            return xsb;
+        }
+
+        public override string ToString() {
+            return this.ToXML().ToString();
         }
     }
 

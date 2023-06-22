@@ -1,13 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
     [Serializable]
     public class League {
-        public List<PlayerInfo> Players { get; private set; } = new List<PlayerInfo>();
 
-        public List<LeagueEvent> Events { get; private set; } = new List<LeagueEvent> ();
+        /// <summary>
+        /// Retrieve a non-reflective list of players.
+        /// Changes made to the list are non-reflective.
+        /// Changes made to a playerInfo object is refelective.
+        /// </summary>
+        public List<PlayerInfo> Players {
+            get {
+                var list = new List<PlayerInfo>();
+                foreach (var lEvent in Events) {
+                    foreach (var p in lEvent.Players) {
+                        if (!list.Contains(p)) list.Add(p);
+                    }
+                }
+                return list;
+            }
+        }
+
+        public List<LeagueEvent> Events { get; private set; } = new List<LeagueEvent>();
 
         /// <summary>
         /// Add to the default players of this League.
@@ -17,46 +33,38 @@ namespace Leagueinator.Model {
             foreach (var name in players) this.Players.Add(new PlayerInfo(name));
         }
 
-        public PlayerInfo AddPlayer(string playerName) {
-            var playerInfo = new PlayerInfo(playerName);
-            this.Players.Add(playerInfo);
-            return playerInfo;
-        }
-
         /// <summary>
         /// Add a new Event to the league.
         /// Will add all current league players to the event.
         /// </summary>
         /// <returns></returns>
-        public LeagueEvent AddEvent(Settings settings) {
-            var lEvent = new LeagueEvent(settings);
-            lEvent.AddPlayers(this.Players);
-            this.Events.Add(lEvent);            
-            return lEvent;
-        }
-
-        /// <summary>
-        /// Add a new Event to the league with a date.
-        /// Will add all current league players to the event.
-        /// </summary>
-        /// <returns></returns>
-        public LeagueEvent AddEvent(string date, string name, Settings settings) {
-            var lEvent = new LeagueEvent(date, name, settings);
-            lEvent.AddPlayers(this.Players);
+        public LeagueEvent AddEvent(string eventName, string date, Settings settings) {
+            var lEvent = new LeagueEvent(eventName, date, settings);
+            var round = lEvent.AddRound();
+            round.IdlePlayers.AddRange(this.Players);
             this.Events.Add(lEvent);
             return lEvent;
         }
 
-        public override string ToString() {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("Players : ");
-            foreach (var player in this.Players) {
-                sb.AppendLine(" - " + player.ToString());
-            }
+        /// <summary>
+        /// Construct a detailed string representation of a League object by combining 
+        /// information about players and events, separated by newlines, and presented 
+        /// in a formatted manner.
+        /// </summary>
+        /// <returns></returns>
+        public XMLStringBuilder ToXML() {
+            XMLStringBuilder xsb = new XMLStringBuilder();
+            xsb.OpenTag("League");
+            xsb.InlineTag("Players", this.Players.DelString());
             foreach (var lEvent in this.Events) {
-                sb.AppendLine(lEvent.ToString());
+                xsb.AppendXML(lEvent.ToXML());
             }
-            return sb.ToString();
+            xsb.CloseTag("League");
+            return xsb;
+        }
+
+        public override string ToString() {
+            return this.ToXML().ToString();
         }
     }
 }

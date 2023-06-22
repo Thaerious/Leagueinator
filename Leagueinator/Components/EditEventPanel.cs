@@ -1,24 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Leagueinator.Forms;
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
     public partial class EditEventPanel : UserControl {
         RoundButton currentRoundButton = null;
 
-        public Round CurrentRound { 
+        public Round CurrentRound {
             get {
                 return currentRoundButton?.Round;
-            } 
+            }
         }
 
         public EditEventPanel() {
@@ -36,7 +29,7 @@ namespace Leagueinator.Components {
                     this.leagueEvent = value;
                     this.currentRoundButton = null;
                     this.leagueEvent.Rounds.ForEach(r => this.AddRound(r));
-                   
+
                 }
             }
         }
@@ -82,7 +75,7 @@ namespace Leagueinator.Components {
             for (int lane = 1; lane <= this.leagueEvent.settings.LaneCount; lane++) {
                 Control[] controls = this.Controls.Find($"matchCard{lane}", true);
                 MatchCard matchCard = controls[0] as MatchCard;
-                matchCard.Match = round.Matches[lane - 1];
+                matchCard.Match = round[lane - 1];
             }
         }
 
@@ -101,7 +94,7 @@ namespace Leagueinator.Components {
             if (this.LeagueEvent == null) return;
 
             this.LeagueEvent.Players.Add(player);
-            foreach(Round round in this.LeagueEvent.Rounds) {
+            foreach (Round round in this.LeagueEvent.Rounds) {
                 round.IdlePlayers.Add(player);
             }
 

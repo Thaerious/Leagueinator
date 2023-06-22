@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows.Forms;
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
-    public class MatchLabel : Label, IModelPlayer{
+    public class MatchLabel : Label, IModelPlayer {
         [Category("Misc"), Description("The team number for this label.")]
         public Team Team { get; set; }
 
@@ -20,7 +14,7 @@ namespace Leagueinator.Components {
             get { return _playerInfo; }
             set {
                 _playerInfo = value;
-                this.Team.Players[this.Position] = value;
+                this.Team[this.Position] = value;
 
                 if (value == null) this.Text = "";
                 else this.Text = _playerInfo.Name;

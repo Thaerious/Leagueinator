@@ -1,20 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using Leagueinator.Components;
+using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
     [Serializable]
     public class Round {
         public List<PlayerInfo> IdlePlayers { get; private set; } = new List<PlayerInfo>();
-        public readonly Match[] Matches;
+        private readonly Match[] _matches;
+
+        public Match this[int key] {
+            get { return _matches[key]; }
+            set { _matches[key] = value; }
+        }
+
+        public List<Match> Matches {
+            get => new List<Match>().AddUnique(this._matches);
+        }
+
+        public List<PlayerInfo> Players {
+            get {
+                var list = new List<PlayerInfo>();
+                list.AddUnique(this.IdlePlayers);
+
+                foreach (Match match in this.Matches) {
+                    list.AddUnique(match.Players);
+                }
+                return list;
+            }
+        }
 
         public Round(Settings settings) {
-            this.Matches = new Match[settings.LaneCount];
-            for (int i = 0; i < this.Matches.Length; i++) {
-                Matches[i] = new Match(settings);
+            this._matches = new Match[settings.LaneCount];
+            for (int i = 0; i < this._matches.Length; i++) {
+                _matches[i] = new Match(settings);
             }
         }
 
@@ -23,22 +41,20 @@ namespace Leagueinator.Model {
             this.IdlePlayers = copy;
         }
 
-        public override string ToString() {
-            var idle = string.Join(",", this.IdlePlayers.ConvertAll<string>(p => p.Name));
-
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine("{");
-            builder.AppendLine($"\tIdle: [{idle}]");
-            builder.AppendLine($"\tMatches: [");
-
-            for (int i = 0; i < this.Matches.Length; i++) {
-                builder.AppendLine($"\t\t{i} : {this.Matches[i]}");
+        public XMLStringBuilder ToXML() {
+            XMLStringBuilder xsb = new XMLStringBuilder();
+            xsb.OpenTag("Round");
+            xsb.InlineTag("Players", this.Players.DelString());
+            xsb.InlineTag("Idle", this.IdlePlayers.DelString());
+            for (int i = 0; i < this._matches.Length; i++) {
+                xsb.AppendXML(this._matches[i].ToXML(i));
             }
+            xsb.CloseTag("Round");
+            return xsb;
+        }
 
-            builder.AppendLine($"\t]");
-            builder.AppendLine("}");
-
-            return builder.ToString();
+        public override string ToString() {
+            return this.ToXML().ToString();
         }
     }
 

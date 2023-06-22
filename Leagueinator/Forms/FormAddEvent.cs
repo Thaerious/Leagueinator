@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
@@ -22,6 +14,14 @@ namespace Leagueinator.Components {
                     Name = this.txtName.Text
                 };
             }
+        }
+
+        public string EventName {
+            get => this.txtName.Text;
+        }
+
+        public string Date {
+            get => this.dateTimePicker.Text;
         }
 
         public FormAddEvent() {

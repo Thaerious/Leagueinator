@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Design;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
     public partial class MatchCard : UserControl, IModelMatch {
         private int lane = 0;
-        [Category("Appearance"),Description("The lane number displayed.")]        
-        public int Lane { 
-            get => lane; 
+        [Category("Appearance"), Description("The lane number displayed.")]
+        public int Lane {
+            get => lane;
             set {
                 lane = value;
                 this.labelLane.Text = value.ToString();
@@ -31,15 +23,15 @@ namespace Leagueinator.Components {
             }
             set {
                 if (value != null) {
-                    this.labelP0.Team = value.Teams[0];
-                    this.labelP1.Team = value.Teams[0];
-                    this.labelP2.Team = value.Teams[1];
-                    this.labelP3.Team = value.Teams[1];
+                    this.labelP0.Team = value[0];
+                    this.labelP1.Team = value[0];
+                    this.labelP2.Team = value[1];
+                    this.labelP3.Team = value[1];
 
-                    this.labelP0.AddPlayer(value.Teams[0]?.Players[0]);
-                    this.labelP1.AddPlayer(value.Teams[0]?.Players[1]);
-                    this.labelP2.AddPlayer(value.Teams[1]?.Players[0]);
-                    this.labelP3.AddPlayer(value.Teams[1]?.Players[1]);
+                    this.labelP0.AddPlayer(value[0][0]);
+                    this.labelP1.AddPlayer(value[0][1]);
+                    this.labelP2.AddPlayer(value[1][0]);
+                    this.labelP3.AddPlayer(value[1][1]);
                 }
                 this._match = value;
             }
@@ -57,7 +49,7 @@ namespace Leagueinator.Components {
         private void OnDrop(object receiver, DragEventArgs e) {
             if (!(receiver is MatchLabel matchLabel)) return;
             Debug.WriteLine($"Match Card Start Drop {matchLabel.Team} {matchLabel.Position}");
-           
+
             DragData dragData = (DragData)e.Data.GetData(typeof(DragData));
             dragData.SwapWith(matchLabel);
 
@@ -91,7 +83,7 @@ namespace Leagueinator.Components {
         private void LabelUpdate(object sender, MatchLabelArgs args) {
             Debug.WriteLine(args.Team + ", " + args.Position + ", " + args.PlayerInfo?.Name);
             Debug.WriteLine(this.Match);
-            this.Match.Teams[args.Team].Players[args.Position] = args.PlayerInfo;
+            this.Match[args.Team][args.Position] = args.PlayerInfo;
         }
     }
 }

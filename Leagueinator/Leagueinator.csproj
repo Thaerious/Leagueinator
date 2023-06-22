@@ -227,7 +227,9 @@
     <Compile Include="Components\PlayerListBox.Designer.cs">
       <DependentUpon>PlayerListBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\PlayersPanel.cs" />
+    <Compile Include="Components\PlayersPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Components\PlayersPanel.Designer.cs">
       <DependentUpon>PlayersPanel.cs</DependentUpon>
     </Compile>
@@ -260,12 +262,14 @@
     <Compile Include="Model\LeagueEvent.cs" />
     <Compile Include="Model\Team.cs" />
     <Compile Include="Model\PlayerInfo.cs" />
+    <Compile Include="Utility_Classes\ListExtensions.cs" />
     <Compile Include="Utility_Classes\ScoreCardPrinter.cs" />
     <Compile Include="Utility_Classes\ToStringExtentions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility_Classes\StringInterpolator.cs" />
     <Compile Include="Utility_Classes\RandomExtensions.cs" />
+    <Compile Include="Utility_Classes\XMLStringBuilder.cs" />
     <EmbeddedResource Include="Forms\FormAddEvent.resx">
       <DependentUpon>FormAddEvent.cs</DependentUpon>
     </EmbeddedResource>

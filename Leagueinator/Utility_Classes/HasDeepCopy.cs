@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Leagueinator.Model;
 
 namespace Leagueinator {
-    public interface HasDeepCopy <T> {
-        T DeepCopy ();
+    public interface HasDeepCopy<T> {
+        T DeepCopy();
     }
 
     public static class DeepCopyExtension {
@@ -13,9 +12,9 @@ namespace Leagueinator {
             return list;
         }
 
-        public static Dictionary<K,V> DeepCopy<K,V>(this Dictionary<K,V> that) where V : HasDeepCopy<V> {
-            Dictionary<K,V> map = new Dictionary<K,V>();
-            foreach(K key in that.Keys) {
+        public static Dictionary<K, V> DeepCopy<K, V>(this Dictionary<K, V> that) where V : HasDeepCopy<V> {
+            Dictionary<K, V> map = new Dictionary<K, V>();
+            foreach (K key in that.Keys) {
                 map[key] = that[key].DeepCopy();
             }
             return map;

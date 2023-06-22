@@ -24,13 +24,11 @@
         /// </summary>
         private void InitializeComponent() {
             this.listPlayers = new System.Windows.Forms.ListBox();
-            this.txtName = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblIndex = new System.Windows.Forms.Label();
+            this.butRename = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtPlayerName = new System.Windows.Forms.TextBox();
             this.buttonDelete = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.panelPlayerList = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panelPlayerList.SuspendLayout();
@@ -39,85 +37,74 @@
             // listPlayers
             // 
             this.listPlayers.Dock = System.Windows.Forms.DockStyle.Top;
+            this.listPlayers.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listPlayers.FormattingEnabled = true;
-            this.listPlayers.ItemHeight = 20;
+            this.listPlayers.ItemHeight = 27;
             this.listPlayers.Location = new System.Drawing.Point(0, 0);
             this.listPlayers.Name = "listPlayers";
-            this.listPlayers.Size = new System.Drawing.Size(398, 764);
+            this.listPlayers.Size = new System.Drawing.Size(398, 787);
             this.listPlayers.TabIndex = 4;
             this.listPlayers.SelectedIndexChanged += new System.EventHandler(this.onSelect);
-            // 
-            // txtName
-            // 
-            this.txtName.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtName.Location = new System.Drawing.Point(0, 772);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(398, 26);
-            this.txtName.TabIndex = 6;
-            this.txtName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNameKeyUp);
             // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.lblIndex);
+            this.panel1.Controls.Add(this.butRename);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.txtPlayerName);
             this.panel1.Controls.Add(this.buttonDelete);
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.Location = new System.Drawing.Point(453, 244);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(467, 231);
+            this.panel1.Size = new System.Drawing.Size(674, 231);
             this.panel1.TabIndex = 5;
             // 
-            // lblIndex
+            // butRename
             // 
-            this.lblIndex.Location = new System.Drawing.Point(98, 22);
-            this.lblIndex.Name = "lblIndex";
-            this.lblIndex.Size = new System.Drawing.Size(200, 20);
-            this.lblIndex.TabIndex = 5;
+            this.butRename.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.butRename.Location = new System.Drawing.Point(253, 108);
+            this.butRename.Name = "butRename";
+            this.butRename.Size = new System.Drawing.Size(143, 44);
+            this.butRename.TabIndex = 5;
+            this.butRename.Text = "Rename";
+            this.butRename.UseVisualStyleBackColor = true;
+            this.butRename.Click += new System.EventHandler(this.ButRename_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 54);
+            this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(296, 18);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 20);
+            this.label2.Size = new System.Drawing.Size(75, 27);
             this.label2.TabIndex = 4;
             this.label2.Text = "Name";
             // 
             // txtPlayerName
             // 
-            this.txtPlayerName.Location = new System.Drawing.Point(102, 48);
+            this.txtPlayerName.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPlayerName.Location = new System.Drawing.Point(165, 48);
             this.txtPlayerName.Name = "txtPlayerName";
-            this.txtPlayerName.Size = new System.Drawing.Size(324, 26);
+            this.txtPlayerName.Size = new System.Drawing.Size(335, 35);
             this.txtPlayerName.TabIndex = 3;
-            this.txtPlayerName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtRenameKeyUp);
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(32, 170);
+            this.buttonDelete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDelete.Location = new System.Drawing.Point(253, 158);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(98, 44);
+            this.buttonDelete.Size = new System.Drawing.Size(143, 44);
             this.buttonDelete.TabIndex = 2;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.clickDelete);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 20);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Index";
-            // 
             // panelPlayerList
             // 
             this.panelPlayerList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelPlayerList.Controls.Add(this.txtName);
             this.panelPlayerList.Controls.Add(this.listPlayers);
             this.panelPlayerList.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelPlayerList.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panelPlayerList.Location = new System.Drawing.Point(0, 0);
             this.panelPlayerList.Name = "panelPlayerList";
             this.panelPlayerList.Size = new System.Drawing.Size(400, 800);
@@ -134,7 +121,6 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panelPlayerList.ResumeLayout(false);
-            this.panelPlayerList.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -142,13 +128,11 @@
         #endregion
 
         private System.Windows.Forms.ListBox listPlayers;
-        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelPlayerList;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtPlayerName;
-        private System.Windows.Forms.Label lblIndex;
+        private System.Windows.Forms.Button butRename;
     }
 }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Leagueinator.Model;
 using Leagueinator.utility_classes;
@@ -13,7 +8,7 @@ using Leagueinator.utility_classes;
 namespace Leagueinator.Utility_Classes {
     public class ScoreCardPrinter {
 
-        public static void Print(Round round) { 
+        public static void Print(Round round) {
             WebBrowser wb = new WebBrowser();
             StringInterpolator si = BuildInterpolationMap(round);
             var input = GetInputHTML(si);
@@ -26,15 +21,15 @@ namespace Leagueinator.Utility_Classes {
             var si = new StringInterpolator();
 
             int matchNo = 0;
-            for (int lane = 0; lane < round.Matches.Length; lane++) {                
-                Match match = round.Matches[lane];
-                if (match.Players().Count > 0) {
+            for (int lane = 0; lane < round.Matches.Count; lane++) {
+                Match match = round[lane];
+                if (match.Players.Count > 0) {
                     matchNo++;
                     si[$"M{matchNo}LANE"] = $"{lane + 1}";
-                    for (int t = 0; t < round.Matches[lane].Teams.Length; t++) {
-                        Team team = round.Matches[lane].Teams[t];
-                        for(int p = 0; p < team.Players.Length; p++) {
-                            PlayerInfo player = team.Players[p];
+                    for (int t = 0; t < round[lane].Teams.Count; t++) {
+                        Team team = round[lane][t];
+                        for (int p = 0; p < team.Players.Count; p++) {
+                            PlayerInfo player = team[p];
                             if (player == null) {
                                 si[$"M{matchNo}T{t + 1}P{p + 1}"] = "";
                             }

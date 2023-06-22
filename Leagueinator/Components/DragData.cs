@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
@@ -18,7 +13,7 @@ namespace Leagueinator.Components {
 
             PlayerInfo prev = dest.AddPlayer(PlayerInfo);
             Source.ClearPlayer(PlayerInfo);
-            
+
             if (prev != null) { Source.AddPlayer(prev); }
         }
     }

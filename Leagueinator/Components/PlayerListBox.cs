@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Leagueinator.Model;
 
@@ -17,7 +11,7 @@ namespace Leagueinator.Components {
             get {
                 return this._round;
             }
-            set {                
+            set {
                 this._round = value;
                 this.Items.Clear();
                 if (value == null) return;
@@ -44,7 +38,7 @@ namespace Leagueinator.Components {
             this.MouseDown += new MouseEventHandler(this.OnDragStart);
         }
 
-        public PlayerInfo PlayerInfo { 
+        public PlayerInfo PlayerInfo {
             get {
                 if (this.SelectedIndex == -1) return null;
                 return (PlayerInfo)this.SelectedItem;
@@ -56,17 +50,17 @@ namespace Leagueinator.Components {
                 else if (this.SelectedItem != value) {
                     this.Items.Remove(this.SelectedItem);
                     this.Items.Add(value);
-                }        
+                }
             }
         }
 
         private void OnDropStart(object receiver, DragEventArgs e) {
             if (!(receiver is PlayerListBox dest)) return;
             Debug.WriteLine($"Player List Box Start Drop");
-            
+
             DragData dragData = (DragData)e.Data.GetData(typeof(DragData));
             dragData.SwapWith(this);
-            
+
             Debug.WriteLine("Player List Box Exit Drop");
         }
 
@@ -74,10 +68,10 @@ namespace Leagueinator.Components {
             Debug.WriteLine($"Player List Box Start Drag");
 
             this.DoDragDrop(
-                new DragData{ Source = this, PlayerInfo = (PlayerInfo)this.SelectedItem }
+                new DragData { Source = this, PlayerInfo = (PlayerInfo)this.SelectedItem }
                 , DragDropEffects.Move
             );
-  
+
             Debug.WriteLine("Player List Box Exit Drag\n");
         }
 

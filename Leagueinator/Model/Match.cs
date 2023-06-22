@@ -1,39 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
     [Serializable]
     public class Match {
-        public readonly Team[] Teams;
+        private readonly Team[] _teams;
+
+        public Team this[int key] {
+            get { return _teams[key]; }
+            set { _teams[key] = value; }
+        }
+
+        public List<Team> Teams {
+            get => new List<Team>().AddUnique(this._teams);
+        }
+
+        public List<PlayerInfo> Players {
+            get {
+                var list = new List<PlayerInfo>();
+
+                foreach (Team team in this.Teams) {
+                    list.AddUnique(team.Players);
+                }
+                return list;
+            }
+        }
 
         public Match(Settings settings) {
-            this.Teams = new Team[settings.MatchSize];
-            for(int i = 0; i < this.Teams.Length; i++) {
-                this.Teams[i] = new Team(settings);
+            this._teams = new Team[settings.MatchSize];
+            for (int i = 0; i < settings.MatchSize; i++) {
+                this[i] = new Team(settings);
             }
         }
 
-
-        public List<PlayerInfo> Players() {
-            var list = new List<PlayerInfo>();
-            foreach (Team team in this.Teams) {
-                if (team == null) continue;
-                foreach(PlayerInfo player in team.Players) {
-                    if (player == null) continue;
-                    list.Add(player);
-                }
+        public XMLStringBuilder ToXML(int lane) {
+            XMLStringBuilder xsb = new XMLStringBuilder();
+            xsb.OpenTag("Match", $"lane='{lane}'");
+            foreach (var team in this.Teams) {
+                xsb.AppendXML(team.ToXML());
             }
-            return list;
-        }
-
-        public override string ToString() {
-            StringBuilder sb = new StringBuilder();
-            foreach (Team team in this.Teams) {
-                sb.Append($"[{team.Players.DelString()}]");
-            }
-            return sb.ToString();
+            xsb.CloseTag("Match");
+            return xsb;
         }
     }
 

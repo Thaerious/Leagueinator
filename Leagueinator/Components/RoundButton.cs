@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
@@ -20,7 +15,7 @@ namespace Leagueinator.Components {
             }
         }
 
-        public RoundButton(Round round) : base() { 
+        public RoundButton(Round round) : base() {
             this.Round = round;
         }
     }
