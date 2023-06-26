@@ -5,7 +5,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using Leagueinator.Components;
 using Leagueinator.Model;
+using Leagueinator.Model.Search_Algorithms;
+using Leagueinator.Search_Algorithms;
 using Leagueinator.Utility_Classes;
+using Org.BouncyCastle.Asn1.X509;
 
 namespace Leagueinator.Forms {
     public partial class FormMain : Form {
@@ -111,11 +114,9 @@ namespace Leagueinator.Forms {
 
         private void Menu_Event_AddPlayer(object sender, EventArgs e) {
             var form = new FormAddPlayer();
+            form.OnAddPlayer += playerInfo => this.editEventPanel.AddPlayer(playerInfo);
             form.StartPosition = FormStartPosition.CenterParent;
-
-            if (form.ShowDialog() == DialogResult.OK) {
-                this.editEventPanel.AddPlayer(new PlayerInfo(form.PlayerName));
-            }
+            form.ShowDialog();
         }
 
         private void Menu_Event_Select(object sender, EventArgs e) {
@@ -196,6 +197,7 @@ namespace Leagueinator.Forms {
                 using (FileStream stream = new FileStream(filename, FileMode.Open)) {
                     this.League = (League)formatter.Deserialize(stream);
                 }
+                this.openFilename = filename;
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Excepion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -216,6 +218,62 @@ namespace Leagueinator.Forms {
             var round = this.editEventPanel.CurrentRound;
             if (round == null) return;
             Debug.WriteLine(round);
+        }
+
+        private void Menu_Help_About(object sender, EventArgs e) {
+            Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            DateTime buildDate = new DateTime(2000, 1, 1).AddDays(version.Build).AddSeconds(version.Revision * 2);
+            string msg = $"Version\n{version}\n({buildDate})";
+            MessageBox.Show(msg, "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void Menu_Events_Assign_RoundRobin(object sender, EventArgs e) {
+            var lEvent = this.editEventPanel.LeagueEvent;
+            var round = this.editEventPanel.CurrentRound;
+
+            var algo = new GenomeMatchPartners(lEvent, round);
+            var best = new RandomWalk().Run(algo);
+
+            this.editEventPanel.CurrentRound = best.Value;
+            this.editEventPanel.RefreshRound();
+        }
+
+        private void prevTeamSumWeightToolStripMenuItem_Click(object sender, EventArgs e) {
+            var lEvent = this.editEventPanel.LeagueEvent;
+            var round = this.editEventPanel.CurrentRound;
+            var g = new GenomeMatchPartners(lEvent, round);
+            
+            Debug.WriteLine($"Round Partner Weight : {g.Evaluate()}");
+        }
+
+        private void Menu_Events_Assign_Copy(object sender, EventArgs e) {
+            Round current = this.editEventPanel.CurrentRound;
+            Round prev = null;
+            foreach (Round round in this.editEventPanel.LeagueEvent.Rounds) {
+                if (round == current) break;
+                prev = round;
+            }
+            if (prev == null) return;
+
+            current.ResetPlayers();
+
+            for (int i = 0; i < prev.MaxSize; i++) {
+                var match = prev.Matches[i];
+                for (int j = 0; j < match.MaxSize; j++) {
+                    var team = match[j];
+                    for (int k = 0; k < team.MaxSize; k++) {
+                        current.IdlePlayers.Remove(team[k]);
+                        current[i][j][k] = team[k];
+                    }
+                }
+            }
+
+            this.editEventPanel.RefreshRound();
+        }
+
+        private void Menu_Events_Assign_Clear(object sender, EventArgs e) {
+            this.editEventPanel.CurrentRound.ResetPlayers();
+            this.editEventPanel.RefreshRound();
         }
     }
 }

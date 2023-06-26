@@ -3,6 +3,13 @@ using System.Collections.Generic;
 
 namespace Leagueinator {
     static class RandomExtensions {
+        static Random rng = new Random();
+
+        public static T SelectRandom<T>(this List<T> list) {
+            int r = rng.Next(list.Count);
+            return list[r];
+        }
+
         public static void Shuffle<T>(this Random rng, T[] array) {
             int n = array.Length;
             while (n > 1) {

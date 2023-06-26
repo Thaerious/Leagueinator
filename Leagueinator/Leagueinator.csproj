@@ -17,7 +17,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -33,7 +33,7 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
+    <Deterministic>false</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -180,6 +180,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assign_Player_Algos\RoundRobin.cs" />
     <Compile Include="Forms\FormAddEvent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -248,6 +249,8 @@
     <Compile Include="Forms\FormSelectEvent.Designer.cs">
       <DependentUpon>FormSelectEvent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Search_Algorithms\GenomeMatchPartners.cs" />
+    <Compile Include="Model\Search_Algorithms\CountPartners.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Forms\FormMain.cs">
       <SubType>Form</SubType>
@@ -255,6 +258,9 @@
     <Compile Include="Forms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Search_Algorithms\RandomWalk.cs" />
+    <None Include="TestDev.cs" />
+    <Compile Include="Search_Algorithms\AMember.cs" />
     <Compile Include="Utility_Classes\HasDeepCopy.cs" />
     <Compile Include="Model\League.cs" />
     <Compile Include="Model\Match.cs" />

@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
-    public partial class PlayerListBox : ListBox, IModelPlayer {
+    public partial class PlayerListBox : ListBox, HasPlayerInfo {
 
         private Round _round = null;
         public Round Round {

@@ -8,9 +8,21 @@ namespace Leagueinator.Components {
     public partial class EditEventPanel : UserControl {
         RoundButton currentRoundButton = null;
 
+        /// <summary>
+        /// Retrieve or set the currently selected round.
+        /// On set the current round is replaced in both the league event
+        /// and this panel.
+        /// </summary>
         public Round CurrentRound {
             get {
                 return currentRoundButton?.Round;
+            }
+
+            set {
+                if (currentRoundButton?.Round == null) return;
+                int index = this.leagueEvent.Rounds.IndexOf(currentRoundButton?.Round);
+                this.leagueEvent.Rounds[index] = value;
+                this.currentRoundButton.Round = value;
             }
         }
 
@@ -67,8 +79,6 @@ namespace Leagueinator.Components {
             this.currentRoundButton = button;
             this.playerListBox.Round = currentRoundButton.Round;
             this.PopulateMatches(button.Round);
-
-            Debug.WriteLine(this.currentRoundButton);
         }
 
         private void PopulateMatches(Round round) {
@@ -99,6 +109,10 @@ namespace Leagueinator.Components {
             }
 
             this.playerListBox.Items.Add(player);
+        }
+
+        internal void RefreshRound() {
+            this.currentRoundButton.PerformClick();
         }
     }
 }

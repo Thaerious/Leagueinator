@@ -25,7 +25,6 @@
         private void InitializeComponent() {
             this.txtName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.butCancel = new System.Windows.Forms.Button();
             this.butOK = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -48,22 +47,11 @@
             this.label3.TabIndex = 13;
             this.label3.Text = "Player Name";
             // 
-            // butCancel
-            // 
-            this.butCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.butCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.butCancel.Location = new System.Drawing.Point(90, 375);
-            this.butCancel.Name = "butCancel";
-            this.butCancel.Size = new System.Drawing.Size(150, 50);
-            this.butCancel.TabIndex = 16;
-            this.butCancel.Text = "Cancel";
-            this.butCancel.UseVisualStyleBackColor = true;
-            // 
             // butOK
             // 
             this.butOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.butOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.butOK.Location = new System.Drawing.Point(91, 319);
+            this.butOK.Location = new System.Drawing.Point(88, 155);
             this.butOK.Name = "butOK";
             this.butOK.Size = new System.Drawing.Size(150, 50);
             this.butOK.TabIndex = 15;
@@ -74,15 +62,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(328, 444);
-            this.Controls.Add(this.butCancel);
+            this.ClientSize = new System.Drawing.Size(328, 244);
             this.Controls.Add(this.butOK);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label3);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(350, 500);
+            this.MaximumSize = new System.Drawing.Size(350, 300);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(350, 500);
+            this.MinimumSize = new System.Drawing.Size(350, 300);
             this.Name = "FormAddPlayer";
             this.Text = "FormAddPlayer";
             this.ResumeLayout(false);
@@ -94,7 +81,6 @@
 
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button butCancel;
         private System.Windows.Forms.Button butOK;
     }
 }

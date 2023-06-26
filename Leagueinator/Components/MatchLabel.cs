@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
-    public class MatchLabel : Label, IModelPlayer {
+    public class MatchLabel : Label, HasPlayerInfo {
         [Category("Misc"), Description("The team number for this label.")]
         public Team Team { get; set; }
 

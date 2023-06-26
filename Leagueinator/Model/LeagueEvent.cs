@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
@@ -9,13 +10,24 @@ namespace Leagueinator.Model {
         public readonly Settings settings;
         public readonly string Name;
 
+        /// <summary>
+        /// Retreive a non-reflective list of all rounds in this event.
+        /// </summary>
         public List<Round> Rounds { get; private set; } = new List<Round>();
+
+        public List<Team> Teams {
+            get {
+                var list = new List<Team>();
+                this.Rounds.ForEach(r => list.AddRange(r.Teams));
+                return list;
+            }
+        }
 
         public List<PlayerInfo> Players {
             get {
                 var list = new List<PlayerInfo>();
                 foreach (var round in Rounds) {
-                    list.AddUnique(round.Players);
+                    list.AddUnique(round.AllPlayers);
                 }
                 return list;
             }

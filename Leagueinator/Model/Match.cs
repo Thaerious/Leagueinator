@@ -4,8 +4,9 @@ using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
     [Serializable]
-    public class Match {
-        private readonly Team[] _teams;
+    public class Match : HasDeepCopy<Match> {
+        public readonly Settings Settings;
+        private Team[] _teams;
 
         public Team this[int key] {
             get { return _teams[key]; }
@@ -27,11 +28,23 @@ namespace Leagueinator.Model {
             }
         }
 
+        /// <summary>
+        /// The number of teams this match can accept.
+        /// </summary>
+        public int MaxSize => this._teams.Length;
+
         public Match(Settings settings) {
+            this.Settings = settings;
             this._teams = new Team[settings.MatchSize];
             for (int i = 0; i < settings.MatchSize; i++) {
                 this[i] = new Team(settings);
             }
+        }
+
+        public Match DeepCopy() {
+            return new Match(this.Settings) {
+                _teams = this._teams.DeepCopy()
+            };
         }
 
         public XMLStringBuilder ToXML(int lane) {
@@ -43,9 +56,15 @@ namespace Leagueinator.Model {
             xsb.CloseTag("Match");
             return xsb;
         }
+
+        public void ClearPlayers() {
+            for (int i = 0; i < this.MaxSize; i++) {
+                this[i].Clear();
+            }
+        }
     }
 
-    public interface IModelMatch {
+    public interface HasModelMatch {
         Match Match { get; set; }
     }
 }

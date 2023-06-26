@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
-    public partial class MatchCard : UserControl, IModelMatch {
+    public partial class MatchCard : UserControl, HasModelMatch {
         private int lane = 0;
         [Category("Appearance"), Description("The lane number displayed.")]
         public int Lane {
