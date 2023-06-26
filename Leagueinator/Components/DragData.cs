@@ -7,8 +7,8 @@ namespace Leagueinator.Components {
         public PlayerInfo PlayerInfo;
 
         public void SwapWith(HasPlayerInfo dest) {
-            PlayerInfo prev = dest.AddPlayer(PlayerInfo);
             Source.ClearPlayer(PlayerInfo);
+            PlayerInfo prev = dest.AddPlayer(PlayerInfo);            
 
             if (prev != null) { Source.AddPlayer(prev); }
         }

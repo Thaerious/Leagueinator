@@ -86,9 +86,11 @@ namespace Leagueinator.Components {
             return null;
         }
 
-        public void ClearPlayer(PlayerInfo playerInfo) {
+        public PlayerInfo ClearPlayer(PlayerInfo playerInfo) {
+            PlayerInfo prev = this.PlayerInfo;
             this.Items.Remove(playerInfo);
             this.Round.IdlePlayers.Remove(playerInfo);
+            return prev;
         }
     }
 }

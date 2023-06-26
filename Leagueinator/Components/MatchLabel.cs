@@ -13,6 +13,7 @@ namespace Leagueinator.Components {
         public PlayerInfo PlayerInfo {
             get { return _playerInfo; }
             set {
+                if (_playerInfo == value) return;
                 _playerInfo = value;
                 this.Team[this.Position] = value;
 
@@ -27,8 +28,10 @@ namespace Leagueinator.Components {
             return prev;
         }
 
-        public void ClearPlayer(PlayerInfo playerInfo) {
+        public PlayerInfo ClearPlayer(PlayerInfo playerInfo) {
+            PlayerInfo prev = this.PlayerInfo;
             if (this.PlayerInfo == playerInfo) this.PlayerInfo = null;
+            return prev;
         }
     }
 

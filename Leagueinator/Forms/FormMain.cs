@@ -31,6 +31,7 @@ namespace Leagueinator.Forms {
                 };
 
                 if (League.Events.Count > 0) {
+                    // Display the latest event if there is one.
                     this.editEventPanel.LeagueEvent = League.Events[League.Events.Count - 1];
                     this.playersPanel.Visible = false;
                     this.editEventPanel.Visible = true;
@@ -201,6 +202,8 @@ namespace Leagueinator.Forms {
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Excepion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.StackTrace);
             }
         }
 
@@ -242,7 +245,7 @@ namespace Leagueinator.Forms {
             var lEvent = this.editEventPanel.LeagueEvent;
             var round = this.editEventPanel.CurrentRound;
             var g = new GenomeMatchPartners(lEvent, round);
-            string msg = $"Round Partner Weight : {g.Evaluate()}";
+            string msg = $"Round Partner Weight : {g.Evaluate() - round.Teams.Count}";
             MessageBox.Show(msg, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }

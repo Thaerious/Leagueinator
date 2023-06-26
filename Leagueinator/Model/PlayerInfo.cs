@@ -32,6 +32,6 @@ namespace Leagueinator.Model {
     }
     public interface HasPlayerInfo {
         PlayerInfo AddPlayer(PlayerInfo playerInfo);
-        void ClearPlayer(PlayerInfo playerInfo);
+        PlayerInfo ClearPlayer(PlayerInfo playerInfo);
     }
 }

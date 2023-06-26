@@ -15,6 +15,7 @@ namespace Leagueinator.Model {
                 return _players[key];
             }
             set {
+                if (_players[key] == value) return;
                 if (value != null && this.HasPlayer(value)) {
                     throw new ArgumentException($"Team already contains value '{value.Name}'");
                 }
