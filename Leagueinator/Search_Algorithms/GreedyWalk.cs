@@ -9,11 +9,10 @@ using System.Threading.Tasks;
 using Leagueinator.Model.Search_Algorithms;
 using Leagueinator.Model;
 namespace Leagueinator.Search_Algorithms {
-    public class RandomWalk {
+    public class GreedyWalk {
         private int generation = 0;
         public int Generation {
             get => generation;
-
         }
 
         public AMember<T> Run<T>(AMember<T> member) {

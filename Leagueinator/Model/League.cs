@@ -5,7 +5,7 @@ using Leagueinator.Utility_Classes;
 namespace Leagueinator.Model {
     [Serializable]
     public class League {
-        private readonly Settings settings;
+        public readonly Settings settings;
 
         /// <summary>
         /// Retrieve a non-reflective list of players.

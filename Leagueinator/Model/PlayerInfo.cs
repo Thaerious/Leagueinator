@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Diagnostics;
 
 namespace Leagueinator.Model {
     [Serializable]
@@ -15,8 +16,7 @@ namespace Leagueinator.Model {
         public override bool Equals(object obj) {
             if (obj == null) return false;
             if (!(obj is PlayerInfo)) return false;
-            PlayerInfo that = (PlayerInfo)obj;
-            return this.Name == that.Name;
+            return this.Equals((PlayerInfo)obj);
         }
 
         public override int GetHashCode() {

@@ -127,7 +127,7 @@ namespace TestLeagueinator
         }
 
         [TestMethod]
-        public void Teams() {
+        public Round Teams() {
             var r1 = new Round(new Settings());
 
             r1[0][0] = new Team(r1.Settings) {
@@ -154,6 +154,30 @@ namespace TestLeagueinator
             Assert.AreEqual(5, r1.AllPlayers.Count);
             Assert.AreEqual(3, r1.Teams.Count);          // return teams with >0 players
             Assert.AreEqual(8, r1.MaxSize);
+
+            return r1;
+        }
+
+        [TestMethod]
+        public void GetTeam() {
+            Round r1 = this.Teams();
+            Team t1 = r1.GetTeam(new PlayerInfo("Adam"));
+            Debug.WriteLine(r1[0]);
+            Debug.WriteLine(t1);
+            Assert.AreEqual(r1[0][0], t1);
+        }
+
+        [TestMethod]
+        public void Get_Team_For_Player() {
+            var r1 = new Round(new Settings());
+            r1[0][0][0] = new PlayerInfo("Adam");
+            r1[0][0][1] = new PlayerInfo("Bailey");
+            r1[0][1][0] = new PlayerInfo("Cain");
+            r1[0][1][1] = new PlayerInfo("Dave");
+
+            var t = r1.GetTeam(new PlayerInfo("Adam"));
+
+            Assert.AreEqual(r1[0][0], t);
         }
     }
 }

@@ -258,7 +258,7 @@
     <Compile Include="Forms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Search_Algorithms\RandomWalk.cs" />
+    <Compile Include="Search_Algorithms\GreedyWalk.cs" />
     <None Include="TestDev.cs" />
     <Compile Include="Search_Algorithms\AMember.cs" />
     <Compile Include="Utility_Classes\HasDeepCopy.cs" />

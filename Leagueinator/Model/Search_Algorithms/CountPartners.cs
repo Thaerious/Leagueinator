@@ -11,7 +11,7 @@ namespace Leagueinator.Search_Algorithms {
     public class CountPartners {
         public static int Count(LeagueEvent lEvent, Round targetRound){
             var graph = new Graph();
-            foreach (Round round in lEvent.Rounds) {
+            foreach (Round round in lEvent) {
                 if (round == targetRound) break;
                 graph.AddRound(round);
             }

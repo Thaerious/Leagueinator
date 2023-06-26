@@ -13,6 +13,7 @@ namespace TestLeagueinator
             var p1 = new PlayerInfo("Adam");
             var p2 = new PlayerInfo("Adam");
             Assert.IsTrue(p1.Equals(p2));
+            //Assert.IsTrue(p1 == p2);
         }
 
         [TestMethod]
@@ -20,6 +21,7 @@ namespace TestLeagueinator
             var p1 = new PlayerInfo("Adam");
             var p2 = new PlayerInfo("Eve");
             Assert.IsFalse(p1.Equals(p2));
+            //Assert.IsTrue(p1 != p2);
         }
 
         [TestMethod]

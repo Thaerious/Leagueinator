@@ -66,8 +66,29 @@ namespace Leagueinator.Model {
         }
 
         public bool HasPlayer(PlayerInfo player) {
-            foreach (PlayerInfo p in this._players) if (p == player) return true;
-            return false;
+            return this.Players.Contains(player);
+        }
+
+        public void AddPlayer(PlayerInfo player) {
+            for (int i = 0; i < this._players.Length; i++) {
+                if (this._players[i] == null) {
+                    this._players[i] = player;
+                    return;
+                }
+            }
+
+            throw new ArgumentException();
+        }
+
+        public void RemovePlayer(PlayerInfo player) {
+            for (int i = 0; i < this._players.Length; i++) {
+                if (this._players[i] == player) {
+                    this._players[i] = null;
+                    return;
+                }
+            }
+
+            throw new KeyNotFoundException();
         }
     }
 }

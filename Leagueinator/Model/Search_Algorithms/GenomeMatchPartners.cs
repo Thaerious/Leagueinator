@@ -1,78 +1,98 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Leagueinator.Search_Algorithms;
 
 namespace Leagueinator.Model.Search_Algorithms {
 
-    public static class RoundExtension {
-        public static PlayerInfo[] ToArray(this Round round) {
-            var teams = round.Teams;
-            PlayerInfo[] array = new PlayerInfo[teams.Count];
-
-            int i = 0;
-            foreach (var team in teams) {
-                foreach(var player in team.Players) {
-                    array[i++] = player;
-                }
-            }
-
-            return array;
-        }
-    }
-
     public class GenomeMatchPartners : AMember<Round> {
-        public readonly LeagueEvent lEvent;
-        public readonly Round targetRound;
+        public readonly LeagueEvent LEvent;
+        public readonly Round Round;
         private readonly Random rng = new Random();
 
         public GenomeMatchPartners(LeagueEvent lEvent, Round round) {
-            this.lEvent = lEvent;
-            this.targetRound = round.DeepCopy();
+            this.LEvent = lEvent;
+            this.Round = round;
         }
 
-        public override Round Value => this.targetRound;
+        public GenomeMatchPartners(GenomeMatchPartners that) {
+            this.LEvent = that.LEvent;
+            this.Round = new Round(that.Round.AllPlayers, that.LEvent.Settings);
+        }
+
+        public override Round Value => this.Round;
 
         public override AMember<Round> Clone() {
-            return new GenomeMatchPartners(lEvent, targetRound.DeepCopy());
+            return new GenomeMatchPartners(this);
         }
 
+        /// <summary>
+        /// Return the nubmer of times player1 was on a team with player2
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
+        public int Evaluate(PlayerInfo player1, PlayerInfo player2) {
+            int sum = 0;
+            foreach(Team team in this.LEvent.GetTeams(player1)) {
+                if (team.HasPlayer(player2)) sum++;
+            }
+            return sum;
+        }
+
+        /// <summary>
+        /// The number of times a match was repeated.
+        /// </summary>
+        /// <returns></returns>
         public override int Evaluate() {
             int sum = 0;
 
-            foreach (PlayerInfo player in targetRound.AllPlayers) {
-                Team currentTeam = targetRound.GetTeam(player);
-                if (currentTeam == null) continue;
+            foreach (PlayerInfo player1 in Round.ActivePlayers) {
+                var team = Round.GetTeam(player1);
 
-                // a list of all teams that player is on
-                List<Team> teams = this.lEvent.Teams.Where(t => t.HasPlayer(player)).ToList();
-
-                // for each partner in the current team
-                foreach (Team team in teams) {
-                    foreach (PlayerInfo partner in  team.Players) {
-                        if (player == partner) continue;
-                        if (team.HasPlayer(partner)) sum++;
-                    }
+                foreach (PlayerInfo player2 in team.Players) {
+                    if (player1.Equals(player2)) continue;
+                    var e = this.Evaluate(player1, player2);
+                    if (e > 0) sum += this.Evaluate(player1, player2);
                 }
             }
 
-            return sum;
+            return sum / 2;
         }
 
         public override bool IsValid() => true;
 
+        public Round Randomize() {
+            this.Round.ResetPlayers();
+
+            foreach (Match match in this.Round.Matches) {
+                foreach (Team team in match.Teams) {
+                    while (team.isFull == false) {
+                        var player = this.Round.IdlePlayers.SelectRandom();
+                        team.AddPlayer(player);
+                        this.Round.IdlePlayers.Remove(player);
+                        if (this.Round.IdlePlayers.Count == 0) return this.Round;
+                    }
+                }
+            }
+
+            return this.Round;
+        }
+
         public override void Mutate() {
-            Team t1 = this.targetRound.Teams.SelectRandom();
-            Team t2 = this.targetRound.Teams.SelectRandom();
+            var p1 = this.Round.AllPlayers.SelectRandom();
+            var p2 = this.Round.AllPlayers.SelectRandom();
+            if (p1 == p2) return;
 
-            int idx1 = rng.Next(t1.Players.Count);
-            int idx2 = rng.Next(t2.Players.Count);
+            var t1 = Round.GetTeam(p1);
+            var t2 = Round.GetTeam(p2);
+            
+            if (t1 == t2) return;
 
-            (t1[idx1], t2[idx2]) = (t2[idx2], t1[idx1]);
+            t1.RemovePlayer(p1);
+            t2.RemovePlayer(p2);
+
+            t1.AddPlayer(p2);
+            t2.AddPlayer(p1);
         }
     }
 }

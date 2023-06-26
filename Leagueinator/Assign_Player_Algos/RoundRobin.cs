@@ -12,7 +12,7 @@ namespace Leagueinator.Algos {
         readonly Graph graph = new Graph();
 
         public RoundRobin(LeagueEvent lEvent, Round targetRound){
-            foreach(Round round in lEvent.Rounds) {
+            foreach(Round round in lEvent) {
                 if (round == targetRound) break;
                 graph.AddRound(round);
             }

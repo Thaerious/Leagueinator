@@ -57,6 +57,10 @@ namespace Leagueinator.Model {
             return xsb;
         }
 
+        public override String ToString() {
+            return this.ToXML(0).ToString();
+        }
+
         public void ClearPlayers() {
             for (int i = 0; i < this.MaxSize; i++) {
                 this[i].Clear();

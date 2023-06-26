@@ -168,21 +168,21 @@
             // menuActionAddEvent
             // 
             this.menuActionAddEvent.Name = "menuActionAddEvent";
-            this.menuActionAddEvent.Size = new System.Drawing.Size(270, 34);
+            this.menuActionAddEvent.Size = new System.Drawing.Size(227, 34);
             this.menuActionAddEvent.Text = "Add Event";
             this.menuActionAddEvent.Click += new System.EventHandler(this.Menu_Events_Add);
             // 
             // selectEventToolStripMenuItem
             // 
             this.selectEventToolStripMenuItem.Name = "selectEventToolStripMenuItem";
-            this.selectEventToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.selectEventToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
             this.selectEventToolStripMenuItem.Text = "Select Event";
             this.selectEventToolStripMenuItem.Click += new System.EventHandler(this.Menu_Event_Select);
             // 
             // addPlayerToolStripMenuItem
             // 
             this.addPlayerToolStripMenuItem.Name = "addPlayerToolStripMenuItem";
-            this.addPlayerToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.addPlayerToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
             this.addPlayerToolStripMenuItem.Text = "Add Player";
             this.addPlayerToolStripMenuItem.Click += new System.EventHandler(this.Menu_Event_AddPlayer);
             // 
@@ -193,7 +193,7 @@
             this.rToolStripMenuItem,
             this.copyPrevRoundToolStripMenuItem});
             this.assignPlayersToolStripMenuItem.Name = "assignPlayersToolStripMenuItem";
-            this.assignPlayersToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.assignPlayersToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
             this.assignPlayersToolStripMenuItem.Text = "Assign Players";
             // 
             // clearToolStripMenuItem
@@ -248,30 +248,30 @@
             // printCurrentRoundToolStripMenuItem
             // 
             this.printCurrentRoundToolStripMenuItem.Name = "printCurrentRoundToolStripMenuItem";
-            this.printCurrentRoundToolStripMenuItem.Size = new System.Drawing.Size(296, 34);
+            this.printCurrentRoundToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.printCurrentRoundToolStripMenuItem.Text = "Print Current Round";
             this.printCurrentRoundToolStripMenuItem.Click += new System.EventHandler(this.Menu_Dev_PrintRound);
             // 
             // printCurrentEventToolStripMenuItem
             // 
             this.printCurrentEventToolStripMenuItem.Name = "printCurrentEventToolStripMenuItem";
-            this.printCurrentEventToolStripMenuItem.Size = new System.Drawing.Size(296, 34);
+            this.printCurrentEventToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.printCurrentEventToolStripMenuItem.Text = "Print Current Event";
             this.printCurrentEventToolStripMenuItem.Click += new System.EventHandler(this.menuPrintCurrentEvent);
             // 
             // printLeagueToolStripMenuItem
             // 
             this.printLeagueToolStripMenuItem.Name = "printLeagueToolStripMenuItem";
-            this.printLeagueToolStripMenuItem.Size = new System.Drawing.Size(296, 34);
+            this.printLeagueToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.printLeagueToolStripMenuItem.Text = "Print League";
             this.printLeagueToolStripMenuItem.Click += new System.EventHandler(this.menuActionsPrintLeague);
             // 
             // prevTeamSumWeightToolStripMenuItem
             // 
             this.prevTeamSumWeightToolStripMenuItem.Name = "prevTeamSumWeightToolStripMenuItem";
-            this.prevTeamSumWeightToolStripMenuItem.Size = new System.Drawing.Size(296, 34);
-            this.prevTeamSumWeightToolStripMenuItem.Text = "Prev Team Sum Weight";
-            this.prevTeamSumWeightToolStripMenuItem.Click += new System.EventHandler(this.prevTeamSumWeightToolStripMenuItem_Click);
+            this.prevTeamSumWeightToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.prevTeamSumWeightToolStripMenuItem.Text = "Evaluate Round";
+            this.prevTeamSumWeightToolStripMenuItem.Click += new System.EventHandler(this.Menu_Dev_EvaluateRound);
             // 
             // helpToolStripMenuItem
             // 

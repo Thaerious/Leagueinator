@@ -20,8 +20,8 @@ namespace Leagueinator.Components {
 
             set {
                 if (currentRoundButton?.Round == null) return;
-                int index = this.leagueEvent.Rounds.IndexOf(currentRoundButton?.Round);
-                this.leagueEvent.Rounds[index] = value;
+                int index = this.leagueEvent.IndexOf(currentRoundButton?.Round);
+                this.leagueEvent[index] = value;
                 this.currentRoundButton.Round = value;
             }
         }
@@ -40,8 +40,7 @@ namespace Leagueinator.Components {
 
                     this.leagueEvent = value;
                     this.currentRoundButton = null;
-                    this.leagueEvent.Rounds.ForEach(r => this.AddRound(r));
-
+                    this.leagueEvent.ForEach(r => this.AddRound(r));
                 }
             }
         }
@@ -82,7 +81,7 @@ namespace Leagueinator.Components {
         }
 
         private void PopulateMatches(Round round) {
-            for (int lane = 1; lane <= this.leagueEvent.settings.LaneCount; lane++) {
+            for (int lane = 1; lane <= this.leagueEvent.Settings.LaneCount; lane++) {
                 Control[] controls = this.Controls.Find($"matchCard{lane}", true);
                 MatchCard matchCard = controls[0] as MatchCard;
                 matchCard.Match = round[lane - 1];
@@ -104,7 +103,7 @@ namespace Leagueinator.Components {
             if (this.LeagueEvent == null) return;
 
             this.LeagueEvent.Players.Add(player);
-            foreach (Round round in this.LeagueEvent.Rounds) {
+            foreach (Round round in this.LeagueEvent) {
                 round.IdlePlayers.Add(player);
             }
 

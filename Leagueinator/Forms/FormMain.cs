@@ -228,28 +228,29 @@ namespace Leagueinator.Forms {
         }
 
         private void Menu_Events_Assign_RoundRobin(object sender, EventArgs e) {
-            var lEvent = this.editEventPanel.LeagueEvent;
-            var round = this.editEventPanel.CurrentRound;
+            //var lEvent = this.editEventPanel.LeagueEvent;
+            //var round = this.editEventPanel.CurrentRound;
 
-            var algo = new GenomeMatchPartners(lEvent, round);
-            var best = new RandomWalk().Run(algo);
+            //var algo = new GenomeMatchPartners(lEvent, new Round(levent.));
+            //var best = new GreedyWalk().Run(algo);
 
-            this.editEventPanel.CurrentRound = best.Value;
-            this.editEventPanel.RefreshRound();
+            //this.editEventPanel.CurrentRound = best.Value;
+            //this.editEventPanel.RefreshRound();
         }
 
-        private void prevTeamSumWeightToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void Menu_Dev_EvaluateRound(object sender, EventArgs e) {
             var lEvent = this.editEventPanel.LeagueEvent;
             var round = this.editEventPanel.CurrentRound;
             var g = new GenomeMatchPartners(lEvent, round);
-            
-            Debug.WriteLine($"Round Partner Weight : {g.Evaluate()}");
+            string msg = $"Round Partner Weight : {g.Evaluate()}";
+            MessageBox.Show(msg, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
 
         private void Menu_Events_Assign_Copy(object sender, EventArgs e) {
             Round current = this.editEventPanel.CurrentRound;
             Round prev = null;
-            foreach (Round round in this.editEventPanel.LeagueEvent.Rounds) {
+            foreach (Round round in this.editEventPanel.LeagueEvent) {
                 if (round == current) break;
                 prev = round;
             }
