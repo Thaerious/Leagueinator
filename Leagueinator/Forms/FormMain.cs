@@ -230,15 +230,17 @@ namespace Leagueinator.Forms {
             MessageBox.Show(msg, "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void Menu_Events_Assign_RoundRobin(object sender, EventArgs e) {
-            //var lEvent = this.editEventPanel.LeagueEvent;
-            //var round = this.editEventPanel.CurrentRound;
+        private void Menu_Events_Assign_Partners(object sender, EventArgs e) {
+            LeagueEvent lEvent = this.editEventPanel.LeagueEvent;
+            Round round = this.editEventPanel.CurrentRound;
+            if (lEvent == null || round == null) return;
 
-            //var algo = new GenomeMatchPartners(lEvent, new Round(levent.));
-            //var best = new GreedyWalk().Run(algo);
+            var solution = new GenomeMatchPartners(lEvent, round);
+            var algo = new GreedyWalk();
+            solution.Randomize();
+            algo.Run(solution);
 
-            //this.editEventPanel.CurrentRound = best.Value;
-            //this.editEventPanel.RefreshRound();
+            this.editEventPanel.RefreshRound();
         }
 
         private void Menu_Dev_EvaluateRound(object sender, EventArgs e) {

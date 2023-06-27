@@ -168,21 +168,21 @@
             // menuActionAddEvent
             // 
             this.menuActionAddEvent.Name = "menuActionAddEvent";
-            this.menuActionAddEvent.Size = new System.Drawing.Size(227, 34);
+            this.menuActionAddEvent.Size = new System.Drawing.Size(270, 34);
             this.menuActionAddEvent.Text = "Add Event";
             this.menuActionAddEvent.Click += new System.EventHandler(this.Menu_Events_Add);
             // 
             // selectEventToolStripMenuItem
             // 
             this.selectEventToolStripMenuItem.Name = "selectEventToolStripMenuItem";
-            this.selectEventToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
+            this.selectEventToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.selectEventToolStripMenuItem.Text = "Select Event";
             this.selectEventToolStripMenuItem.Click += new System.EventHandler(this.Menu_Event_Select);
             // 
             // addPlayerToolStripMenuItem
             // 
             this.addPlayerToolStripMenuItem.Name = "addPlayerToolStripMenuItem";
-            this.addPlayerToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
+            this.addPlayerToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.addPlayerToolStripMenuItem.Text = "Add Player";
             this.addPlayerToolStripMenuItem.Click += new System.EventHandler(this.Menu_Event_AddPlayer);
             // 
@@ -193,27 +193,27 @@
             this.rToolStripMenuItem,
             this.copyPrevRoundToolStripMenuItem});
             this.assignPlayersToolStripMenuItem.Name = "assignPlayersToolStripMenuItem";
-            this.assignPlayersToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
+            this.assignPlayersToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.assignPlayersToolStripMenuItem.Text = "Assign Players";
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(252, 34);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.clearToolStripMenuItem.Text = "Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.Menu_Events_Assign_Clear);
             // 
             // rToolStripMenuItem
             // 
             this.rToolStripMenuItem.Name = "rToolStripMenuItem";
-            this.rToolStripMenuItem.Size = new System.Drawing.Size(252, 34);
-            this.rToolStripMenuItem.Text = "Round Robin";
-            this.rToolStripMenuItem.Click += new System.EventHandler(this.Menu_Events_Assign_RoundRobin);
+            this.rToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.rToolStripMenuItem.Text = "Assign Partners";
+            this.rToolStripMenuItem.Click += new System.EventHandler(this.Menu_Events_Assign_Partners);
             // 
             // copyPrevRoundToolStripMenuItem
             // 
             this.copyPrevRoundToolStripMenuItem.Name = "copyPrevRoundToolStripMenuItem";
-            this.copyPrevRoundToolStripMenuItem.Size = new System.Drawing.Size(252, 34);
+            this.copyPrevRoundToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.copyPrevRoundToolStripMenuItem.Text = "Copy Prev Round";
             this.copyPrevRoundToolStripMenuItem.Click += new System.EventHandler(this.Menu_Events_Assign_Copy);
             // 

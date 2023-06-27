@@ -11,6 +11,9 @@ using Leagueinator.Model;
 namespace Leagueinator.Search_Algorithms {
     public class GreedyWalk {
         private int generation = 0;
+
+        public int MaxGen = 100;
+
         public int Generation {
             get => generation;
         }
@@ -23,7 +26,7 @@ namespace Leagueinator.Search_Algorithms {
 
             AMember<T> current = member;
 
-            while (bestScore > 0 && generation++ < 100) {
+            while (bestScore > 0 && generation++ < MaxGen) {
                 member.Mutate();
                 current = current.Clone();
                 current.Mutate();

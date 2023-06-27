@@ -56,9 +56,12 @@ namespace Leagueinator.Components {
 
         private void OnDropStart(object receiver, DragEventArgs e) {
             if (!(receiver is PlayerListBox dest)) return;
+
             Debug.WriteLine($"Player List Box Start Drop");
 
             DragData dragData = (DragData)e.Data.GetData(typeof(DragData));
+            if (receiver == dragData.Source) return;
+
             dragData.SwapWith(this);
 
             Debug.WriteLine("Player List Box Exit Drop");
