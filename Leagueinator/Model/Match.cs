@@ -13,6 +13,7 @@ namespace Leagueinator.Model {
             set { _teams[key] = value; }
         }
 
+        [Model]
         public List<Team> Teams {
             get => new List<Team>().AddUnique(this._teams);
         }

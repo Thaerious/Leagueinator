@@ -21,7 +21,7 @@ namespace TestLeagueinator
             r1[0][1][0] = new PlayerInfo("Cain");
             r1[0][1][1] = new PlayerInfo("Dave");
 
-            Assert.AreEqual(4, e1.Players.Count);
+            Assert.AreEqual(4, e1.SeekDeep<PlayerInfo>().Count);
             Assert.AreEqual(1, e1.Size);
         }
 
@@ -29,7 +29,7 @@ namespace TestLeagueinator
         public void EmptyEvent() {
             var e1 = new LeagueEvent(new Settings());
 
-            Assert.AreEqual(0, e1.Players.Count);
+            Assert.AreEqual(0, e1.SeekDeep<PlayerInfo>().Count);
             Assert.AreEqual(0, e1.Size);
         }
 
@@ -38,7 +38,7 @@ namespace TestLeagueinator
             var e1 = new LeagueEvent(new Settings());
             e1.AddRound();
 
-            Assert.AreEqual(0, e1.Players.Count);
+            Assert.AreEqual(0, e1.SeekDeep<PlayerInfo>().Count);
             Assert.AreEqual(1, e1.Size);
         }
 
@@ -47,7 +47,7 @@ namespace TestLeagueinator
             var e1 = new LeagueEvent(new Settings());
             e1.AddRound();
 
-            Assert.AreEqual(0, e1.Players.Count);
+            Assert.AreEqual(0, e1.SeekDeep<PlayerInfo>().Count);
             Assert.AreEqual(1, e1.Size);
         }
 
@@ -61,9 +61,8 @@ namespace TestLeagueinator
             r1[0][1][0] = new PlayerInfo("Cain");
             r1[0][1][1] = new PlayerInfo("Dave");
 
-            Assert.AreEqual(4, e1.Players.Count);
+            Assert.AreEqual(4, e1.SeekDeep<PlayerInfo>().Count);
             Assert.AreEqual(1, e1.Size);
-            Assert.AreEqual(2, e1.Teams.Count);
         }
 
         [TestMethod]

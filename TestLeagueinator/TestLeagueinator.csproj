@@ -55,6 +55,7 @@
     <Compile Include="Tests\Test_Model_Round.cs" />
     <Compile Include="Tests\Test_Model_Match.cs" />
     <Compile Include="Tests\Test_Model_Team.cs" />
+    <Compile Include="Tests\Test_IsModel_Extensions.cs" />
     <Compile Include="Tests\Test_Model_PlayerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\Test_GenomeMatchPartners.cs" />

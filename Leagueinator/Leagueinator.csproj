@@ -249,6 +249,7 @@
     <Compile Include="Forms\FormSelectEvent.Designer.cs">
       <DependentUpon>FormSelectEvent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\IsModel.cs" />
     <Compile Include="Model\Search_Algorithms\GenomeMatchPartners.cs" />
     <Compile Include="Model\Search_Algorithms\CountPartners.cs" />
     <Compile Include="Model\Settings.cs" />

@@ -7,7 +7,6 @@ using TestLeagueinator.Helpers;
 
 namespace TestLeagueinator
 {
-
     [TestClass]
     public class Test_Model_Match {
 

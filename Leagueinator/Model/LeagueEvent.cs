@@ -15,29 +15,14 @@ namespace Leagueinator.Model {
         /// <summary>
         /// Retreive a non-reflective list of all rounds in this event.
         /// </summary>
-        private List<Round> Rounds = new List<Round>();
+        [Model]
+        public List<Round> Rounds {
+            get; private set;
+        } = new List<Round>();
 
         public Round this[int key] {
             get { return Rounds[key]; }
             set { Rounds.Remove(Rounds[key]); }
-        }
-
-        public List<Team> Teams {
-            get {
-                var list = new List<Team>();
-                this.Rounds.ForEach(r => list.AddRange(r.Teams));
-                return list;
-            }
-        }
-
-        public List<PlayerInfo> Players {
-            get {
-                var list = new List<PlayerInfo>();
-                foreach (var round in Rounds) {
-                    list.AddUnique(round.AllPlayers);
-                }
-                return list;
-            }
         }
 
         public int Size { get => Rounds.Count;}
@@ -58,7 +43,7 @@ namespace Leagueinator.Model {
         /// Add a new empty round to this event.
         /// </summary>
         public Round AddRound() {
-            var round = new Round(this.Players, this.Settings);
+            var round = new Round(this.SeekDeep<PlayerInfo>(), this.Settings);
             this.Rounds.Add(round);
             return round;
         }
@@ -66,7 +51,7 @@ namespace Leagueinator.Model {
         public XMLStringBuilder ToXML() {
             XMLStringBuilder xsb = new XMLStringBuilder();
             xsb.OpenTag("Event");
-            xsb.InlineTag("Players", this.Players.DelString());
+            xsb.InlineTag("Players", this.SeekDeep<PlayerInfo>().DelString());
             foreach (var round in this.Rounds) {
                 xsb.AppendXML(round.ToXML());
             }
@@ -95,7 +80,7 @@ namespace Leagueinator.Model {
 
         public List<Team> GetTeams(PlayerInfo player) {
             List<Team> teams = new List<Team>();
-            foreach (Team team in this.Teams) {
+            foreach (Team team in this.SeekAll<Team>()) {
                 if (team.HasPlayer(player)) teams.Add(team);
             }
             return teams;

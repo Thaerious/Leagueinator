@@ -7,14 +7,17 @@ namespace Leagueinator.Model {
     [Serializable]
     public class Round : HasDeepCopy<Round> {
         public readonly Settings Settings;
-        public List<PlayerInfo> IdlePlayers { get; private set; } = new List<PlayerInfo>();
         private Match[] _matches;
+
+        [Model]
+        public List<PlayerInfo> IdlePlayers { get; private set; } = new List<PlayerInfo>();        
 
         public Match this[int key] {
             get { return _matches[key]; }
             set { _matches[key] = value; }
         }
 
+        [Model]
         public List<Match> Matches {
             get => new List<Match>().AddUnique(this._matches);
         }

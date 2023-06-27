@@ -8,7 +8,7 @@ using TestLeagueinator.Helpers;
 namespace TestLeagueinator
 {
     [TestClass]
-    public class Test_Model_Team {
+    public class Test_IsModel_Team {
         PlayerInfo adam = new PlayerInfo("Adam");
         PlayerInfo eve = new PlayerInfo("Eve");
         PlayerInfo cain = new PlayerInfo("Cain");
@@ -17,7 +17,7 @@ namespace TestLeagueinator
         public void Empty_Team() {
             var t1 = new Team(new Settings());
             Assert.AreEqual(0, t1.Players.Count);
-            Assert.IsFalse(t1.isFull);
+            Assert.IsFalse(t1.IsFull);
             Assert.AreEqual(2, t1.MaxSize);
             Assert.IsFalse(t1.HasPlayer(adam));
         }
@@ -29,7 +29,7 @@ namespace TestLeagueinator
             };
 
             Assert.AreEqual(2, t1.Players.Count);
-            Assert.IsTrue(t1.isFull);
+            Assert.IsTrue(t1.IsFull);
             Assert.AreEqual(2, t1.MaxSize);
             Assert.AreEqual(adam, t1[0]);
             Assert.AreEqual(eve, t1[1]);
@@ -41,14 +41,14 @@ namespace TestLeagueinator
 
             t1[0] = adam;
             Assert.AreEqual(1, t1.Players.Count);
-            Assert.IsFalse(t1.isFull);
+            Assert.IsFalse(t1.IsFull);
             Assert.AreEqual(2, t1.MaxSize);
             Assert.AreEqual(adam, t1[0]);
             Assert.AreEqual(null, t1[1]);
 
             t1[1] = eve;
             Assert.AreEqual(2, t1.Players.Count);
-            Assert.IsTrue(t1.isFull);
+            Assert.IsTrue(t1.IsFull);
             Assert.AreEqual(2, t1.MaxSize);
             Assert.AreEqual(adam, t1[0]);
             Assert.AreEqual(eve, t1[1]);
@@ -63,7 +63,7 @@ namespace TestLeagueinator
             t1.RemovePlayer(eve);
 
             Assert.AreEqual(1, t1.Players.Count);
-            Assert.IsFalse(t1.isFull);
+            Assert.IsFalse(t1.IsFull);
             Assert.AreEqual(2, t1.MaxSize);
             Assert.AreEqual(adam, t1[0]);
             Assert.AreEqual(null, t1[1]);
@@ -88,7 +88,7 @@ namespace TestLeagueinator
             t1.AddPlayer(eve);
 
             Assert.AreEqual(2, t1.Players.Count);
-            Assert.IsTrue(t1.isFull);
+            Assert.IsTrue(t1.IsFull);
             Assert.AreEqual(2, t1.MaxSize);
             Assert.AreEqual(adam, t1[0]);
             Assert.AreEqual(eve, t1[1]);
@@ -102,7 +102,7 @@ namespace TestLeagueinator
             t1.AddPlayer(adam);
 
             Assert.AreEqual(2, t1.Players.Count);
-            Assert.IsTrue(t1.isFull);
+            Assert.IsTrue(t1.IsFull);
             Assert.AreEqual(2, t1.MaxSize);
             Assert.AreEqual(adam, t1[0]);
             Assert.AreEqual(eve, t1[1]);
@@ -125,14 +125,14 @@ namespace TestLeagueinator
 
             t1[0] = adam;
             Assert.AreEqual(1, t1.Players.Count);
-            Assert.IsFalse(t1.isFull);
+            Assert.IsFalse(t1.IsFull);
             Assert.AreEqual(2, t1.MaxSize);
             Assert.AreEqual(adam, t1[0]);
             Assert.AreEqual(null, t1[1]);
 
             t1[1] = eve;
             Assert.AreEqual(2, t1.Players.Count);
-            Assert.IsTrue(t1.isFull);
+            Assert.IsTrue(t1.IsFull);
             Assert.AreEqual(2, t1.MaxSize);
             Assert.AreEqual(adam, t1[0]);
             Assert.AreEqual(eve, t1[1]);
@@ -180,7 +180,7 @@ namespace TestLeagueinator
             t1[1] = null;
 
             Assert.AreEqual(0, t1.Players.Count);
-            Assert.IsFalse(t1.isFull);
+            Assert.IsFalse(t1.IsFull);
             Assert.AreEqual(2, t1.MaxSize);
             Assert.AreEqual(null, t1[0]);
             Assert.AreEqual(null, t1[1]);
@@ -196,7 +196,7 @@ namespace TestLeagueinator
             var t2 = t1.DeepCopy();
 
             Assert.AreEqual(2, t2.Players.Count);
-            Assert.IsTrue(t2.isFull);
+            Assert.IsTrue(t2.IsFull);
             Assert.AreEqual(2, t2.MaxSize);
             Assert.AreEqual(adam, t2[0]);
             Assert.AreEqual(eve, t2[1]);
@@ -215,7 +215,7 @@ namespace TestLeagueinator
             t1[1] = null;
 
             Assert.AreEqual(2, t2.Players.Count);
-            Assert.IsTrue(t2.isFull);
+            Assert.IsTrue(t2.IsFull);
             Assert.AreEqual(2, t2.MaxSize);
             Assert.AreEqual(adam, t2[0]);
             Assert.AreEqual(eve, t2[1]);
@@ -230,7 +230,7 @@ namespace TestLeagueinator
             t1.Clear();
 
             Assert.AreEqual(0, t1.Players.Count);
-            Assert.IsFalse(t1.isFull);
+            Assert.IsFalse(t1.IsFull);
             Assert.AreEqual(2, t1.MaxSize);
             Assert.IsFalse(t1.HasPlayer(adam));
         }

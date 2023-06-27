@@ -25,8 +25,9 @@ namespace Leagueinator.Model {
 
         public int MaxSize => _players.Length;
 
-        public bool isFull => _players.Length == Players.Count;
+        public bool IsFull => _players.Length == Players.Count;
 
+        [Model]
         public ICollection<PlayerInfo> Players {
             get => new List<PlayerInfo>().AddUnique(this._players);
             set {

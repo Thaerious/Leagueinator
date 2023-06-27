@@ -66,7 +66,7 @@ namespace Leagueinator.Model.Search_Algorithms {
 
             foreach (Match match in this.Round.Matches) {
                 foreach (Team team in match.Teams) {
-                    while (team.isFull == false) {
+                    while (team.IsFull == false) {
                         var player = this.Round.IdlePlayers.SelectRandom();
                         team.AddPlayer(player);
                         this.Round.IdlePlayers.Remove(player);

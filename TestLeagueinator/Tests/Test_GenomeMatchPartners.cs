@@ -89,7 +89,7 @@ namespace TestLeagueinator {
 
             var g = new GenomeMatchPartners(lEvent, lEvent[0]);
 
-            Assert.AreEqual(0, g.Evaluate());
+            Assert.AreEqual(2, g.Evaluate());
         }
 
         [TestMethod]

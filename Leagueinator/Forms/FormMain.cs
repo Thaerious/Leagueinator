@@ -281,6 +281,11 @@ namespace Leagueinator.Forms {
             this.editEventPanel.CurrentRound.ResetPlayers();
             this.editEventPanel.RefreshRound();
         }
+
+        private void Menu_Dev_PrintPlayers(object sender, EventArgs e) {
+            string s = this.League.SeekDeep<PlayerInfo>().DelString();
+            Debug.WriteLine($"[{s}]");
+        }
     }
 }
 

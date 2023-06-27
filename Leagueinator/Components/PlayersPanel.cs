@@ -18,7 +18,7 @@ namespace Leagueinator.Components {
                 this._league = value;
                 this.listPlayers.Items.Clear();
                 if (value == null) return;
-                foreach (PlayerInfo player in value.Players) {
+                foreach (PlayerInfo player in value.SeekDeep<PlayerInfo>()) {
                     this.listPlayers.Items.Add(player);
                 }
             }
@@ -45,7 +45,7 @@ namespace Leagueinator.Components {
             PlayerInfo selectedPlayer = listPlayers.SelectedItem as PlayerInfo;
             if (selectedPlayer == null) return;
 
-            foreach (var player in this.League.Players) {
+            foreach (var player in this.League.SeekDeep<PlayerInfo>()) {
                 if (player.Name == txtPlayerName.Text) {
                     string msg = "Name already in use";
                     MessageBox.Show(msg, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -53,9 +53,9 @@ namespace Leagueinator.Components {
                 }
             }
 
-            PlayerInfo selected = this.listPlayers.SelectedItem as PlayerInfo; ;
+            PlayerInfo selected = this.listPlayers.SelectedItem as PlayerInfo;
             foreach (var lEvent in this.League.Events) {
-                foreach (var p in lEvent.Players) {
+                foreach (var p in lEvent.SeekDeep<PlayerInfo>()) {
                     if (p.Name == selected.Name) {
                         selected.Name = txtPlayerName.Text;
                     }

@@ -100,14 +100,15 @@ namespace Leagueinator.Components {
         }
 
         public void AddPlayer(PlayerInfo player) {
-            if (this.LeagueEvent == null) return;
+            //if (this.LeagueEvent == null) return;
 
-            this.LeagueEvent.Players.Add(player);
-            foreach (Round round in this.LeagueEvent) {
-                round.IdlePlayers.Add(player);
-            }
+            //this.LeagueEvent.Players.Add(player);
 
-            this.playerListBox.Items.Add(player);
+            //foreach (Round round in this.LeagueEvent) {
+            //    round.IdlePlayers.Add(player);
+            //}
+
+            //this.playerListBox.Items.Add(player);
         }
 
         internal void RefreshRound() {
