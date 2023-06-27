@@ -56,6 +56,7 @@
             this.panelContents = new System.Windows.Forms.Panel();
             this.editEventPanel = new Leagueinator.Components.EditEventPanel();
             this.playersPanel = new Leagueinator.Components.PlayersPanel();
+            this.refreshRoundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.tableRoot.SuspendLayout();
             this.panelContents.SuspendLayout();
@@ -242,7 +243,8 @@
             this.printCurrentEventToolStripMenuItem,
             this.printLeagueToolStripMenuItem,
             this.prevTeamSumWeightToolStripMenuItem,
-            this.printPlayersToolStripMenuItem});
+            this.printPlayersToolStripMenuItem,
+            this.refreshRoundToolStripMenuItem});
             this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
             this.actionsToolStripMenuItem.Size = new System.Drawing.Size(59, 29);
             this.actionsToolStripMenuItem.Text = "Dev";
@@ -343,6 +345,13 @@
             this.playersPanel.TabIndex = 0;
             this.playersPanel.Visible = false;
             // 
+            // refreshRoundToolStripMenuItem
+            // 
+            this.refreshRoundToolStripMenuItem.Name = "refreshRoundToolStripMenuItem";
+            this.refreshRoundToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.refreshRoundToolStripMenuItem.Text = "Refresh Round";
+            this.refreshRoundToolStripMenuItem.Click += new System.EventHandler(this.refreshRoundToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -395,5 +404,6 @@
         private System.Windows.Forms.ToolStripMenuItem copyPrevRoundToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printPlayersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem refreshRoundToolStripMenuItem;
     }
 }

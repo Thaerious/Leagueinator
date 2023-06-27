@@ -77,14 +77,6 @@ namespace Leagueinator.Model {
         public void ForEach(Action<Round> value) {
             Rounds.ForEach(value);
         }
-
-        public List<Team> GetTeams(PlayerInfo player) {
-            List<Team> teams = new List<Team>();
-            foreach (Team team in this.SeekAll<Team>()) {
-                if (team.HasPlayer(player)) teams.Add(team);
-            }
-            return teams;
-        }
     }
 
     public interface IModelLeagueEvent {

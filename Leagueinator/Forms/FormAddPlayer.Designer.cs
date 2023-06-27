@@ -57,6 +57,7 @@
             this.butOK.TabIndex = 15;
             this.butOK.Text = "OK";
             this.butOK.UseVisualStyleBackColor = true;
+            this.butOK.Click += new System.EventHandler(this.ButOK_Click);
             // 
             // FormAddPlayer
             // 

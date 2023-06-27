@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Linq;
 using Leagueinator.Search_Algorithms;
+using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model.Search_Algorithms {
 
@@ -33,7 +34,13 @@ namespace Leagueinator.Model.Search_Algorithms {
         /// <returns></returns>
         public int Evaluate(PlayerInfo player1, PlayerInfo player2) {
             int sum = 0;
-            foreach(Team team in this.LEvent.GetTeams(player1)) {
+
+            List<Team> teams = this.LEvent
+                .SeekDeep<Team>()
+                .Where(t => t.HasPlayer(player1))
+                .ToList();
+
+            foreach (Team team in teams) {
                 if (team.HasPlayer(player2)) sum++;
             }
             return sum;

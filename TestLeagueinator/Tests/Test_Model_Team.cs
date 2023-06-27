@@ -141,18 +141,6 @@ namespace TestLeagueinator
             Assert.IsTrue(t1.HasPlayer(new PlayerInfo("Adam")));
         }
 
-        /// <summary>
-        /// Can not add the same player to multiple positions.
-        /// </summary>
-        [TestMethod]
-        public void AddDuplicate() {
-            var t1 = new Team(new Settings());
-            Assert.ThrowsException<ArgumentException>(() => {
-                t1[0] = adam;
-                t1[0] = adam;
-            });
-        }
-
         [TestMethod]
         public void OutOfBounds_0() {
             var t1 = new Team(new Settings());

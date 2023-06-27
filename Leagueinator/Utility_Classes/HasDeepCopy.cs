@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Leagueinator {
+namespace Leagueinator.Utility_Classes {
     public interface HasDeepCopy<T> {
         T DeepCopy();
     }

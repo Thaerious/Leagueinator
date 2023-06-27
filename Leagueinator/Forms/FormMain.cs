@@ -88,6 +88,8 @@ namespace Leagueinator.Forms {
         private void Menu_View_Event
             (object sender, EventArgs e) {
             if (this.editEventPanel.LeagueEvent == null) return;
+
+            this.editEventPanel.RefreshRound();
             this.editEventPanel.LeagueEvent = this.editEventPanel.LeagueEvent;
             this.playersPanel.Visible = false;
             this.editEventPanel.Visible = true;
@@ -114,7 +116,7 @@ namespace Leagueinator.Forms {
         }
 
         private void Menu_Event_AddPlayer(object sender, EventArgs e) {
-            var form = new FormAddPlayer();
+            var form = new FormAddPlayer();            
             form.OnAddPlayer += playerInfo => this.editEventPanel.AddPlayer(playerInfo);
             form.StartPosition = FormStartPosition.CenterParent;
             form.ShowDialog();
@@ -285,6 +287,10 @@ namespace Leagueinator.Forms {
         private void Menu_Dev_PrintPlayers(object sender, EventArgs e) {
             string s = this.League.SeekDeep<PlayerInfo>().DelString();
             Debug.WriteLine($"[{s}]");
+        }
+
+        private void refreshRoundToolStripMenuItem_Click(object sender, EventArgs e) {
+            this.editEventPanel.RefreshRound();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Leagueinator {
+namespace Leagueinator.Utility_Classes {
     static class RandomExtensions {
         static Random rng = new Random();
 

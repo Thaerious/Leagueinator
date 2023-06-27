@@ -17,7 +17,7 @@ namespace Leagueinator.Forms {
             }
         }
 
-        private void ButOk_Click() {
+        private void ButOK_Click(object sender, System.EventArgs e) {
             if (this.OnAddPlayer != null) {
                 OnAddPlayer(new PlayerInfo(this.txtName.Text));
                 this.txtName.Text = null;

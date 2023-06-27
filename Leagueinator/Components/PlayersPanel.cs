@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Leagueinator.Model;
+using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Components {
     public partial class PlayersPanel : UserControl {
@@ -18,7 +19,8 @@ namespace Leagueinator.Components {
                 this._league = value;
                 this.listPlayers.Items.Clear();
                 if (value == null) return;
-                foreach (PlayerInfo player in value.SeekDeep<PlayerInfo>()) {
+
+                foreach (PlayerInfo player in value.SeekDeep<PlayerInfo>().Unique()) {
                     this.listPlayers.Items.Add(player);
                 }
             }
@@ -53,17 +55,15 @@ namespace Leagueinator.Components {
                 }
             }
 
-            PlayerInfo selected = this.listPlayers.SelectedItem as PlayerInfo;
-            foreach (var lEvent in this.League.Events) {
-                foreach (var p in lEvent.SeekDeep<PlayerInfo>()) {
-                    if (p.Name == selected.Name) {
-                        selected.Name = txtPlayerName.Text;
-                    }
+            string previous = (listPlayers.SelectedItem as PlayerInfo).Name;
+            foreach (var player in this.League.SeekDeep<PlayerInfo>()) {
+                if (player.Name == previous) {
+                    player.Name = txtPlayerName.Text;
                 }
             }
 
-            listPlayers.Items.Remove(selectedPlayer);
-            listPlayers.Items.Add(selectedPlayer);
+            int index = listPlayers.SelectedIndex;
+            listPlayers.Items[index] = listPlayers.SelectedItem;
         }
 
         public class PlayerArgs {

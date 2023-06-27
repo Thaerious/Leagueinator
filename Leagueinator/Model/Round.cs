@@ -87,6 +87,7 @@ namespace Leagueinator.Model {
             xsb.InlineTag("Players", this.AllPlayers.DelString());
             xsb.InlineTag("Idle", this.IdlePlayers.DelString());
             for (int i = 0; i < this._matches.Length; i++) {
+                if (this._matches[i].Players.Count == 0) continue;
                 xsb.AppendXML(this._matches[i].ToXML(i));
             }
             xsb.CloseTag("Round");

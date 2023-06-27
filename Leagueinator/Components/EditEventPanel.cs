@@ -71,10 +71,6 @@ namespace Leagueinator.Components {
 
             button.BackColor = Color.GreenYellow;
 
-            if (this.currentRoundButton != null) {
-                this.currentRoundButton.Round = this.GetCurrentRound();
-            }
-
             this.currentRoundButton = button;
             this.playerListBox.Round = currentRoundButton.Round;
             this.PopulateMatches(button.Round);
@@ -100,19 +96,22 @@ namespace Leagueinator.Components {
         }
 
         public void AddPlayer(PlayerInfo player) {
-            //if (this.LeagueEvent == null) return;
+            if (this.LeagueEvent == null) return;
 
-            //this.LeagueEvent.Players.Add(player);
+            if (this.LeagueEvent.SeekDeep<PlayerInfo>().Contains(player)) {
+                return;
+            }
 
-            //foreach (Round round in this.LeagueEvent) {
-            //    round.IdlePlayers.Add(player);
-            //}
+            foreach (Round round in this.LeagueEvent) {
+                round.IdlePlayers.Add(player);
+            }
 
-            //this.playerListBox.Items.Add(player);
+            this.playerListBox.Items.Add(player);
         }
 
         internal void RefreshRound() {
-            this.currentRoundButton.PerformClick();
+            this.playerListBox.Round = currentRoundButton.Round;
+            this.PopulateMatches(currentRoundButton.Round);
         }
     }
 }

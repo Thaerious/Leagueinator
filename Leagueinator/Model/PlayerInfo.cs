@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Diagnostics;
+using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
     [Serializable]

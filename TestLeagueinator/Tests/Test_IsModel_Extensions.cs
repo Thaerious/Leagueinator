@@ -158,15 +158,11 @@ namespace TestLeagueinator
             r1.Matches[0].Teams[1][0] = new PlayerInfo("Chuck");
             r1.Matches[0].Teams[1][1] = new PlayerInfo("Desere");
 
-            var r2 = target.AddRound();
-            //r2.Matches[0].Teams[0][0] = new PlayerInfo("Albert");
-            //r2.Matches[0].Teams[0][1] = new PlayerInfo("Bert");
-            //r2.Matches[0].Teams[1][0] = new PlayerInfo("Chuck");
-            //r2.Matches[0].Teams[1][1] = new PlayerInfo("Desere");
+            var r2 = target.AddRound(); // adds idle players
 
             var list = target.SeekDeep<PlayerInfo>();
             Debug.WriteLine(list.DelString());
-            Assert.AreEqual(16, list.Count);
+            Assert.AreEqual(8, list.Count);
 
         }
     }

@@ -54,7 +54,6 @@ namespace Leagueinator.Model {
                 list.AddRange(l);
             }
 
-            Debug.WriteLine($"{list.Count} added from {isModel.GetType().Name}");
             return list;
         }
 
@@ -63,19 +62,16 @@ namespace Leagueinator.Model {
 
             if (typeof(IEnumerable<T>).IsAssignableFrom(prop.PropertyType)) {
                 // Enumberable of type - ie List or Array
-                Debug.WriteLine($"Is Enumerable {prop.Name}");
                 IEnumerable<T> values = (IEnumerable<T>)prop.GetValue(isModel, null);
                 list.AddRange(values);
             }
             else if (prop.PropertyType == typeof(T)) {
                 // Is of exact type
-                Debug.WriteLine($"Is Target Type {prop.Name}");
                 T value = (T)prop.GetValue(isModel, null);
                 if (value != null) list.Add(value);
             }
             else if (prop.PropertyType.GetInterfaces().Contains(typeof(IEnumerable))) {
                 // Enumerable of not-type
-                Debug.WriteLine($"Is Enumerable {prop.Name}");
                 var value = (IEnumerable)prop.GetValue(isModel, null);
                 if (value != null) foreach (var item in value) {
                     list.AddRange(item.SeekDeep<T>());
@@ -83,7 +79,6 @@ namespace Leagueinator.Model {
             }
             else if (!prop.PropertyType.IsPrimitive) {
                 // Some other (non-enumerable) type
-                Debug.WriteLine($"Is Type {prop.PropertyType} {prop.Name}");
                 var value = prop.GetValue(isModel, null);
                 list.AddRange(value.SeekDeep<T>());
             }

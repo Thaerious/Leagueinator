@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Leagueinator.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestLeagueinator.Helpers;
@@ -81,9 +82,12 @@ namespace TestLeagueinator
             r2[1][1][0] = new PlayerInfo("Cain");
             r2[1][1][1] = new PlayerInfo("Dave");
 
-            List<Team> teams = e1.GetTeams(new PlayerInfo("Adam"));
+            List<Team> teams = 
+                e1.SeekDeep<Team>()
+                .Where(t => t.HasPlayer(new PlayerInfo("Adam")))
+                .ToList();
 
-            Assert.AreEqual(teams.Count, 2);
+            Assert.AreEqual(2, teams.Count);
             Assert.AreEqual(r1[0][0], teams[0]);
             Assert.AreEqual(r2[1][0], teams[1]);
         }

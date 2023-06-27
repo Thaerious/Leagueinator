@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Leagueinator.utility_classes {
+namespace Leagueinator.Utility_Classes {
     public class StringInterpolator : Dictionary<string, string> {
 
         public string Interpolate(string input) {
