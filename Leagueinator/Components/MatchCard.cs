@@ -6,12 +6,11 @@ using Leagueinator.Model;
 
 namespace Leagueinator.Components {
     public partial class MatchCard : UserControl, HasModelMatch {
-        private int lane = 0;
-        [Category("Appearance"), Description("The lane number displayed.")]
+        private int _lane = 0;
         public int Lane {
-            get => lane;
+            get => _lane;
             set {
-                lane = value;
+                _lane = value;
                 this.labelLane.Text = value.ToString();
             }
         }
@@ -23,15 +22,10 @@ namespace Leagueinator.Components {
             }
             set {
                 if (value != null) {
-                    this.labelP0.Team = value[0];
-                    this.labelP1.Team = value[0];
-                    this.labelP2.Team = value[1];
-                    this.labelP3.Team = value[1];
-
-                    this.labelP0.AddPlayer(value[0][0]);
-                    this.labelP1.AddPlayer(value[0][1]);
-                    this.labelP2.AddPlayer(value[1][0]);
-                    this.labelP3.AddPlayer(value[1][1]);
+                    this.labelP0.PlayerInfo = value[0][0];
+                    this.labelP1.PlayerInfo = value[0][1];
+                    this.labelP2.PlayerInfo = value[1][0];
+                    this.labelP3.PlayerInfo = value[1][1];
                 }
                 this._match = value;
             }
@@ -48,11 +42,11 @@ namespace Leagueinator.Components {
         /// <param name="e"></param>
         private void OnDrop(object receiver, DragEventArgs e) {
             if (!(receiver is MatchLabel matchLabel)) return;
-            Debug.WriteLine($"Match Card Start Drop {matchLabel.Team} {matchLabel.Position}");
+            Debug.WriteLine($"Match Card Start Drop");
 
-            DragData dragData = (DragData)e.Data.GetData(typeof(DragData));
-            dragData.SwapWith(matchLabel);
-
+            PlayerDragData data = (PlayerDragData)e.Data.GetData(typeof(PlayerDragData));
+            data.Destination = receiver;
+            
             Debug.WriteLine("Match Card Exit Drop");
         }
 
@@ -60,15 +54,26 @@ namespace Leagueinator.Components {
             if (!(sender is MatchLabel matchLabel)) return;
             if (matchLabel.PlayerInfo == null) return;
 
-            Debug.WriteLine($"Match Card Start Drag {matchLabel.Team} {matchLabel.Position}");
+            Debug.WriteLine($"Match Card Start Drag");
             matchLabel.ForeColor = Color.LightGray;
 
-            this.DoDragDrop(
-                new DragData { Source = matchLabel, PlayerInfo = matchLabel.PlayerInfo }
-                , DragDropEffects.Move
-            );
+            var data = new PlayerDragData { Source = matchLabel, PlayerInfo = matchLabel.PlayerInfo };
 
+            this.DoDragDrop(data, DragDropEffects.Move);
             matchLabel.ForeColor = Color.Black;
+            if (data.Destination == null) return;
+
+            if (data.Destination.GetType() == typeof(PlayerListBox)) {
+                PlayerListBox playerListBox = (PlayerListBox)data.Destination;
+                playerListBox.Items.Add(data.PlayerInfo);
+                matchLabel.PlayerInfo = null;
+
+                Debug.WriteLine(this.Match);
+                this.Match.Teams[matchLabel.Team][matchLabel.Position] = null;
+
+                playerListBox.Round.IdlePlayers.Add(data.PlayerInfo);
+            }
+
             Debug.WriteLine("Match Card Exit Drag\n");
         }
 
@@ -78,12 +83,6 @@ namespace Leagueinator.Components {
 
         private void OnExit(object sender, DragEventArgs e) {
             e.Effect = DragDropEffects.None;
-        }
-
-        private void LabelUpdate(object sender, MatchLabelArgs args) {
-            Debug.WriteLine(args.Team + ", " + args.Position + ", " + args.PlayerInfo?.Name);
-            Debug.WriteLine(this.Match);
-            this.Match[args.Team][args.Position] = args.PlayerInfo;
         }
     }
 }

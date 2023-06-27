@@ -193,7 +193,7 @@
     <Compile Include="Components\BuyCard.Designer.cs">
       <DependentUpon>BuyCard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\DragData.cs" />
+    <Compile Include="Components\PlayerDragData.cs" />
     <Compile Include="Components\MatchLabel.cs">
       <SubType>Component</SubType>
     </Compile>

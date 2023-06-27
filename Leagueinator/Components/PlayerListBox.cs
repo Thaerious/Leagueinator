@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
-    public partial class PlayerListBox : ListBox, HasPlayerInfo {
+    public partial class PlayerListBox : ListBox {
 
         private Round _round = null;
         public Round Round {
@@ -59,10 +59,10 @@ namespace Leagueinator.Components {
 
             Debug.WriteLine($"Player List Box Start Drop");
 
-            DragData dragData = (DragData)e.Data.GetData(typeof(DragData));
-            if (receiver == dragData.Source) return;
+            PlayerDragData data = (PlayerDragData)e.Data.GetData(typeof(PlayerDragData));
+            if (receiver == data.Source) return;
 
-            dragData.SwapWith(this);
+            data.Destination = receiver;
 
             Debug.WriteLine("Player List Box Exit Drop");
         }
@@ -70,10 +70,22 @@ namespace Leagueinator.Components {
         public void OnDragStart(object sender, MouseEventArgs e) {
             Debug.WriteLine($"Player List Box Start Drag");
 
-            this.DoDragDrop(
-                new DragData { Source = this, PlayerInfo = (PlayerInfo)this.SelectedItem }
-                , DragDropEffects.Move
-            );
+            var data = new PlayerDragData { Source = this, PlayerInfo = (PlayerInfo)this.SelectedItem };            
+
+            this.DoDragDrop(data, DragDropEffects.Move);
+            if (data.Destination == null) return;
+
+            if (data.Destination.GetType() == typeof(MatchLabel)) {
+                MatchLabel matchLabel = (MatchLabel)data.Destination;
+                matchLabel.PlayerInfo = data.PlayerInfo;
+                this.Items.Remove(data.PlayerInfo);
+
+                this.Round.IdlePlayers.Remove(data.PlayerInfo);
+                this.Round
+                    .Matches[matchLabel.Lane]
+                    .Teams[matchLabel.Team]
+                    [matchLabel.Position] = data.PlayerInfo;
+            }
 
             Debug.WriteLine("Player List Box Exit Drag\n");
         }
@@ -82,7 +94,7 @@ namespace Leagueinator.Components {
             e.Effect = DragDropEffects.Move;
         }
 
-        public PlayerInfo AddPlayer(PlayerInfo playerInfo) {
+        public PlayerInfo SetPlayer(PlayerInfo playerInfo) {
             if (playerInfo == null) return null;
             this.Items.Add(playerInfo);
             this.Round.IdlePlayers.Add(playerInfo);

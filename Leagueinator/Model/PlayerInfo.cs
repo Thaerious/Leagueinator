@@ -31,8 +31,4 @@ namespace Leagueinator.Model {
             return this.Name == that.Name;
         }
     }
-    public interface HasPlayerInfo {
-        PlayerInfo AddPlayer(PlayerInfo playerInfo);
-        PlayerInfo ClearPlayer(PlayerInfo playerInfo);
-    }
 }
