@@ -4,7 +4,7 @@ using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
     [Serializable]
-    public class Match : HasDeepCopy<Match> {
+    public class Match {
         public readonly Settings Settings;
         private Team[] _teams;
 
@@ -40,12 +40,6 @@ namespace Leagueinator.Model {
             for (int i = 0; i < settings.MatchSize; i++) {
                 this[i] = new Team(settings);
             }
-        }
-
-        public Match DeepCopy() {
-            return new Match(this.Settings) {
-                _teams = this._teams.DeepCopy()
-            };
         }
 
         public XMLStringBuilder ToXML(int lane) {

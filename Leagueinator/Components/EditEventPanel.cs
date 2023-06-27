@@ -45,10 +45,6 @@ namespace Leagueinator.Components {
             }
         }
 
-        private Round GetCurrentRound() {
-            return currentRoundButton.Round;
-        }
-
         private void AddRound(Round round) {
             var button = new RoundButton(round) {
                 Text = $"Round #{this.flowRounds.Controls.Count + 1}"

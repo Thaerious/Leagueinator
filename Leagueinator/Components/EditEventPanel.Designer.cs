@@ -130,7 +130,7 @@
             // matchCard8
             // 
             this.matchCard8.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.matchCard8.Lane = 8;
+            this.matchCard8.Lane = 7;
             this.matchCard8.Location = new System.Drawing.Point(43, 579);
             this.matchCard8.Match = null;
             this.matchCard8.Name = "matchCard8";
@@ -140,7 +140,7 @@
             // matchCard7
             // 
             this.matchCard7.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.matchCard7.Lane = 7;
+            this.matchCard7.Lane = 6;
             this.matchCard7.Location = new System.Drawing.Point(43, 499);
             this.matchCard7.Match = null;
             this.matchCard7.Name = "matchCard7";
@@ -150,7 +150,7 @@
             // matchCard6
             // 
             this.matchCard6.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.matchCard6.Lane = 6;
+            this.matchCard6.Lane = 5;
             this.matchCard6.Location = new System.Drawing.Point(43, 419);
             this.matchCard6.Match = null;
             this.matchCard6.Name = "matchCard6";
@@ -160,7 +160,7 @@
             // matchCard5
             // 
             this.matchCard5.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.matchCard5.Lane = 5;
+            this.matchCard5.Lane = 4;
             this.matchCard5.Location = new System.Drawing.Point(43, 339);
             this.matchCard5.Match = null;
             this.matchCard5.Name = "matchCard5";
@@ -170,7 +170,7 @@
             // matchCard4
             // 
             this.matchCard4.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.matchCard4.Lane = 4;
+            this.matchCard4.Lane = 3;
             this.matchCard4.Location = new System.Drawing.Point(43, 259);
             this.matchCard4.Match = null;
             this.matchCard4.Name = "matchCard4";
@@ -180,7 +180,7 @@
             // matchCard3
             // 
             this.matchCard3.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.matchCard3.Lane = 3;
+            this.matchCard3.Lane = 2;
             this.matchCard3.Location = new System.Drawing.Point(43, 179);
             this.matchCard3.Match = null;
             this.matchCard3.Name = "matchCard3";
@@ -190,7 +190,7 @@
             // matchCard2
             // 
             this.matchCard2.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.matchCard2.Lane = 2;
+            this.matchCard2.Lane = 1;
             this.matchCard2.Location = new System.Drawing.Point(43, 99);
             this.matchCard2.Match = null;
             this.matchCard2.Name = "matchCard2";
@@ -200,7 +200,7 @@
             // matchCard1
             // 
             this.matchCard1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.matchCard1.Lane = 1;
+            this.matchCard1.Lane = 0;
             this.matchCard1.Location = new System.Drawing.Point(43, 19);
             this.matchCard1.Match = null;
             this.matchCard1.Name = "matchCard1";

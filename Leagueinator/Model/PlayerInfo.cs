@@ -5,14 +5,12 @@ using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
     [Serializable]
-    public class PlayerInfo : HasDeepCopy<PlayerInfo>, IEquatable<PlayerInfo> {
+    public class PlayerInfo : IEquatable<PlayerInfo> {
         public string Name { get; set; }
 
         public PlayerInfo(string name) => Name = name;
 
         override public string ToString() => Name;
-
-        public PlayerInfo DeepCopy() => new PlayerInfo(this.Name);
 
         public override bool Equals(object obj) {
             if (obj == null) return false;

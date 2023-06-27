@@ -5,7 +5,7 @@ using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
     [Serializable]
-    public class Round : HasDeepCopy<Round> {
+    public class Round {
         public readonly Settings Settings;
         private Match[] _matches;
 
@@ -71,14 +71,7 @@ namespace Leagueinator.Model {
 
         public Round(List<PlayerInfo> idlePlayers, Settings settings) : this(settings) {
             this.Settings = settings;
-            this.IdlePlayers = idlePlayers.DeepCopy();
-        }
-
-        public Round DeepCopy(){            
-            return new Round(this.Settings) {
-                IdlePlayers = this.IdlePlayers.DeepCopy(),
-                _matches = this._matches.DeepCopy()
-            };
+            this.IdlePlayers = new List<PlayerInfo>(idlePlayers);
         }
 
         public XMLStringBuilder ToXML() {
@@ -86,10 +79,12 @@ namespace Leagueinator.Model {
             xsb.OpenTag("Round");
             xsb.InlineTag("Players", this.AllPlayers.DelString());
             xsb.InlineTag("Idle", this.IdlePlayers.DelString());
+
             for (int i = 0; i < this._matches.Length; i++) {
                 if (this._matches[i].Players.Count == 0) continue;
                 xsb.AppendXML(this._matches[i].ToXML(i));
             }
+
             xsb.CloseTag("Round");
             return xsb;
         }

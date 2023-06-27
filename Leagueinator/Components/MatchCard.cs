@@ -11,7 +11,7 @@ namespace Leagueinator.Components {
             get => _lane;
             set {
                 _lane = value;
-                this.labelLane.Text = value.ToString();
+                this.labelLane.Text = (value + 1).ToString();
             }
         }
 

@@ -6,10 +6,10 @@ using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
     [Serializable]
-    public class Team : HasDeepCopy<Team> {
-        private PlayerInfo[] _players;
-        private Settings settings;
+    public class Team {
+        public readonly Settings settings;
 
+        private PlayerInfo[] _players;
         public PlayerInfo this[int key] {
             get {
                 return _players[key];
@@ -40,12 +40,6 @@ namespace Leagueinator.Model {
         public Team(Settings settings) {
             this.settings = settings;
             this._players = new PlayerInfo[settings.TeamSize];
-        }
-
-        public Team DeepCopy() {
-            return new Team(this.settings) {
-                _players = this._players.DeepCopy()
-            };
         }
 
         public XMLStringBuilder ToXML() {
