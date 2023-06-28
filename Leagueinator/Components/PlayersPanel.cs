@@ -16,12 +16,12 @@ namespace Leagueinator.Components {
                 return _league;
             }
             set {
-                this._league = value;
-                this.listPlayers.Items.Clear();
+                _league = value;
+                listPlayers.Items.Clear();
                 if (value == null) return;
 
                 foreach (PlayerInfo player in value.SeekDeep<PlayerInfo>().Unique()) {
-                    this.listPlayers.Items.Add(player);
+                    listPlayers.Items.Add(player);
                 }
             }
         }
@@ -35,19 +35,19 @@ namespace Leagueinator.Components {
         private void clickDelete(object sender, EventArgs e) {
             if (listPlayers.SelectedIndex == -1) return;
             string selectedPlayer = listPlayers.SelectedItem as string;
-            this.listPlayers.Items.Remove(selectedPlayer);
+            listPlayers.Items.Remove(selectedPlayer);
             txtPlayerName.Text = "";
         }
 
         internal void Clear() {
-            this.listPlayers.Items.Clear();
+            listPlayers.Items.Clear();
         }
 
         private void ButRename_Click(object sender, EventArgs e) {
             PlayerInfo selectedPlayer = listPlayers.SelectedItem as PlayerInfo;
             if (selectedPlayer == null) return;
 
-            foreach (var player in this.League.SeekDeep<PlayerInfo>()) {
+            foreach (var player in League.SeekDeep<PlayerInfo>()) {
                 if (player.Name == txtPlayerName.Text) {
                     string msg = "Name already in use";
                     MessageBox.Show(msg, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -56,7 +56,7 @@ namespace Leagueinator.Components {
             }
 
             string previous = (listPlayers.SelectedItem as PlayerInfo).Name;
-            foreach (var player in this.League.SeekDeep<PlayerInfo>()) {
+            foreach (var player in League.SeekDeep<PlayerInfo>()) {
                 if (player.Name == previous) {
                     player.Name = txtPlayerName.Text;
                 }

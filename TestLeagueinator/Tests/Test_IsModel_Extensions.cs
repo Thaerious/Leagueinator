@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using Leagueinator;
 using Leagueinator.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TestLeagueinator.Helpers;
+using Leagueinator.Utility_Classes;
 
 namespace TestLeagueinator
 {

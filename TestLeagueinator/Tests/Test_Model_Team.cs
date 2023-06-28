@@ -175,41 +175,6 @@ namespace TestLeagueinator
         }
 
         [TestMethod]
-        public void DeepCopy() {
-            var t1 = new Team(new Settings());
-
-            t1[0] = adam;
-            t1[1] = eve;
-
-            var t2 = t1.DeepCopy();
-
-            Assert.AreEqual(2, t2.Players.Count);
-            Assert.IsTrue(t2.IsFull);
-            Assert.AreEqual(2, t2.MaxSize);
-            Assert.AreEqual(adam, t2[0]);
-            Assert.AreEqual(eve, t2[1]);
-        }
-
-        [TestMethod]
-        public void DeepCopy_NonReflective() {
-            var t1 = new Team(new Settings());
-
-            t1[0] = adam;
-            t1[1] = eve;
-
-            var t2 = t1.DeepCopy();
-
-            t1[0] = null;
-            t1[1] = null;
-
-            Assert.AreEqual(2, t2.Players.Count);
-            Assert.IsTrue(t2.IsFull);
-            Assert.AreEqual(2, t2.MaxSize);
-            Assert.AreEqual(adam, t2[0]);
-            Assert.AreEqual(eve, t2[1]);
-        }
-
-        [TestMethod]
         public void Clear() {
             var t1 = new Team(new Settings());
 

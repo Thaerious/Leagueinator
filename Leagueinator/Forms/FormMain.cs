@@ -8,7 +8,6 @@ using Leagueinator.Model;
 using Leagueinator.Model.Search_Algorithms;
 using Leagueinator.Search_Algorithms;
 using Leagueinator.Utility_Classes;
-using Org.BouncyCastle.Asn1.X509;
 
 namespace Leagueinator.Forms {
     public partial class FormMain : Form {
@@ -18,32 +17,32 @@ namespace Leagueinator.Forms {
         public League League {
             get { return _league; }
             set {
-                this._league = value;
-                this.playersPanel.Clear();
+                _league = value;
+                playersPanel.Clear();
 
                 if (value == null) {
-                    this.menuView.Enabled = false;
-                    this.menuEvents.Enabled = false;
-                    this.playersPanel.Visible = false;
-                    this.editEventPanel.Visible = false;
-                    this.editEventPanel.LeagueEvent = null;
+                    menuView.Enabled = false;
+                    menuEvents.Enabled = false;
+                    playersPanel.Visible = false;
+                    editEventPanel.Visible = false;
+                    editEventPanel.LeagueEvent = null;
                     return;
                 };
 
                 if (League.Events.Count > 0) {
                     // Display the latest event if there is one.
-                    this.editEventPanel.LeagueEvent = League.Events[League.Events.Count - 1];
-                    this.playersPanel.Visible = false;
-                    this.editEventPanel.Visible = true;
+                    editEventPanel.LeagueEvent = League.Events[League.Events.Count - 1];
+                    playersPanel.Visible = false;
+                    editEventPanel.Visible = true;
                 }
                 else {
-                    this.editEventPanel.LeagueEvent = null;
-                    this.playersPanel.Visible = true;
-                    this.editEventPanel.Visible = false;
+                    editEventPanel.LeagueEvent = null;
+                    playersPanel.Visible = true;
+                    editEventPanel.Visible = false;
                 }
 
-                this.menuEvents.Enabled = true;
-                this.menuView.Enabled = true;
+                menuEvents.Enabled = true;
+                menuView.Enabled = true;
             }
         }
 
@@ -60,39 +59,39 @@ namespace Leagueinator.Forms {
         public FormMain() {
             InitializeComponent();
 
-            if (this.LastSave != null && this.LastSave != "") {
-                this.LoadFile(this.LastSave);
+            if (LastSave != null && LastSave != "") {
+                LoadFile(LastSave);
             }
         }
 
         private void Menu_File_New(object sender, EventArgs e) {
-            this.League = new League();
+            League = new League();
         }
 
         private void Menu_File_Close(object sender, EventArgs e) {
-            this.LastSave = "";
-            this.Text = "Leagueinator";
-            this.League = null;
+            LastSave = "";
+            Text = "Leagueinator";
+            League = null;
         }
 
         private void Menu_File_Exit(object sender, EventArgs e) {
-            this.Close();
+            Close();
         }
 
         private void Menu_View_Players(object sender, EventArgs e) {
-            this.playersPanel.League = this.League;
-            this.playersPanel.Visible = true;
-            this.editEventPanel.Visible = false;
+            playersPanel.League = League;
+            playersPanel.Visible = true;
+            editEventPanel.Visible = false;
         }
 
         private void Menu_View_Event
             (object sender, EventArgs e) {
-            if (this.editEventPanel.LeagueEvent == null) return;
+            if (editEventPanel.LeagueEvent == null) return;
 
-            this.editEventPanel.RefreshRound();
-            this.editEventPanel.LeagueEvent = this.editEventPanel.LeagueEvent;
-            this.playersPanel.Visible = false;
-            this.editEventPanel.Visible = true;
+            editEventPanel.RefreshRound();
+            editEventPanel.LeagueEvent = editEventPanel.LeagueEvent;
+            playersPanel.Visible = false;
+            editEventPanel.Visible = true;
         }
 
         private void Menu_Events_Add(object sender, EventArgs e) {
@@ -100,47 +99,47 @@ namespace Leagueinator.Forms {
             DialogResult result = childForm.ShowDialog();
             if (result == DialogResult.Cancel) return;
 
-            this.playersPanel.Visible = false;
-            this.editEventPanel.Visible = true;
+            playersPanel.Visible = false;
+            editEventPanel.Visible = true;
 
-            LeagueEvent lEvent = this._league.AddEvent(
+            LeagueEvent lEvent = _league.AddEvent(
                 childForm.EventName,
                 childForm.Date,
                 childForm.Settings
             );
-            this.editEventPanel.LeagueEvent = lEvent;
+            editEventPanel.LeagueEvent = lEvent;
         }
 
         private void menuPrintCurrentEvent(object sender, EventArgs e) {
-            Debug.WriteLine(this.editEventPanel.LeagueEvent);
+            Debug.WriteLine(editEventPanel.LeagueEvent);
         }
 
         private void Menu_Event_AddPlayer(object sender, EventArgs e) {
-            var form = new FormAddPlayer();            
-            form.OnAddPlayer += playerInfo => this.editEventPanel.AddPlayer(playerInfo);
+            var form = new FormAddPlayer();
+            form.OnAddPlayer += playerInfo => editEventPanel.AddPlayer(playerInfo);
             form.StartPosition = FormStartPosition.CenterParent;
             form.ShowDialog();
         }
 
         private void Menu_Event_Select(object sender, EventArgs e) {
             FormSelectEvent childForm = new FormSelectEvent();
-            childForm.SetEvents(this.League.Events);
+            childForm.SetEvents(League.Events);
 
             DialogResult result = childForm.ShowDialog();
             if (result == DialogResult.Cancel) return;
 
             if (childForm.Action == "Select") {
                 LeagueEvent lEvent = childForm.LeagueEvent;
-                this.editEventPanel.LeagueEvent = lEvent;
-                this.playersPanel.Visible = false;
-                this.editEventPanel.Visible = true;
+                editEventPanel.LeagueEvent = lEvent;
+                playersPanel.Visible = false;
+                editEventPanel.Visible = true;
             }
             else if (childForm.Action == "Delete") {
-                this.League.Events.Remove(childForm.LeagueEvent);
-                if (this.editEventPanel.LeagueEvent == childForm.LeagueEvent) {
-                    this.playersPanel.Visible = true;
-                    this.editEventPanel.Visible = false;
-                    this.editEventPanel.LeagueEvent = null;
+                League.Events.Remove(childForm.LeagueEvent);
+                if (editEventPanel.LeagueEvent == childForm.LeagueEvent) {
+                    playersPanel.Visible = true;
+                    editEventPanel.Visible = false;
+                    editEventPanel.LeagueEvent = null;
                 }
             }
         }
@@ -150,57 +149,57 @@ namespace Leagueinator.Forms {
             dialog.Filter = "league files (*.league)|*.league|All files (*.*)|*.*";
             dialog.FilterIndex = 1;
             dialog.RestoreDirectory = true;
-            dialog.FileName = this.LastSave;
+            dialog.FileName = LastSave;
         }
 
         private void Menu_File_Load(object sender, EventArgs e) {
             using (OpenFileDialog dialog = new OpenFileDialog()) {
-                this.SetupDialog(dialog);
+                SetupDialog(dialog);
 
                 if (dialog.ShowDialog() == DialogResult.OK) {
-                    this.LoadFile(dialog.FileName);
-                    this.LastSave = dialog.FileName;
+                    LoadFile(dialog.FileName);
+                    LastSave = dialog.FileName;
                 }
             }
         }
 
         private void Menu_File_SaveAs(object sender, EventArgs e) {
             using (SaveFileDialog dialog = new SaveFileDialog()) {
-                this.SetupDialog(dialog);
+                SetupDialog(dialog);
 
                 if (dialog.ShowDialog() == DialogResult.OK) {
-                    this.SaveAs(dialog.FileName);
-                    this.LastSave = dialog.FileName;
+                    SaveAs(dialog.FileName);
+                    LastSave = dialog.FileName;
                     openFilename = dialog.FileName;
                 }
             }
         }
 
         private void Menu_FIle_Save(object sender, EventArgs e) {
-            if (this.openFilename == null) {
+            if (openFilename == null) {
                 Menu_File_SaveAs(sender, e);
             }
             else {
-                this.SaveAs(this.openFilename);
+                SaveAs(openFilename);
             }
         }
 
         private void SaveAs(string filename) {
             BinaryFormatter formatter = new BinaryFormatter();
             using (FileStream stream = new FileStream(filename, FileMode.OpenOrCreate)) {
-                formatter.Serialize(stream, this.League);
+                formatter.Serialize(stream, League);
             }
         }
 
         private void LoadFile(string filename) {
-            this.Text = filename;
+            Text = filename;
 
             try {
                 BinaryFormatter formatter = new BinaryFormatter();
                 using (FileStream stream = new FileStream(filename, FileMode.Open)) {
-                    this.League = (League)formatter.Deserialize(stream);
+                    League = (League)formatter.Deserialize(stream);
                 }
-                this.openFilename = filename;
+                openFilename = filename;
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Excepion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -210,17 +209,17 @@ namespace Leagueinator.Forms {
         }
 
         private void menuActionsPrintLeague(object sender, EventArgs e) {
-            Debug.WriteLine(this.League);
+            Debug.WriteLine(League);
         }
 
         private void Menu_File_Print(object sender, EventArgs e) {
-            var round = this.editEventPanel.CurrentRound;
+            var round = editEventPanel.CurrentRound;
             if (round == null) return;
             ScoreCardPrinter.Print(round);
         }
 
         private void Menu_Dev_PrintRound(object sender, EventArgs e) {
-            var round = this.editEventPanel.CurrentRound;
+            var round = editEventPanel.CurrentRound;
             if (round == null) return;
             Debug.WriteLine(round);
         }
@@ -233,8 +232,8 @@ namespace Leagueinator.Forms {
         }
 
         private void Menu_Events_Assign_Partners(object sender, EventArgs e) {
-            LeagueEvent lEvent = this.editEventPanel.LeagueEvent;
-            Round round = this.editEventPanel.CurrentRound;
+            LeagueEvent lEvent = editEventPanel.LeagueEvent;
+            Round round = editEventPanel.CurrentRound;
             if (lEvent == null || round == null) return;
 
             var solution = new GenomeMatchPartners(lEvent, round);
@@ -242,12 +241,12 @@ namespace Leagueinator.Forms {
             solution.Randomize();
             algo.Run(solution);
 
-            this.editEventPanel.RefreshRound();
+            editEventPanel.RefreshRound();
         }
 
         private void Menu_Dev_EvaluateRound(object sender, EventArgs e) {
-            var lEvent = this.editEventPanel.LeagueEvent;
-            var round = this.editEventPanel.CurrentRound;
+            var lEvent = editEventPanel.LeagueEvent;
+            var round = editEventPanel.CurrentRound;
             var g = new GenomeMatchPartners(lEvent, round);
             string msg = $"Round Partner Weight : {g.Evaluate() - round.Teams.Count}";
             MessageBox.Show(msg, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -255,9 +254,9 @@ namespace Leagueinator.Forms {
         }
 
         private void Menu_Events_Assign_Copy(object sender, EventArgs e) {
-            Round current = this.editEventPanel.CurrentRound;
+            Round current = editEventPanel.CurrentRound;
             Round prev = null;
-            foreach (Round round in this.editEventPanel.LeagueEvent) {
+            foreach (Round round in editEventPanel.LeagueEvent) {
                 if (round == current) break;
                 prev = round;
             }
@@ -276,21 +275,21 @@ namespace Leagueinator.Forms {
                 }
             }
 
-            this.editEventPanel.RefreshRound();
+            editEventPanel.RefreshRound();
         }
 
         private void Menu_Events_Assign_Clear(object sender, EventArgs e) {
-            this.editEventPanel.CurrentRound.ResetPlayers();
-            this.editEventPanel.RefreshRound();
+            editEventPanel.CurrentRound.ResetPlayers();
+            editEventPanel.RefreshRound();
         }
 
         private void Menu_Dev_PrintPlayers(object sender, EventArgs e) {
-            string s = this.League.SeekDeep<PlayerInfo>().DelString();
+            string s = League.SeekDeep<PlayerInfo>().DelString();
             Debug.WriteLine($"[{s}]");
         }
 
         private void refreshRoundToolStripMenuItem_Click(object sender, EventArgs e) {
-            this.editEventPanel.RefreshRound();
+            editEventPanel.RefreshRound();
         }
     }
 }

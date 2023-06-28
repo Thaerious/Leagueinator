@@ -11,12 +11,12 @@ namespace Leagueinator.Components {
         public EventCard(LeagueEvent leagueEvent) {
             InitializeComponent();
             this.leagueEvent = leagueEvent;
-            this.lblDate.Text = leagueEvent.Date.ToString();
+            lblDate.Text = leagueEvent.Date.ToString();
         }
 
         private void EventCard_DoubleClick(object sender, EventArgs e) {
             if (OnEventCardSelect == null) return;
-            var args = new EventCardArgs(this.leagueEvent);
+            var args = new EventCardArgs(leagueEvent);
             OnEventCardSelect(this, args);
         }
     }
@@ -25,7 +25,7 @@ namespace Leagueinator.Components {
         public readonly LeagueEvent LeagueEvent;
 
         public EventCardArgs(LeagueEvent leagueEvent) {
-            this.LeagueEvent = leagueEvent;
+            LeagueEvent = leagueEvent;
         }
     }
 }

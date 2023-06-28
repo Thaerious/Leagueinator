@@ -12,15 +12,15 @@ namespace Leagueinator.Components {
         }
 
         public void SetEvents(IEnumerable<LeagueEvent> list) {
-            this.Controls.Clear();
+            Controls.Clear();
             foreach (var lEvent in list) {
-                this.AddEvent(lEvent);
+                AddEvent(lEvent);
             }
         }
 
         public void AddEvent(LeagueEvent lEvent) {
             var card = new EventCard(lEvent);
-            this.Controls.Add(card);
+            Controls.Add(card);
 
             card.OnEventCardSelect += (s, e) => {
                 OnEventCardSelect(this, e);

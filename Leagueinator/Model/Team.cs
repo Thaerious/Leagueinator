@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
 using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
@@ -26,46 +24,47 @@ namespace Leagueinator.Model {
 
         [Model]
         public ICollection<PlayerInfo> Players {
-            get => new List<PlayerInfo>().AddUnique(this._players);
+            get => new List<PlayerInfo>().AddUnique(_players);
+
             set {
-                this.Clear();
+                Clear();
                 int i = 0;
-                
+
                 foreach (PlayerInfo p in value) {
-                    this._players[i++] = p;
+                    _players[i++] = p;
                 }
             }
         }
 
         public Team(Settings settings) {
             this.settings = settings;
-            this._players = new PlayerInfo[settings.TeamSize];
+            _players = new PlayerInfo[settings.TeamSize];
         }
 
         public XMLStringBuilder ToXML() {
             XMLStringBuilder xsb = new XMLStringBuilder();
-            xsb.InlineTag("Team", this.Players.DelString());
+            xsb.InlineTag("Team", Players.DelString());
             return xsb;
         }
 
         public override string ToString() {
-            return this.ToXML().ToString();
+            return ToXML().ToString();
         }
 
         public void Clear() {
-            for (int i = 0; i < this._players.Length; i++) {
-                this._players[i] = null;
+            for (int i = 0; i < _players.Length; i++) {
+                _players[i] = null;
             }
         }
 
         public bool HasPlayer(PlayerInfo player) {
-            return this.Players.Contains(player);
+            return Players.Contains(player);
         }
 
         public void AddPlayer(PlayerInfo player) {
-            for (int i = 0; i < this._players.Length; i++) {
-                if (this._players[i] == null) {
-                    this._players[i] = player;
+            for (int i = 0; i < _players.Length; i++) {
+                if (_players[i] == null) {
+                    _players[i] = player;
                     return;
                 }
             }
@@ -74,9 +73,9 @@ namespace Leagueinator.Model {
         }
 
         public void RemovePlayer(PlayerInfo player) {
-            for (int i = 0; i < this._players.Length; i++) {
-                if (this._players[i] == player) {
-                    this._players[i] = null;
+            for (int i = 0; i < _players.Length; i++) {
+                if (_players[i] == player) {
+                    _players[i] = null;
                     return;
                 }
             }

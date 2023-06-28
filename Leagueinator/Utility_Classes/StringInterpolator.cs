@@ -6,7 +6,7 @@ namespace Leagueinator.Utility_Classes {
         public string Interpolate(string input) {
             string content = string.Copy(input);
 
-            foreach (string key in this.Keys) {
+            foreach (string key in Keys) {
                 content = content.Replace("${" + key + "}", this[key]);
             }
 

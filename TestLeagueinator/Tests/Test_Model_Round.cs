@@ -46,36 +46,6 @@ namespace TestLeagueinator
         }
 
         [TestMethod]
-        public void DeepCopy() {
-            var r1 = new Round(new Settings());
-
-            r1[0] = new Match(r1.Settings);
-            r1[1] = new Match(r1.Settings);
-
-            var r2 = r1.DeepCopy();
-
-            Assert.AreEqual(8, r2.Matches.Count);
-            Assert.AreEqual(8, r2.MaxSize);
-        }
-
-        [TestMethod]
-        public void DeepCopy_NonReflective() {
-            var r1 = new Round(new Settings());
-
-            r1[0] = new Match(r1.Settings);
-            r1[1] = new Match(r1.Settings);
-
-            var r2 = r1.DeepCopy();
-
-            r1[0] = null;
-            r1[1] = null;
-
-            Assert.AreEqual(6, r1.Matches.Count);
-            Assert.AreEqual(8, r2.Matches.Count);
-            Assert.AreEqual(8, r2.MaxSize);
-        }
-
-        [TestMethod]
         public void ResetPlayers() {
             var r1 = new Round(new Settings());
 

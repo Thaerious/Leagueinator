@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Leagueinator.Model;
-using Org.BouncyCastle.Asn1.Cms;
 
 namespace Leagueinator.Search_Algorithms {
     public class CountPartners {
-        public static int Count(LeagueEvent lEvent, Round targetRound){
+        public static int Count(LeagueEvent lEvent, Round targetRound) {
             var graph = new Graph();
             foreach (Round round in lEvent) {
                 if (round == targetRound) break;
@@ -38,19 +32,19 @@ namespace Leagueinator.Search_Algorithms {
         }
 
         public void AddRound(Round round) {
-            foreach(PlayerInfo pi in round.AllPlayers) {
+            foreach (PlayerInfo pi in round.AllPlayers) {
                 if (!nodes.ContainsKey(pi)) nodes[pi] = new Node(pi);
             }
 
-            foreach(Team team in round.Teams) {
+            foreach (Team team in round.Teams) {
                 if (team[0] == null || team[1] == null) continue;
-                this.AddWeight(team[0], team[1], 1);
+                AddWeight(team[0], team[1], 1);
             }
         }
 
         public int SumWeights(Round round) {
             int sum = 0;
-            foreach(Team team in round.Teams) {
+            foreach (Team team in round.Teams) {
                 if (team[0] == null || team[1] == null) continue;
 
                 Node n1 = nodes[team[0]];
@@ -77,7 +71,7 @@ namespace Leagueinator.Search_Algorithms {
         }
 
         public Node(PlayerInfo player) {
-            this.PlayerInfo = player;
+            PlayerInfo = player;
         }
     }
 }

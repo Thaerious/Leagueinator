@@ -3,7 +3,6 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using Leagueinator.Model;
-using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Utility_Classes {
     public class ScoreCardPrinter {

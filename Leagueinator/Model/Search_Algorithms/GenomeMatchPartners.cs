@@ -12,16 +12,16 @@ namespace Leagueinator.Model.Search_Algorithms {
         private readonly Random rng = new Random();
 
         public GenomeMatchPartners(LeagueEvent lEvent, Round round) {
-            this.LEvent = lEvent;
-            this.Round = round;
+            LEvent = lEvent;
+            Round = round;
         }
 
         public GenomeMatchPartners(GenomeMatchPartners that) {
-            this.LEvent = that.LEvent;
-            this.Round = new Round(that.Round.AllPlayers, that.LEvent.Settings);
+            LEvent = that.LEvent;
+            Round = new Round(that.Round.AllPlayers, that.LEvent.Settings);
         }
 
-        public override Round Value => this.Round;
+        public override Round Value => Round;
 
         public override AMember<Round> Clone() {
             return new GenomeMatchPartners(this);
@@ -35,7 +35,7 @@ namespace Leagueinator.Model.Search_Algorithms {
         public int Evaluate(PlayerInfo player1, PlayerInfo player2) {
             int sum = 0;
 
-            List<Team> teams = this.LEvent
+            List<Team> teams = LEvent
                 .SeekDeep<Team>()
                 .Where(t => t.HasPlayer(player1))
                 .ToList();
@@ -58,8 +58,8 @@ namespace Leagueinator.Model.Search_Algorithms {
 
                 foreach (PlayerInfo player2 in team.Players) {
                     if (player1.Equals(player2)) continue;
-                    var e = this.Evaluate(player1, player2);
-                    if (e > 0) sum += this.Evaluate(player1, player2);
+                    var e = Evaluate(player1, player2);
+                    if (e > 0) sum += Evaluate(player1, player2);
                 }
             }
 
@@ -69,30 +69,30 @@ namespace Leagueinator.Model.Search_Algorithms {
         public override bool IsValid() => true;
 
         public Round Randomize() {
-            this.Round.ResetPlayers();
+            Round.ResetPlayers();
 
-            foreach (Match match in this.Round.Matches) {
+            foreach (Match match in Round.Matches) {
                 foreach (Team team in match.Teams) {
                     while (team.IsFull == false) {
-                        var player = this.Round.IdlePlayers.SelectRandom();
+                        var player = Round.IdlePlayers.SelectRandom();
                         team.AddPlayer(player);
-                        this.Round.IdlePlayers.Remove(player);
-                        if (this.Round.IdlePlayers.Count == 0) return this.Round;
+                        Round.IdlePlayers.Remove(player);
+                        if (Round.IdlePlayers.Count == 0) return Round;
                     }
                 }
             }
 
-            return this.Round;
+            return Round;
         }
 
         public override void Mutate() {
-            var p1 = this.Round.AllPlayers.SelectRandom();
-            var p2 = this.Round.AllPlayers.SelectRandom();
+            var p1 = Round.AllPlayers.SelectRandom();
+            var p2 = Round.AllPlayers.SelectRandom();
             if (p1 == p2) return;
 
             var t1 = Round.GetTeam(p1);
             var t2 = Round.GetTeam(p2);
-            
+
             if (t1 == t2) return;
 
             t1.RemovePlayer(p1);

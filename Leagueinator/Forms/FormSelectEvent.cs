@@ -15,20 +15,20 @@ namespace Leagueinator.Forms {
         }
 
         public void SetEvents(IEnumerable<LeagueEvent> events) {
-            this.listEvents.Items.Clear();
-            this.listEvents.Items.AddRange(
+            listEvents.Items.Clear();
+            listEvents.Items.AddRange(
                 events.Select(e => new LeagueEventWrapper { LeagueEvent = e }).ToArray()
             );
         }
 
         private void clickSelect(object sender, EventArgs e) {
-            this.Action = "Select";
-            this.LeagueEvent = (listEvents.SelectedItem as LeagueEventWrapper).LeagueEvent;
+            Action = "Select";
+            LeagueEvent = (listEvents.SelectedItem as LeagueEventWrapper).LeagueEvent;
         }
 
         private void clickDelete(object sender, EventArgs e) {
-            this.Action = "Delete";
-            this.LeagueEvent = (listEvents.SelectedItem as LeagueEventWrapper).LeagueEvent;
+            Action = "Delete";
+            LeagueEvent = (listEvents.SelectedItem as LeagueEventWrapper).LeagueEvent;
         }
     }
 

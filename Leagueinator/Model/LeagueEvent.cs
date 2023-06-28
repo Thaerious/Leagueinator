@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
@@ -25,26 +23,26 @@ namespace Leagueinator.Model {
             set { Rounds.Remove(Rounds[key]); }
         }
 
-        public int Size { get => Rounds.Count;}
+        public int Size { get => Rounds.Count; }
 
         public LeagueEvent(string date, String name, Settings settings) {
-            this.Date = date;
-            this.Name = name;
-            this.Settings = settings;
+            Date = date;
+            Name = name;
+            Settings = settings;
         }
 
         public LeagueEvent(Settings settings) {
-            this.Date = DateTime.Today.ToString("yyyy-MM-dd");
-            this.Name = "Event";
-            this.Settings = settings;
+            Date = DateTime.Today.ToString("yyyy-MM-dd");
+            Name = "Event";
+            Settings = settings;
         }
 
         /// <summary>
         /// Add a new empty round to this event.
         /// </summary>
         public Round AddRound() {
-            var round = new Round(this.SeekDeep<PlayerInfo>(), this.Settings);
-            this.Rounds.Add(round);
+            var round = new Round(this.SeekDeep<PlayerInfo>(), Settings);
+            Rounds.Add(round);
             return round;
         }
 
@@ -52,22 +50,22 @@ namespace Leagueinator.Model {
             XMLStringBuilder xsb = new XMLStringBuilder();
             xsb.OpenTag("Event");
             xsb.InlineTag("Players", this.SeekDeep<PlayerInfo>().DelString());
-            foreach (var round in this.Rounds) {
+            foreach (var round in Rounds) {
                 xsb.AppendXML(round.ToXML());
             }
             xsb.CloseTag("Event");
             return xsb;
         }
         public override string ToString() {
-            return this.ToXML().ToString();
+            return ToXML().ToString();
         }
 
         public IEnumerator<Round> GetEnumerator() {
-            return this.Rounds.GetEnumerator();
+            return Rounds.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator() {
-            return this.Rounds.GetEnumerator();
+            return Rounds.GetEnumerator();
         }
 
         public int IndexOf(Round round) {

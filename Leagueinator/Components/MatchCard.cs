@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using Leagueinator.Model;
@@ -11,7 +10,7 @@ namespace Leagueinator.Components {
             get => _lane;
             set {
                 _lane = value;
-                this.labelLane.Text = (value + 1).ToString();
+                labelLane.Text = (value + 1).ToString();
             }
         }
 
@@ -22,12 +21,12 @@ namespace Leagueinator.Components {
             }
             set {
                 if (value != null) {
-                    this.labelP0.PlayerInfo = value[0][0];
-                    this.labelP1.PlayerInfo = value[0][1];
-                    this.labelP2.PlayerInfo = value[1][0];
-                    this.labelP3.PlayerInfo = value[1][1];
+                    labelP0.PlayerInfo = value[0][0];
+                    labelP1.PlayerInfo = value[0][1];
+                    labelP2.PlayerInfo = value[1][0];
+                    labelP3.PlayerInfo = value[1][1];
                 }
-                this._match = value;
+                _match = value;
             }
         }
 
@@ -46,7 +45,7 @@ namespace Leagueinator.Components {
 
             PlayerDragData data = (PlayerDragData)e.Data.GetData(typeof(PlayerDragData));
             data.Destination = receiver;
-            
+
             Debug.WriteLine("Match Card Exit Drop");
         }
 
@@ -59,7 +58,7 @@ namespace Leagueinator.Components {
 
             var data = new PlayerDragData { Source = matchLabel, PlayerInfo = matchLabel.PlayerInfo };
 
-            this.DoDragDrop(data, DragDropEffects.Move);
+            DoDragDrop(data, DragDropEffects.Move);
             matchLabel.ForeColor = Color.Black;
             if (data.Destination == null) return;
 
@@ -68,8 +67,8 @@ namespace Leagueinator.Components {
                 playerListBox.Items.Add(data.PlayerInfo);
                 matchLabel.PlayerInfo = null;
 
-                Debug.WriteLine(this.Match);
-                this.Match.Teams[matchLabel.Team][matchLabel.Position] = null;
+                Debug.WriteLine(Match);
+                Match.Teams[matchLabel.Team][matchLabel.Position] = null;
 
                 playerListBox.Round.IdlePlayers.Add(data.PlayerInfo);
             }

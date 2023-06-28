@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using Leagueinator.Model;
@@ -20,9 +19,9 @@ namespace Leagueinator.Components {
 
             set {
                 if (currentRoundButton?.Round == null) return;
-                int index = this.leagueEvent.IndexOf(currentRoundButton?.Round);
-                this.leagueEvent[index] = value;
-                this.currentRoundButton.Round = value;
+                int index = leagueEvent.IndexOf(currentRoundButton?.Round);
+                leagueEvent[index] = value;
+                currentRoundButton.Round = value;
             }
         }
 
@@ -35,79 +34,79 @@ namespace Leagueinator.Components {
             get { return leagueEvent; }
             set {
                 if (value != null) {
-                    this.flowRounds.Controls.Clear();
-                    this.playerListBox.Items.Clear();
+                    flowRounds.Controls.Clear();
+                    playerListBox.Items.Clear();
 
-                    this.leagueEvent = value;
-                    this.currentRoundButton = null;
-                    this.leagueEvent.ForEach(r => this.AddRound(r));
+                    leagueEvent = value;
+                    currentRoundButton = null;
+                    leagueEvent.ForEach(r => AddRound(r));
                 }
             }
         }
 
         private void AddRound(Round round) {
             var button = new RoundButton(round) {
-                Text = $"Round #{this.flowRounds.Controls.Count + 1}"
+                Text = $"Round #{flowRounds.Controls.Count + 1}"
             };
-            this.flowRounds.Controls.Add(button);
+            flowRounds.Controls.Add(button);
 
             button.Click += new EventHandler(RoundButtonClick);
 
-            if (this.currentRoundButton == null) {
-                this.RoundButtonClick(button, null);
+            if (currentRoundButton == null) {
+                RoundButtonClick(button, null);
             }
         }
 
         private void RoundButtonClick(object source, EventArgs _) {
             RoundButton button = (RoundButton)source;
 
-            if (this.currentRoundButton != null) {
-                this.currentRoundButton.BackColor = Color.White;
+            if (currentRoundButton != null) {
+                currentRoundButton.BackColor = Color.White;
             }
 
             button.BackColor = Color.GreenYellow;
 
-            this.currentRoundButton = button;
-            this.playerListBox.Round = currentRoundButton.Round;
-            this.PopulateMatches(button.Round);
+            currentRoundButton = button;
+            playerListBox.Round = currentRoundButton.Round;
+            PopulateMatches(button.Round);
         }
 
         private void PopulateMatches(Round round) {
-            for (int lane = 1; lane <= this.leagueEvent.Settings.LaneCount; lane++) {
-                Control[] controls = this.Controls.Find($"matchCard{lane}", true);
+            for (int lane = 1; lane <= leagueEvent.Settings.LaneCount; lane++) {
+                Control[] controls = Controls.Find($"matchCard{lane}", true);
                 MatchCard matchCard = controls[0] as MatchCard;
                 matchCard.Match = round[lane - 1];
             }
         }
 
         private void AddRoundHnd(object sender, EventArgs e) {
-            this.AddRound(this.leagueEvent.AddRound());
+            AddRound(leagueEvent.AddRound());
         }
 
         private void RemoveRoundHnd(object sender, EventArgs e) {
-            if (this.currentRoundButton != null) {
-                this.flowRounds.Controls.Remove(this.currentRoundButton);
-                this.currentRoundButton = null;
+            if (currentRoundButton != null) {
+                flowRounds.Controls.Remove(currentRoundButton);
+                currentRoundButton = null;
             }
         }
 
         public void AddPlayer(PlayerInfo player) {
-            if (this.LeagueEvent == null) return;
+            if (LeagueEvent == null) return;
 
-            if (this.LeagueEvent.SeekDeep<PlayerInfo>().Contains(player)) {
+            if (LeagueEvent.SeekDeep<PlayerInfo>().Contains(player)) {
                 return;
             }
 
-            foreach (Round round in this.LeagueEvent) {
+            foreach (Round round in LeagueEvent) {
                 round.IdlePlayers.Add(player);
             }
 
-            this.playerListBox.Items.Add(player);
+            playerListBox.Items.Add(player);
         }
 
         internal void RefreshRound() {
-            this.playerListBox.Round = currentRoundButton.Round;
-            this.PopulateMatches(currentRoundButton.Round);
+            playerListBox.Round = currentRoundButton.Round;
+            PopulateMatches(currentRoundButton.Round);
         }
     }
 }

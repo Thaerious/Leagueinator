@@ -36,7 +36,7 @@ namespace Leagueinator.Utility_Classes {
             string[] lines = text.Split('\n');
 
             foreach (string line in lines) {
-                this.AppendLine(line);
+                AppendLine(line);
             }
         }
 
@@ -59,7 +59,7 @@ namespace Leagueinator.Utility_Classes {
 
         public override string ToString() {
             var sb = new StringBuilder();
-            foreach (IndentedString iString in this.lines) {
+            foreach (IndentedString iString in lines) {
                 sb.AppendLine(iString.ToString());
             }
             return sb.ToString();

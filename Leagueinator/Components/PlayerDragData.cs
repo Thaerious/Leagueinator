@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Leagueinator.Model;
+﻿using Leagueinator.Model;
 
 namespace Leagueinator.Components {
     public class PlayerDragData {

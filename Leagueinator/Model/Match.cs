@@ -15,14 +15,14 @@ namespace Leagueinator.Model {
 
         [Model]
         public List<Team> Teams {
-            get => new List<Team>().AddUnique(this._teams);
+            get => new List<Team>().AddUnique(_teams);
         }
 
         public List<PlayerInfo> Players {
             get {
                 var list = new List<PlayerInfo>();
 
-                foreach (Team team in this.Teams) {
+                foreach (Team team in Teams) {
                     list.AddUnique(team.Players);
                 }
                 return list;
@@ -32,11 +32,11 @@ namespace Leagueinator.Model {
         /// <summary>
         /// The number of teams this match can accept.
         /// </summary>
-        public int MaxSize => this._teams.Length;
+        public int MaxSize => _teams.Length;
 
         public Match(Settings settings) {
-            this.Settings = settings;
-            this._teams = new Team[settings.MatchSize];
+            Settings = settings;
+            _teams = new Team[settings.MatchSize];
             for (int i = 0; i < settings.MatchSize; i++) {
                 this[i] = new Team(settings);
             }
@@ -45,7 +45,7 @@ namespace Leagueinator.Model {
         public XMLStringBuilder ToXML(int lane) {
             XMLStringBuilder xsb = new XMLStringBuilder();
             xsb.OpenTag("Match", $"lane='{lane}'");
-            foreach (var team in this.Teams) {
+            foreach (var team in Teams) {
                 xsb.AppendXML(team.ToXML());
             }
             xsb.CloseTag("Match");
@@ -53,11 +53,11 @@ namespace Leagueinator.Model {
         }
 
         public override String ToString() {
-            return this.ToXML(0).ToString();
+            return ToXML(0).ToString();
         }
 
         public void ClearPlayers() {
-            for (int i = 0; i < this.MaxSize; i++) {
+            for (int i = 0; i < MaxSize; i++) {
                 this[i].Clear();
             }
         }

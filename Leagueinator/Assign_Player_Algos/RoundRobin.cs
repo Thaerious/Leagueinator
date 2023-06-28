@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Leagueinator.Model;
-using Org.BouncyCastle.Asn1.Cms;
 
 namespace Leagueinator.Algos {
     public class RoundRobin {
         readonly Graph graph = new Graph();
 
-        public RoundRobin(LeagueEvent lEvent, Round targetRound){
-            foreach(Round round in lEvent) {
+        public RoundRobin(LeagueEvent lEvent, Round targetRound) {
+            foreach (Round round in lEvent) {
                 if (round == targetRound) break;
                 graph.AddRound(round);
             }
@@ -37,19 +31,19 @@ namespace Leagueinator.Algos {
         }
 
         public void AddRound(Round round) {
-            foreach(PlayerInfo pi in round.AllPlayers) {
+            foreach (PlayerInfo pi in round.AllPlayers) {
                 nodes[pi] = new Node(pi);
             }
 
-            foreach(Team team in round.Teams) {
+            foreach (Team team in round.Teams) {
                 if (team[0] == null || team[1] == null) continue;
-                this.AddWeight(team[0], team[1], 1);
+                AddWeight(team[0], team[1], 1);
             }
         }
 
         public int SumWeights(Round round) {
             int sum = 0;
-            foreach(Team team in round.Teams) {
+            foreach (Team team in round.Teams) {
                 if (team[0] == null || team[1] == null) continue;
 
                 Node n1 = nodes[team[0]];
@@ -76,7 +70,7 @@ namespace Leagueinator.Algos {
         }
 
         public Node(PlayerInfo player) {
-            this.PlayerInfo = player;
+            PlayerInfo = player;
         }
     }
 }

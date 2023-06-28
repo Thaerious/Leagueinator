@@ -9,47 +9,47 @@ namespace Leagueinator.Components {
         private Round _round = null;
         public Round Round {
             get {
-                return this._round;
+                return _round;
             }
             set {
-                this._round = value;
-                this.Items.Clear();
+                _round = value;
+                Items.Clear();
                 if (value == null) return;
                 foreach (PlayerInfo pi in value.IdlePlayers) {
-                    this.Items.Add(pi);
+                    Items.Add(pi);
                 }
             }
         }
 
         public PlayerListBox() {
             InitializeComponent();
-            this.AllowDrop = true;
-            this.DragDrop += new DragEventHandler(this.OnDropStart);
-            this.DragEnter += new DragEventHandler(this.OnDragEnter);
-            this.MouseDown += new MouseEventHandler(this.OnDragStart);
+            AllowDrop = true;
+            DragDrop += new DragEventHandler(OnDropStart);
+            DragEnter += new DragEventHandler(OnDragEnter);
+            MouseDown += new MouseEventHandler(OnDragStart);
         }
 
         public PlayerListBox(IContainer container) {
             container.Add(this);
             InitializeComponent();
-            this.AllowDrop = true;
-            this.DragDrop += new DragEventHandler(this.OnDropStart);
-            this.DragEnter += new DragEventHandler(this.OnDragEnter);
-            this.MouseDown += new MouseEventHandler(this.OnDragStart);
+            AllowDrop = true;
+            DragDrop += new DragEventHandler(OnDropStart);
+            DragEnter += new DragEventHandler(OnDragEnter);
+            MouseDown += new MouseEventHandler(OnDragStart);
         }
 
         public PlayerInfo PlayerInfo {
             get {
-                if (this.SelectedIndex == -1) return null;
-                return (PlayerInfo)this.SelectedItem;
+                if (SelectedIndex == -1) return null;
+                return (PlayerInfo)SelectedItem;
             }
             set {
                 if (value == null) {
-                    this.Items.Remove(this.SelectedItem);
+                    Items.Remove(SelectedItem);
                 }
-                else if (this.SelectedItem != value) {
-                    this.Items.Remove(this.SelectedItem);
-                    this.Items.Add(value);
+                else if (SelectedItem != value) {
+                    Items.Remove(SelectedItem);
+                    Items.Add(value);
                 }
             }
         }
@@ -70,21 +70,21 @@ namespace Leagueinator.Components {
         public void OnDragStart(object sender, MouseEventArgs e) {
             Debug.WriteLine($"Player List Box Start Drag");
 
-            var data = new PlayerDragData { Source = this, PlayerInfo = (PlayerInfo)this.SelectedItem };            
+            var data = new PlayerDragData { Source = this, PlayerInfo = (PlayerInfo)SelectedItem };
 
-            this.DoDragDrop(data, DragDropEffects.Move);
+            DoDragDrop(data, DragDropEffects.Move);
             if (data.Destination == null) return;
 
             if (data.Destination.GetType() == typeof(MatchLabel)) {
                 MatchLabel matchLabel = (MatchLabel)data.Destination;
                 matchLabel.PlayerInfo = data.PlayerInfo;
-                this.Items.Remove(data.PlayerInfo);
+                Items.Remove(data.PlayerInfo);
 
-                this.Round.IdlePlayers.Remove(data.PlayerInfo);
-                this.Round
-                    .Matches[matchLabel.Lane]
-                    .Teams[matchLabel.Team]
-                    [matchLabel.Position] = data.PlayerInfo;
+                Round.IdlePlayers.Remove(data.PlayerInfo);
+                Round.Matches[matchLabel.Lane]
+                     .Teams[matchLabel.Team]
+                      [matchLabel.Position] 
+                     = data.PlayerInfo;
             }
 
             Debug.WriteLine("Player List Box Exit Drag\n");
@@ -96,15 +96,15 @@ namespace Leagueinator.Components {
 
         public PlayerInfo SetPlayer(PlayerInfo playerInfo) {
             if (playerInfo == null) return null;
-            this.Items.Add(playerInfo);
-            this.Round.IdlePlayers.Add(playerInfo);
+            Items.Add(playerInfo);
+            Round.IdlePlayers.Add(playerInfo);
             return null;
         }
 
         public PlayerInfo ClearPlayer(PlayerInfo playerInfo) {
-            PlayerInfo prev = this.PlayerInfo;
-            this.Items.Remove(playerInfo);
-            this.Round.IdlePlayers.Remove(playerInfo);
+            PlayerInfo prev = PlayerInfo;
+            Items.Remove(playerInfo);
+            Round.IdlePlayers.Remove(playerInfo);
             return prev;
         }
     }

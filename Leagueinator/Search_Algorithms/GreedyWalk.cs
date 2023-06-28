@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using Leagueinator.Model.Search_Algorithms;
-using Leagueinator.Model;
+﻿using System.Diagnostics;
 namespace Leagueinator.Search_Algorithms {
     public class GreedyWalk {
         private int generation = 0;

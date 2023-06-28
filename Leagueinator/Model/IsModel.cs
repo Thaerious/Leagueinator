@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Leagueinator.Model {
 
     [AttributeUsage(AttributeTargets.Property)]
-    public class Model : Attribute {}
+    public class Model : Attribute { }
 
     public static class ModelExtensions {
         public static List<T> SeekAll<T>(this object isModel) where T : class {
@@ -36,7 +32,7 @@ namespace Leagueinator.Model {
             return list;
         }
 
-        public static List<T> SeekDeep<T>(this object isModel) where T : class {            
+        public static List<T> SeekDeep<T>(this object isModel) where T : class {
             List<T> list = new List<T>();
             Type type = isModel.GetType();
 
@@ -74,8 +70,8 @@ namespace Leagueinator.Model {
                 // Enumerable of not-type
                 var value = (IEnumerable)prop.GetValue(isModel, null);
                 if (value != null) foreach (var item in value) {
-                    list.AddRange(item.SeekDeep<T>());
-                }
+                        list.AddRange(item.SeekDeep<T>());
+                    }
             }
             else if (!prop.PropertyType.IsPrimitive) {
                 // Some other (non-enumerable) type
