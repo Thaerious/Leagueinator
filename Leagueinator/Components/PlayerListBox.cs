@@ -77,6 +77,10 @@ namespace Leagueinator.Components {
 
             if (data.Destination.GetType() == typeof(MatchLabel)) {
                 MatchLabel matchLabel = (MatchLabel)data.Destination;
+                if (matchLabel.PlayerInfo != null) {
+                    this.Items.Add(matchLabel.PlayerInfo);
+                }
+
                 matchLabel.PlayerInfo = data.PlayerInfo;
                 Items.Remove(data.PlayerInfo);
 
