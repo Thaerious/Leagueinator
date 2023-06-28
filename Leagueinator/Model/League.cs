@@ -7,8 +7,7 @@ namespace Leagueinator.Model {
     public class League {
         public readonly Settings settings;
 
-        [Model]
-        public List<LeagueEvent> Events { get; private set; } = new List<LeagueEvent>();
+        [Model] public List<LeagueEvent> Events { get; private set; } = new List<LeagueEvent>();
 
         /// <summary>
         /// Add a new Event to the league.

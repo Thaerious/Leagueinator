@@ -60,13 +60,9 @@ namespace Leagueinator.Model {
             return ToXML().ToString();
         }
 
-        public IEnumerator<Round> GetEnumerator() {
-            return Rounds.GetEnumerator();
-        }
+        public IEnumerator<Round> GetEnumerator() => Rounds.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator() {
-            return Rounds.GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => Rounds.GetEnumerator();
 
         public int IndexOf(Round round) {
             return Rounds.IndexOf(round);
