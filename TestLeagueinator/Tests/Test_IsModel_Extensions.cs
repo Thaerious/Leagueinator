@@ -163,5 +163,15 @@ namespace TestLeagueinator
             Assert.AreEqual(8, list.Count);
 
         }
+
+        [TestMethod]
+        public void Root_Is_Array() {
+            PlayerInfo[] target = new PlayerInfo[4];
+            target[0] = new PlayerInfo("Albert");
+            target[1] = new PlayerInfo("Bert");
+            target[2] = new PlayerInfo("Chuck");
+            target[3] = new PlayerInfo("Desere");
+            Assert.AreEqual(4, target.SeekDeep<PlayerInfo>().Count);
+        }
     }
 }

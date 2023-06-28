@@ -4,57 +4,70 @@ using System.Text;
 
 namespace Leagueinator.Utility_Classes {
     public class XMLStringBuilder {
-        private StringBuilder sb = new StringBuilder();
-        private int depth = 0;
-        public char indent = '\t';
-        private List<IndentedString> lines = new List<IndentedString>();
+        private readonly StringBuilder sb = new StringBuilder();
+        private int Depth => this.CurrentTag.Count;
+        public char Indent = '\t';
+        private readonly List<IndentedString> lines = new List<IndentedString>();
+        private readonly Stack<string> CurrentTag = new Stack<string>();
 
-        public void OpenTag(string name, params string[] attributes) {
+        public XMLStringBuilder OpenTag(string name, params string[] attributes) {
             var text = $"<{name}";
 
             foreach (var attr in attributes) {
-                text = text + ($" {attr}");
+                text += ($" {attr}");
             }
 
-            text = text + ">";
+            text += ">";
 
-            lines.Add(new IndentedString(depth, text));
-            depth++;
+            lines.Add(new IndentedString(Depth, text));
+            CurrentTag.Push(name);
+            return this;
         }
 
-        public void OpenTag(string name) {
+        public XMLStringBuilder OpenTag(string name) {
             var text = $"<{name}>";
-            lines.Add(new IndentedString(depth, text));
-            depth++;
+            lines.Add(new IndentedString(Depth, text));
+            CurrentTag.Push(name);
+            return this;
         }
 
-        public void AppendLine(string text) {
-            lines.Add(new IndentedString(depth, text));
+        public XMLStringBuilder AppendLine(string text) {
+            lines.Add(new IndentedString(Depth, text));
+            return this;
         }
 
-        public void AppendLines(string text) {
+        public XMLStringBuilder AppendLines(string text) {
             string[] lines = text.Split('\n');
 
             foreach (string line in lines) {
                 AppendLine(line);
             }
+            return this;
         }
 
-        public void InlineTag(string tag, string text) {
+        public XMLStringBuilder InlineTag(string tag, string text) {
             var t = $"<{tag}>{text}</{tag}>";
-            lines.Add(new IndentedString(depth, t));
+            lines.Add(new IndentedString(Depth, t));
+            return this;
         }
 
-        public void CloseTag(string name) {
-            depth--;
+        public XMLStringBuilder CloseTag(string name) {
             var text = $"</{name}>";
-            lines.Add(new IndentedString(depth, text));
+            lines.Add(new IndentedString(Depth, text));
+            return this;
         }
 
-        public void AppendXML(XMLStringBuilder xsb) {
+        public XMLStringBuilder CloseTag() {
+            var text = $"</{this.CurrentTag.Pop()}>";
+            lines.Add(new IndentedString(Depth, text));
+            return this;
+        }
+
+        public XMLStringBuilder AppendXML(XMLStringBuilder xsb) {
             foreach (IndentedString iString in xsb.lines) {
-                lines.Add(new IndentedString(iString.indent + depth, iString.text));
+                lines.Add(new IndentedString(iString.indent + Depth, iString.text));
             }
+            return this;
         }
 
         public override string ToString() {
@@ -66,7 +79,7 @@ namespace Leagueinator.Utility_Classes {
         }
     }
 
-    public class IndentedString {
+    class IndentedString {
         public string text = "";
         public int indent = 0;
         public char c = '\t';

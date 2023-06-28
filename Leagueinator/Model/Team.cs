@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Leagueinator.Utility_Classes;
+using Org.BouncyCastle.Utilities.IO;
 
 namespace Leagueinator.Model {
     [Serializable]
@@ -9,32 +10,17 @@ namespace Leagueinator.Model {
 
         private PlayerInfo[] _players;
         public PlayerInfo this[int key] {
-            get {
-                return _players[key];
-            }
-            set {
-                if (_players[key] == value) return;
-                _players[key] = value;
-            }
+            get => _players[key];
+            set => _players[key] = value;
         }
 
         public int MaxSize => _players.Length;
 
-        public bool IsFull => _players.Length == Players.Count;
+        public bool IsFull => Players.Count == this.MaxSize;
 
-        [Model]
-        public ICollection<PlayerInfo> Players {
-            get => new List<PlayerInfo>().AddUnique(_players);
+        public bool IsEmpty => Players.Count == 0;
 
-            set {
-                Clear();
-                int i = 0;
-
-                foreach (PlayerInfo p in value) {
-                    _players[i++] = p;
-                }
-            }
-        }
+        [Model] public List<PlayerInfo> Players => new List<PlayerInfo>().AddUnique(_players);
 
         public Team(Settings settings) {
             this.settings = settings;
@@ -52,35 +38,43 @@ namespace Leagueinator.Model {
         }
 
         public void Clear() {
-            for (int i = 0; i < _players.Length; i++) {
-                _players[i] = null;
-            }
+            this._players.Fill(null);
         }
 
         public bool HasPlayer(PlayerInfo player) {
             return Players.Contains(player);
         }
 
-        public void AddPlayer(PlayerInfo player) {
+        /// <summary>
+        /// Add player to the next empty position.
+        /// If there is no emptly position, no change is made.
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns>True, if a change was made.</returns>
+        public bool AddPlayer(PlayerInfo player) {
             for (int i = 0; i < _players.Length; i++) {
                 if (_players[i] == null) {
                     _players[i] = player;
-                    return;
+                    return true;
                 }
             }
-
-            throw new ArgumentException();
+            return false;
         }
 
-        public void RemovePlayer(PlayerInfo player) {
+        /// <summary>
+        /// Remove a player from this Team.
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns>True, if a change was made.</returns>
+        public bool RemovePlayer(PlayerInfo player) {
             for (int i = 0; i < _players.Length; i++) {
                 if (_players[i] == player) {
                     _players[i] = null;
-                    return;
+                    return true;
                 }
             }
 
-            throw new KeyNotFoundException();
+            return false;
         }
     }
 }

@@ -1,42 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
     [Serializable]
     public class Round {
         public readonly Settings Settings;
-        private Match[] _matches;
+        private readonly Match[] _matches;
 
         [Model]
         public List<PlayerInfo> IdlePlayers { get; private set; } = new List<PlayerInfo>();
 
-        public Match this[int key] {
-            get { return _matches[key]; }
-            set { _matches[key] = value; }
-        }
+        public Match this[int key] => _matches[key];
 
-        [Model]
-        public List<Match> Matches {
-            get => new List<Match>().AddUnique(_matches);
-        }
+        [Model] public List<Match> Matches => new List<Match>().AddUnique(_matches);
 
         public int MaxSize => _matches.Length;
 
-        /// <summary>
-        /// Retreive a list of all teams that contain at least one player.
-        /// </summary>
-        public List<Team> Teams {
-            get {
-                List<Team> list = new List<Team>();
-                foreach (Match match in _matches) {
-                    foreach (Team team in match.Teams) {
-                        if (team.Players.Count > 0) list.Add(team);
-                    }
-                }
-                return list;
-            }
-        }
+        public List<Team> Teams => this.SeekDeep<Team>().Where(t => !t.IsEmpty).ToList();
 
         public List<PlayerInfo> AllPlayers {
             get {
@@ -47,25 +29,12 @@ namespace Leagueinator.Model {
             }
         }
 
-        public List<PlayerInfo> ActivePlayers {
-            get {
-                var list = new List<PlayerInfo>();
-
-                foreach (Match match in Matches) {
-                    list.AddUnique(match.Players);
-                }
-                return list;
-            }
-        }
+        public List<PlayerInfo> ActivePlayers => Matches.SeekDeep<PlayerInfo>().Unique();
 
         public Round(Settings settings) {
             if (settings == null) throw new NullReferenceException("settings");
-
             Settings = settings;
-            _matches = new Match[settings.LaneCount];
-            for (int i = 0; i < _matches.Length; i++) {
-                _matches[i] = new Match(settings);
-            }
+            _matches = new Match[settings.LaneCount].Populate(() => new Match(settings));
         }
 
         public Round(List<PlayerInfo> idlePlayers, Settings settings) : this(settings) {
@@ -84,7 +53,7 @@ namespace Leagueinator.Model {
                 xsb.AppendXML(_matches[i].ToXML(i));
             }
 
-            xsb.CloseTag("Round");
+            xsb.CloseTag();
             return xsb;
         }
 

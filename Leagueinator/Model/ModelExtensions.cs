@@ -36,6 +36,15 @@ namespace Leagueinator.Model {
             List<T> list = new List<T>();
             Type type = isModel.GetType();
 
+            if (isModel == null) return list;
+
+            if (isModel.GetType().GetInterfaces().Contains(typeof(IEnumerable))) {
+                foreach (var item in (IEnumerable)isModel) {
+                    list.AddRange(item.SeekDeep<T>());
+                }
+                return list;
+            }
+
             if (isModel.GetType() == typeof(T)) {
                 if (list.Contains(isModel)) return list;
                 list.Add((T)isModel);
@@ -70,8 +79,8 @@ namespace Leagueinator.Model {
                 // Enumerable of not-type
                 var value = (IEnumerable)prop.GetValue(isModel, null);
                 if (value != null) foreach (var item in value) {
-                        list.AddRange(item.SeekDeep<T>());
-                    }
+                    list.AddRange(item.SeekDeep<T>());
+                }
             }
             else if (!prop.PropertyType.IsPrimitive) {
                 // Some other (non-enumerable) type

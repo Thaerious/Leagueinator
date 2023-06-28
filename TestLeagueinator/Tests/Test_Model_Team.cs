@@ -5,8 +5,7 @@ using Leagueinator.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestLeagueinator.Helpers;
 
-namespace TestLeagueinator
-{
+namespace TestLeagueinator {
     [TestClass]
     public class Test_IsModel_Team {
         PlayerInfo adam = new PlayerInfo("Adam");
@@ -24,9 +23,9 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void Constructor() {
-            var t1 = new Team(new Settings()) {
-                Players = new List<PlayerInfo>{ adam, eve }
-            };
+            var t1 = new Team(new Settings());
+            t1[0] = adam;
+            t1[1] = eve;
 
             Assert.AreEqual(2, t1.Players.Count);
             Assert.IsTrue(t1.IsFull);
@@ -70,15 +69,13 @@ namespace TestLeagueinator
         }
 
         [TestMethod]
-        public void Remove_Player_By_Index_Exception() {
+        public void Remove_Unknown_Player_By_Value_Returns_False() {
             var t1 = new Team(new Settings());
 
             t1[0] = adam;
             t1[1] = eve;
 
-            Assert.ThrowsException<KeyNotFoundException>(() => {
-                t1.RemovePlayer(cain);
-            });
+            Assert.IsFalse(t1.RemovePlayer(cain));
         }
 
         [TestMethod]
@@ -109,14 +106,11 @@ namespace TestLeagueinator
         }
 
         [TestMethod]
-        public void AddPlayer_Out_Of_Bounds() {
+        public void Add_Player_No_Vacanacy() {
             var t1 = new Team(new Settings());
-
-            Assert.ThrowsException<ArgumentException>(() => {
-                t1.AddPlayer(adam);
-                t1.AddPlayer(eve);
-                t1.AddPlayer(cain);
-            });
+            t1.AddPlayer(adam);
+            t1.AddPlayer(eve);
+            Assert.IsFalse(t1.AddPlayer(cain));
         }
 
         [TestMethod]

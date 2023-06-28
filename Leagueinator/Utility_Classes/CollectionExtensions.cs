@@ -21,9 +21,22 @@ namespace Leagueinator.Utility_Classes {
             return newList;
         }
 
+        public static List<T> NotNull<T>(this List<T> list) {
+            List<T> newList = new List<T>();
+            foreach (T t in list) if (t != null) newList.Add(t);
+            return newList;
+        }
+
         public static T[] Populate<T>(this T[] array, Func<T> provider) {
             for (int i = 0; i < array.Length; i++) {
                 array[i] = provider();
+            }
+            return array;
+        }
+
+        public static T[] Fill<T>(this T[] array, T value) {
+            for (int i = 0; i < array.Length; i++) {
+                array[i] = value;
             }
             return array;
         }

@@ -53,7 +53,7 @@ namespace Leagueinator.Model {
             foreach (var round in Rounds) {
                 xsb.AppendXML(round.ToXML());
             }
-            xsb.CloseTag("Event");
+            xsb.CloseTag();
             return xsb;
         }
         public override string ToString() {

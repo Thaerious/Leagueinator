@@ -20,20 +20,10 @@ namespace TestLeagueinator
         }
 
         [TestMethod]
-        public void RemoveMatch_0() {
-            var r1 = new Round(new Settings());
-            r1[0] = null; 
-
-            Assert.AreEqual(0, r1.AllPlayers.Count);
-            Assert.AreEqual(7, r1.Matches.Count); // by default a match is inserted for each lane
-            Assert.AreEqual(8, r1.MaxSize);
-        }
-
-        [TestMethod]
         public void OutOfBounds_0() {
             var r1 = new Round(new Settings());
             Assert.ThrowsException<IndexOutOfRangeException>(() => {
-                r1[8] = new Match(r1.Settings);
+                r1[8].Teams[0].Players[0] = null;
             });
         }
 
@@ -41,7 +31,7 @@ namespace TestLeagueinator
         public void OutOfBounds_1() {
             var r1 = new Round(new Settings());
             Assert.ThrowsException<IndexOutOfRangeException>(() => {
-                r1[-1] = new Match(r1.Settings);
+                r1[-1].Teams[0].Players[0] = null;
             });
         }
 
@@ -81,7 +71,24 @@ namespace TestLeagueinator
         }
 
         [TestMethod]
-        public Round Teams() {
+        public void Teams() {
+            var r1 = new Round(new Settings());
+
+            r1.Matches[0][0][0] = new PlayerInfo("Adam");
+            r1.Matches[0][0][1] = new PlayerInfo("Eve");
+            r1.Matches[0][1][0] = new PlayerInfo("Cain");
+            r1.Matches[0][1][1] = new PlayerInfo("Able");
+            r1.Matches[1][0][0] = new PlayerInfo("Bain");
+
+            Assert.AreEqual(5, r1.ActivePlayers.Count);
+            Assert.AreEqual(0, r1.IdlePlayers.Count);
+            Assert.AreEqual(5, r1.AllPlayers.Count);
+            Assert.AreEqual(3, r1.Teams.Count);          // return teams with >0 players
+            Assert.AreEqual(8, r1.MaxSize);
+        }
+
+        [TestMethod]
+        public void GetTeam() {
             var r1 = new Round(new Settings());
 
             r1.Matches[0][0][0] = new PlayerInfo("Adam");
@@ -96,12 +103,6 @@ namespace TestLeagueinator
             Assert.AreEqual(3, r1.Teams.Count);          // return teams with >0 players
             Assert.AreEqual(8, r1.MaxSize);
 
-            return r1;
-        }
-
-        [TestMethod]
-        public void GetTeam() {
-            Round r1 = this.Teams();
             Team t1 = r1.GetTeam(new PlayerInfo("Adam"));
             Debug.WriteLine(r1[0]);
             Debug.WriteLine(t1);

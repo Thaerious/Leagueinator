@@ -36,7 +36,7 @@ namespace Leagueinator.Model {
             foreach (var lEvent in Events) {
                 xsb.AppendXML(lEvent.ToXML());
             }
-            xsb.CloseTag("League");
+            xsb.CloseTag();
             return xsb;
         }
 
