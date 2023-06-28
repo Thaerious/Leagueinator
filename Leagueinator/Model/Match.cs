@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
@@ -10,7 +11,7 @@ namespace Leagueinator.Model {
 
         public Team this[int key] {
             get { return _teams[key]; }
-            set { _teams[key] = value; }
+            private set { _teams[key] = value; }
         }
 
         [Model]
@@ -21,7 +22,6 @@ namespace Leagueinator.Model {
         public List<PlayerInfo> Players {
             get {
                 var list = new List<PlayerInfo>();
-
                 foreach (Team team in Teams) {
                     list.AddUnique(team.Players);
                 }
@@ -33,6 +33,11 @@ namespace Leagueinator.Model {
         /// The number of teams this match can accept.
         /// </summary>
         public int MaxSize => _teams.Length;
+
+        /// <summary>
+        /// COunt the number of teams that have more than 0 players.
+        /// </summary>
+        public int Count => _teams.Where(e=>e != null).Count();
 
         public Match(Settings settings) {
             Settings = settings;

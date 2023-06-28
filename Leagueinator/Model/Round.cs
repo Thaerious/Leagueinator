@@ -99,6 +99,7 @@ namespace Leagueinator.Model {
         public void ResetPlayers() {
             var players = AllPlayers;
             IdlePlayers.Clear();
+
             foreach (PlayerInfo player in players) {
                 IdlePlayers.Add(player);
             }
