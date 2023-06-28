@@ -49,18 +49,10 @@ namespace TestLeagueinator
         public void ResetPlayers() {
             var r1 = new Round(new Settings());
 
-            r1[0][0] = new Team(r1.Settings) {
-                Players = new List<PlayerInfo>() {
-                    new PlayerInfo("Adam"),
-                    new PlayerInfo("Eve"),
-                }
-            };
-            r1[0][1] = new Team(r1.Settings) {
-                Players = new List<PlayerInfo>() {
-                    new PlayerInfo("Cain"),
-                    new PlayerInfo("Able"),
-                }
-            };
+            r1.Matches[0][0][0] = new PlayerInfo("Adam");
+            r1.Matches[0][0][1] = new PlayerInfo("Eve");
+            r1.Matches[0][1][0] = new PlayerInfo("Cain");
+            r1.Matches[0][1][1] = new PlayerInfo("Able");
 
             r1.ResetPlayers();
 
@@ -75,18 +67,10 @@ namespace TestLeagueinator
         public void Players() {
             var r1 = new Round(new Settings());
 
-            r1[0][0] = new Team(r1.Settings) {
-                Players = new List<PlayerInfo>() {
-                    new PlayerInfo("Adam"),
-                    new PlayerInfo("Eve"),
-                }
-            };
-            r1[0][1] = new Team(r1.Settings) {
-                Players = new List<PlayerInfo>() {
-                    new PlayerInfo("Cain"),
-                    new PlayerInfo("Able"),
-                }
-            };
+            r1.Matches[0][0][0] = new PlayerInfo("Adam");
+            r1.Matches[0][0][1] = new PlayerInfo("Eve");
+            r1.Matches[0][1][0] = new PlayerInfo("Cain");
+            r1.Matches[0][1][1] = new PlayerInfo("Able");
 
             var list = r1.AllPlayers;
 
@@ -100,24 +84,11 @@ namespace TestLeagueinator
         public Round Teams() {
             var r1 = new Round(new Settings());
 
-            r1[0][0] = new Team(r1.Settings) {
-                Players = new List<PlayerInfo>() {
-                    new PlayerInfo("Adam"),
-                    new PlayerInfo("Eve"),
-                }
-            };
-            r1[0][1] = new Team(r1.Settings) {
-                Players = new List<PlayerInfo>() {
-                    new PlayerInfo("Cain"),
-                    new PlayerInfo("Able"),
-                }
-            };
-
-            r1[1][1] = new Team(r1.Settings) {
-                Players = new List<PlayerInfo>() {
-                    new PlayerInfo("Bain"),
-                }
-            };
+            r1.Matches[0][0][0] = new PlayerInfo("Adam");
+            r1.Matches[0][0][1] = new PlayerInfo("Eve");
+            r1.Matches[0][1][0] = new PlayerInfo("Cain");
+            r1.Matches[0][1][1] = new PlayerInfo("Able");
+            r1.Matches[1][0][0] = new PlayerInfo("Bain");
 
             Assert.AreEqual(5, r1.ActivePlayers.Count);
             Assert.AreEqual(0, r1.IdlePlayers.Count);

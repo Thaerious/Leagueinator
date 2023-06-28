@@ -268,7 +268,7 @@
     <Compile Include="Model\LeagueEvent.cs" />
     <Compile Include="Model\Team.cs" />
     <Compile Include="Model\PlayerInfo.cs" />
-    <Compile Include="Utility_Classes\ListExtensions.cs" />
+    <Compile Include="Utility_Classes\CollectionExtensions.cs" />
     <Compile Include="Utility_Classes\ScoreCardPrinter.cs" />
     <Compile Include="Utility_Classes\ToStringExtentions.cs" />
     <Compile Include="Program.cs" />

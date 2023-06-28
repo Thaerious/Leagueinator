@@ -9,25 +9,14 @@ namespace Leagueinator.Model {
         public readonly Settings Settings;
         private Team[] _teams;
 
-        public Team this[int key] {
-            get { return _teams[key]; }
-            private set { _teams[key] = value; }
-        }
+        public Team this[int key] => _teams[key];
 
         [Model]
         public List<Team> Teams {
             get => new List<Team>().AddUnique(_teams);
         }
 
-        public List<PlayerInfo> Players {
-            get {
-                var list = new List<PlayerInfo>();
-                foreach (Team team in Teams) {
-                    list.AddUnique(team.Players);
-                }
-                return list;
-            }
-        }
+        public List<PlayerInfo> Players => this.SeekDeep<PlayerInfo>().Unique();
 
         /// <summary>
         /// The number of teams this match can accept.
@@ -41,10 +30,7 @@ namespace Leagueinator.Model {
 
         public Match(Settings settings) {
             Settings = settings;
-            _teams = new Team[settings.MatchSize];
-            for (int i = 0; i < settings.MatchSize; i++) {
-                this[i] = new Team(settings);
-            }
+            _teams = new Team[settings.MatchSize].Populate(() => new Team(settings));
         }
 
         public XMLStringBuilder ToXML(int lane) {
@@ -66,9 +52,5 @@ namespace Leagueinator.Model {
                 this[i].Clear();
             }
         }
-    }
-
-    public interface HasModelMatch {
-        Match Match { get; set; }
     }
 }

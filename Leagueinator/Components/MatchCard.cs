@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
-    public partial class MatchCard : UserControl, HasModelMatch {
+    public partial class MatchCard : UserControl {
         private int _lane = 0;
         public int Lane {
             get => _lane;

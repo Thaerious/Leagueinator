@@ -22,7 +22,7 @@ namespace TestLeagueinator
         public void OutOfBounds_0() {
             var m1 = new Match(new Settings());
             Assert.ThrowsException<IndexOutOfRangeException>(() => {
-                m1[2] = new Team(m1.Settings);
+                m1[2][0] = new PlayerInfo("Adam");
             });
         }
 
@@ -30,42 +30,18 @@ namespace TestLeagueinator
         public void OutOfBounds_1() {
             var m1 = new Match(new Settings());
             Assert.ThrowsException<IndexOutOfRangeException>(() => {
-                m1[-1] = new Team(m1.Settings);
+                m1[-1][0] = new PlayerInfo("Adam");
             });
-        }
-
-        [TestMethod]
-        public void RemoveTeam() {
-            var m1 = new Match(new Settings());
-
-            m1[0] = new Team(m1.Settings);
-            m1[1] = new Team(m1.Settings);
-
-            m1[0] = null;
-            m1[1] = null;
-
-            Assert.AreEqual(0, m1.Teams.Count);
-            Assert.AreEqual(2, m1.MaxSize);
-            Assert.AreEqual(null, m1[0]);
-            Assert.AreEqual(null, m1[1]);
         }
 
         [TestMethod]
         public void ClearPlayers() {
             var m1 = new Match(new Settings());
 
-            m1[0] = new Team(m1.Settings) {
-                Players = new List<PlayerInfo>() {
-                    new PlayerInfo("Adam"),
-                    new PlayerInfo("Eve"),
-                }
-            };
-            m1[1] = new Team(m1.Settings) {
-                Players = new List<PlayerInfo>() {
-                    new PlayerInfo("Cain"),
-                    new PlayerInfo("Able"),
-                }
-            };
+            m1[0][0] = new PlayerInfo("Adam");
+            m1[0][1] = new PlayerInfo("Eve");
+            m1[1][0] = new PlayerInfo("Cain");
+            m1[1][1] = new PlayerInfo("Able");
 
             m1.ClearPlayers();
 
@@ -78,18 +54,10 @@ namespace TestLeagueinator
         public void Players() {
             var m1 = new Match(new Settings());
 
-            m1[0] = new Team(m1.Settings) {
-                Players = new List<PlayerInfo>() {
-                    new PlayerInfo("Adam"),
-                    new PlayerInfo("Eve"),
-                }
-            };
-            m1[1] = new Team(m1.Settings) {
-                Players = new List<PlayerInfo>() {
-                    new PlayerInfo("Cain"),
-                    new PlayerInfo("Able"),
-                }
-            };
+            m1[0][0] = new PlayerInfo("Adam");
+            m1[0][1] = new PlayerInfo("Eve");
+            m1[1][0] = new PlayerInfo("Cain");
+            m1[1][1] = new PlayerInfo("Able");
 
             var list = m1.Players;
 
