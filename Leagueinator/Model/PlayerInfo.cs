@@ -4,7 +4,16 @@ using System;
 namespace Leagueinator.Model {
     [Serializable]
     public class PlayerInfo : IEquatable<PlayerInfo> {
-        public string Name { get; set; }
+        private string _name;
+
+        public string Name {
+            get => _name;
+            set {
+                if (value == null) throw new ArgumentNullException();
+                if (value.Trim() == "") throw new ArgumentException();
+                _name = value.Trim();
+            }
+        }
 
         public PlayerInfo(string name) => Name = name;
 

@@ -7,24 +7,21 @@ namespace Leagueinator.Model {
     [Serializable]
     public class Match {
         public readonly Settings Settings;
-        private Team[] _teams;
+        private readonly Team[] _teams;
 
         public Team this[int key] => _teams[key];
 
-        [Model]
-        public List<Team> Teams {
-            get => new List<Team>().AddUnique(_teams);
-        }
+        [Model] public List<Team> Teams => new List<Team>().AddUnique(_teams);
 
         public List<PlayerInfo> Players => this.SeekDeep<PlayerInfo>().Unique();
 
         /// <summary>
-        /// The number of teams this match can accept.
+        /// The maximum number of teams this match can have.
         /// </summary>
         public int MaxSize => _teams.Length;
 
         /// <summary>
-        /// COunt the number of teams that have more than 0 players.
+        /// Count the number of teams that have more than 0 players.
         /// </summary>
         public int Count => _teams.Where(e=>e != null).Count();
 

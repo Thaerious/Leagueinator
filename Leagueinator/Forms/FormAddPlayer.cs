@@ -12,14 +12,18 @@ namespace Leagueinator.Forms {
 
         private void TxtName_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Enter) {
-                OnAddPlayer(new PlayerInfo(txtName.Text));
+                if (txtName.Text != null && txtName.Text.Trim() != "") {
+                    OnAddPlayer(new PlayerInfo(txtName.Text));
+                }
                 txtName.Text = null;
             }
         }
 
         private void ButOK_Click(object sender, System.EventArgs e) {
             if (OnAddPlayer != null) {
-                OnAddPlayer(new PlayerInfo(txtName.Text));
+                if (txtName.Text != null && txtName.Text.Trim() != "") {
+                    OnAddPlayer(new PlayerInfo(txtName.Text));
+                }
                 txtName.Text = null;
             }
         }
