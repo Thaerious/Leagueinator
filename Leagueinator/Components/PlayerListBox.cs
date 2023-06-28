@@ -81,10 +81,7 @@ namespace Leagueinator.Components {
                 Items.Remove(data.PlayerInfo);
 
                 Round.IdlePlayers.Remove(data.PlayerInfo);
-                Round.Matches[matchLabel.Lane]
-                     .Teams[matchLabel.Team]
-                      [matchLabel.Position] 
-                     = data.PlayerInfo;
+                Round[matchLabel.Lane][matchLabel.Team][matchLabel.Position] = data.PlayerInfo;
             }
 
             Debug.WriteLine("Player List Box Exit Drag\n");

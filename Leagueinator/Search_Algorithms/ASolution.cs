@@ -1,9 +1,7 @@
 ﻿namespace Leagueinator.Search_Algorithms {
-    public abstract class AMember<T> {
+    public abstract class ASolution {
 
-        public abstract T Value { get; }
-
-        public abstract AMember<T> Clone();
+        public abstract ASolution Clone();
 
         public abstract int Evaluate();
 

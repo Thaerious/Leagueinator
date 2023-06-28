@@ -42,6 +42,24 @@ namespace Leagueinator.Model {
             IdlePlayers = new List<PlayerInfo>(idlePlayers);
         }
 
+        public void CopyFrom(Round that) {
+            this.IdlePlayers = new List<PlayerInfo>(that.IdlePlayers);
+
+            for (int m = 0; m < this.MaxSize; m++) {
+                for (int t = 0; t < this[m].MaxSize; t++) {
+                    for (int p = 0; p < this[m][t].MaxSize; p++) {
+                        this[m][t][p] = that[m][t][p];
+                    }
+                }
+            }
+        }
+
+        public Round Clone() {            
+            var clone = new Round(this.Settings);
+            clone.CopyFrom(this);
+            return clone;
+        }
+
         public XMLStringBuilder ToXML() {
             XMLStringBuilder xsb = new XMLStringBuilder();
             xsb.OpenTag("Round");

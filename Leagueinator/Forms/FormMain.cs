@@ -236,18 +236,24 @@ namespace Leagueinator.Forms {
             Round round = editEventPanel.CurrentRound;
             if (lEvent == null || round == null) return;
 
-            var solution = new GenomeMatchPartners(lEvent, round);
+            round.ResetPlayers();
+
+            var solution = new PartnerSolution(lEvent, round);
             var algo = new GreedyWalk();
             solution.Randomize();
-            algo.Run(solution);
+            
+            var best = algo.Run(solution, s => {
+                Debug.WriteLine($"{algo.Generation} : {s.Round.GetHashCode()} {s.Round.SeekDeep<PlayerInfo>().DelString()} [{s.Evaluate()}]");
+            });
 
+            editEventPanel.CurrentRound.CopyFrom(best.Round);
             editEventPanel.RefreshRound();
         }
 
         private void Menu_Dev_EvaluateRound(object sender, EventArgs e) {
             var lEvent = editEventPanel.LeagueEvent;
             var round = editEventPanel.CurrentRound;
-            var g = new GenomeMatchPartners(lEvent, round);
+            var g = new PartnerSolution(lEvent, round);
             string msg = $"Round Partner Weight : {g.Evaluate() - round.Teams.Count}";
             MessageBox.Show(msg, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

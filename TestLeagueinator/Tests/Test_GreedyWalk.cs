@@ -56,7 +56,7 @@ namespace TestLeagueinator {
 
             // ------------------------------------------
 
-            var g = new GenomeMatchPartners(lEvent, lEvent[0]);
+            var g = new PartnerSolution(lEvent, lEvent[0]);
             g.Randomize();
             new GreedyWalk().Run(g);
 

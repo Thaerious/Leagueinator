@@ -41,7 +41,7 @@ namespace Leagueinator.Model {
         /// Add a new empty round to this event.
         /// </summary>
         public Round AddRound() {
-            var round = new Round(this.SeekDeep<PlayerInfo>(), Settings);
+            var round = new Round(this.SeekDeep<PlayerInfo>().Unique(), Settings);
             Rounds.Add(round);
             return round;
         }

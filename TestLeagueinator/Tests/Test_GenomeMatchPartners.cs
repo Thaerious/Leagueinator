@@ -38,7 +38,7 @@ namespace TestLeagueinator {
         [TestMethod]
         public void Evaluate_By_Player() {
             var lEvent = NewEvent();
-            var g = new GenomeMatchPartners(lEvent, lEvent[0]);
+            var g = new PartnerSolution(lEvent, lEvent[0]);
 
             Assert.AreEqual(
                 2, 
@@ -46,9 +46,12 @@ namespace TestLeagueinator {
             );
         }
 
+        /// <summary>
+        /// The event is empty, all rounds evaluate to 0
+        /// </summary>
         [TestMethod]
         public void Evaluate_0() {
-            var lEvent = NewEvent();
+            var lEvent = new LeagueEvent(new Settings());
             
             Round r = new Round(lEvent.Settings);
             r[0][0][0] = new PlayerInfo("Adam");
@@ -56,28 +59,33 @@ namespace TestLeagueinator {
             r[0][1][0] = new PlayerInfo("Bently");
             r[0][1][1] = new PlayerInfo("Dave");
 
-            var g = new GenomeMatchPartners(lEvent, r);
+            var g = new PartnerSolution(lEvent, r);
+
+            Assert.AreEqual(0, g.Evaluate());
+        }
+
+        /// <summary>
+        /// The round is part of the event, so it counts
+        /// in the evaluation. It will evaluate to the
+        /// number of teams.
+        /// </summary>
+        [TestMethod]
+        public void Evaluate_1() {
+            var lEvent = new LeagueEvent(new Settings());
+
+            Round r = lEvent.AddRound();
+            r[0][0][0] = new PlayerInfo("Adam");
+            r[0][0][1] = new PlayerInfo("Bently");
+            r[0][1][0] = new PlayerInfo("Cain");
+            r[0][1][1] = new PlayerInfo("Dave");
+
+            var g = new PartnerSolution(lEvent, r);
 
             Assert.AreEqual(2, g.Evaluate());
         }
 
         [TestMethod]
         public void Evaluate_2() {
-            var lEvent = NewEvent();
-
-            Round r = new Round(lEvent.Settings);
-            r[0][0][0] = new PlayerInfo("Adam");
-            r[0][0][1] = new PlayerInfo("Bently");
-            r[0][1][0] = new PlayerInfo("Cain");
-            r[0][1][1] = new PlayerInfo("Dave");
-
-            var g = new GenomeMatchPartners(lEvent, r);
-
-            Assert.AreEqual(4, g.Evaluate());
-        }
-
-        [TestMethod]
-        public void Evaluate_1() {
             var lEvent = new LeagueEvent(new Settings());
             lEvent.AddRound();
 
@@ -87,9 +95,31 @@ namespace TestLeagueinator {
             lEvent[0][0][1][0] = new PlayerInfo("Cain");
             lEvent[0][0][1][1] = new PlayerInfo("Dave");
 
-            var g = new GenomeMatchPartners(lEvent, lEvent[0]);
+            var g = new PartnerSolution(lEvent, lEvent[0]);
 
             Assert.AreEqual(2, g.Evaluate());
+        }
+
+        [TestMethod]
+        public void Evaluate_3() {
+            var lEvent = new LeagueEvent(new Settings());
+            lEvent.AddRound();
+            lEvent.AddRound();
+
+            //     r  m  t  p   
+            lEvent[0][0][0][0] = new PlayerInfo("Adam");
+            lEvent[0][0][0][1] = new PlayerInfo("Bently");
+            lEvent[0][0][1][0] = new PlayerInfo("Cain");
+            lEvent[0][0][1][1] = new PlayerInfo("Dave");
+
+            lEvent[1][0][0][0] = new PlayerInfo("Adam");
+            lEvent[1][0][0][1] = new PlayerInfo("Bently");
+            lEvent[1][0][1][0] = new PlayerInfo("Cain");
+            lEvent[1][0][1][1] = new PlayerInfo("Dave");
+
+            var g = new PartnerSolution(lEvent, lEvent[0]);
+
+            Assert.AreEqual(4, g.Evaluate());
         }
 
         [TestMethod]
@@ -97,16 +127,34 @@ namespace TestLeagueinator {
             var lEvent = new LeagueEvent(new Settings());
             lEvent.AddRound();
 
-            // First Round
+            //     r  m  t  p  
             lEvent[0][0][0][0] = new PlayerInfo("Adam");
             lEvent[0][0][0][1] = new PlayerInfo("Bently");
             lEvent[0][0][1][0] = new PlayerInfo("Cain");
             lEvent[0][0][1][1] = new PlayerInfo("Dave");
 
-            var g = new GenomeMatchPartners(lEvent, lEvent[0]);
+            var g = new PartnerSolution(lEvent, lEvent[0]);
             Round r = g.Randomize();
             Assert.AreEqual(4, r.AllPlayers.Count);
             Debug.WriteLine(r);
+        }
+
+        [TestMethod]
+        public void RandomizeEmpty() {
+            var lEvent = new LeagueEvent(new Settings());
+            lEvent.AddRound();
+
+            //     r  m  t  p  
+            lEvent[0][0][0][0] = new PlayerInfo("Adam");
+            lEvent[0][0][0][1] = new PlayerInfo("Bently");
+            lEvent[0][0][1][0] = new PlayerInfo("Cain");
+            lEvent[0][0][1][1] = new PlayerInfo("Dave");
+
+            lEvent[0].ResetPlayers();
+
+            var g = new PartnerSolution(lEvent, lEvent[0]);
+            Round r = g.Randomize();
+            Assert.AreEqual(4, r.AllPlayers.Count);
         }
     }
 }

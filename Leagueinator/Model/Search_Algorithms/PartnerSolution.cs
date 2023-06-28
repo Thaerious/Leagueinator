@@ -1,31 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Leagueinator.Search_Algorithms;
 using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model.Search_Algorithms {
 
-    public class GenomeMatchPartners : AMember<Round> {
+    public class PartnerSolution : ASolution {
         public readonly LeagueEvent LEvent;
         public readonly Round Round;
         private readonly Random rng = new Random();
 
-        public GenomeMatchPartners(LeagueEvent lEvent, Round round) {
+        public PartnerSolution(LeagueEvent lEvent, Round round) {
             LEvent = lEvent;
-            Round = round;
+            Round = round.Clone();
         }
 
-        public GenomeMatchPartners(GenomeMatchPartners that) {
+        public PartnerSolution(PartnerSolution that) {
             LEvent = that.LEvent;
-            Round = new Round(that.Round.AllPlayers, that.LEvent.Settings);
+            Round = that.Round;
         }
 
-        public override Round Value => Round;
+        public Round Value => Round;
 
-        public override AMember<Round> Clone() {
-            return new GenomeMatchPartners(this);
-        }
+        public override ASolution Clone()  => new PartnerSolution(this.LEvent, this.Round);
 
         /// <summary>
         /// Return the nubmer of times player1 was on a team with player2
@@ -52,14 +51,13 @@ namespace Leagueinator.Model.Search_Algorithms {
         /// <returns></returns>
         public override int Evaluate() {
             int sum = 0;
-
+            
             foreach (PlayerInfo player1 in Round.ActivePlayers) {
                 var team = Round.GetTeam(player1);
 
                 foreach (PlayerInfo player2 in team.Players) {
                     if (player1.Equals(player2)) continue;
-                    var e = Evaluate(player1, player2);
-                    if (e > 0) sum += Evaluate(player1, player2);
+                    sum += Evaluate(player1, player2);
                 }
             }
 
@@ -68,8 +66,8 @@ namespace Leagueinator.Model.Search_Algorithms {
 
         public override bool IsValid() => true;
 
-        public Round Randomize() {
-            Round.ResetPlayers();
+        public Round Randomize() {            
+            Round.ResetPlayers();            
 
             foreach (Match match in Round.Matches) {
                 foreach (Team team in match.Teams) {

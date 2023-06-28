@@ -50,27 +50,36 @@ namespace Leagueinator.Components {
         }
 
         private void StartDrag(object sender, MouseEventArgs e) {
-            if (!(sender is MatchLabel matchLabel)) return;
-            if (matchLabel.PlayerInfo == null) return;
+            if (!(sender is MatchLabel srcLabel)) return;
+            if (srcLabel.PlayerInfo == null) return;
 
             Debug.WriteLine($"Match Card Start Drag");
-            matchLabel.ForeColor = Color.LightGray;
+            srcLabel.ForeColor = Color.LightGray;
 
-            var data = new PlayerDragData { Source = matchLabel, PlayerInfo = matchLabel.PlayerInfo };
+            var data = new PlayerDragData { Source = srcLabel, PlayerInfo = srcLabel.PlayerInfo };
 
             DoDragDrop(data, DragDropEffects.Move);
-            matchLabel.ForeColor = Color.Black;
+            srcLabel.ForeColor = Color.Black;
             if (data.Destination == null) return;
 
             if (data.Destination.GetType() == typeof(PlayerListBox)) {
                 PlayerListBox playerListBox = (PlayerListBox)data.Destination;
                 playerListBox.Items.Add(data.PlayerInfo);
-                matchLabel.PlayerInfo = null;
+                srcLabel.PlayerInfo = null;
 
-                Debug.WriteLine(Match);
-                Match.Teams[matchLabel.Team][matchLabel.Position] = null;
+                Match.Teams[srcLabel.Team][srcLabel.Position] = null;
 
                 playerListBox.Round.IdlePlayers.Add(data.PlayerInfo);
+            }
+
+            if (data.Destination.GetType() == typeof(MatchLabel)) {
+                MatchLabel destLabel = (MatchLabel)data.Destination;
+
+                srcLabel.PlayerInfo = destLabel.PlayerInfo;
+                destLabel.PlayerInfo = data.PlayerInfo;
+
+                Match.Teams[srcLabel.Team][srcLabel.Position] = srcLabel.PlayerInfo;
+                Match.Teams[destLabel.Team][destLabel.Position] = destLabel.PlayerInfo;
             }
 
             Debug.WriteLine("Match Card Exit Drag\n");
