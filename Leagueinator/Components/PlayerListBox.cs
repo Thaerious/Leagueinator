@@ -57,19 +57,14 @@ namespace Leagueinator.Components {
         private void OnDropStart(object receiver, DragEventArgs e) {
             if (!(receiver is PlayerListBox dest)) return;
 
-            Debug.WriteLine($"Player List Box Start Drop");
-
             PlayerDragData data = (PlayerDragData)e.Data.GetData(typeof(PlayerDragData));
             if (receiver == data.Source) return;
 
             data.Destination = receiver;
-
-            Debug.WriteLine("Player List Box Exit Drop");
         }
 
         public void OnDragStart(object sender, MouseEventArgs e) {
-            Debug.WriteLine($"Player List Box Start Drag");
-
+            if (e.Button != MouseButtons.Left) return;
             var data = new PlayerDragData { Source = this, PlayerInfo = (PlayerInfo)SelectedItem };
 
             DoDragDrop(data, DragDropEffects.Move);
@@ -87,8 +82,6 @@ namespace Leagueinator.Components {
                 Round.IdlePlayers.Remove(data.PlayerInfo);
                 Round[matchLabel.Lane][matchLabel.Team][matchLabel.Position] = data.PlayerInfo;
             }
-
-            Debug.WriteLine("Player List Box Exit Drag\n");
         }
 
         public void OnDragEnter(object sender, DragEventArgs e) {

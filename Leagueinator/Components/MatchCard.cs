@@ -41,21 +41,17 @@ namespace Leagueinator.Components {
         /// <param name="e"></param>
         private void OnDrop(object receiver, DragEventArgs e) {
             if (!(receiver is MatchLabel matchLabel)) return;
-            Debug.WriteLine($"Match Card Start Drop");
 
             PlayerDragData data = (PlayerDragData)e.Data.GetData(typeof(PlayerDragData));
             data.Destination = receiver;
-
-            Debug.WriteLine("Match Card Exit Drop");
         }
 
         private void StartDrag(object sender, MouseEventArgs e) {
+            if (e.Button != MouseButtons.Left) return;
             if (!(sender is MatchLabel srcLabel)) return;
             if (srcLabel.PlayerInfo == null) return;
 
-            Debug.WriteLine($"Match Card Start Drag");
             srcLabel.ForeColor = Color.LightGray;
-
             var data = new PlayerDragData { Source = srcLabel, PlayerInfo = srcLabel.PlayerInfo };
 
             DoDragDrop(data, DragDropEffects.Move);
@@ -81,8 +77,6 @@ namespace Leagueinator.Components {
                 Match.Teams[srcLabel.Team][srcLabel.Position] = srcLabel.PlayerInfo;
                 Match.Teams[destLabel.Team][destLabel.Position] = destLabel.PlayerInfo;
             }
-
-            Debug.WriteLine("Match Card Exit Drag\n");
         }
 
         private void OnEnter(object sender, DragEventArgs e) {
