@@ -184,6 +184,9 @@
     <Compile Include="Components\EditEventPanel.Events.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Components\FlowPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Components\MatchLabel.Events.cs">
       <SubType>Component</SubType>
     </Compile>

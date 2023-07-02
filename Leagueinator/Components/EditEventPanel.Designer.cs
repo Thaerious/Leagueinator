@@ -29,19 +29,19 @@
             this.butRemoveRound = new System.Windows.Forms.Button();
             this.flowRounds = new System.Windows.Forms.FlowLayoutPanel();
             this.layoutRoot = new System.Windows.Forms.TableLayoutPanel();
-            this.panelMatch = new System.Windows.Forms.Panel();
-            this.matchCard8 = new Leagueinator.Components.MatchCard();
-            this.matchCard7 = new Leagueinator.Components.MatchCard();
-            this.matchCard6 = new Leagueinator.Components.MatchCard();
-            this.matchCard5 = new Leagueinator.Components.MatchCard();
+            this.panelMatchCard = new System.Windows.Forms.FlowLayoutPanel();
+            this.playerListBox = new Leagueinator.Components.PlayerListBox(this.components);
+            this.matchCard1 = new Leagueinator.Components.MatchCard();
+            this.matchCard2 = new Leagueinator.Components.MatchCard();
             this.matchCard4 = new Leagueinator.Components.MatchCard();
             this.matchCard3 = new Leagueinator.Components.MatchCard();
-            this.matchCard2 = new Leagueinator.Components.MatchCard();
-            this.matchCard1 = new Leagueinator.Components.MatchCard();
-            this.playerListBox = new Leagueinator.Components.PlayerListBox(this.components);
+            this.matchCard5 = new Leagueinator.Components.MatchCard();
+            this.matchCard6 = new Leagueinator.Components.MatchCard();
+            this.matchCard7 = new Leagueinator.Components.MatchCard();
+            this.matchCard8 = new Leagueinator.Components.MatchCard();
             this.layoutRounds.SuspendLayout();
             this.layoutRoot.SuspendLayout();
-            this.panelMatch.SuspendLayout();
+            this.panelMatchCard.SuspendLayout();
             this.SuspendLayout();
             // 
             // layoutRounds
@@ -60,7 +60,7 @@
             this.layoutRounds.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.layoutRounds.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.layoutRounds.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.layoutRounds.Size = new System.Drawing.Size(370, 745);
+            this.layoutRounds.Size = new System.Drawing.Size(220, 745);
             this.layoutRounds.TabIndex = 0;
             // 
             // butAddRound
@@ -68,7 +68,7 @@
             this.butAddRound.Dock = System.Windows.Forms.DockStyle.Fill;
             this.butAddRound.Location = new System.Drawing.Point(4, 625);
             this.butAddRound.Name = "butAddRound";
-            this.butAddRound.Size = new System.Drawing.Size(362, 44);
+            this.butAddRound.Size = new System.Drawing.Size(212, 44);
             this.butAddRound.TabIndex = 0;
             this.butAddRound.Text = "Add";
             this.butAddRound.UseVisualStyleBackColor = true;
@@ -79,7 +79,7 @@
             this.butRemoveRound.Dock = System.Windows.Forms.DockStyle.Fill;
             this.butRemoveRound.Location = new System.Drawing.Point(4, 676);
             this.butRemoveRound.Name = "butRemoveRound";
-            this.butRemoveRound.Size = new System.Drawing.Size(362, 44);
+            this.butRemoveRound.Size = new System.Drawing.Size(212, 44);
             this.butRemoveRound.TabIndex = 1;
             this.butRemoveRound.Text = "Remove";
             this.butRemoveRound.UseVisualStyleBackColor = true;
@@ -90,18 +90,18 @@
             this.flowRounds.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowRounds.Location = new System.Drawing.Point(4, 4);
             this.flowRounds.Name = "flowRounds";
-            this.flowRounds.Size = new System.Drawing.Size(362, 614);
+            this.flowRounds.Size = new System.Drawing.Size(212, 614);
             this.flowRounds.TabIndex = 2;
             // 
             // layoutRoot
             // 
             this.layoutRoot.ColumnCount = 3;
-            this.layoutRoot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.layoutRoot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.layoutRoot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.layoutRoot.Controls.Add(this.panelMatch, 2, 0);
+            this.layoutRoot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.layoutRoot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.layoutRoot.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.layoutRoot.Controls.Add(this.playerListBox, 0, 0);
             this.layoutRoot.Controls.Add(this.layoutRounds, 0, 0);
+            this.layoutRoot.Controls.Add(this.panelMatchCard, 2, 0);
             this.layoutRoot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutRoot.Location = new System.Drawing.Point(0, 0);
             this.layoutRoot.Name = "layoutRoot";
@@ -111,67 +111,62 @@
             this.layoutRoot.Size = new System.Drawing.Size(1130, 751);
             this.layoutRoot.TabIndex = 1;
             // 
-            // panelMatch
+            // panelMatchCard
             // 
-            this.panelMatch.Controls.Add(this.matchCard8);
-            this.panelMatch.Controls.Add(this.matchCard7);
-            this.panelMatch.Controls.Add(this.matchCard6);
-            this.panelMatch.Controls.Add(this.matchCard5);
-            this.panelMatch.Controls.Add(this.matchCard4);
-            this.panelMatch.Controls.Add(this.matchCard3);
-            this.panelMatch.Controls.Add(this.matchCard2);
-            this.panelMatch.Controls.Add(this.matchCard1);
-            this.panelMatch.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelMatch.Location = new System.Drawing.Point(773, 3);
-            this.panelMatch.Name = "panelMatch";
-            this.panelMatch.Size = new System.Drawing.Size(354, 745);
-            this.panelMatch.TabIndex = 1;
+            this.panelMatchCard.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panelMatchCard.AutoSize = true;
+            this.panelMatchCard.Controls.Add(this.matchCard1);
+            this.panelMatchCard.Controls.Add(this.matchCard2);
+            this.panelMatchCard.Controls.Add(this.matchCard4);
+            this.panelMatchCard.Controls.Add(this.matchCard3);
+            this.panelMatchCard.Controls.Add(this.matchCard5);
+            this.panelMatchCard.Controls.Add(this.matchCard6);
+            this.panelMatchCard.Controls.Add(this.matchCard7);
+            this.panelMatchCard.Controls.Add(this.matchCard8);
+            this.panelMatchCard.Location = new System.Drawing.Point(764, 55);
+            this.panelMatchCard.Name = "panelMatchCard";
+            this.panelMatchCard.Size = new System.Drawing.Size(279, 640);
+            this.panelMatchCard.TabIndex = 8;
             // 
-            // matchCard8
+            // playerListBox
             // 
-            this.matchCard8.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.matchCard8.Lane = 7;
-            this.matchCard8.Location = new System.Drawing.Point(43, 579);
-            this.matchCard8.Match = null;
-            this.matchCard8.Name = "matchCard8";
-            this.matchCard8.Size = new System.Drawing.Size(273, 74);
-            this.matchCard8.TabIndex = 7;
+            this.playerListBox.AllowDrop = true;
+            this.playerListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.playerListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playerListBox.FormattingEnabled = true;
+            this.playerListBox.ItemHeight = 29;
+            this.playerListBox.Location = new System.Drawing.Point(229, 3);
+            this.playerListBox.Name = "playerListBox";
+            this.playerListBox.PlayerInfo = null;
+            this.playerListBox.Round = null;
+            this.playerListBox.Size = new System.Drawing.Size(446, 745);
+            this.playerListBox.TabIndex = 0;
             // 
-            // matchCard7
+            // matchCard1
             // 
-            this.matchCard7.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.matchCard7.Lane = 6;
-            this.matchCard7.Location = new System.Drawing.Point(43, 499);
-            this.matchCard7.Match = null;
-            this.matchCard7.Name = "matchCard7";
-            this.matchCard7.Size = new System.Drawing.Size(273, 74);
-            this.matchCard7.TabIndex = 6;
+            this.matchCard1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.matchCard1.Lane = 0;
+            this.matchCard1.Location = new System.Drawing.Point(3, 3);
+            this.matchCard1.Match = null;
+            this.matchCard1.Name = "matchCard1";
+            this.matchCard1.Size = new System.Drawing.Size(273, 74);
+            this.matchCard1.TabIndex = 0;
             // 
-            // matchCard6
+            // matchCard2
             // 
-            this.matchCard6.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.matchCard6.Lane = 5;
-            this.matchCard6.Location = new System.Drawing.Point(43, 419);
-            this.matchCard6.Match = null;
-            this.matchCard6.Name = "matchCard6";
-            this.matchCard6.Size = new System.Drawing.Size(273, 74);
-            this.matchCard6.TabIndex = 5;
-            // 
-            // matchCard5
-            // 
-            this.matchCard5.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.matchCard5.Lane = 4;
-            this.matchCard5.Location = new System.Drawing.Point(43, 339);
-            this.matchCard5.Match = null;
-            this.matchCard5.Name = "matchCard5";
-            this.matchCard5.Size = new System.Drawing.Size(273, 74);
-            this.matchCard5.TabIndex = 4;
+            this.matchCard2.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.matchCard2.Lane = 1;
+            this.matchCard2.Location = new System.Drawing.Point(3, 83);
+            this.matchCard2.Match = null;
+            this.matchCard2.Name = "matchCard2";
+            this.matchCard2.Size = new System.Drawing.Size(273, 74);
+            this.matchCard2.TabIndex = 1;
             // 
             // matchCard4
             // 
             this.matchCard4.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.matchCard4.Lane = 3;
-            this.matchCard4.Location = new System.Drawing.Point(43, 259);
+            this.matchCard4.Location = new System.Drawing.Point(3, 163);
             this.matchCard4.Match = null;
             this.matchCard4.Name = "matchCard4";
             this.matchCard4.Size = new System.Drawing.Size(273, 74);
@@ -181,45 +176,51 @@
             // 
             this.matchCard3.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.matchCard3.Lane = 2;
-            this.matchCard3.Location = new System.Drawing.Point(43, 179);
+            this.matchCard3.Location = new System.Drawing.Point(3, 243);
             this.matchCard3.Match = null;
             this.matchCard3.Name = "matchCard3";
             this.matchCard3.Size = new System.Drawing.Size(273, 74);
             this.matchCard3.TabIndex = 2;
             // 
-            // matchCard2
+            // matchCard5
             // 
-            this.matchCard2.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.matchCard2.Lane = 1;
-            this.matchCard2.Location = new System.Drawing.Point(43, 99);
-            this.matchCard2.Match = null;
-            this.matchCard2.Name = "matchCard2";
-            this.matchCard2.Size = new System.Drawing.Size(273, 74);
-            this.matchCard2.TabIndex = 1;
+            this.matchCard5.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.matchCard5.Lane = 4;
+            this.matchCard5.Location = new System.Drawing.Point(3, 323);
+            this.matchCard5.Match = null;
+            this.matchCard5.Name = "matchCard5";
+            this.matchCard5.Size = new System.Drawing.Size(273, 74);
+            this.matchCard5.TabIndex = 4;
             // 
-            // matchCard1
+            // matchCard6
             // 
-            this.matchCard1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.matchCard1.Lane = 0;
-            this.matchCard1.Location = new System.Drawing.Point(43, 19);
-            this.matchCard1.Match = null;
-            this.matchCard1.Name = "matchCard1";
-            this.matchCard1.Size = new System.Drawing.Size(273, 74);
-            this.matchCard1.TabIndex = 0;
+            this.matchCard6.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.matchCard6.Lane = 5;
+            this.matchCard6.Location = new System.Drawing.Point(3, 403);
+            this.matchCard6.Match = null;
+            this.matchCard6.Name = "matchCard6";
+            this.matchCard6.Size = new System.Drawing.Size(273, 74);
+            this.matchCard6.TabIndex = 5;
             // 
-            // playerListBox
+            // matchCard7
             // 
-            this.playerListBox.AllowDrop = true;
-            this.playerListBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.playerListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.playerListBox.FormattingEnabled = true;
-            this.playerListBox.ItemHeight = 29;
-            this.playerListBox.Location = new System.Drawing.Point(379, 3);
-            this.playerListBox.Name = "playerListBox";
-            this.playerListBox.PlayerInfo = null;
-            this.playerListBox.Round = null;
-            this.playerListBox.Size = new System.Drawing.Size(370, 745);
-            this.playerListBox.TabIndex = 0;
+            this.matchCard7.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.matchCard7.Lane = 6;
+            this.matchCard7.Location = new System.Drawing.Point(3, 483);
+            this.matchCard7.Match = null;
+            this.matchCard7.Name = "matchCard7";
+            this.matchCard7.Size = new System.Drawing.Size(273, 74);
+            this.matchCard7.TabIndex = 6;
+            // 
+            // matchCard8
+            // 
+            this.matchCard8.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.matchCard8.Lane = 7;
+            this.matchCard8.Location = new System.Drawing.Point(3, 563);
+            this.matchCard8.Match = null;
+            this.matchCard8.Name = "matchCard8";
+            this.matchCard8.Size = new System.Drawing.Size(273, 74);
+            this.matchCard8.TabIndex = 7;
             // 
             // EditEventPanel
             // 
@@ -230,7 +231,8 @@
             this.Size = new System.Drawing.Size(1130, 751);
             this.layoutRounds.ResumeLayout(false);
             this.layoutRoot.ResumeLayout(false);
-            this.panelMatch.ResumeLayout(false);
+            this.layoutRoot.PerformLayout();
+            this.panelMatchCard.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -243,7 +245,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowRounds;
         private System.Windows.Forms.TableLayoutPanel layoutRoot;
         private PlayerListBox playerListBox;
-        private System.Windows.Forms.Panel panelMatch;
         private MatchCard matchCard1;
         private MatchCard matchCard2;
         private MatchCard matchCard8;
@@ -252,5 +253,6 @@
         private MatchCard matchCard5;
         private MatchCard matchCard4;
         private MatchCard matchCard3;
+        private System.Windows.Forms.FlowLayoutPanel panelMatchCard;
     }
 }

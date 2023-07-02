@@ -9,7 +9,7 @@ namespace Leagueinator.Components {
     public partial class EditEventPanel {
         public event PlayerInfoEvent RenamePlayer {
             add {
-                foreach (var control in this.panelMatch.Controls.OfType<MatchCard>()) {
+                foreach (var control in this.panelMatchCard.Controls.OfType<MatchCard>()) {
                     control.RenamePlayer += value;
                 }
                 this.PlayerListBox.RenamePlayer += value;
@@ -24,7 +24,7 @@ namespace Leagueinator.Components {
 
         public event PlayerInfoEvent DeletePlayer {
             add {
-                foreach (var control in this.panelMatch.Controls.OfType<MatchCard>()) {
+                foreach (var control in this.panelMatchCard.Controls.OfType<MatchCard>()) {
                     control.DeletePlayer += value;
                 }
                 this.PlayerListBox.DeletePlayer += value;
