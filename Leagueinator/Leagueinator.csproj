@@ -17,7 +17,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -181,6 +181,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assign_Player_Algos\RoundRobin.cs" />
+    <Compile Include="Components\EditEventPanel.Events.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\MatchLabel.Events.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\PlayerInfoArgs.cs" />
+    <Compile Include="Components\PlayerListBox.Events.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\FormMain.Events.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormAddEvent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -228,14 +241,14 @@
     <Compile Include="Components\PlayerListBox.Designer.cs">
       <DependentUpon>PlayerListBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\PlayersPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Components\PlayersPanel.Designer.cs">
-      <DependentUpon>PlayersPanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="Components\RoundButton.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\FormRenamePlayer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormRenamePlayer.Designer.cs">
+      <DependentUpon>FormRenamePlayer.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormAddPlayer.cs">
       <SubType>Form</SubType>
@@ -249,6 +262,10 @@
     <Compile Include="Forms\FormSelectEvent.Designer.cs">
       <DependentUpon>FormSelectEvent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\MatchCard.Events.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\IsSaved.cs" />
     <Compile Include="Model\ModelExtensions.cs" />
     <Compile Include="Model\Search_Algorithms\PartnerSolution.cs" />
     <Compile Include="Model\Search_Algorithms\CountPartners.cs" />
@@ -276,6 +293,12 @@
     <Compile Include="Utility_Classes\StringInterpolator.cs" />
     <Compile Include="Utility_Classes\RandomExtensions.cs" />
     <Compile Include="Utility_Classes\XMLStringBuilder.cs" />
+    <EmbeddedResource Include="Components\MatchLabel.resx">
+      <DependentUpon>MatchLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\PlayerListBox.resx">
+      <DependentUpon>PlayerListBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAddEvent.resx">
       <DependentUpon>FormAddEvent.cs</DependentUpon>
     </EmbeddedResource>
@@ -294,8 +317,8 @@
     <EmbeddedResource Include="Components\MatchCard.resx">
       <DependentUpon>MatchCard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\PlayersPanel.resx">
-      <DependentUpon>PlayersPanel.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FormRenamePlayer.resx">
+      <DependentUpon>FormRenamePlayer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAddPlayer.resx">
       <DependentUpon>FormAddPlayer.cs</DependentUpon>

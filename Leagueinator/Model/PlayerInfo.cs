@@ -33,7 +33,7 @@ namespace Leagueinator.Model {
             if (obj == null) return false;
             if (!(obj is PlayerInfo)) return false;
             PlayerInfo that = (PlayerInfo)obj;
-            return Name == that.Name;
+            return Name.ToLower().Trim() == that.Name.ToLower().Trim();
         }
     }
 }

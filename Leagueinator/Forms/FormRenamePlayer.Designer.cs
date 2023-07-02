@@ -1,5 +1,5 @@
 ﻿namespace Leagueinator.Forms {
-    partial class FormAddPlayer {
+    partial class FormRenamePlayer {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -26,7 +26,6 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.butOK = new System.Windows.Forms.Button();
-            this.chkCurrentRound = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // txtName
@@ -52,33 +51,18 @@
             // 
             this.butOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.butOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.butOK.Location = new System.Drawing.Point(88, 182);
+            this.butOK.Location = new System.Drawing.Point(88, 155);
             this.butOK.Name = "butOK";
             this.butOK.Size = new System.Drawing.Size(150, 50);
             this.butOK.TabIndex = 15;
             this.butOK.Text = "OK";
             this.butOK.UseVisualStyleBackColor = true;
-            this.butOK.Click += new System.EventHandler(this.ButOK_Click);
-            // 
-            // chkCurrentRound
-            // 
-            this.chkCurrentRound.AutoSize = true;
-            this.chkCurrentRound.Checked = true;
-            this.chkCurrentRound.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkCurrentRound.Location = new System.Drawing.Point(79, 138);
-            this.chkCurrentRound.Name = "chkCurrentRound";
-            this.chkCurrentRound.Size = new System.Drawing.Size(175, 24);
-            this.chkCurrentRound.TabIndex = 16;
-            this.chkCurrentRound.Text = "Current Round Only";
-            this.chkCurrentRound.UseMnemonic = false;
-            this.chkCurrentRound.UseVisualStyleBackColor = true;
             // 
             // FormAddPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(328, 244);
-            this.Controls.Add(this.chkCurrentRound);
             this.Controls.Add(this.butOK);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label3);
@@ -86,7 +70,6 @@
             this.MaximumSize = new System.Drawing.Size(350, 300);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(350, 300);
-            this.Name = "FormAddPlayer";
             this.Text = "FormAddPlayer";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -98,6 +81,5 @@
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button butOK;
-        private System.Windows.Forms.CheckBox chkCurrentRound;
     }
 }

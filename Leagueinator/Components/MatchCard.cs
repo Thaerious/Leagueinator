@@ -1,7 +1,11 @@
 ﻿using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
+using Leagueinator.Forms;
 using Leagueinator.Model;
+using static Leagueinator.Components.MatchLabel;
+using static Leagueinator.Components.PlayerInfoArgs;
 
 namespace Leagueinator.Components {
     public partial class MatchCard : UserControl {
@@ -64,6 +68,7 @@ namespace Leagueinator.Components {
                 srcLabel.PlayerInfo = null;
 
                 Match.Teams[srcLabel.Team][srcLabel.Position] = null;
+                IsSaved.Singleton.Value = false;
 
                 playerListBox.Round.IdlePlayers.Add(data.PlayerInfo);
             }
@@ -76,6 +81,7 @@ namespace Leagueinator.Components {
 
                 Match.Teams[srcLabel.Team][srcLabel.Position] = srcLabel.PlayerInfo;
                 Match.Teams[destLabel.Team][destLabel.Position] = destLabel.PlayerInfo;
+                IsSaved.Singleton.Value = false;
             }
         }
 

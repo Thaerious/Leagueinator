@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Forms;
+using Leagueinator.Forms;
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
@@ -21,14 +22,6 @@ namespace Leagueinator.Components {
             }
         }
 
-        public PlayerListBox() {
-            InitializeComponent();
-            AllowDrop = true;
-            DragDrop += new DragEventHandler(OnDropStart);
-            DragEnter += new DragEventHandler(OnDragEnter);
-            MouseDown += new MouseEventHandler(OnDragStart);
-        }
-
         public PlayerListBox(IContainer container) {
             container.Add(this);
             InitializeComponent();
@@ -36,6 +29,9 @@ namespace Leagueinator.Components {
             DragDrop += new DragEventHandler(OnDropStart);
             DragEnter += new DragEventHandler(OnDragEnter);
             MouseDown += new MouseEventHandler(OnDragStart);
+
+            this.menuDelete.Click += new System.EventHandler(this.HndMenuDelete);
+            this.menuRename.Click += new System.EventHandler(this.HndMenuRename);
         }
 
         public PlayerInfo PlayerInfo {
@@ -81,6 +77,7 @@ namespace Leagueinator.Components {
 
                 Round.IdlePlayers.Remove(data.PlayerInfo);
                 Round[matchLabel.Lane][matchLabel.Team][matchLabel.Position] = data.PlayerInfo;
+                IsSaved.Singleton.Value = false;
             }
         }
 
@@ -92,6 +89,7 @@ namespace Leagueinator.Components {
             if (playerInfo == null) return null;
             Items.Add(playerInfo);
             Round.IdlePlayers.Add(playerInfo);
+            IsSaved.Singleton.Value = false;
             return null;
         }
 
@@ -99,7 +97,15 @@ namespace Leagueinator.Components {
             PlayerInfo prev = PlayerInfo;
             Items.Remove(playerInfo);
             Round.IdlePlayers.Remove(playerInfo);
+            IsSaved.Singleton.Value = false;
             return prev;
+        }
+
+        private void Context_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
+            Debug.WriteLine("Context_Opening");
+            if (this.SelectedItems.Count == 0) {
+                e.Cancel = true;
+            }
         }
     }
 }

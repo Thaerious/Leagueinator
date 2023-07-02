@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
+using Leagueinator.Forms;
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
     public partial class EditEventPanel : UserControl {
         RoundButton currentRoundButton = null;
+        public PlayerListBox PlayerListBox => this.playerListBox;
 
         /// <summary>
         /// Retrieve or set the currently selected round.
@@ -79,29 +82,22 @@ namespace Leagueinator.Components {
             }
         }
 
-        private void AddRoundHnd(object sender, EventArgs e) {
-            AddRound(leagueEvent.AddRound());
-        }
-
-        private void RemoveRoundHnd(object sender, EventArgs e) {
-            if (currentRoundButton != null) {
-                flowRounds.Controls.Remove(currentRoundButton);
-                currentRoundButton = null;
-            }
-        }
-
-        public void AddPlayer(PlayerInfo player) {
+        public void AddPlayer(PlayerInfo player, bool currentRoundOnly = true) {
             if (LeagueEvent == null) return;
 
-            if (LeagueEvent.SeekDeep<PlayerInfo>().Contains(player)) {
-                return;
+            if (!this.CurrentRound.SeekDeep<PlayerInfo>().Contains(player)) {
+                this.CurrentRound.IdlePlayers.Add(player);
+                playerListBox.Items.Add(player);
+                IsSaved.Singleton.Value = false;
             }
 
-            foreach (Round round in LeagueEvent) {
-                round.IdlePlayers.Add(player);
+            if (!currentRoundOnly) {
+                foreach (Round round in LeagueEvent) {
+                    if (round.SeekDeep<PlayerInfo>().Contains(player)) continue;
+                    round.IdlePlayers.Add(player);
+                    IsSaved.Singleton.Value = false;
+                }
             }
-
-            playerListBox.Items.Add(player);
         }
 
         internal void RefreshRound() {
