@@ -1,5 +1,5 @@
 ﻿namespace Leagueinator.Components {
-    partial class MatchCard {
+    partial class FlexMatchCard {
         /// <summary> 
         /// Required designer variable.
         /// </summary>

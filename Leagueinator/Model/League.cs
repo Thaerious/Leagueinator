@@ -18,7 +18,7 @@ namespace Leagueinator.Model {
             var lEvent = new LeagueEvent(eventName, date, settings);
             var round = lEvent.AddRound();
             round.IdlePlayers.AddRange(this.SeekDeep<PlayerInfo>());
-            Events.Add(lEvent);
+            this.Events.Add(lEvent);
             return lEvent;
         }
 
@@ -32,7 +32,7 @@ namespace Leagueinator.Model {
             XMLStringBuilder xsb = new XMLStringBuilder();
             xsb.OpenTag("League");
             xsb.InlineTag("Players", this.SeekDeep<PlayerInfo>().DelString());
-            foreach (var lEvent in Events) {
+            foreach (var lEvent in this.Events) {
                 xsb.AppendXML(lEvent.ToXML());
             }
             xsb.CloseTag();
@@ -40,7 +40,7 @@ namespace Leagueinator.Model {
         }
 
         public override string ToString() {
-            return ToXML().ToString();
+            return this.ToXML().ToString();
         }
     }
 }

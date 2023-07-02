@@ -7,33 +7,33 @@ namespace Leagueinator.Model {
         private string _name;
 
         public string Name {
-            get => _name;
+            get => this._name;
             set {
                 if (value == null) throw new ArgumentNullException();
                 if (value.Trim() == "") throw new ArgumentException();
-                _name = value.Trim();
+                this._name = value.Trim();
             }
         }
 
-        public PlayerInfo(string name) => Name = name;
+        public PlayerInfo(string name) => this.Name = name;
 
-        override public string ToString() => Name;
+        override public string ToString() => this.Name;
 
         public override bool Equals(object obj) {
             if (obj == null) return false;
             if (!(obj is PlayerInfo)) return false;
-            return Equals((PlayerInfo)obj);
+            return this.Equals((PlayerInfo)obj);
         }
 
         public override int GetHashCode() {
-            return Name.GetHashCode();
+            return this.Name.GetHashCode();
         }
 
         public bool Equals(PlayerInfo obj) {
             if (obj == null) return false;
             if (!(obj is PlayerInfo)) return false;
             PlayerInfo that = (PlayerInfo)obj;
-            return Name.ToLower().Trim() == that.Name.ToLower().Trim();
+            return this.Name.ToLower().Trim() == that.Name.ToLower().Trim();
         }
     }
 }

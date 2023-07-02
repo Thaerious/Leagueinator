@@ -79,8 +79,8 @@ namespace Leagueinator.Model {
                 // Enumerable of not-type
                 var value = (IEnumerable)prop.GetValue(isModel, null);
                 if (value != null) foreach (var item in value) {
-                    list.AddRange(item.SeekDeep<T>());
-                }
+                        list.AddRange(item.SeekDeep<T>());
+                    }
             }
             else if (!prop.PropertyType.IsPrimitive) {
                 // Some other (non-enumerable) type

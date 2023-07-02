@@ -1,9 +1,8 @@
-﻿using System.Diagnostics;
-using static Leagueinator.Components.PlayerInfoArgs;
+﻿using static Leagueinator.Components.PlayerInfoArgs;
 
 namespace Leagueinator.Components {
 
-    public partial class MatchLabel {        
+    public partial class MatchLabel {
         public event PlayerInfoEvent RenamePlayer;
         public event PlayerInfoEvent DeletePlayer;
 

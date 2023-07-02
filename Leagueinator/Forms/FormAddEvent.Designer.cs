@@ -68,7 +68,7 @@
             // 
             this.spinLaneCount.Location = new System.Drawing.Point(119, 203);
             this.spinLaneCount.Maximum = new decimal(new int[] {
-            8,
+            32,
             0,
             0,
             0});

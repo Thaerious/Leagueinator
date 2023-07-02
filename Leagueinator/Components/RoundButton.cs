@@ -8,15 +8,15 @@ namespace Leagueinator.Components {
 
         public bool Selected {
             get {
-                return BackColor == Color.GreenYellow;
+                return this.BackColor == Color.GreenYellow;
             }
             set {
-                BackColor = Color.GreenYellow;
+                this.BackColor = Color.GreenYellow;
             }
         }
 
         public RoundButton(Round round) : base() {
-            Round = round;
+            this.Round = round;
         }
     }
 }

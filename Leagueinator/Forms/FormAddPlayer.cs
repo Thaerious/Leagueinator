@@ -9,24 +9,24 @@ namespace Leagueinator.Forms {
         public bool CurrentRoundOnly => this.chkCurrentRound.Checked;
 
         public FormAddPlayer() {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void TxtName_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Enter) {
-                if (txtName.Text != null && txtName.Text.Trim() != "") {
-                    OnAddPlayer(new PlayerInfo(txtName.Text), this.CurrentRoundOnly);
+                if (this.txtName.Text != null && this.txtName.Text.Trim() != "") {
+                    OnAddPlayer(new PlayerInfo(this.txtName.Text), this.CurrentRoundOnly);
                 }
-                txtName.Text = null;
+                this.txtName.Text = null;
             }
         }
 
         private void ButOK_Click(object sender, System.EventArgs e) {
             if (OnAddPlayer != null) {
-                if (txtName.Text != null && txtName.Text.Trim() != "") {
-                    OnAddPlayer(new PlayerInfo(txtName.Text), this.CurrentRoundOnly);
+                if (this.txtName.Text != null && this.txtName.Text.Trim() != "") {
+                    OnAddPlayer(new PlayerInfo(this.txtName.Text), this.CurrentRoundOnly);
                 }
-                txtName.Text = null;
+                this.txtName.Text = null;
             }
         }
     }

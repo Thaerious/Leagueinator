@@ -7,25 +7,25 @@ namespace Leagueinator.Components {
         public Settings Settings {
             get {
                 return new Settings {
-                    TeamSize = (int)spinTeamSize.Value,
-                    LaneCount = (int)spinLaneCount.Value,
+                    TeamSize = (int)this.spinTeamSize.Value,
+                    LaneCount = (int)this.spinLaneCount.Value,
                     MatchSize = 2,
-                    Date = dateTimePicker.Text,
-                    Name = txtName.Text
+                    Date = this.dateTimePicker.Text,
+                    Name = this.txtName.Text
                 };
             }
         }
 
         public string EventName {
-            get => txtName.Text;
+            get => this.txtName.Text;
         }
 
         public string Date {
-            get => dateTimePicker.Text;
+            get => this.dateTimePicker.Text;
         }
 
         public FormAddEvent() {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

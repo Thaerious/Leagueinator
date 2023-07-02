@@ -7,19 +7,18 @@ namespace Leagueinator.Search_Algorithms {
         public int MaxGen = 100;
 
         public int Generation {
-            get => generation;
+            get => this.generation;
         }
 
-        public T Run<T>(T member, Action<T> func = null) where T : ASolution
-        {
+        public T Run<T>(T member, Action<T> func = null) where T : ASolution {
             int bestScore = member.Evaluate();
             T current = (T)member.Clone();
             T best = member;
-            
-            Debug.WriteLine($"Starting value {bestScore}");            
+
+            Debug.WriteLine($"Starting value {bestScore}");
 
             func?.Invoke(current);
-            while (bestScore > 0 && generation++ < MaxGen) {
+            while (bestScore > 0 && this.generation++ < this.MaxGen) {
                 current = (T)current.Clone();
                 current.Mutate();
                 int eval = current.Evaluate();

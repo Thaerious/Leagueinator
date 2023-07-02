@@ -4,7 +4,7 @@ using Leagueinator.Forms;
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
-    public partial class MatchCard : UserControl {
+    public partial class FlexMatchCard : UserControl {
         private int _lane = 0;
         public int Lane {
             get => this._lane;
@@ -30,7 +30,7 @@ namespace Leagueinator.Components {
             }
         }
 
-        public MatchCard() {
+        public FlexMatchCard() {
             this.InitializeComponent();
         }
 

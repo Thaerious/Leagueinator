@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using static Leagueinator.Components.PlayerInfoArgs;
 
 namespace Leagueinator.Components {
-    public partial class MatchCard : UserControl {
+    public partial class FlexMatchCard : UserControl {
         public event PlayerInfoEvent RenamePlayer {
             add {
                 foreach (var control in this.Controls.OfType<MatchLabel>()) {

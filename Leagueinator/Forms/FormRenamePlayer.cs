@@ -1,5 +1,4 @@
 ﻿using System.Windows.Forms;
-using Leagueinator.Model;
 
 namespace Leagueinator.Forms {
     public partial class FormRenamePlayer : Form {
@@ -7,7 +6,7 @@ namespace Leagueinator.Forms {
         public string PlayerName => this.txtName.Text;
 
         public FormRenamePlayer() {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void TxtName_KeyDown(object sender, KeyEventArgs e) {

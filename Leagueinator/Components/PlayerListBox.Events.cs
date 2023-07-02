@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Leagueinator.Components.PlayerInfoArgs;
 
@@ -24,12 +19,12 @@ namespace Leagueinator.Components {
         }
 
         private void HndMenuDelete(object sender, EventArgs e) {
-            TriggerDeleteEvent();
+            this.TriggerDeleteEvent();
             this.Items.Remove(this.SelectedItem);
         }
 
         private void HndMenuRename(object sender, EventArgs e) {
-            TriggerRenameEvent();
+            this.TriggerRenameEvent();
         }
 
         public void TriggerRenameEvent() {

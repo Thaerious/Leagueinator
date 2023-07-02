@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Leagueinator.Search_Algorithms;
 using Leagueinator.Utility_Classes;
@@ -13,18 +12,18 @@ namespace Leagueinator.Model.Search_Algorithms {
         private readonly Random rng = new Random();
 
         public PartnerSolution(LeagueEvent lEvent, Round round) {
-            LEvent = lEvent;
-            Round = round.Clone();
+            this.LEvent = lEvent;
+            this.Round = round.Clone();
         }
 
         public PartnerSolution(PartnerSolution that) {
-            LEvent = that.LEvent;
-            Round = that.Round;
+            this.LEvent = that.LEvent;
+            this.Round = that.Round;
         }
 
-        public Round Value => Round;
+        public Round Value => this.Round;
 
-        public override ASolution Clone()  => new PartnerSolution(this.LEvent, this.Round);
+        public override ASolution Clone() => new PartnerSolution(this.LEvent, this.Round);
 
         /// <summary>
         /// Return the nubmer of times player1 was on a team with player2
@@ -34,7 +33,7 @@ namespace Leagueinator.Model.Search_Algorithms {
         public int Evaluate(PlayerInfo player1, PlayerInfo player2) {
             int sum = 0;
 
-            List<Team> teams = LEvent
+            List<Team> teams = this.LEvent
                 .SeekDeep<Team>()
                 .Where(t => t.HasPlayer(player1))
                 .ToList();
@@ -51,13 +50,13 @@ namespace Leagueinator.Model.Search_Algorithms {
         /// <returns></returns>
         public override int Evaluate() {
             int sum = 0;
-            
-            foreach (PlayerInfo player1 in Round.ActivePlayers) {
-                var team = Round.GetTeam(player1);
+
+            foreach (PlayerInfo player1 in this.Round.ActivePlayers) {
+                var team = this.Round.GetTeam(player1);
 
                 foreach (PlayerInfo player2 in team.Players) {
                     if (player1.Equals(player2)) continue;
-                    sum += Evaluate(player1, player2);
+                    sum += this.Evaluate(player1, player2);
                 }
             }
 
@@ -66,30 +65,30 @@ namespace Leagueinator.Model.Search_Algorithms {
 
         public override bool IsValid() => true;
 
-        public Round Randomize() {            
-            Round.ResetPlayers();            
+        public Round Randomize() {
+            this.Round.ResetPlayers();
 
-            foreach (Match match in Round.Matches) {
+            foreach (Match match in this.Round.Matches) {
                 foreach (Team team in match.Teams) {
                     while (team.IsFull == false) {
-                        var player = Round.IdlePlayers.SelectRandom();
+                        var player = this.Round.IdlePlayers.SelectRandom();
                         team.AddPlayer(player);
-                        Round.IdlePlayers.Remove(player);
-                        if (Round.IdlePlayers.Count == 0) return Round;
+                        this.Round.IdlePlayers.Remove(player);
+                        if (this.Round.IdlePlayers.Count == 0) return this.Round;
                     }
                 }
             }
 
-            return Round;
+            return this.Round;
         }
 
         public override void Mutate() {
-            var p1 = Round.AllPlayers.SelectRandom();
-            var p2 = Round.AllPlayers.SelectRandom();
+            var p1 = this.Round.AllPlayers.SelectRandom();
+            var p2 = this.Round.AllPlayers.SelectRandom();
             if (p1 == p2) return;
 
-            var t1 = Round.GetTeam(p1);
-            var t2 = Round.GetTeam(p2);
+            var t1 = this.Round.GetTeam(p1);
+            var t2 = this.Round.GetTeam(p2);
 
             if (t1 == t2) return;
 

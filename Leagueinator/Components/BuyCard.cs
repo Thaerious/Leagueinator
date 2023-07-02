@@ -3,8 +3,8 @@
 namespace Leagueinator {
     public partial class BuyCard : UserControl {
         public BuyCard(string name) {
-            InitializeComponent();
-            labelName.Text = name;
+            this.InitializeComponent();
+            this.labelName.Text = name;
         }
     }
 }

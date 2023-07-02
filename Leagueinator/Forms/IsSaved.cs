@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Leagueinator.Forms {
+﻿namespace Leagueinator.Forms {
     public class IsSaved {
         public delegate void IsSavedEvent(bool value);
         public event IsSavedEvent Update;
@@ -14,10 +8,10 @@ namespace Leagueinator.Forms {
 
         public bool _value = false;
         public bool Value {
-            get => _value;
+            get => this._value;
             set {
-                if (value != _value) {
-                    _value = value;
+                if (value != this._value) {
+                    this._value = value;
                     Update?.Invoke(value);
                 }
             }

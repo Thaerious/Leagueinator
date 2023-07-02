@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using Leagueinator.Model;
@@ -14,28 +13,28 @@ namespace Leagueinator.Components {
 
         public int Team { get; set; } = 0;
         public int Position { get; set; } = 0;
-        public int Lane => (Parent as MatchCard).Lane;
-               
-        public MatchLabel() : base(){
-            InitializeComponent();
+        public int Lane => (this.Parent as MatchCard).Lane;
+
+        public MatchLabel() : base() {
+            this.InitializeComponent();
         }
 
-        private void OnMouseDown(object sender, MouseEventArgs e) {            
+        private void OnMouseDown(object sender, MouseEventArgs e) {
             switch (e.Button) {
                 case MouseButtons.Right: {
-                    if (this.PlayerInfo == null) return;
-                    this.contextMenu.Show(this, new Point(e.X, e.Y));
-                }
-                break;
+                        if (this.PlayerInfo == null) return;
+                        this.contextMenu.Show(this, new Point(e.X, e.Y));
+                    }
+                    break;
             }
         }
 
         public PlayerInfo PlayerInfo {
-            get { return _playerInfo; }
+            get { return this._playerInfo; }
             set {
-                _playerInfo = value;
-                if (value == null) Text = "";
-                else Text = _playerInfo.Name;
+                this._playerInfo = value;
+                if (value == null) this.Text = "";
+                else this.Text = this._playerInfo.Name;
             }
         }
 

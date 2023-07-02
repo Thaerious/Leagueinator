@@ -19,20 +19,20 @@ namespace Leagueinator.Utility_Classes {
 
             text += ">";
 
-            lines.Add(new IndentedString(Depth, text));
-            CurrentTag.Push(name);
+            this.lines.Add(new IndentedString(this.Depth, text));
+            this.CurrentTag.Push(name);
             return this;
         }
 
         public XMLStringBuilder OpenTag(string name) {
             var text = $"<{name}>";
-            lines.Add(new IndentedString(Depth, text));
-            CurrentTag.Push(name);
+            this.lines.Add(new IndentedString(this.Depth, text));
+            this.CurrentTag.Push(name);
             return this;
         }
 
         public XMLStringBuilder AppendLine(string text) {
-            lines.Add(new IndentedString(Depth, text));
+            this.lines.Add(new IndentedString(this.Depth, text));
             return this;
         }
 
@@ -40,39 +40,39 @@ namespace Leagueinator.Utility_Classes {
             string[] lines = text.Split('\n');
 
             foreach (string line in lines) {
-                AppendLine(line);
+                this.AppendLine(line);
             }
             return this;
         }
 
         public XMLStringBuilder InlineTag(string tag, string text) {
             var t = $"<{tag}>{text}</{tag}>";
-            lines.Add(new IndentedString(Depth, t));
+            this.lines.Add(new IndentedString(this.Depth, t));
             return this;
         }
 
         public XMLStringBuilder CloseTag(string name) {
             var text = $"</{name}>";
-            lines.Add(new IndentedString(Depth, text));
+            this.lines.Add(new IndentedString(this.Depth, text));
             return this;
         }
 
         public XMLStringBuilder CloseTag() {
             var text = $"</{this.CurrentTag.Pop()}>";
-            lines.Add(new IndentedString(Depth, text));
+            this.lines.Add(new IndentedString(this.Depth, text));
             return this;
         }
 
         public XMLStringBuilder AppendXML(XMLStringBuilder xsb) {
             foreach (IndentedString iString in xsb.lines) {
-                lines.Add(new IndentedString(iString.indent + Depth, iString.text));
+                this.lines.Add(new IndentedString(iString.indent + this.Depth, iString.text));
             }
             return this;
         }
 
         public override string ToString() {
             var sb = new StringBuilder();
-            foreach (IndentedString iString in lines) {
+            foreach (IndentedString iString in this.lines) {
                 sb.AppendLine(iString.ToString());
             }
             return sb.ToString();
@@ -90,7 +90,7 @@ namespace Leagueinator.Utility_Classes {
         }
 
         public override string ToString() {
-            return $"{new String(c, indent)}{text}";
+            return $"{new String(this.c, this.indent)}{this.text}";
         }
     }
 }

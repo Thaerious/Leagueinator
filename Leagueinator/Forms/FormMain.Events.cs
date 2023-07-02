@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using Leagueinator.Components;
 using Leagueinator.Model;
 
@@ -16,7 +13,7 @@ namespace Leagueinator.Forms {
             var result = form.ShowDialog();
             if (result == DialogResult.Cancel) return;
 
-            foreach (var player in League.SeekDeep<PlayerInfo>()) {
+            foreach (var player in this.League.SeekDeep<PlayerInfo>()) {
                 if (player.Name == form.PlayerName) {
                     string msg = "Name already in use";
                     MessageBox.Show(msg, "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -25,7 +22,7 @@ namespace Leagueinator.Forms {
             }
 
             string previous = args.PlayerInfo.Name;
-            foreach (var player in League.SeekDeep<PlayerInfo>()) {
+            foreach (var player in this.League.SeekDeep<PlayerInfo>()) {
                 if (player.Name == previous) {
                     player.Name = form.PlayerName;
                 }

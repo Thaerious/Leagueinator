@@ -11,31 +11,31 @@ namespace Leagueinator.Forms {
         public LeagueEvent LeagueEvent = null;
 
         public FormSelectEvent() {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         public void SetEvents(IEnumerable<LeagueEvent> events) {
-            listEvents.Items.Clear();
-            listEvents.Items.AddRange(
+            this.listEvents.Items.Clear();
+            this.listEvents.Items.AddRange(
                 events.Select(e => new LeagueEventWrapper { LeagueEvent = e }).ToArray()
             );
         }
 
         private void clickSelect(object sender, EventArgs e) {
-            Action = "Select";
-            LeagueEvent = (listEvents.SelectedItem as LeagueEventWrapper).LeagueEvent;
+            this.Action = "Select";
+            this.LeagueEvent = (this.listEvents.SelectedItem as LeagueEventWrapper).LeagueEvent;
         }
 
         private void clickDelete(object sender, EventArgs e) {
-            Action = "Delete";
-            LeagueEvent = (listEvents.SelectedItem as LeagueEventWrapper).LeagueEvent;
+            this.Action = "Delete";
+            this.LeagueEvent = (this.listEvents.SelectedItem as LeagueEventWrapper).LeagueEvent;
         }
     }
 
     class LeagueEventWrapper {
         public LeagueEvent LeagueEvent;
         public override string ToString() {
-            return LeagueEvent.Name + " " + LeagueEvent.Date;
+            return this.LeagueEvent.Name + " " + this.LeagueEvent.Date;
         }
     }
 }

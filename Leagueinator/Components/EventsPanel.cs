@@ -8,19 +8,19 @@ namespace Leagueinator.Components {
         public event EventCardSelect OnEventCardSelect;
 
         public EventsPanel() {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         public void SetEvents(IEnumerable<LeagueEvent> list) {
-            Controls.Clear();
+            this.Controls.Clear();
             foreach (var lEvent in list) {
-                AddEvent(lEvent);
+                this.AddEvent(lEvent);
             }
         }
 
         public void AddEvent(LeagueEvent lEvent) {
             var card = new EventCard(lEvent);
-            Controls.Add(card);
+            this.Controls.Add(card);
 
             card.OnEventCardSelect += (s, e) => {
                 OnEventCardSelect(this, e);

@@ -187,6 +187,15 @@
     <Compile Include="Components\FlowPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Components\FlexMatchCard\FlexMatchCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\FlexMatchCard\FlexMatchCard.Designer.cs">
+      <DependentUpon>FlexMatchCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\FlexMatchCard\FlexMatchCard.Events.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Components\MatchLabel.Events.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -296,6 +305,9 @@
     <Compile Include="Utility_Classes\StringInterpolator.cs" />
     <Compile Include="Utility_Classes\RandomExtensions.cs" />
     <Compile Include="Utility_Classes\XMLStringBuilder.cs" />
+    <EmbeddedResource Include="Components\FlexMatchCard\FlexMatchCard.resx">
+      <DependentUpon>FlexMatchCard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\MatchLabel.resx">
       <DependentUpon>MatchLabel.cs</DependentUpon>
     </EmbeddedResource>

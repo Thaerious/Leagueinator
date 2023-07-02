@@ -12,34 +12,34 @@ namespace Leagueinator.Model {
         [Model]
         public List<PlayerInfo> IdlePlayers { get; private set; } = new List<PlayerInfo>();
 
-        public Match this[int key] => _matches[key];
+        public Match this[int key] => this._matches[key];
 
-        [Model] public List<Match> Matches => new List<Match>().AddUnique(_matches);
+        [Model] public List<Match> Matches => new List<Match>().AddUnique(this._matches);
 
-        public int MaxSize => _matches.Length;
+        public int MaxSize => this._matches.Length;
 
         public List<Team> Teams => this.SeekDeep<Team>().Where(t => !t.IsEmpty).ToList();
 
         public List<PlayerInfo> AllPlayers {
             get {
                 var list = new List<PlayerInfo>();
-                list.AddUnique(IdlePlayers);
-                list.AddUnique(ActivePlayers);
+                list.AddUnique(this.IdlePlayers);
+                list.AddUnique(this.ActivePlayers);
                 return list;
             }
         }
 
-        public List<PlayerInfo> ActivePlayers => Matches.SeekDeep<PlayerInfo>().Unique();
+        public List<PlayerInfo> ActivePlayers => this.Matches.SeekDeep<PlayerInfo>().Unique();
 
         public Round(Settings settings) {
             if (settings == null) throw new NullReferenceException("settings");
-            Settings = settings;
-            _matches = new Match[settings.LaneCount].Populate(() => new Match(settings));
+            this.Settings = settings;
+            this._matches = new Match[settings.LaneCount].Populate(() => new Match(settings));
         }
 
         public Round(List<PlayerInfo> idlePlayers, Settings settings) : this(settings) {
-            Settings = settings;
-            IdlePlayers = new List<PlayerInfo>(idlePlayers);
+            this.Settings = settings;
+            this.IdlePlayers = new List<PlayerInfo>(idlePlayers);
         }
 
         public void CopyFrom(Round that) {
@@ -54,7 +54,7 @@ namespace Leagueinator.Model {
             }
         }
 
-        public Round Clone() {            
+        public Round Clone() {
             var clone = new Round(this.Settings);
             clone.CopyFrom(this);
             return clone;
@@ -63,12 +63,12 @@ namespace Leagueinator.Model {
         public XMLStringBuilder ToXML() {
             XMLStringBuilder xsb = new XMLStringBuilder();
             xsb.OpenTag("Round");
-            xsb.InlineTag("Players", AllPlayers.DelString());
-            xsb.InlineTag("Idle", IdlePlayers.DelString());
+            xsb.InlineTag("Players", this.AllPlayers.DelString());
+            xsb.InlineTag("Idle", this.IdlePlayers.DelString());
 
-            for (int i = 0; i < _matches.Length; i++) {
-                if (_matches[i].Players.Count == 0) continue;
-                xsb.AppendXML(_matches[i].ToXML(i));
+            for (int i = 0; i < this._matches.Length; i++) {
+                if (this._matches[i].Players.Count == 0) continue;
+                xsb.AppendXML(this._matches[i].ToXML(i));
             }
 
             xsb.CloseTag();
@@ -76,7 +76,7 @@ namespace Leagueinator.Model {
         }
 
         public override string ToString() {
-            return ToXML().ToString();
+            return this.ToXML().ToString();
         }
 
         /// <summary>
@@ -84,20 +84,20 @@ namespace Leagueinator.Model {
         /// retaining players previously in idle.
         /// </summary>
         public void ResetPlayers() {
-            var players = AllPlayers;
-            IdlePlayers.Clear();
+            var players = this.AllPlayers;
+            this.IdlePlayers.Clear();
 
             foreach (PlayerInfo player in players) {
-                IdlePlayers.Add(player);
+                this.IdlePlayers.Add(player);
             }
 
-            foreach (Match match in _matches) {
+            foreach (Match match in this._matches) {
                 match.ClearPlayers();
             }
         }
 
         public Team GetTeam(PlayerInfo player) {
-            foreach (Team team in Teams) {
+            foreach (Team team in this.Teams) {
                 if (team.HasPlayer(player)) return team;
             }
             return null;

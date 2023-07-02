@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Leagueinator.Utility_Classes;
-using Org.BouncyCastle.Utilities.IO;
 
 namespace Leagueinator.Model {
     [Serializable]
@@ -10,31 +9,31 @@ namespace Leagueinator.Model {
 
         private PlayerInfo[] _players;
         public PlayerInfo this[int key] {
-            get => _players[key];
-            set => _players[key] = value;
+            get => this._players[key];
+            set => this._players[key] = value;
         }
 
-        public int MaxSize => _players.Length;
+        public int MaxSize => this._players.Length;
 
-        public bool IsFull => Players.Count == this.MaxSize;
+        public bool IsFull => this.Players.Count == this.MaxSize;
 
-        public bool IsEmpty => Players.Count == 0;
+        public bool IsEmpty => this.Players.Count == 0;
 
-        [Model] public List<PlayerInfo> Players => new List<PlayerInfo>().AddUnique(_players);
+        [Model] public List<PlayerInfo> Players => new List<PlayerInfo>().AddUnique(this._players);
 
         public Team(Settings settings) {
             this.settings = settings;
-            _players = new PlayerInfo[settings.TeamSize];
+            this._players = new PlayerInfo[settings.TeamSize];
         }
 
         public XMLStringBuilder ToXML() {
             XMLStringBuilder xsb = new XMLStringBuilder();
-            xsb.InlineTag("Team", Players.DelString());
+            xsb.InlineTag("Team", this.Players.DelString());
             return xsb;
         }
 
         public override string ToString() {
-            return ToXML().ToString();
+            return this.ToXML().ToString();
         }
 
         public void Clear() {
@@ -42,7 +41,7 @@ namespace Leagueinator.Model {
         }
 
         public bool HasPlayer(PlayerInfo player) {
-            return Players.Contains(player);
+            return this.Players.Contains(player);
         }
 
         /// <summary>
@@ -52,9 +51,9 @@ namespace Leagueinator.Model {
         /// <param name="player"></param>
         /// <returns>True, if a change was made.</returns>
         public bool AddPlayer(PlayerInfo player) {
-            for (int i = 0; i < _players.Length; i++) {
-                if (_players[i] == null) {
-                    _players[i] = player;
+            for (int i = 0; i < this._players.Length; i++) {
+                if (this._players[i] == null) {
+                    this._players[i] = player;
                     return true;
                 }
             }
@@ -67,9 +66,9 @@ namespace Leagueinator.Model {
         /// <param name="player"></param>
         /// <returns>True, if a change was made.</returns>
         public bool RemovePlayer(PlayerInfo player) {
-            for (int i = 0; i < _players.Length; i++) {
-                if (_players[i] == player) {
-                    _players[i] = null;
+            for (int i = 0; i < this._players.Length; i++) {
+                if (this._players[i] == player) {
+                    this._players[i] = null;
                     return true;
                 }
             }
