@@ -8,12 +8,22 @@ namespace Leagueinator.Components {
         public override Match Match {
             set {
                 if (value != null) {
-                    //this.labelP0.PlayerInfo = value[0][0];
-                    //this.labelP1.PlayerInfo = value[0][1];
-                    //this.labelP2.PlayerInfo = value[1][0];
-                    //this.labelP3.PlayerInfo = value[1][1];
+                    this.labelP0.PlayerInfo = value[0][0];
+                    this.labelP1.PlayerInfo = value[0][1];
+                    this.labelP2.PlayerInfo = value[0][2];
+                    this.labelP3.PlayerInfo = value[1][0];
+                    this.labelP4.PlayerInfo = value[1][1];
+                    this.labelP5.PlayerInfo = value[1][2];
+
                 }
                 base.Match = value;
+            }
+        }
+
+        public override int Lane {
+            set {
+                this.labelLane.Text = (value + 1).ToString();
+                base.Lane = value;
             }
         }
 

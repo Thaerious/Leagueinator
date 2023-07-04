@@ -27,11 +27,11 @@
             this.labelP1 = new Leagueinator.Components.MatchLabel();
             this.labelP0 = new Leagueinator.Components.MatchLabel();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.matchLabel1 = new Leagueinator.Components.MatchLabel();
-            this.matchLabel2 = new Leagueinator.Components.MatchLabel();
+            this.labelP4 = new Leagueinator.Components.MatchLabel();
+            this.labelP3 = new Leagueinator.Components.MatchLabel();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.matchLabel3 = new Leagueinator.Components.MatchLabel();
-            this.matchLabel4 = new Leagueinator.Components.MatchLabel();
+            this.labelP5 = new Leagueinator.Components.MatchLabel();
+            this.labelP2 = new Leagueinator.Components.MatchLabel();
             this.SuspendLayout();
             // 
             // labelLane
@@ -92,37 +92,43 @@
             this.textBox1.Text = "0";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // matchLabel1
+            // labelP4
             // 
-            this.matchLabel1.AllowDrop = true;
-            this.matchLabel1.AutoEllipsis = true;
-            this.matchLabel1.BackColor = System.Drawing.Color.White;
-            this.matchLabel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.matchLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.matchLabel1.Location = new System.Drawing.Point(202, 32);
-            this.matchLabel1.Margin = new System.Windows.Forms.Padding(0);
-            this.matchLabel1.Name = "matchLabel1";
-            this.matchLabel1.PlayerInfo = null;
-            this.matchLabel1.Position = 1;
-            this.matchLabel1.Size = new System.Drawing.Size(113, 29);
-            this.matchLabel1.TabIndex = 7;
-            this.matchLabel1.Team = 0;
+            this.labelP4.AllowDrop = true;
+            this.labelP4.AutoEllipsis = true;
+            this.labelP4.BackColor = System.Drawing.Color.White;
+            this.labelP4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelP4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelP4.Location = new System.Drawing.Point(202, 32);
+            this.labelP4.Margin = new System.Windows.Forms.Padding(0);
+            this.labelP4.Name = "labelP4";
+            this.labelP4.PlayerInfo = null;
+            this.labelP4.Position = 1;
+            this.labelP4.Size = new System.Drawing.Size(113, 29);
+            this.labelP4.TabIndex = 7;
+            this.labelP4.Team = 0;
+            this.labelP4.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDrop);
+            this.labelP4.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnEnter);
+            this.labelP4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StartDrag);
             // 
-            // matchLabel2
+            // labelP3
             // 
-            this.matchLabel2.AllowDrop = true;
-            this.matchLabel2.AutoEllipsis = true;
-            this.matchLabel2.BackColor = System.Drawing.Color.White;
-            this.matchLabel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.matchLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.matchLabel2.Location = new System.Drawing.Point(202, 3);
-            this.matchLabel2.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.matchLabel2.Name = "matchLabel2";
-            this.matchLabel2.PlayerInfo = null;
-            this.matchLabel2.Position = 0;
-            this.matchLabel2.Size = new System.Drawing.Size(113, 29);
-            this.matchLabel2.TabIndex = 6;
-            this.matchLabel2.Team = 0;
+            this.labelP3.AllowDrop = true;
+            this.labelP3.AutoEllipsis = true;
+            this.labelP3.BackColor = System.Drawing.Color.White;
+            this.labelP3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelP3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelP3.Location = new System.Drawing.Point(202, 3);
+            this.labelP3.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.labelP3.Name = "labelP3";
+            this.labelP3.PlayerInfo = null;
+            this.labelP3.Position = 0;
+            this.labelP3.Size = new System.Drawing.Size(113, 29);
+            this.labelP3.TabIndex = 6;
+            this.labelP3.Team = 0;
+            this.labelP3.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDrop);
+            this.labelP3.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnEnter);
+            this.labelP3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StartDrag);
             // 
             // textBox2
             // 
@@ -134,48 +140,54 @@
             this.textBox2.Text = "0";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // matchLabel3
+            // labelP5
             // 
-            this.matchLabel3.AllowDrop = true;
-            this.matchLabel3.AutoEllipsis = true;
-            this.matchLabel3.BackColor = System.Drawing.Color.White;
-            this.matchLabel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.matchLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.matchLabel3.Location = new System.Drawing.Point(202, 61);
-            this.matchLabel3.Margin = new System.Windows.Forms.Padding(0);
-            this.matchLabel3.Name = "matchLabel3";
-            this.matchLabel3.PlayerInfo = null;
-            this.matchLabel3.Position = 1;
-            this.matchLabel3.Size = new System.Drawing.Size(113, 29);
-            this.matchLabel3.TabIndex = 10;
-            this.matchLabel3.Team = 0;
+            this.labelP5.AllowDrop = true;
+            this.labelP5.AutoEllipsis = true;
+            this.labelP5.BackColor = System.Drawing.Color.White;
+            this.labelP5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelP5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelP5.Location = new System.Drawing.Point(202, 61);
+            this.labelP5.Margin = new System.Windows.Forms.Padding(0);
+            this.labelP5.Name = "labelP5";
+            this.labelP5.PlayerInfo = null;
+            this.labelP5.Position = 1;
+            this.labelP5.Size = new System.Drawing.Size(113, 29);
+            this.labelP5.TabIndex = 10;
+            this.labelP5.Team = 0;
+            this.labelP5.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDrop);
+            this.labelP5.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnEnter);
+            this.labelP5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StartDrag);
             // 
-            // matchLabel4
+            // labelP2
             // 
-            this.matchLabel4.AllowDrop = true;
-            this.matchLabel4.AutoEllipsis = true;
-            this.matchLabel4.BackColor = System.Drawing.Color.White;
-            this.matchLabel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.matchLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.matchLabel4.Location = new System.Drawing.Point(56, 61);
-            this.matchLabel4.Margin = new System.Windows.Forms.Padding(0);
-            this.matchLabel4.Name = "matchLabel4";
-            this.matchLabel4.PlayerInfo = null;
-            this.matchLabel4.Position = 1;
-            this.matchLabel4.Size = new System.Drawing.Size(113, 29);
-            this.matchLabel4.TabIndex = 9;
-            this.matchLabel4.Team = 0;
+            this.labelP2.AllowDrop = true;
+            this.labelP2.AutoEllipsis = true;
+            this.labelP2.BackColor = System.Drawing.Color.White;
+            this.labelP2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelP2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelP2.Location = new System.Drawing.Point(56, 61);
+            this.labelP2.Margin = new System.Windows.Forms.Padding(0);
+            this.labelP2.Name = "labelP2";
+            this.labelP2.PlayerInfo = null;
+            this.labelP2.Position = 1;
+            this.labelP2.Size = new System.Drawing.Size(113, 29);
+            this.labelP2.TabIndex = 9;
+            this.labelP2.Team = 0;
+            this.labelP2.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDrop);
+            this.labelP2.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnEnter);
+            this.labelP2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StartDrag);
             // 
             // MatchCard_3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Controls.Add(this.matchLabel3);
-            this.Controls.Add(this.matchLabel4);
+            this.Controls.Add(this.labelP5);
+            this.Controls.Add(this.labelP2);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.matchLabel1);
-            this.Controls.Add(this.matchLabel2);
+            this.Controls.Add(this.labelP4);
+            this.Controls.Add(this.labelP3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.labelLane);
             this.Controls.Add(this.labelP1);
@@ -194,10 +206,10 @@
         private MatchLabel labelP1;
         private System.Windows.Forms.Label labelLane;
         private System.Windows.Forms.TextBox textBox1;
-        private MatchLabel matchLabel1;
-        private MatchLabel matchLabel2;
+        private MatchLabel labelP4;
+        private MatchLabel labelP3;
         private System.Windows.Forms.TextBox textBox2;
-        private MatchLabel matchLabel3;
-        private MatchLabel matchLabel4;
+        private MatchLabel labelP5;
+        private MatchLabel labelP2;
     }
 }

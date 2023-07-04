@@ -26,7 +26,7 @@
             this.labelLane = new System.Windows.Forms.Label();
             this.labelP0 = new Leagueinator.Components.MatchLabel();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.matchLabel2 = new Leagueinator.Components.MatchLabel();
+            this.labelP1 = new Leagueinator.Components.MatchLabel();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -69,21 +69,24 @@
             this.textBox1.Text = "0";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // matchLabel2
+            // labelP1
             // 
-            this.matchLabel2.AllowDrop = true;
-            this.matchLabel2.AutoEllipsis = true;
-            this.matchLabel2.BackColor = System.Drawing.Color.White;
-            this.matchLabel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.matchLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.matchLabel2.Location = new System.Drawing.Point(202, 19);
-            this.matchLabel2.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.matchLabel2.Name = "matchLabel2";
-            this.matchLabel2.PlayerInfo = null;
-            this.matchLabel2.Position = 0;
-            this.matchLabel2.Size = new System.Drawing.Size(113, 29);
-            this.matchLabel2.TabIndex = 6;
-            this.matchLabel2.Team = 0;
+            this.labelP1.AllowDrop = true;
+            this.labelP1.AutoEllipsis = true;
+            this.labelP1.BackColor = System.Drawing.Color.White;
+            this.labelP1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelP1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelP1.Location = new System.Drawing.Point(202, 19);
+            this.labelP1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.labelP1.Name = "labelP1";
+            this.labelP1.PlayerInfo = null;
+            this.labelP1.Position = 0;
+            this.labelP1.Size = new System.Drawing.Size(113, 29);
+            this.labelP1.TabIndex = 6;
+            this.labelP1.Team = 0;
+            this.labelP1.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDrop);
+            this.labelP1.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnEnter);
+            this.labelP1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StartDrag);
             // 
             // textBox2
             // 
@@ -101,7 +104,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.matchLabel2);
+            this.Controls.Add(this.labelP1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.labelLane);
             this.Controls.Add(this.labelP0);
@@ -118,7 +121,7 @@
         private MatchLabel labelP0;
         private System.Windows.Forms.Label labelLane;
         private System.Windows.Forms.TextBox textBox1;
-        private MatchLabel matchLabel2;
+        private MatchLabel labelP1;
         private System.Windows.Forms.TextBox textBox2;
     }
 }

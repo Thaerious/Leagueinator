@@ -41,11 +41,10 @@ namespace Leagueinator.Components {
             }
         }
 
-        public int Lane {
+        public virtual int Lane {
             get => this._lane;
             set {
                 this._lane = value;
-                this.labelLane.Text = (value + 1).ToString();
             }
         }
 
