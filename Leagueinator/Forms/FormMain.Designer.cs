@@ -41,6 +41,8 @@
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyPrevRoundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.randomizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.assignLanesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printCurrentRoundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,11 +55,11 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableRoot = new System.Windows.Forms.TableLayoutPanel();
             this.panelContents = new System.Windows.Forms.Panel();
+            this.butAddEvent = new System.Windows.Forms.Button();
             this.editEventPanel = new Leagueinator.Components.EditEventPanel();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.assignLanesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.tableRoot.SuspendLayout();
             this.panelContents.SuspendLayout();
@@ -141,7 +143,6 @@
             this.addPlayerToolStripMenuItem,
             this.assignPlayersToolStripMenuItem,
             this.assignLanesToolStripMenuItem});
-            this.menuEvents.Enabled = false;
             this.menuEvents.Name = "menuEvents";
             this.menuEvents.Size = new System.Drawing.Size(79, 29);
             this.menuEvents.Text = "Events";
@@ -149,21 +150,21 @@
             // menuActionAddEvent
             // 
             this.menuActionAddEvent.Name = "menuActionAddEvent";
-            this.menuActionAddEvent.Size = new System.Drawing.Size(270, 34);
+            this.menuActionAddEvent.Size = new System.Drawing.Size(227, 34);
             this.menuActionAddEvent.Text = "Add Event";
             this.menuActionAddEvent.Click += new System.EventHandler(this.Menu_Events_Add);
             // 
             // selectEventToolStripMenuItem
             // 
             this.selectEventToolStripMenuItem.Name = "selectEventToolStripMenuItem";
-            this.selectEventToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.selectEventToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
             this.selectEventToolStripMenuItem.Text = "Select Event";
             this.selectEventToolStripMenuItem.Click += new System.EventHandler(this.Menu_Event_Select);
             // 
             // addPlayerToolStripMenuItem
             // 
             this.addPlayerToolStripMenuItem.Name = "addPlayerToolStripMenuItem";
-            this.addPlayerToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.addPlayerToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
             this.addPlayerToolStripMenuItem.Text = "Add Player";
             this.addPlayerToolStripMenuItem.Click += new System.EventHandler(this.Menu_Event_AddPlayer);
             // 
@@ -172,9 +173,10 @@
             this.assignPlayersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clearToolStripMenuItem,
             this.rToolStripMenuItem,
-            this.copyPrevRoundToolStripMenuItem});
+            this.copyPrevRoundToolStripMenuItem,
+            this.randomizeToolStripMenuItem});
             this.assignPlayersToolStripMenuItem.Name = "assignPlayersToolStripMenuItem";
-            this.assignPlayersToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.assignPlayersToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
             this.assignPlayersToolStripMenuItem.Text = "Assign Players";
             // 
             // clearToolStripMenuItem
@@ -197,6 +199,20 @@
             this.copyPrevRoundToolStripMenuItem.Size = new System.Drawing.Size(252, 34);
             this.copyPrevRoundToolStripMenuItem.Text = "Copy Prev Round";
             this.copyPrevRoundToolStripMenuItem.Click += new System.EventHandler(this.Menu_Events_Assign_Copy);
+            // 
+            // randomizeToolStripMenuItem
+            // 
+            this.randomizeToolStripMenuItem.Name = "randomizeToolStripMenuItem";
+            this.randomizeToolStripMenuItem.Size = new System.Drawing.Size(252, 34);
+            this.randomizeToolStripMenuItem.Text = "Randomize";
+            this.randomizeToolStripMenuItem.Click += new System.EventHandler(this.randomizeToolStripMenuItem_Click);
+            // 
+            // assignLanesToolStripMenuItem
+            // 
+            this.assignLanesToolStripMenuItem.Name = "assignLanesToolStripMenuItem";
+            this.assignLanesToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
+            this.assignLanesToolStripMenuItem.Text = "Assign Lanes";
+            this.assignLanesToolStripMenuItem.Click += new System.EventHandler(this.Menu_Event_AssignLanes);
             // 
             // menuStrip
             // 
@@ -302,11 +318,26 @@
             // panelContents
             // 
             this.panelContents.Controls.Add(this.editEventPanel);
+            this.panelContents.Controls.Add(this.butAddEvent);
             this.panelContents.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContents.Location = new System.Drawing.Point(3, 36);
             this.panelContents.Name = "panelContents";
             this.panelContents.Size = new System.Drawing.Size(1254, 776);
             this.panelContents.TabIndex = 3;
+            // 
+            // butAddEvent
+            // 
+            this.butAddEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.butAddEvent.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.butAddEvent.Location = new System.Drawing.Point(485, 322);
+            this.butAddEvent.Name = "butAddEvent";
+            this.butAddEvent.Size = new System.Drawing.Size(316, 56);
+            this.butAddEvent.TabIndex = 1;
+            this.butAddEvent.Text = "Add Event";
+            this.butAddEvent.UseVisualStyleBackColor = true;
+            this.butAddEvent.Click += new System.EventHandler(this.butAddEvent_Click);
             // 
             // editEventPanel
             // 
@@ -341,13 +372,6 @@
             this.renameToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(148, 68);
-            // 
-            // assignLanesToolStripMenuItem
-            // 
-            this.assignLanesToolStripMenuItem.Name = "assignLanesToolStripMenuItem";
-            this.assignLanesToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.assignLanesToolStripMenuItem.Text = "Assign Lanes";
-            this.assignLanesToolStripMenuItem.Click += new System.EventHandler(this.Menu_Event_AssignLanes);
             // 
             // FormMain
             // 
@@ -403,5 +427,7 @@
         private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem assignLanesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem randomizeToolStripMenuItem;
+        private System.Windows.Forms.Button butAddEvent;
     }
 }

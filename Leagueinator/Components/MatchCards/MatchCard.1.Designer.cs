@@ -119,7 +119,7 @@
         #endregion
 
         private MatchLabel labelP0;
-        private System.Windows.Forms.Label labelLane;
+        private new System.Windows.Forms.Label labelLane;
         private System.Windows.Forms.TextBox textBox1;
         private MatchLabel labelP1;
         private System.Windows.Forms.TextBox textBox2;

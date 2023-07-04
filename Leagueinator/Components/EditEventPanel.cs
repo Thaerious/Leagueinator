@@ -41,6 +41,7 @@ namespace Leagueinator.Components {
 
                     this.leagueEvent = value;
                     this.currentRoundButton = null;
+                    this.PopulateMatches(value.Settings);
                     this.leagueEvent.ForEach(r => this.AddRound(r));
                 }
             }
@@ -70,19 +71,35 @@ namespace Leagueinator.Components {
 
             this.currentRoundButton = button;
             this.playerListBox.Round = this.currentRoundButton.Round;
-            this.PopulateMatches(button.Round);
+            this.RePopulateMatches(button.Round);
         }
 
-        private void PopulateMatches(Round round) {
+        /// <summary>
+        /// Populate the match card panel with new match cards.
+        /// </summary>
+        /// <param name="round"></param>
+        private void PopulateMatches(Settings settings) {
             this.panelMatchCard.Controls.Clear();
 
-            for (int lane = 0; lane < this.leagueEvent.Settings.LaneCount; lane++) {
+            for (int lane = 0; lane < settings.LaneCount; lane++) {
                 MatchCard matchCard = MatchCard.NewMatchCard(
-                    this.CurrentRound.Settings.TeamSize,
+                    settings.TeamSize,
                     lane,
-                    this.CurrentRound.Matches[lane]
+                    null
                 );
                 this.panelMatchCard.Controls.Add(matchCard);
+            }
+        }
+
+        /// <summary>
+        /// Fill the match cards with values from 'round'.
+        /// Retains the match cards currently in place.
+        /// </summary>
+        /// <param name="round"></param>
+        private void RePopulateMatches(Round round) {
+            for (int lane = 0; lane < this.leagueEvent.Settings.LaneCount; lane++) {
+                MatchCard matchCard = this.panelMatchCard.Controls[lane] as MatchCard;
+                matchCard.Match = round[lane];
             }
         }
 
@@ -106,7 +123,7 @@ namespace Leagueinator.Components {
 
         internal void RefreshRound() {
             this.playerListBox.Round = this.currentRoundButton.Round;
-            this.PopulateMatches(this.currentRoundButton.Round);
+            this.RePopulateMatches(this.currentRoundButton.Round);
         }
     }
 }

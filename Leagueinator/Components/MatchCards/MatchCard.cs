@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Leagueinator.Forms;
 using Leagueinator.Model;
@@ -57,6 +58,12 @@ namespace Leagueinator.Components {
 
         public MatchCard() {
             this.InitializeComponent();
+        }
+
+        public void Clear() {
+            foreach (var control in this.Controls.OfType<MatchLabel>()) {
+                control.PlayerInfo = null;
+            }
         }
 
         /// <summary>

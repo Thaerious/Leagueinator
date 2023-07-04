@@ -11,7 +11,7 @@ using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Forms {
     public partial class FormMain : Form {
-        private League _league;
+        private League _league = new League();
 
         private string filename = "";
 
@@ -76,7 +76,7 @@ namespace Leagueinator.Forms {
             this.editEventPanel.Visible = true;
         }
 
-        private void Menu_Events_Add(object sender, EventArgs e) {
+        private void Menu_Events_Add(object _ = null, EventArgs __ = null) {
             FormAddEvent childForm = new FormAddEvent();
             DialogResult result = childForm.ShowDialog();
             if (result == DialogResult.Cancel) return;
@@ -275,6 +275,22 @@ namespace Leagueinator.Forms {
 
         private void Menu_Event_AssignLanes(object sender, EventArgs e) {
 
+        }
+
+        private void randomizeToolStripMenuItem_Click(object sender, EventArgs e) {
+            LeagueEvent lEvent = this.editEventPanel.LeagueEvent;
+            Round round = this.editEventPanel.CurrentRound;
+            if (lEvent == null || round == null) return;
+
+            var solution = new PartnerSolution(lEvent, round);
+            solution.Randomize();
+
+            this.editEventPanel.CurrentRound.CopyFrom(solution.Round);
+            this.editEventPanel.RefreshRound();
+        }
+
+        private void butAddEvent_Click(object sender, EventArgs e) {
+            Menu_Events_Add();
         }
     }
 }
