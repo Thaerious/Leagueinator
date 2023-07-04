@@ -1,11 +1,46 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using Leagueinator.Forms;
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
     public partial class MatchCard : UserControl {
-        private int _lane = 0;
+
+        public static MatchCard NewMatchCard(int teamSize, int lane, Match match) {
+            switch (teamSize) {
+                case 1: {
+                        return new MatchCard_1 {
+                            Name = $"matchCard{lane}",
+                            Match = match,
+                            Lane = lane
+                        };
+                    }
+                case 2: {
+                        return new MatchCard_2 {
+                            Name = $"matchCard{lane}",
+                            Match = match,
+                            Lane = lane
+                        };
+                    }
+                case 3: {
+                        return new MatchCard_3 {
+                            Name = $"matchCard{lane}",
+                            Match = match,
+                            Lane = lane
+                        };
+                    }
+                case 4: {
+                        return new MatchCard_4 {
+                            Name = $"matchCard{lane}",
+                            Match = match,
+                            Lane = lane
+                        };
+                    }
+                default: throw new ArgumentOutOfRangeException("teamSize");
+            }
+        }
+
         public int Lane {
             get => this._lane;
             set {
@@ -14,21 +49,12 @@ namespace Leagueinator.Components {
             }
         }
 
-        private Match _match;
-        public Match Match {
-            get {
-                return this._match;
-            }
-            set {
-                if (value != null) {
-                    this.labelP0.PlayerInfo = value[0][0];
-                    this.labelP1.PlayerInfo = value[0][1];
-                    this.labelP2.PlayerInfo = value[1][0];
-                    this.labelP3.PlayerInfo = value[1][1];
-                }
-                this._match = value;
-            }
+        public virtual Match Match {
+            get => this._match;
+            set => this._match = value;
         }
+
+        public virtual void InitializeComponent() {}
 
         public MatchCard() {
             this.InitializeComponent();
@@ -39,14 +65,14 @@ namespace Leagueinator.Components {
         /// </summary>
         /// <param name="receiver"></param>
         /// <param name="e"></param>
-        private void OnDrop(object receiver, DragEventArgs e) {
+        internal virtual void DoDrop(object receiver, DragEventArgs e) {
             if (!(receiver is MatchLabel matchLabel)) return;
 
             PlayerDragData data = (PlayerDragData)e.Data.GetData(typeof(PlayerDragData));
             data.Destination = receiver;
         }
 
-        private void StartDrag(object sender, MouseEventArgs e) {
+        internal void DoStartDrag(object sender, MouseEventArgs e) {
             if (e.Button != MouseButtons.Left) return;
             if (!(sender is MatchLabel srcLabel)) return;
             if (srcLabel.PlayerInfo == null) return;
@@ -81,13 +107,17 @@ namespace Leagueinator.Components {
             }
         }
 
-        private void OnEnter(object sender, DragEventArgs e) {
+        internal void DoEnter(object sender, DragEventArgs e) {
             e.Effect = DragDropEffects.Move;
         }
 
-        private void OnExit(object sender, DragEventArgs e) {
+        internal void DoExit(object sender, DragEventArgs e) {
             e.Effect = DragDropEffects.None;
         }
+
+        private int _lane = 0;
+        private Match _match;
+        internal Label labelLane = new System.Windows.Forms.Label();
     }
 }
 

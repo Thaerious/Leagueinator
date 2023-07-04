@@ -196,6 +196,30 @@
     <Compile Include="Components\FlexMatchCard\FlexMatchCard.Events.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Components\MatchCards\MatchCard.4.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\MatchCards\MatchCard.4.Designer.cs">
+      <DependentUpon>MatchCard.4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\MatchCards\MatchCard.3.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\MatchCards\MatchCard.3.Designer.cs">
+      <DependentUpon>MatchCard.3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\MatchCards\MatchCard.2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\MatchCards\MatchCard.2.Designer.cs">
+      <DependentUpon>MatchCard.2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\MatchCards\MatchCard.1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\MatchCards\MatchCard.1.Designer.cs">
+      <DependentUpon>MatchCard.1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\MatchLabel.Events.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -240,11 +264,8 @@
     <Compile Include="Components\EventsPanel.Designer.cs">
       <DependentUpon>EventsPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\MatchCard.cs">
+    <Compile Include="Components\MatchCards\MatchCard.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Components\MatchCard.Designer.cs">
-      <DependentUpon>MatchCard.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\MatchLabelData.cs" />
     <Compile Include="Components\PlayerListBox.cs">
@@ -274,7 +295,7 @@
     <Compile Include="Forms\FormSelectEvent.Designer.cs">
       <DependentUpon>FormSelectEvent.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\MatchCard.Events.cs">
+    <Compile Include="Components\MatchCards\MatchCard.Events.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\IsSaved.cs" />
@@ -308,6 +329,18 @@
     <EmbeddedResource Include="Components\FlexMatchCard\FlexMatchCard.resx">
       <DependentUpon>FlexMatchCard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\MatchCards\MatchCard.4.resx">
+      <DependentUpon>MatchCard.4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\MatchCards\MatchCard.3.resx">
+      <DependentUpon>MatchCard.3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\MatchCards\MatchCard.2.resx">
+      <DependentUpon>MatchCard.2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\MatchCards\MatchCard.1.resx">
+      <DependentUpon>MatchCard.1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\MatchLabel.resx">
       <DependentUpon>MatchLabel.cs</DependentUpon>
     </EmbeddedResource>
@@ -328,9 +361,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Components\EventsPanel.resx">
       <DependentUpon>EventsPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Components\MatchCard.resx">
-      <DependentUpon>MatchCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormRenamePlayer.resx">
       <DependentUpon>FormRenamePlayer.cs</DependentUpon>

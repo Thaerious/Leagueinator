@@ -77,11 +77,11 @@ namespace Leagueinator.Components {
             this.panelMatchCard.Controls.Clear();
 
             for (int lane = 0; lane < this.leagueEvent.Settings.LaneCount; lane++) {
-                MatchCard matchCard = new MatchCard {
-                    Name = $"matchCard{lane}",
-                    Match = round[lane],
-                    Lane = lane
-                };
+                MatchCard matchCard = MatchCard.NewMatchCard(
+                    this.CurrentRound.Settings.TeamSize,
+                    lane,
+                    this.CurrentRound.Matches[lane]
+                );
                 this.panelMatchCard.Controls.Add(matchCard);
             }
         }
