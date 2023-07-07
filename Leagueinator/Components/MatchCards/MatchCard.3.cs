@@ -28,7 +28,7 @@ namespace Leagueinator.Components {
         }
 
         public void OnDrop(object sender, DragEventArgs e) => base.DoDrop(sender, e);
-        public void StartDrag(object sender, MouseEventArgs e) => base.DoStartDrag(sender, e);
+        public void StartDrag(object sender, MouseEventArgs e) => base.StartDragLabel(sender, e);
         public void OnEnter(object sender, DragEventArgs e) => base.DoEnter(sender, e);
         public void OnExit(object sender, DragEventArgs e) => base.DoExit(sender, e);
     }

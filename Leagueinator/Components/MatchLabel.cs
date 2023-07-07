@@ -33,7 +33,6 @@ namespace Leagueinator.Components {
         public PlayerInfo PlayerInfo {
             get { return this._playerInfo; }
             set {
-                Debug.WriteLine($"Set Player Info {this} {value?.ToXML()}");
                 this._playerInfo = value;
                 if (value == null) this.Text = "";
                 else this.Text = this._playerInfo.Name;

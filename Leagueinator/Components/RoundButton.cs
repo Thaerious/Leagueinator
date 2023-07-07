@@ -2,7 +2,7 @@
 using Leagueinator.Model;
 
 namespace Leagueinator.Components {
-    internal class RoundButton : System.Windows.Forms.Button, IModelRound {
+    internal class RoundButton : System.Windows.Forms.Button {
         public Round Round { get; set; }
 
 

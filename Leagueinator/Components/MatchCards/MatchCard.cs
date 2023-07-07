@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -66,10 +67,11 @@ namespace Leagueinator.Components {
             set => this._match = value;
         }
 
-        public virtual void InitializeComponent() {}
+        public virtual void InitializeComponent() { }
 
         public MatchCard() {
             this.InitializeComponent();
+            var dragDropCard = new DragDropCard(this);
         }
 
         public void Clear() {
@@ -89,7 +91,11 @@ namespace Leagueinator.Components {
             data.Destination = receiver;
         }
 
-        internal void DoStartDrag(object sender, MouseEventArgs e) {
+        public virtual void StartDragCard(object sender, MouseEventArgs e) {
+            Debug.WriteLine("Start Drag Card");
+        }
+
+        internal void StartDragLabel(object sender, MouseEventArgs e) {
             if (e.Button != MouseButtons.Left) return;
             if (!(sender is MatchLabel srcLabel)) return;
             if (srcLabel.PlayerInfo == null) return;
@@ -130,6 +136,19 @@ namespace Leagueinator.Components {
         internal void DoExit(object sender, DragEventArgs e) {
             e.Effect = DragDropEffects.None;
         }
+
+        public List<MatchLabel> Labels() {
+            var list = new List<MatchLabel>();
+
+            this.Controls
+                .Cast<Control>()
+                .Where(c => c is MatchLabel)
+                .ToList()
+                .ForEach(c => list.Add((MatchLabel)c));
+
+            return list;
+        }
+        
 
         private int _lane = 0;
         private Match _match;

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
     [Serializable]
-    public class Round {
+    public class Round : HasDeepCopy<Round>{
         public readonly Settings Settings;
-        private readonly Match[] _matches;
+        private Match[] _matches;
 
         [Model]
         public List<PlayerInfo> IdlePlayers { get; private set; } = new List<PlayerInfo>();
@@ -15,6 +16,19 @@ namespace Leagueinator.Model {
         public Match this[int key] {
             get => this._matches [key];
             set => this._matches[key] = value;
+        }
+
+        public Match this[Match match] {
+            get {
+                if (this.Matches.Contains(match)) return match;
+                throw new InvalidOperationException ();
+            }
+            set {
+                if (!this.Matches.Contains(match)) throw new InvalidOperationException();
+                int idx = this.Matches.IndexOf(match);
+                Debug.WriteLine($"Set index {idx} to {value.GetHashCode().ToString("X")}");
+                this._matches[idx] = value;
+            }
         }
 
         [Model] public List<Match> Matches => new List<Match>().AddUnique(this._matches);
@@ -105,9 +119,12 @@ namespace Leagueinator.Model {
             }
             return null;
         }
-    }
 
-    public interface IModelRound {
-        Round Round { get; set; }
+        public Round DeepCopy() {
+            return new Round(this.Settings) {
+                IdlePlayers = this.IdlePlayers.DeepCopy(),
+                _matches = this._matches.DeepCopy()
+            };
+        }
     }
 }

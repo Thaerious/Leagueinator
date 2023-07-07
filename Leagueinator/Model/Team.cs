@@ -4,7 +4,7 @@ using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
     [Serializable]
-    public class Team {
+    public class Team : HasDeepCopy<Team>{
         public readonly Settings settings;
 
         private PlayerInfo[] _players;
@@ -79,6 +79,12 @@ namespace Leagueinator.Model {
             }
 
             return false;
+        }
+
+        public Team DeepCopy() {
+            return new Team(this.settings) {
+                _players = this._players.DeepCopy()
+            };
         }
     }
 }

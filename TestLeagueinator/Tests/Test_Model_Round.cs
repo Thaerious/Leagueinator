@@ -121,5 +121,25 @@ namespace TestLeagueinator
 
             Assert.AreEqual(r1[0][0], t);
         }
+
+        [TestMethod]
+        public void Swap_By_Element() {
+            var r1 = new Round(new Settings());
+            // m  t  p
+            r1[0][0][0] = new PlayerInfo("A");
+            r1[0][0][1] = new PlayerInfo("B");
+            r1[0][1][0] = new PlayerInfo("C");
+            r1[0][1][1] = new PlayerInfo("D");
+
+            r1[1][0][0] = new PlayerInfo("E");
+            r1[1][0][1] = new PlayerInfo("F");
+            r1[1][1][0] = new PlayerInfo("G");
+            r1[1][1][1] = new PlayerInfo("H");
+
+            (r1[0], r1[1]) = (r1[1], r1[0]);
+
+            Assert.AreEqual("E", r1[0][0][0].Name);
+            Assert.AreEqual("A", r1[1][0][0].Name);
+        }
     }
 }

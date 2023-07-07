@@ -63,6 +63,7 @@ namespace TestLeagueinator {
             lEvent.AddRound();
             
             // First Round
+            //     r  m  t  p
             lEvent[0][0][0][0] = new PlayerInfo("Adam");
             lEvent[0][0][0][1] = new PlayerInfo("Bently");
             lEvent[0][0][1][0] = new PlayerInfo("Cain");

@@ -5,9 +5,9 @@ using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
     [Serializable]
-    public class Match {
+    public class Match : HasDeepCopy<Match>{
         public readonly Settings Settings;
-        private readonly Team[] _teams;
+        private Team[] _teams;
 
         public Team this[int key] => this._teams[key];
 
@@ -48,6 +48,12 @@ namespace Leagueinator.Model {
             for (int i = 0; i < this.MaxSize; i++) {
                 this[i].Clear();
             }
+        }
+
+        public Match DeepCopy() {
+            return new Match(this.Settings) {
+                _teams = this._teams.DeepCopy()
+            };
         }
     }
 }

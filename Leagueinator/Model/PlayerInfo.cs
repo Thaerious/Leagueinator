@@ -4,7 +4,7 @@ using System;
 
 namespace Leagueinator.Model {
     [Serializable]
-    public class PlayerInfo : IEquatable<PlayerInfo> {
+    public class PlayerInfo : IEquatable<PlayerInfo>, HasDeepCopy<PlayerInfo> {
         private string _name;
 
         public string Name {
@@ -17,6 +17,8 @@ namespace Leagueinator.Model {
         }
 
         public PlayerInfo(string name) => this.Name = name;
+
+        public PlayerInfo DeepCopy() => new PlayerInfo(this.Name);
 
         override public string ToString() => this.Name;
 
@@ -36,7 +38,7 @@ namespace Leagueinator.Model {
             PlayerInfo that = (PlayerInfo)obj;
             return this.Name.ToLower().Trim() == that.Name.ToLower().Trim();
         }
-                public XMLStringBuilder ToXML() {
+        public XMLStringBuilder ToXML() {
             XMLStringBuilder xsb = new XMLStringBuilder();
             xsb.InlineTag("Player", this.Name, $"hash='{this.GetHashCode().ToString("X")}'");
             return xsb;

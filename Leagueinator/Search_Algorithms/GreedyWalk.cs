@@ -3,6 +3,7 @@ using System.Diagnostics;
 namespace Leagueinator.Search_Algorithms {
     public class GreedyWalk {
         private int generation = 0;
+        private Random random = new Random();
 
         public int MaxGen = 100;
 
@@ -36,5 +37,15 @@ namespace Leagueinator.Search_Algorithms {
             return best;
         }
 
+        public void Mutate(ASolution sol) {
+            int r1 = 0, r2 = 0;
+
+            while (r1 == r2) {
+                r1 = random.Next(sol.Size);
+                r2 = random.Next(sol.Size);
+            }
+
+            (sol[r1], sol[r2]) = (sol[r2], sol[r1]);
+        }
     }
 }

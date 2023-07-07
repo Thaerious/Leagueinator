@@ -12,12 +12,12 @@ namespace Leagueinator.Search_Algorithms.Solutions {
         public readonly Round Round;
         private readonly Random rng = new Random();
 
-        public PartnerSolution(LeagueEvent lEvent, Round round) {
+        public PartnerSolution(LeagueEvent lEvent, Round round) : base(0) {
             this.LEvent = lEvent;
             this.Round = round.Clone();
         }
 
-        public PartnerSolution(PartnerSolution that) {
+        public PartnerSolution(PartnerSolution that) : base(0) {
             this.LEvent = that.LEvent;
             this.Round = that.Round;
         }
