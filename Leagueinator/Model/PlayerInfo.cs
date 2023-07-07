@@ -1,4 +1,5 @@
 ﻿
+using Leagueinator.Utility_Classes;
 using System;
 
 namespace Leagueinator.Model {
@@ -34,6 +35,11 @@ namespace Leagueinator.Model {
             if (!(obj is PlayerInfo)) return false;
             PlayerInfo that = (PlayerInfo)obj;
             return this.Name.ToLower().Trim() == that.Name.ToLower().Trim();
+        }
+                public XMLStringBuilder ToXML() {
+            XMLStringBuilder xsb = new XMLStringBuilder();
+            xsb.InlineTag("Player", this.Name, $"hash='{this.GetHashCode().ToString("X")}'");
+            return xsb;
         }
     }
 }

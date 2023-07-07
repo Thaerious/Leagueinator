@@ -6,7 +6,7 @@ using Leagueinator.Model;
 
 namespace Leagueinator.Components {
     public partial class EditEventPanel : UserControl {
-        RoundButton currentRoundButton = null;
+        private RoundButton currentRoundButton = null;
         public PlayerListBox PlayerListBox => this.playerListBox;
 
         /// <summary>
@@ -85,6 +85,7 @@ namespace Leagueinator.Components {
                 MatchCard matchCard = MatchCard.NewMatchCard(
                     settings.TeamSize,
                     lane,
+                    null,
                     null
                 );
                 this.panelMatchCard.Controls.Add(matchCard);
@@ -99,6 +100,7 @@ namespace Leagueinator.Components {
         private void RePopulateMatches(Round round) {
             for (int lane = 0; lane < this.leagueEvent.Settings.LaneCount; lane++) {
                 MatchCard matchCard = this.panelMatchCard.Controls[lane] as MatchCard;
+                matchCard.Round = round;
                 matchCard.Match = round[lane];
             }
         }
@@ -124,6 +126,10 @@ namespace Leagueinator.Components {
         internal void RefreshRound() {
             this.playerListBox.Round = this.currentRoundButton.Round;
             this.RePopulateMatches(this.currentRoundButton.Round);
+        }
+
+        public void ReplaceCurrentRound(Round round) {
+            this.currentRoundButton.Round = round;
         }
     }
 }

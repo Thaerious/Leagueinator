@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\MyAssert.cs" />
+    <Compile Include="Tests\Test_LaneSolution.cs" />
     <Compile Include="Tests\Test_GreedyWalk.cs" />
     <Compile Include="Tests\Test_Model_LeagueEvent.cs" />
     <Compile Include="Tests\Test_Model_Round.cs" />

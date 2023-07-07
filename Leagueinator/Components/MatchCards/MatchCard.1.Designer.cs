@@ -83,7 +83,7 @@
             this.labelP1.Position = 0;
             this.labelP1.Size = new System.Drawing.Size(113, 29);
             this.labelP1.TabIndex = 6;
-            this.labelP1.Team = 0;
+            this.labelP1.Team = 1;
             this.labelP1.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDrop);
             this.labelP1.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnEnter);
             this.labelP1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StartDrag);

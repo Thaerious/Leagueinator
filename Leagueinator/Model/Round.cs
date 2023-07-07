@@ -12,7 +12,10 @@ namespace Leagueinator.Model {
         [Model]
         public List<PlayerInfo> IdlePlayers { get; private set; } = new List<PlayerInfo>();
 
-        public Match this[int key] => this._matches[key];
+        public Match this[int key] {
+            get => this._matches [key];
+            set => this._matches[key] = value;
+        }
 
         [Model] public List<Match> Matches => new List<Match>().AddUnique(this._matches);
 
@@ -62,7 +65,7 @@ namespace Leagueinator.Model {
 
         public XMLStringBuilder ToXML() {
             XMLStringBuilder xsb = new XMLStringBuilder();
-            xsb.OpenTag("Round");
+            xsb.OpenTag("Round", $"hash='{this.GetHashCode().ToString("X")}'");
             xsb.InlineTag("Players", this.AllPlayers.DelString());
             xsb.InlineTag("Idle", this.IdlePlayers.DelString());
 

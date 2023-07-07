@@ -48,7 +48,7 @@ namespace Leagueinator.Model {
 
         public XMLStringBuilder ToXML() {
             XMLStringBuilder xsb = new XMLStringBuilder();
-            xsb.OpenTag("Event");
+            xsb.OpenTag("Event", $"hash='{this.GetHashCode().ToString("X")}'");
             xsb.InlineTag("Players", this.SeekDeep<PlayerInfo>().DelString());
             foreach (var round in this.Rounds) {
                 xsb.AppendXML(round.ToXML());
@@ -70,6 +70,24 @@ namespace Leagueinator.Model {
 
         public void ForEach(Action<Round> value) {
             this.Rounds.ForEach(value);
+        }
+
+        public Round PrevRound(Round round) {
+            Round prev = null;
+            foreach(Round r in this.Rounds) {
+                if (r == round) return prev;
+                prev = r;
+            }
+            return null;
+        }
+
+        public Round NextRound(Round round) {
+            Round prev = null;
+            foreach (Round r in this.Rounds) {
+                if (prev == round) return r;
+                prev = r;
+            }
+            return null;
         }
     }
 

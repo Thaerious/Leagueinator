@@ -13,7 +13,7 @@ namespace Leagueinator.Search_Algorithms {
         public T Run<T>(T member, Action<T> func = null) where T : ASolution {
             int bestScore = member.Evaluate();
             T current = (T)member.Clone();
-            T best = member;
+            T best = current;
 
             Debug.WriteLine($"Starting value {bestScore}");
 

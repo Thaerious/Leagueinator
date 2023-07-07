@@ -5,7 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using Leagueinator.Components;
 using Leagueinator.Model;
-using Leagueinator.Model.Search_Algorithms;
+using Leagueinator.Search_Algorithms.Solutions;
 using Leagueinator.Search_Algorithms;
 using Leagueinator.Utility_Classes;
 
@@ -151,7 +151,7 @@ namespace Leagueinator.Forms {
         }
 
         private void Menu_File_Save(object sender, EventArgs e) {
-            if (this.filename == null) {
+            if (this.filename.IsEmpty()) {
                 this.Menu_File_SaveAs(sender, e);
             }
             else {
@@ -274,7 +274,21 @@ namespace Leagueinator.Forms {
         }
 
         private void Menu_Event_AssignLanes(object sender, EventArgs e) {
+            var lEvent = this.editEventPanel.LeagueEvent;
+            Round round = this.editEventPanel.CurrentRound;
 
+            var solution = new LaneSolution(lEvent, round);
+            var algo = new GreedyWalk();
+            
+            int index = lEvent.Rounds.IndexOf(round);
+
+            var best = algo.Run(solution, s => {
+                Debug.WriteLine($"{algo.Generation} : [{s.Evaluate()}]");
+            });
+
+            lEvent.Rounds[index] = best.Round;
+            this.editEventPanel.ReplaceCurrentRound(best.Round);
+            this.editEventPanel.RefreshRound();
         }
 
         private void randomizeToolStripMenuItem_Click(object sender, EventArgs e) {

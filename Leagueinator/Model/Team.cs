@@ -28,7 +28,12 @@ namespace Leagueinator.Model {
 
         public XMLStringBuilder ToXML() {
             XMLStringBuilder xsb = new XMLStringBuilder();
-            xsb.InlineTag("Team", this.Players.DelString());
+            xsb.OpenTag("Team", $"hash='{this.GetHashCode().ToString("X")}'");
+            
+            foreach ( var player in this.Players ) {
+                xsb.AppendXML( player.ToXML() );
+            }
+            
             return xsb;
         }
 

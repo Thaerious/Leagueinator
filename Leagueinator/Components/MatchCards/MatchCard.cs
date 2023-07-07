@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -8,11 +9,12 @@ using Leagueinator.Model;
 namespace Leagueinator.Components {
     public partial class MatchCard : UserControl {
 
-        public static MatchCard NewMatchCard(int teamSize, int lane, Match match) {
+        public static MatchCard NewMatchCard(int teamSize, int lane, Round round, Match match) {
             switch (teamSize) {
                 case 1: {
                         return new MatchCard_1 {
                             Name = $"matchCard{lane}",
+                            Round = round,
                             Match = match,
                             Lane = lane
                         };
@@ -20,6 +22,7 @@ namespace Leagueinator.Components {
                 case 2: {
                         return new MatchCard_2 {
                             Name = $"matchCard{lane}",
+                            Round = round,
                             Match = match,
                             Lane = lane
                         };
@@ -27,6 +30,7 @@ namespace Leagueinator.Components {
                 case 3: {
                         return new MatchCard_3 {
                             Name = $"matchCard{lane}",
+                            Round = round,
                             Match = match,
                             Lane = lane
                         };
@@ -34,6 +38,7 @@ namespace Leagueinator.Components {
                 case 4: {
                         return new MatchCard_4 {
                             Name = $"matchCard{lane}",
+                            Round = round,
                             Match = match,
                             Lane = lane
                         };
@@ -46,6 +51,13 @@ namespace Leagueinator.Components {
             get => this._lane;
             set {
                 this._lane = value;
+            }
+        }
+
+        public virtual Round Round {
+            get => this._round;
+            set {
+                this._round = value;
             }
         }
 
@@ -73,7 +85,6 @@ namespace Leagueinator.Components {
         /// <param name="e"></param>
         internal virtual void DoDrop(object receiver, DragEventArgs e) {
             if (!(receiver is MatchLabel matchLabel)) return;
-
             PlayerDragData data = (PlayerDragData)e.Data.GetData(typeof(PlayerDragData));
             data.Destination = receiver;
         }
@@ -85,8 +96,8 @@ namespace Leagueinator.Components {
 
             srcLabel.ForeColor = Color.LightGray;
             var data = new PlayerDragData { Source = srcLabel, PlayerInfo = srcLabel.PlayerInfo };
-
             this.DoDragDrop(data, DragDropEffects.Move);
+
             srcLabel.ForeColor = Color.Black;
             if (data.Destination == null) return;
 
@@ -104,11 +115,10 @@ namespace Leagueinator.Components {
             if (data.Destination.GetType() == typeof(MatchLabel)) {
                 MatchLabel destLabel = (MatchLabel)data.Destination;
 
-                srcLabel.PlayerInfo = destLabel.PlayerInfo;
-                destLabel.PlayerInfo = data.PlayerInfo;
+                (srcLabel.PlayerInfo, destLabel.PlayerInfo) = (destLabel.PlayerInfo, srcLabel.PlayerInfo);
 
-                this.Match.Teams[srcLabel.Team][srcLabel.Position] = srcLabel.PlayerInfo;
-                this.Match.Teams[destLabel.Team][destLabel.Position] = destLabel.PlayerInfo;
+                this.Round[srcLabel.Lane][srcLabel.Team][srcLabel.Position] = srcLabel.PlayerInfo;
+                this.Round[destLabel.Lane][destLabel.Team][destLabel.Position] = destLabel.PlayerInfo;
                 IsSaved.Singleton.Value = false;
             }
         }
@@ -123,6 +133,7 @@ namespace Leagueinator.Components {
 
         private int _lane = 0;
         private Match _match;
+        private Round _round;
         internal Label labelLane = new System.Windows.Forms.Label();
     }
 }

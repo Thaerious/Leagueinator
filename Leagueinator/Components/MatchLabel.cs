@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using Leagueinator.Model;
@@ -13,7 +14,7 @@ namespace Leagueinator.Components {
 
         public int Team { get; set; } = 0;
         public int Position { get; set; } = 0;
-        public int Lane => (this.Parent as MatchCard).Lane;
+        public int Lane => this.Parent != null ? (this.Parent as MatchCard).Lane : -1;
 
         public MatchLabel() : base() {
             this.InitializeComponent();
@@ -32,10 +33,15 @@ namespace Leagueinator.Components {
         public PlayerInfo PlayerInfo {
             get { return this._playerInfo; }
             set {
+                Debug.WriteLine($"Set Player Info {this} {value?.ToXML()}");
                 this._playerInfo = value;
                 if (value == null) this.Text = "";
                 else this.Text = this._playerInfo.Name;
             }
+        }
+
+        public override string ToString() {
+            return $"MatchLabel [lane = {this?.Lane}, team = {this?.Team}, pos = {this?.Position}]";
         }
 
         private void InitializeComponent() {

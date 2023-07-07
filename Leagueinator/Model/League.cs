@@ -30,7 +30,7 @@ namespace Leagueinator.Model {
         /// <returns></returns>
         public XMLStringBuilder ToXML() {
             XMLStringBuilder xsb = new XMLStringBuilder();
-            xsb.OpenTag("League");
+            xsb.OpenTag("League", $"hash='{this.GetHashCode().ToString("X")}'");
             xsb.InlineTag("Players", this.SeekDeep<PlayerInfo>().DelString());
             foreach (var lEvent in this.Events) {
                 xsb.AppendXML(lEvent.ToXML());

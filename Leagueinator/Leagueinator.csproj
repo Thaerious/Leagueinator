@@ -187,15 +187,6 @@
     <Compile Include="Components\FlowPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\FlexMatchCard\FlexMatchCard.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Components\FlexMatchCard\FlexMatchCard.Designer.cs">
-      <DependentUpon>FlexMatchCard.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Components\FlexMatchCard\FlexMatchCard.Events.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Components\MatchCards\MatchCard.4.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -300,8 +291,8 @@
     </Compile>
     <Compile Include="Forms\IsSaved.cs" />
     <Compile Include="Model\ModelExtensions.cs" />
-    <Compile Include="Model\Search_Algorithms\PartnerSolution.cs" />
-    <Compile Include="Model\Search_Algorithms\CountPartners.cs" />
+    <Compile Include="Search_Algorithms\Solutions\PartnerSolution.cs" />
+    <Compile Include="Search_Algorithms\Solutions\CountPartners.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Forms\FormMain.cs">
       <SubType>Form</SubType>
@@ -318,17 +309,15 @@
     <Compile Include="Model\LeagueEvent.cs" />
     <Compile Include="Model\Team.cs" />
     <Compile Include="Model\PlayerInfo.cs" />
+    <Compile Include="Search_Algorithms\Solutions\LaneSolution.cs" />
     <Compile Include="Utility_Classes\CollectionExtensions.cs" />
     <Compile Include="Utility_Classes\ScoreCardPrinter.cs" />
-    <Compile Include="Utility_Classes\ToStringExtentions.cs" />
+    <Compile Include="Utility_Classes\StringExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility_Classes\StringInterpolator.cs" />
     <Compile Include="Utility_Classes\RandomExtensions.cs" />
     <Compile Include="Utility_Classes\XMLStringBuilder.cs" />
-    <EmbeddedResource Include="Components\FlexMatchCard\FlexMatchCard.resx">
-      <DependentUpon>FlexMatchCard.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Components\MatchCards\MatchCard.4.resx">
       <DependentUpon>MatchCard.4.cs</DependentUpon>
     </EmbeddedResource>

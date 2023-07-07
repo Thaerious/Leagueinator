@@ -102,7 +102,6 @@ namespace Leagueinator.Components {
         }
 
         private void Context_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
-            Debug.WriteLine("Context_Opening");
             if (this.SelectedItems.Count == 0) {
                 e.Cancel = true;
             }

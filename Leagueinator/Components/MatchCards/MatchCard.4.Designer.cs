@@ -108,7 +108,7 @@
             this.labelP5.Position = 1;
             this.labelP5.Size = new System.Drawing.Size(113, 29);
             this.labelP5.TabIndex = 7;
-            this.labelP5.Team = 0;
+            this.labelP5.Team = 1;
             this.labelP5.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDrop);
             this.labelP5.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnEnter);
             this.labelP5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StartDrag);
@@ -127,7 +127,7 @@
             this.labelP4.Position = 0;
             this.labelP4.Size = new System.Drawing.Size(113, 29);
             this.labelP4.TabIndex = 6;
-            this.labelP4.Team = 0;
+            this.labelP4.Team = 1;
             this.labelP4.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDrop);
             this.labelP4.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnEnter);
             this.labelP4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StartDrag);
@@ -153,10 +153,10 @@
             this.labelP6.Margin = new System.Windows.Forms.Padding(0);
             this.labelP6.Name = "labelP6";
             this.labelP6.PlayerInfo = null;
-            this.labelP6.Position = 1;
+            this.labelP6.Position = 2;
             this.labelP6.Size = new System.Drawing.Size(113, 29);
             this.labelP6.TabIndex = 10;
-            this.labelP6.Team = 0;
+            this.labelP6.Team = 1;
             this.labelP6.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDrop);
             this.labelP6.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnEnter);
             this.labelP6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StartDrag);
@@ -172,7 +172,7 @@
             this.labelP2.Margin = new System.Windows.Forms.Padding(0);
             this.labelP2.Name = "labelP2";
             this.labelP2.PlayerInfo = null;
-            this.labelP2.Position = 1;
+            this.labelP2.Position = 2;
             this.labelP2.Size = new System.Drawing.Size(113, 29);
             this.labelP2.TabIndex = 9;
             this.labelP2.Team = 0;
@@ -191,10 +191,10 @@
             this.labelP7.Margin = new System.Windows.Forms.Padding(0);
             this.labelP7.Name = "labelP7";
             this.labelP7.PlayerInfo = null;
-            this.labelP7.Position = 1;
+            this.labelP7.Position = 3;
             this.labelP7.Size = new System.Drawing.Size(113, 29);
             this.labelP7.TabIndex = 12;
-            this.labelP7.Team = 0;
+            this.labelP7.Team = 1;
             this.labelP7.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnDrop);
             this.labelP7.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnEnter);
             this.labelP7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StartDrag);
@@ -210,7 +210,7 @@
             this.labelP3.Margin = new System.Windows.Forms.Padding(0);
             this.labelP3.Name = "labelP3";
             this.labelP3.PlayerInfo = null;
-            this.labelP3.Position = 1;
+            this.labelP3.Position = 3;
             this.labelP3.Size = new System.Drawing.Size(113, 29);
             this.labelP3.TabIndex = 11;
             this.labelP3.Team = 0;

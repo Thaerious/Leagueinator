@@ -11,13 +11,7 @@ namespace Leagueinator.Utility_Classes {
         private readonly Stack<string> CurrentTag = new Stack<string>();
 
         public XMLStringBuilder OpenTag(string name, params string[] attributes) {
-            var text = $"<{name}";
-
-            foreach (var attr in attributes) {
-                text += ($" {attr}");
-            }
-
-            text += ">";
+            var text = $"<{name} {attributes.DelString(" ")}>";
 
             this.lines.Add(new IndentedString(this.Depth, text));
             this.CurrentTag.Push(name);
@@ -47,6 +41,12 @@ namespace Leagueinator.Utility_Classes {
 
         public XMLStringBuilder InlineTag(string tag, string text) {
             var t = $"<{tag}>{text}</{tag}>";
+            this.lines.Add(new IndentedString(this.Depth, t));
+            return this;
+        }
+
+        public XMLStringBuilder InlineTag(string tag, string text, params string[] attributes) {
+            var t = $"<{tag} {attributes.DelString(" ")}>{text}</{tag}>";
             this.lines.Add(new IndentedString(this.Depth, t));
             return this;
         }
