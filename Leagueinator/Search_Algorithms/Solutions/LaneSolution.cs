@@ -6,17 +6,14 @@ using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Search_Algorithms.Solutions {
     public class LaneSolution : ASolution {
-        private static Random random = new Random();
+        private static readonly Random random = new Random();
         private readonly LeagueEvent LeagueEvent;
-        private readonly Round Ignore;
-        private static readonly Random rng = new Random();
-        public readonly Round Round;
+        public readonly Round Reference;
 
         public LaneSolution(LeagueEvent leagueEvent, Round round) : base(leagueEvent.Settings.LaneCount) {
             this.LeagueEvent = leagueEvent;
-            this.Round = round;
+            this.Reference = round.DeepCopy();
 
-            Debug.WriteLine(leagueEvent.Settings.LaneCount);
             for (int lane = 0; lane < leagueEvent.Settings.LaneCount; lane++) {
                 this[lane] = lane;
             }
@@ -25,21 +22,20 @@ namespace Leagueinator.Search_Algorithms.Solutions {
         public override int Evaluate() {
             int laneCount = this.LeagueEvent.Settings.LaneCount;
             int sum = 0;
-
-            foreach (Allele a in this) {
-                Debug.WriteLine(a);
-                Match match = this.Round[a.Value];
-                match.Players.ForEach(p => sum += Count(p, a.Index));
+            
+            for (int lane = 0; lane < this.Size; lane++){                
+                Match match = this.Reference[this[lane]];
+                match.Players.ForEach(p => sum += Count(p, lane));
             }
 
             return sum;
         }
 
         public Round Value() {
-            var newRound = new Round(this.Round.Settings);
+            var newRound = new Round(this.Reference.Settings);
 
-            foreach (Allele a in this) {
-                newRound[a.Index] = this.Round[a.Value].DeepCopy();
+            for (int i = 0; i < this.Size; i++) {
+                newRound[i] = this.Reference[this[i]];
             }
 
             return newRound;
@@ -57,9 +53,11 @@ namespace Leagueinator.Search_Algorithms.Solutions {
             int sum = 0;
             
             foreach (Round round in this.LeagueEvent.Rounds) {
-                if (round == this.Round) continue;
                 Match match = round[lane];
-                if (match.Players.Contains(player)) sum++;
+                if (match.Players.Contains(player)) {
+                    Debug.WriteLine($"Player {player.Name} in Lane {lane} sum = {sum + 1}");
+                    sum++;
+                }
             }
 
             return sum;
@@ -87,7 +85,9 @@ namespace Leagueinator.Search_Algorithms.Solutions {
         }
 
         public override ASolution Clone() {
-            return new LaneSolution(this.LeagueEvent, this.Round);
+            LaneSolution that = new LaneSolution(this.LeagueEvent, this.Reference);
+            for (int i = 0; i < this.Size; i++) that[i] = this[i];
+            return that;
         }
 
         public override void Mutate() {

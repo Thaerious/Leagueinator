@@ -26,7 +26,6 @@ namespace Leagueinator.Model {
             set {
                 if (!this.Matches.Contains(match)) throw new InvalidOperationException();
                 int idx = this.Matches.IndexOf(match);
-                Debug.WriteLine($"Set index {idx} to {value.GetHashCode().ToString("X")}");
                 this._matches[idx] = value;
             }
         }
@@ -84,8 +83,12 @@ namespace Leagueinator.Model {
             xsb.InlineTag("Idle", this.IdlePlayers.DelString());
 
             for (int i = 0; i < this._matches.Length; i++) {
-                if (this._matches[i].Players.Count == 0) continue;
-                xsb.AppendXML(this._matches[i].ToXML(i));
+                if (this._matches[i].Players.Count == 0) {
+                    xsb.InlineTag("Match", "", $"lane='{i}'");
+                }
+                else {
+                    xsb.AppendXML(this._matches[i].ToXML(i));
+                }
             }
 
             xsb.CloseTag();

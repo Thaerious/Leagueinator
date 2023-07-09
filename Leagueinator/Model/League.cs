@@ -16,7 +16,7 @@ namespace Leagueinator.Model {
         /// <returns></returns>
         public LeagueEvent AddEvent(string eventName, string date, Settings settings) {
             var lEvent = new LeagueEvent(eventName, date, settings);
-            var round = lEvent.AddRound();
+            var round = lEvent.NewRound();
             round.IdlePlayers.AddRange(this.SeekDeep<PlayerInfo>().Unique());
             this.Events.Add(lEvent);
             return lEvent;

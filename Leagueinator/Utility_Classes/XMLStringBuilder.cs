@@ -39,8 +39,11 @@ namespace Leagueinator.Utility_Classes {
             return this;
         }
 
-        public XMLStringBuilder InlineTag(string tag, string text) {
-            var t = $"<{tag}>{text}</{tag}>";
+        public XMLStringBuilder InlineTag(string tag, string text = "") {
+            var t = "";
+            if (text == "") t = $"<{tag}/>";
+            else t = $"<{tag}>{text}</{tag}>";
+
             this.lines.Add(new IndentedString(this.Depth, t));
             return this;
         }

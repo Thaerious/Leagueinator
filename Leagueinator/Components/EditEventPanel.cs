@@ -18,13 +18,6 @@ namespace Leagueinator.Components {
             get {
                 return this.currentRoundButton?.Round;
             }
-
-            set {
-                if (this.currentRoundButton?.Round == null) return;
-                int index = this.leagueEvent.IndexOf(this.currentRoundButton?.Round);
-                this.leagueEvent[index] = value;
-                this.currentRoundButton.Round = value;
-            }
         }
 
         public EditEventPanel() {

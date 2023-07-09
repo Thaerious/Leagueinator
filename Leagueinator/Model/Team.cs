@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Model {
@@ -34,6 +35,8 @@ namespace Leagueinator.Model {
                 xsb.AppendXML( player.ToXML() );
             }
             
+            xsb.CloseTag();
+
             return xsb;
         }
 
@@ -82,9 +85,11 @@ namespace Leagueinator.Model {
         }
 
         public Team DeepCopy() {
-            return new Team(this.settings) {
+            var t = new Team(this.settings) {
                 _players = this._players.DeepCopy()
             };
+
+            return t;
         }
     }
 }

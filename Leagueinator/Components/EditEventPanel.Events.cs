@@ -37,7 +37,7 @@ namespace Leagueinator.Components {
         }
 
         private void HndAddRound(object sender, EventArgs e) {
-            this.AddRound(this.leagueEvent.AddRound());
+            this.AddRound(this.leagueEvent.NewRound());
             IsSaved.Singleton.Value = false;
         }
 

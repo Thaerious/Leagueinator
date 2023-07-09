@@ -10,9 +10,9 @@ namespace TestLeagueinator {
         public static LeagueEvent NewEvent() {
             var lEvent = new LeagueEvent(new Settings());
 
-            lEvent.AddRound();
-            lEvent.AddRound();
-            lEvent.AddRound();
+            lEvent.NewRound();
+            lEvent.NewRound();
+            lEvent.NewRound();
 
             // First Round
             lEvent[0][0][0][0] = new PlayerInfo("Adam");
@@ -73,7 +73,7 @@ namespace TestLeagueinator {
         public void Evaluate_1() {
             var lEvent = new LeagueEvent(new Settings());
 
-            Round r = lEvent.AddRound();
+            Round r = lEvent.NewRound();
             r[0][0][0] = new PlayerInfo("Adam");
             r[0][0][1] = new PlayerInfo("Bently");
             r[0][1][0] = new PlayerInfo("Cain");
@@ -87,7 +87,7 @@ namespace TestLeagueinator {
         [TestMethod]
         public void Evaluate_2() {
             var lEvent = new LeagueEvent(new Settings());
-            lEvent.AddRound();
+            lEvent.NewRound();
 
             // First Round
             lEvent[0][0][0][0] = new PlayerInfo("Adam");
@@ -103,8 +103,8 @@ namespace TestLeagueinator {
         [TestMethod]
         public void Evaluate_3() {
             var lEvent = new LeagueEvent(new Settings());
-            lEvent.AddRound();
-            lEvent.AddRound();
+            lEvent.NewRound();
+            lEvent.NewRound();
 
             //     r  m  t  p   
             lEvent[0][0][0][0] = new PlayerInfo("Adam");
@@ -125,7 +125,7 @@ namespace TestLeagueinator {
         [TestMethod]
         public void Randomize() {
             var lEvent = new LeagueEvent(new Settings());
-            lEvent.AddRound();
+            lEvent.NewRound();
 
             //     r  m  t  p  
             lEvent[0][0][0][0] = new PlayerInfo("Adam");
@@ -142,7 +142,7 @@ namespace TestLeagueinator {
         [TestMethod]
         public void RandomizeEmpty() {
             var lEvent = new LeagueEvent(new Settings());
-            lEvent.AddRound();
+            lEvent.NewRound();
 
             //     r  m  t  p  
             lEvent[0][0][0][0] = new PlayerInfo("Adam");

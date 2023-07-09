@@ -330,7 +330,6 @@
             // 
             // editEventPanel
             // 
-            this.editEventPanel.CurrentRound = null;
             this.editEventPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.editEventPanel.LeagueEvent = null;
             this.editEventPanel.Location = new System.Drawing.Point(0, 0);

@@ -19,8 +19,7 @@ namespace Leagueinator.Model {
         } = new List<Round>();
 
         public Round this[int key] {
-            get { return this.Rounds[key]; }
-            set { this.Rounds.Remove(this.Rounds[key]); }
+            get { return this.Rounds[key]; }            
         }
 
         public int Size { get => this.Rounds.Count; }
@@ -40,10 +39,20 @@ namespace Leagueinator.Model {
         /// <summary>
         /// Add a new empty round to this event.
         /// </summary>
-        public Round AddRound() {
+        public Round NewRound() {
             var round = new Round(this.SeekDeep<PlayerInfo>().Unique(), this.Settings);
             this.Rounds.Add(round);
             return round;
+        }
+
+        public Round AddRound(Round round) {
+            this.Rounds.Add(round);
+            return round;
+        }
+
+        public void ReplaceRound(Round replace, Round with) {
+            int index = this.Rounds.IndexOf(replace);
+            this.Rounds[index] = with;
         }
 
         public XMLStringBuilder ToXML() {

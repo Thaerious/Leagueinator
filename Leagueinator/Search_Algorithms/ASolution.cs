@@ -4,14 +4,7 @@ using System.Collections.Generic;
 
 namespace Leagueinator.Search_Algorithms {
 
-    public class Allele {
-        public int Index;
-        public int Value;
-
-        public override string ToString() => $"[{Index}, {Value}]";
-    }
-
-    public abstract class ASolution : IEnumerable<Allele> {
+    public abstract class ASolution : IEnumerable<int> {
         public int this[int i] {
             get => this.values[i];
             set => this.values[i] = value;
@@ -31,24 +24,17 @@ namespace Leagueinator.Search_Algorithms {
 
         public abstract void Mutate();
 
-        public IEnumerator<Allele> GetEnumerator() {
+        public IEnumerator<int> GetEnumerator() {
             int index = 0;
             while (index < this.Size) {
-                yield return new Allele {
-                    Index = index,
-                    Value = this[index]
-                };
-                index++;
+                yield return this[index++];
             }
         }
 
         IEnumerator IEnumerable.GetEnumerator() {
             int index = 0;
             while (index < this.Size) {
-                yield return new Allele {
-                    Index = index++,
-                    Value = this[index]
-                };
+                yield return this[index++];
             }
         }
 

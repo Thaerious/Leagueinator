@@ -11,9 +11,9 @@ namespace TestLeagueinator {
         public static LeagueEvent NewEvent() {
             var lEvent = new LeagueEvent(new Settings());
 
-            lEvent.AddRound();
-            lEvent.AddRound();
-            lEvent.AddRound();
+            lEvent.NewRound();
+            lEvent.NewRound();
+            lEvent.NewRound();
 
             // First Round
             lEvent[0][0][0][0] = new PlayerInfo("Adam");
@@ -40,7 +40,7 @@ namespace TestLeagueinator {
         public void Basic() {
             var lEvent = new LeagueEvent(new Settings());
 
-            lEvent.AddRound();
+            lEvent.NewRound();
 
             // First Round
             //     R  M  T  P

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Leagueinator.Utility_Classes;
+using System;
 using System.Diagnostics;
 namespace Leagueinator.Search_Algorithms {
     public class GreedyWalk {
@@ -11,29 +12,26 @@ namespace Leagueinator.Search_Algorithms {
             get => this.generation;
         }
 
-        public T Run<T>(T member, Action<T> func = null) where T : ASolution {
+        public T Run<T>(T member, Action<T> cb = null) where T : ASolution {
             int bestScore = member.Evaluate();
             T current = (T)member.Clone();
             T best = current;
 
-            Debug.WriteLine($"Starting value {bestScore}");
-
-            func?.Invoke(current);
+            cb?.Invoke(best);
             while (bestScore > 0 && this.generation++ < this.MaxGen) {
                 current = (T)current.Clone();
                 current.Mutate();
                 int eval = current.Evaluate();
                 if (eval <= bestScore) {
                     bestScore = eval;
-                    best = (T)current.Clone();
+                    best = (T)current.Clone();                    
                 }
                 else {
                     current = best;
                 }
-                func?.Invoke(current);
+                cb?.Invoke(best);
             }
 
-            Debug.WriteLine($"Final value {bestScore}");
             return best;
         }
 

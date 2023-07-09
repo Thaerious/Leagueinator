@@ -280,14 +280,14 @@ namespace Leagueinator.Forms {
             var solution = new LaneSolution(lEvent, round);
             var algo = new GreedyWalk();
             
-            int index = lEvent.Rounds.IndexOf(round);
+            int index = lEvent.IndexOf(round);
 
             var best = algo.Run(solution, s => {
                 Debug.WriteLine($"{algo.Generation} : [{s.Evaluate()}]");
             });
 
-            lEvent.Rounds[index] = best.Round;
-            this.editEventPanel.ReplaceCurrentRound(best.Round);
+            lEvent.Rounds[index] = best.Reference;
+            this.editEventPanel.ReplaceCurrentRound(best.Reference);
             this.editEventPanel.RefreshRound();
         }
 

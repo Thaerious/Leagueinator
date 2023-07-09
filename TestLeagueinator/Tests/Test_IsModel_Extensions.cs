@@ -150,13 +150,13 @@ namespace TestLeagueinator
         public void Event() {
             var target = new LeagueEvent(new Settings());
 
-            var r1 = target.AddRound();
+            var r1 = target.NewRound();
             r1.Matches[0].Teams[0][0] = new PlayerInfo("Albert");
             r1.Matches[0].Teams[0][1] = new PlayerInfo("Bert");
             r1.Matches[0].Teams[1][0] = new PlayerInfo("Chuck");
             r1.Matches[0].Teams[1][1] = new PlayerInfo("Desere");
 
-            var r2 = target.AddRound(); // adds idle players
+            var r2 = target.NewRound(); // adds idle players
 
             var list = target.SeekDeep<PlayerInfo>();
             Debug.WriteLine(list.DelString());
