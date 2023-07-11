@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using Leagueinator.Model;
-using Leagueinator.Search_Algorithms.Solutions;
+using Leagueinator.Algorithms.Solutions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestLeagueinator {

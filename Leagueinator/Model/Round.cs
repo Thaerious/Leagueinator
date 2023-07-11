@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Leagueinator.Utility_Classes;
+using Leagueinator.Model.Settings;
 
 namespace Leagueinator.Model {
     [Serializable]
     public class Round : HasDeepCopy<Round>{
-        public readonly Settings Settings;
+        public readonly Setting Settings;
         private Match[] _matches;
 
         [Model]
@@ -47,13 +48,13 @@ namespace Leagueinator.Model {
 
         public List<PlayerInfo> ActivePlayers => this.Matches.SeekDeep<PlayerInfo>().Unique();
 
-        public Round(Settings settings) {
+        public Round(Setting settings) {
             if (settings == null) throw new NullReferenceException("settings");
             this.Settings = settings;
             this._matches = new Match[settings.LaneCount].Populate(() => new Match(settings));
         }
 
-        public Round(List<PlayerInfo> idlePlayers, Settings settings) : this(settings) {
+        public Round(List<PlayerInfo> idlePlayers, Setting settings) : this(settings) {
             this.Settings = settings;
             this.IdlePlayers = new List<PlayerInfo>(idlePlayers);
         }

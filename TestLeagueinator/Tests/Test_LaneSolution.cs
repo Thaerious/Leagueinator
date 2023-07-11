@@ -1,6 +1,6 @@
 ﻿using Leagueinator.Model;
-using Leagueinator.Search_Algorithms;
-using Leagueinator.Search_Algorithms.Solutions;
+using Leagueinator.Algorithms;
+using Leagueinator.Algorithms.Solutions;
 using Leagueinator.Utility_Classes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;

@@ -18,6 +18,8 @@ namespace Leagueinator.Components {
         }
 
         private void OnExit(object sender, EventArgs e) {
+            if (DragDropCard.source == null) return;
+            if (DragDropCard.destination == null) return;
             DragDropCard.SwapDestAndSrc();
             DragDropCard.source.Labels().ForEach(c => c.ForeColor = Color.Black);
             DragDropCard.destination.Labels().ForEach(c => c.ForeColor = Color.Black);
@@ -27,6 +29,9 @@ namespace Leagueinator.Components {
 
         private void OnEnter(object sender, DragEventArgs e) {
             if (!(sender is MatchCard currentCard)) return;
+            if (DragDropCard.source == null) return;
+            if (DragDropCard.destination == null) return;
+
             e.Effect = DragDropEffects.Move;
 
             DragDropCard.destination = sender as MatchCard;
@@ -38,6 +43,9 @@ namespace Leagueinator.Components {
         private void OnDrop(object sender, DragEventArgs e) {
             if (!(sender is MatchCard currentCard)) return;
             DragDropCard.source.Labels().ForEach(c => c.ForeColor = Color.Black);
+
+            DragDropCard.source = null;
+            DragDropCard.destination = null;
         }
 
         private void StartDrag(object sender, MouseEventArgs e) {

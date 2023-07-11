@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Leagueinator.Utility_Classes;
+using Leagueinator.Model.Settings;
 
 namespace Leagueinator.Model {
     [Serializable]
     public class League {
-        public readonly Settings settings;
+        public readonly Settings.Setting settings;
 
         [Model] public List<LeagueEvent> Events { get; private set; } = new List<LeagueEvent>();
 
@@ -14,7 +15,7 @@ namespace Leagueinator.Model {
         /// Will add all current league players to the event.
         /// </summary>
         /// <returns></returns>
-        public LeagueEvent AddEvent(string eventName, string date, Settings settings) {
+        public LeagueEvent AddEvent(string eventName, string date, Setting settings) {
             var lEvent = new LeagueEvent(eventName, date, settings);
             var round = lEvent.NewRound();
             round.IdlePlayers.AddRange(this.SeekDeep<PlayerInfo>().Unique());

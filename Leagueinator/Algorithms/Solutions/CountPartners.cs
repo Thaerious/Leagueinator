@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Leagueinator.Model;
 
-namespace Leagueinator.Search_Algorithms.Solutions {
+namespace Leagueinator.Algorithms.Solutions {
     public class CountPartners {
         public static int Count(LeagueEvent lEvent, Round targetRound) {
             var graph = new Graph();

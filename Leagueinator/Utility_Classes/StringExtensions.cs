@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Leagueinator.Utility_Classes {
@@ -11,6 +12,11 @@ namespace Leagueinator.Utility_Classes {
             if (str == null) return true;
             if (str.Length == 0) return true;
             return false;
+        }
+
+        public static string GetHashCode(this object obj, string format) {
+            if (obj == null) return null;
+            return obj.GetHashCode().ToString(format);
         }
     }
 }

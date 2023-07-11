@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using Leagueinator.Utility_Classes;
+using Leagueinator.Model.Settings;
 
 namespace Leagueinator.Model {
     [Serializable]
     public class Team : HasDeepCopy<Team>{
-        public readonly Settings settings;
+        public readonly Setting settings;
 
         private PlayerInfo[] _players;
         public PlayerInfo this[int key] {
@@ -22,7 +23,7 @@ namespace Leagueinator.Model {
 
         [Model] public List<PlayerInfo> Players => new List<PlayerInfo>().AddUnique(this._players);
 
-        public Team(Settings settings) {
+        public Team(Setting settings) {
             this.settings = settings;
             this._players = new PlayerInfo[settings.TeamSize];
         }

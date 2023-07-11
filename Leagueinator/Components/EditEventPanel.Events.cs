@@ -37,16 +37,24 @@ namespace Leagueinator.Components {
         }
 
         private void HndAddRound(object sender, EventArgs e) {
-            this.AddRound(this.leagueEvent.NewRound());
+            var round = this.leagueEvent.NewRound();
+            if (round != this.leagueEvent[0]) { 
+                round = this.SetupRound(round);
+            }
+
+            this.AddRound(round);
+            this.RefreshRound();
             IsSaved.Singleton.Value = false;
         }
 
         private void HndRemoveRound(object sender, EventArgs e) {
-            if (this.currentRoundButton != null) {
-                this.flowRounds.Controls.Remove(this.currentRoundButton);
-                this.currentRoundButton = null;
-                IsSaved.Singleton.Value = false;
-            }
+            if (this.currentRoundButton == null) return;
+            this.panelMatchCard.Visible = false;
+            this.playerListBox.Items.Clear();
+            this.LeagueEvent.RemoveRound(this.CurrentRound);
+            this.flowRounds.Controls.Remove(this.currentRoundButton);
+            this.currentRoundButton = null;
+            IsSaved.Singleton.Value = false;
         }
     }
 }

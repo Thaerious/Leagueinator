@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using Leagueinator.Utility_Classes;
+using Leagueinator.Model.Settings;
 
 namespace Leagueinator.Model {
     [Serializable]
     public class Match : HasDeepCopy<Match>{
-        public readonly Settings Settings;
+        public readonly Setting Settings;
         private Team[] _teams;
 
-        public Team this[int key] => this._teams[key];
+        public Team this[int key] {
+            get => this._teams[key];
+            set => this._teams[key] = value;
+        }
 
         [Model] public List<Team> Teams => new List<Team>().AddUnique(this._teams);
 
@@ -25,7 +29,7 @@ namespace Leagueinator.Model {
         /// </summary>
         public int Count => this._teams.Where(e => e != null).Count();
 
-        public Match(Settings settings) {
+        public Match(Setting settings) {
             this.Settings = settings;
             this._teams = new Team[settings.MatchSize].Populate(() => new Team(settings));
         }

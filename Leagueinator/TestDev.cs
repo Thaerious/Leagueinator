@@ -5,8 +5,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using Leagueinator.Forms;
 using Leagueinator.Model;
-using Leagueinator.Model.Search_Algorithms;
-using Leagueinator.Search_Algorithms;
+using Leagueinator.Model.Algorithms;
+using Leagueinator.Algorithms;
 
 namespace Leagueinator {
     internal static class Program {

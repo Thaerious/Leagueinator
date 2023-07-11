@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Leagueinator.Model;
-using Leagueinator.Search_Algorithms;
+using Leagueinator.Algorithms;
 using Leagueinator.Utility_Classes;
 
-namespace Leagueinator.Search_Algorithms.Solutions {
+namespace Leagueinator.Algorithms.Solutions {
 
     public class PartnerSolution : ASolution {
         public readonly LeagueEvent LEvent;

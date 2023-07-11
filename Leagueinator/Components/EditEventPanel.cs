@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
+using Leagueinator.Algorithms;
+using Leagueinator.Algorithms.Solutions;
 using Leagueinator.Forms;
 using Leagueinator.Model;
+using Leagueinator.Model.Settings;
+using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Components {
     public partial class EditEventPanel : UserControl {
@@ -32,15 +37,23 @@ namespace Leagueinator.Components {
                     this.flowRounds.Controls.Clear();
                     this.playerListBox.Items.Clear();
 
-                    this.leagueEvent = value;
-                    this.currentRoundButton = null;
+                    this.leagueEvent = value; 
                     this.PopulateMatches(value.Settings);
-                    this.leagueEvent.ForEach(r => this.AddRound(r));
+                    
+                    foreach(Round r  in value.Rounds) {
+                        this.AddRound(r);
+                    }
                 }
             }
         }
 
-        private void AddRound(Round round) {
+        /// <summary>
+        /// Add a round to this panel.<br>
+        /// Does not manipulate the underlying model.<br>
+        /// Set the current round to the added round.<br>
+        /// </summary>
+        /// <param name="round"></param>
+        private RoundButton AddRound(Round round) {
             var button = new RoundButton(round) {
                 Text = $"Round #{this.flowRounds.Controls.Count + 1}"
             };
@@ -51,10 +64,32 @@ namespace Leagueinator.Components {
             if (this.currentRoundButton == null) {
                 this.RoundButtonClick(button, null);
             }
+
+            return button;
+        }
+
+        private Round SetupRound(Round round) {
+            Setting setting = this.LeagueEvent.Settings;
+
+            switch (setting.MatchType) {
+                case MATCH_TYPE.RoundRobin:
+                    this.LeagueEvent.CopyPlayers(round);
+                    round = this.LeagueEvent.DoRoundRobin(round);
+                    round = this.LeagueEvent.DoAssignLanes(round);
+                    Debug.WriteLine($"Round Setup Complete {round.GetHashCode("X")}");
+                    break;
+                case MATCH_TYPE.Ranked:
+                    break;
+                case MATCH_TYPE.Brackets:
+                    break;
+            }
+
+            return round;
         }
 
         private void RoundButtonClick(object source, EventArgs _) {
             RoundButton button = (RoundButton)source;
+            this.panelMatchCard.Visible = true;
 
             if (this.currentRoundButton != null) {
                 this.currentRoundButton.BackColor = Color.White;
@@ -70,12 +105,14 @@ namespace Leagueinator.Components {
         /// <summary>
         /// Populate the match card panel with new match cards.
         /// </summary>
+        /// <return>The last card added</return>
         /// <param name="round"></param>
-        private void PopulateMatches(Settings settings) {
+        private MatchCard PopulateMatches(Setting settings) {
             this.panelMatchCard.Controls.Clear();
+            MatchCard matchCard = null;
 
             for (int lane = 0; lane < settings.LaneCount; lane++) {
-                MatchCard matchCard = MatchCard.NewMatchCard(
+                matchCard = MatchCard.NewMatchCard(
                     settings.TeamSize,
                     lane,
                     null,
@@ -83,6 +120,7 @@ namespace Leagueinator.Components {
                 );
                 this.panelMatchCard.Controls.Add(matchCard);
             }
+            return matchCard;
         }
 
         /// <summary>
@@ -90,7 +128,7 @@ namespace Leagueinator.Components {
         /// Retains the match cards currently in place.
         /// </summary>
         /// <param name="round"></param>
-        private void RePopulateMatches(Round round) {
+        private void RePopulateMatches(Round round) {            
             for (int lane = 0; lane < this.leagueEvent.Settings.LaneCount; lane++) {
                 MatchCard matchCard = this.panelMatchCard.Controls[lane] as MatchCard;
                 matchCard.Round = round;
@@ -100,6 +138,7 @@ namespace Leagueinator.Components {
 
         public void AddPlayer(PlayerInfo player, bool currentRoundOnly = true) {
             if (this.LeagueEvent == null) return;
+            if (this.CurrentRound == null) throw new Exception();
 
             if (!this.CurrentRound.SeekDeep<PlayerInfo>().Contains(player)) {
                 this.CurrentRound.IdlePlayers.Add(player);
@@ -121,7 +160,7 @@ namespace Leagueinator.Components {
             this.RePopulateMatches(this.currentRoundButton.Round);
         }
 
-        public void ReplaceCurrentRound(Round round) {
+        public void SetCurrentRound(Round round) {
             this.currentRoundButton.Round = round;
         }
     }

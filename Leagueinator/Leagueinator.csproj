@@ -180,6 +180,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\RoundRobin.cs" />
     <Compile Include="Assign_Player_Algos\RoundRobin.cs" />
     <Compile Include="Components\EditEventPanel.Events.cs">
       <SubType>UserControl</SubType>
@@ -292,26 +293,27 @@
     </Compile>
     <Compile Include="Forms\IsSaved.cs" />
     <Compile Include="Model\HasDeepCopy.cs" />
+    <Compile Include="Model\ModelAlgoExtensions.cs" />
     <Compile Include="Model\ModelExtensions.cs" />
-    <Compile Include="Search_Algorithms\Solutions\PartnerSolution.cs" />
-    <Compile Include="Search_Algorithms\Solutions\CountPartners.cs" />
-    <Compile Include="Model\Settings.cs" />
+    <Compile Include="Algorithms\Solutions\PartnerSolution.cs" />
+    <Compile Include="Algorithms\Solutions\CountPartners.cs" />
+    <Compile Include="Model\Setting.cs" />
     <Compile Include="Forms\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Search_Algorithms\GreedyWalk.cs" />
+    <Compile Include="Algorithms\GreedyWalk.cs" />
     <None Include="TestDev.cs" />
-    <Compile Include="Search_Algorithms\ASolution.cs" />
+    <Compile Include="Algorithms\ASolution.cs" />
     <Compile Include="Model\League.cs" />
     <Compile Include="Model\Match.cs" />
     <Compile Include="Model\Round.cs" />
     <Compile Include="Model\LeagueEvent.cs" />
     <Compile Include="Model\Team.cs" />
     <Compile Include="Model\PlayerInfo.cs" />
-    <Compile Include="Search_Algorithms\Solutions\LaneSolution.cs" />
+    <Compile Include="Algorithms\Solutions\LaneSolution.cs" />
     <Compile Include="Utility_Classes\CollectionExtensions.cs" />
     <Compile Include="Utility_Classes\ScoreCardPrinter.cs" />
     <Compile Include="Utility_Classes\StringExtensions.cs" />

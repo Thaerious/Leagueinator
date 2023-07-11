@@ -2,12 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using Leagueinator.Utility_Classes;
+using Leagueinator.Model.Settings;
+using System.Diagnostics;
 
 namespace Leagueinator.Model {
     [Serializable]
     public class LeagueEvent : IEnumerable<Round> {
         public readonly string Date;
-        public readonly Settings Settings;
+        public readonly Settings.Setting Settings;
         public readonly string Name;
 
         /// <summary>
@@ -24,13 +26,13 @@ namespace Leagueinator.Model {
 
         public int Size { get => this.Rounds.Count; }
 
-        public LeagueEvent(string date, String name, Settings settings) {
+        public LeagueEvent(string date, String name, Setting settings) {
             this.Date = date;
             this.Name = name;
             this.Settings = settings;
         }
 
-        public LeagueEvent(Settings settings) {
+        public LeagueEvent(Setting settings) {
             this.Date = DateTime.Today.ToString("yyyy-MM-dd");
             this.Name = "Event";
             this.Settings = settings;
@@ -50,8 +52,20 @@ namespace Leagueinator.Model {
             return round;
         }
 
+        public void AddRounds(IEnumerable<Round> rounds) {
+           foreach (Round r in rounds) this.AddRound(r);
+        }
+
         public void ReplaceRound(Round replace, Round with) {
             int index = this.Rounds.IndexOf(replace);
+
+            if (index <= 0) {
+                throw new ArgumentOutOfRangeException(
+                    $"Attempting to replace round that is not a member of League Event"
+                );
+            }
+
+            Debug.WriteLine($"Replace {replace.GetHashCode("X")} with {with.GetHashCode("X")}");
             this.Rounds[index] = with;
         }
 
@@ -77,10 +91,6 @@ namespace Leagueinator.Model {
             return this.Rounds.IndexOf(round);
         }
 
-        public void ForEach(Action<Round> value) {
-            this.Rounds.ForEach(value);
-        }
-
         public Round PrevRound(Round round) {
             Round prev = null;
             foreach(Round r in this.Rounds) {
@@ -97,6 +107,12 @@ namespace Leagueinator.Model {
                 prev = r;
             }
             return null;
+        }
+
+        internal void RemoveRound(Round round) {
+            Debug.WriteLine($"Remove Round {round.GetHashCode("X")}");
+            this.Rounds.Remove(round);
+            Debug.WriteLine(this);
         }
     }
 

@@ -1,7 +1,7 @@
 ﻿using Leagueinator.Utility_Classes;
 using System;
 using System.Diagnostics;
-namespace Leagueinator.Search_Algorithms {
+namespace Leagueinator.Algorithms {
     public class GreedyWalk {
         private int generation = 0;
         private Random random = new Random();

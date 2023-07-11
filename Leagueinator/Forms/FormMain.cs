@@ -5,8 +5,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using Leagueinator.Components;
 using Leagueinator.Model;
-using Leagueinator.Search_Algorithms.Solutions;
-using Leagueinator.Search_Algorithms;
+using Leagueinator.Algorithms.Solutions;
+using Leagueinator.Algorithms;
 using Leagueinator.Utility_Classes;
 
 namespace Leagueinator.Forms {
@@ -48,6 +48,9 @@ namespace Leagueinator.Forms {
                 if (value) this.Text = this.filename;
                 else this.Text = this.filename + " *";
             };
+
+            this.editEventPanel.RenamePlayer += new Leagueinator.Components.PlayerInfoArgs.PlayerInfoEvent(this.HndRenamePlayer);
+            this.editEventPanel.DeletePlayer += new Leagueinator.Components.PlayerInfoArgs.PlayerInfoEvent(this.HndDeletePlayer);
         }
 
         private void Menu_File_New(object sender, EventArgs e) {
@@ -83,7 +86,7 @@ namespace Leagueinator.Forms {
 
             this.editEventPanel.Visible = true;
 
-            LeagueEvent lEvent = this._league.AddEvent(
+            LeagueEvent lEvent = this.League.AddEvent(
                 childForm.EventName,
                 childForm.Date,
                 childForm.Settings
@@ -286,8 +289,8 @@ namespace Leagueinator.Forms {
                 Debug.WriteLine($"{algo.Generation} : [{s.Evaluate()}]");
             });
 
-            lEvent.Rounds[index] = best.Reference;
-            this.editEventPanel.ReplaceCurrentRound(best.Reference);
+            lEvent.ReplaceRound(round, best.Value());
+            this.editEventPanel.SetCurrentRound(best.Value());
             this.editEventPanel.RefreshRound();
         }
 
@@ -305,6 +308,21 @@ namespace Leagueinator.Forms {
 
         private void butAddEvent_Click(object sender, EventArgs e) {
             Menu_Events_Add();
+        }
+
+        private void roundRobinToolStripMenuItem_Click(object sender, EventArgs e) {
+            LeagueEvent lEvent = this.editEventPanel.LeagueEvent;
+            Round current = this.editEventPanel.CurrentRound;
+
+            if (current == null) return;
+
+            Round reference = lEvent[0];
+            RoundRobin rr = new RoundRobin(reference);
+            int index = lEvent.IndexOf(current);
+            Round newRound = rr.Value(index);
+            lEvent.ReplaceRound(current, newRound);
+            this.editEventPanel.SetCurrentRound(newRound);
+            this.editEventPanel.RefreshRound();
         }
     }
 }

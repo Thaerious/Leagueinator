@@ -1,18 +1,26 @@
 ﻿using System.Windows.Forms;
-using Leagueinator.Model;
+using Leagueinator.Model.Settings;
 
 namespace Leagueinator.Components {
     public partial class FormAddEvent : Form {
 
-        public Settings Settings {
+        public Setting Settings {
             get {
-                return new Settings {
+                var setting = new Setting {
                     TeamSize = (int)this.spinTeamSize.Value,
                     LaneCount = (int)this.spinLaneCount.Value,
                     MatchSize = 2,
                     Date = this.dateTimePicker.Text,
                     Name = this.txtName.Text
                 };
+
+                if (radRoundRobin.Checked) setting.MatchType = MATCH_TYPE.RoundRobin;
+                else if  (radBracket.Checked) setting.MatchType = MATCH_TYPE.Brackets;
+                else if (radRanked.Checked) setting.MatchType = MATCH_TYPE.Ranked;
+                else if (radPenache.Checked) setting.MatchType = MATCH_TYPE.Penache;
+                else setting.MatchType = MATCH_TYPE.None;
+
+                return setting;
             }
         }
 

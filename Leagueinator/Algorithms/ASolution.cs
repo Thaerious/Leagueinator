@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Leagueinator.Search_Algorithms {
+namespace Leagueinator.Algorithms {
 
     public abstract class ASolution : IEnumerable<int> {
         public int this[int i] {

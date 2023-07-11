@@ -4,7 +4,7 @@ using System.Diagnostics;
 using Leagueinator.Model;
 using Leagueinator.Utility_Classes;
 
-namespace Leagueinator.Search_Algorithms.Solutions {
+namespace Leagueinator.Algorithms.Solutions {
     public class LaneSolution : ASolution {
         private static readonly Random random = new Random();
         private readonly LeagueEvent LeagueEvent;
