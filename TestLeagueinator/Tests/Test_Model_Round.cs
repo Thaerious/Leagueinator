@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using Leagueinator.Model;
+using Leagueinator.Model.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestLeagueinator.Helpers;
 
@@ -13,7 +14,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void EmptyRound() {
-            var r1 = new Round(new Settings());
+            var r1 = new Round(new Setting());
             Assert.AreEqual(0, r1.AllPlayers.Count);
             Assert.AreEqual(8, r1.Matches.Count); // by default a match is inserted for each lane
             Assert.AreEqual(8, r1.MaxSize);
@@ -21,7 +22,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void OutOfBounds_0() {
-            var r1 = new Round(new Settings());
+            var r1 = new Round(new Setting());
             Assert.ThrowsException<IndexOutOfRangeException>(() => {
                 r1[8].Teams[0].Players[0] = null;
             });
@@ -29,7 +30,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void OutOfBounds_1() {
-            var r1 = new Round(new Settings());
+            var r1 = new Round(new Setting());
             Assert.ThrowsException<IndexOutOfRangeException>(() => {
                 r1[-1].Teams[0].Players[0] = null;
             });
@@ -37,7 +38,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void ResetPlayers() {
-            var r1 = new Round(new Settings());
+            var r1 = new Round(new Setting());
 
             r1.Matches[0][0][0] = new PlayerInfo("Adam");
             r1.Matches[0][0][1] = new PlayerInfo("Eve");
@@ -55,7 +56,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void Players() {
-            var r1 = new Round(new Settings());
+            var r1 = new Round(new Setting());
 
             r1.Matches[0][0][0] = new PlayerInfo("Adam");
             r1.Matches[0][0][1] = new PlayerInfo("Eve");
@@ -72,7 +73,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void Teams() {
-            var r1 = new Round(new Settings());
+            var r1 = new Round(new Setting());
 
             r1.Matches[0][0][0] = new PlayerInfo("Adam");
             r1.Matches[0][0][1] = new PlayerInfo("Eve");
@@ -89,7 +90,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void GetTeam() {
-            var r1 = new Round(new Settings());
+            var r1 = new Round(new Setting());
 
             r1.Matches[0][0][0] = new PlayerInfo("Adam");
             r1.Matches[0][0][1] = new PlayerInfo("Eve");
@@ -111,7 +112,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void Get_Team_For_Player() {
-            var r1 = new Round(new Settings());
+            var r1 = new Round(new Setting());
             r1[0][0][0] = new PlayerInfo("Adam");
             r1[0][0][1] = new PlayerInfo("Bailey");
             r1[0][1][0] = new PlayerInfo("Cain");
@@ -124,7 +125,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void Swap_By_Element() {
-            var r1 = new Round(new Settings());
+            var r1 = new Round(new Setting());
             // m  t  p
             r1[0][0][0] = new PlayerInfo("A");
             r1[0][0][1] = new PlayerInfo("B");

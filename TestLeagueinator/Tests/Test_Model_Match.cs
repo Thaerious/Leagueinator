@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using Leagueinator.Model;
+using Leagueinator.Model.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestLeagueinator.Helpers;
 
@@ -12,7 +13,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void EmptyMatch() {
-            var m1 = new Match(new Settings());
+            var m1 = new Match(new Setting());
             Assert.AreEqual(0, m1.Players.Count);
             Assert.AreEqual(2, m1.Teams.Count); // by default two empty teams are added
             Assert.AreEqual(2, m1.MaxSize);
@@ -20,7 +21,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void OutOfBounds_0() {
-            var m1 = new Match(new Settings());
+            var m1 = new Match(new Setting());
             Assert.ThrowsException<IndexOutOfRangeException>(() => {
                 m1[2][0] = new PlayerInfo("Adam");
             });
@@ -28,7 +29,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void OutOfBounds_1() {
-            var m1 = new Match(new Settings());
+            var m1 = new Match(new Setting());
             Assert.ThrowsException<IndexOutOfRangeException>(() => {
                 m1[-1][0] = new PlayerInfo("Adam");
             });
@@ -36,7 +37,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void ClearPlayers() {
-            var m1 = new Match(new Settings());
+            var m1 = new Match(new Setting());
 
             m1[0][0] = new PlayerInfo("Adam");
             m1[0][1] = new PlayerInfo("Eve");
@@ -52,7 +53,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void Players() {
-            var m1 = new Match(new Settings());
+            var m1 = new Match(new Setting());
 
             m1[0][0] = new PlayerInfo("Adam");
             m1[0][1] = new PlayerInfo("Eve");

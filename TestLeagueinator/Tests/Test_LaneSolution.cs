@@ -4,12 +4,13 @@ using Leagueinator.Algorithms.Solutions;
 using Leagueinator.Utility_Classes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
+using Leagueinator.Model.Settings;
 
 namespace TestLeagueinator {
     [TestClass]
     public class Test_LaneSolution {
         public static LeagueEvent NewEvent() {
-            var lEvent = new LeagueEvent(new Settings());
+            var lEvent = new LeagueEvent(new Setting());
 
             lEvent.NewRound();
             lEvent.NewRound();
@@ -60,7 +61,7 @@ namespace TestLeagueinator {
         /// </summary>
         [TestMethod]
         public void Simple_Repeat_Lanes() {
-            var lEvent = new LeagueEvent(new Settings());
+            var lEvent = new LeagueEvent(new Setting());
 
             lEvent.NewRound();
             lEvent.NewRound();
@@ -88,7 +89,7 @@ namespace TestLeagueinator {
         /// </summary>
         [TestMethod]
         public void Simple_Repeat_Lanes_Twice() {
-            var lEvent = new LeagueEvent(new Settings());
+            var lEvent = new LeagueEvent(new Setting());
 
             lEvent.NewRound();
             lEvent.NewRound();
@@ -133,7 +134,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Evaluate_One_Round() {
-            var lEvent = new LeagueEvent(new Settings {
+            var lEvent = new LeagueEvent(new Setting() {
                 TeamSize = 1,
                 LaneCount = 2,
                 MatchSize = 2,
@@ -159,7 +160,7 @@ namespace TestLeagueinator {
         /// </summary>
         [TestMethod]
         public void Build_Value() {
-            var lEvent = new LeagueEvent(new Settings {
+            var lEvent = new LeagueEvent(new Setting() {
                 TeamSize = 1,
                 LaneCount = 2,
                 MatchSize = 2,
@@ -185,7 +186,7 @@ namespace TestLeagueinator {
         /// </summary>
         [TestMethod]
         public void Clone() {
-            var lEvent = new LeagueEvent(new Settings {
+            var lEvent = new LeagueEvent(new Setting() {
                 TeamSize = 1,
                 LaneCount = 2,
                 MatchSize = 2,
@@ -209,7 +210,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void TestGreedyAlgo() {
-            var lEvent = new LeagueEvent(new Settings {
+            var lEvent = new LeagueEvent(new Setting() {
                 TeamSize = 1,
                 LaneCount = 2,
                 MatchSize = 2,

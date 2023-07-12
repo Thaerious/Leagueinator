@@ -16,7 +16,7 @@ namespace Leagueinator.Model {
         /// </summary>
         /// <param name="lEvent"></param>
         /// <param name="target"></param>
-        public static void CopyPlayers(this LeagueEvent lEvent, Round target) {
+        public static void CopyPlayersTo(this LeagueEvent lEvent, Round target) {
             Round source = lEvent[0];
             if (source == null) return;
 
@@ -43,9 +43,27 @@ namespace Leagueinator.Model {
         /// <returns></returns>
         public static Round DoRoundRobin(this LeagueEvent lEvent, Round target) {
             Round reference = lEvent[0];
+            reference.InjectByes();
+            Debug.WriteLine(reference);
             RoundRobin rr = new RoundRobin(reference);
             int index = lEvent.IndexOf(target);
             Round newRound = rr.Value(index);
+            lEvent.ReplaceRound(target, newRound);
+            return newRound;
+        }
+
+        /// <summary>
+        /// Replace the target round with a generated round generated from
+        /// the Penache algorithm.
+        /// </summary>
+        /// <param name="lEvent"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static Round DoPenache(this LeagueEvent lEvent, Round target) {
+            Round reference = lEvent[0];
+            Penache penache = new Penache(reference);
+            int index = lEvent.IndexOf(target);
+            Round newRound = penache.Value(index);
             lEvent.ReplaceRound(target, newRound);
             return newRound;
         }
@@ -64,7 +82,7 @@ namespace Leagueinator.Model {
             int index = lEvent.IndexOf(target);
 
             var best = algo.Run(solution, s => {
-                Debug.WriteLine($"{algo.Generation} : [{s.Evaluate()}]");
+                //Debug.WriteLine($"{algo.Generation} : [{s.Evaluate()}]");
             });
 
             Round newRound = best.Value();

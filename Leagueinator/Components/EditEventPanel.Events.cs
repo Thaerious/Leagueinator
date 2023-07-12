@@ -38,7 +38,7 @@ namespace Leagueinator.Components {
 
         private void HndAddRound(object sender, EventArgs e) {
             var round = this.leagueEvent.NewRound();
-            if (round != this.leagueEvent[0]) { 
+            if (round != this.leagueEvent[0]) {
                 round = this.SetupRound(round);
             }
 

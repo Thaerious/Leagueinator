@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Leagueinator.Model;
+using Leagueinator.Model.Settings;
+using Leagueinator.Utility_Classes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestLeagueinator.Helpers;
 
@@ -13,7 +15,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Constructor() {
-            var e1 = new LeagueEvent(new Settings());
+            var e1 = new LeagueEvent(new Setting());
 
             var r1 = e1.NewRound();
             r1[0][0][0] = new PlayerInfo("Adam");
@@ -27,7 +29,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void EmptyEvent() {
-            var e1 = new LeagueEvent(new Settings());
+            var e1 = new LeagueEvent(new Setting());
 
             Assert.AreEqual(0, e1.SeekDeep<PlayerInfo>().Count);
             Assert.AreEqual(0, e1.Size);
@@ -35,7 +37,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Add_New_Round() {
-            var e1 = new LeagueEvent(new Settings());
+            var e1 = new LeagueEvent(new Setting());
             e1.NewRound();
 
             Assert.AreEqual(0, e1.SeekDeep<PlayerInfo>().Count);
@@ -44,7 +46,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Add_Specified_Round() {
-            var e1 = new LeagueEvent(new Settings());
+            var e1 = new LeagueEvent(new Setting());
             Round round = new Round(e1.Settings);
             e1.AddRound(round);
 
@@ -53,7 +55,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void GetTeams_0() {
-            var e1 = new LeagueEvent(new Settings());
+            var e1 = new LeagueEvent(new Setting());
             e1.NewRound();
 
             Assert.AreEqual(0, e1.SeekDeep<PlayerInfo>().Count);
@@ -62,7 +64,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void GetTeams_1() {
-            var e1 = new LeagueEvent(new Settings());
+            var e1 = new LeagueEvent(new Setting());
 
             var r1 = e1.NewRound();
             r1[0][0][0] = new PlayerInfo("Adam");
@@ -76,7 +78,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Get_Teams_For_Player() {
-            var e1 = new LeagueEvent(new Settings());
+            var e1 = new LeagueEvent(new Setting());
 
             var r1 = e1.NewRound();
             r1[0][0][0] = new PlayerInfo("Adam");
@@ -102,7 +104,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Replace_Round() {
-            var e1 = new LeagueEvent(new Settings());
+            var e1 = new LeagueEvent(new Setting());
             var r1 = e1.NewRound();
             var r2 = new Round(e1.Settings);
 

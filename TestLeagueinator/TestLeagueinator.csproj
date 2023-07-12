@@ -60,6 +60,7 @@
     <Compile Include="Tests\Test_Model_PlayerInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\Test_GenomeMatchPartners.cs" />
+    <Compile Include="Tests\Test_Penache.cs" />
     <Compile Include="Tests\Test_RoundRobin.cs" />
   </ItemGroup>
   <ItemGroup>

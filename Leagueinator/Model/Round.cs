@@ -71,10 +71,11 @@ namespace Leagueinator.Model {
             }
         }
 
-        public Round Clone() {
-            var clone = new Round(this.Settings);
-            clone.CopyFrom(this);
-            return clone;
+        public void InjectByes() {
+            foreach(Match match in this.Matches){
+                if (match[0].IsEmpty && !match[1].IsEmpty) match[0] = new TeamBye(this.Settings);
+                if (!match[0].IsEmpty && match[1].IsEmpty) match[1] = new TeamBye(this.Settings);
+            }
         }
 
         public XMLStringBuilder ToXML() {

@@ -3,12 +3,13 @@ using System.Diagnostics;
 using Leagueinator.Model;
 using Leagueinator.Algorithms.Solutions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Leagueinator.Model.Settings;
 
 namespace TestLeagueinator {
     [TestClass]
     public class Test_GenomeMatchPartners {
         public static LeagueEvent NewEvent() {
-            var lEvent = new LeagueEvent(new Settings());
+            var lEvent = new LeagueEvent(new Setting());
 
             lEvent.NewRound();
             lEvent.NewRound();
@@ -51,7 +52,7 @@ namespace TestLeagueinator {
         /// </summary>
         [TestMethod]
         public void Evaluate_0() {
-            var lEvent = new LeagueEvent(new Settings());
+            var lEvent = new LeagueEvent(new Setting());
             
             Round r = new Round(lEvent.Settings);
             r[0][0][0] = new PlayerInfo("Adam");
@@ -71,7 +72,7 @@ namespace TestLeagueinator {
         /// </summary>
         [TestMethod]
         public void Evaluate_1() {
-            var lEvent = new LeagueEvent(new Settings());
+            var lEvent = new LeagueEvent(new Setting());
 
             Round r = lEvent.NewRound();
             r[0][0][0] = new PlayerInfo("Adam");
@@ -86,7 +87,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Evaluate_2() {
-            var lEvent = new LeagueEvent(new Settings());
+            var lEvent = new LeagueEvent(new Setting());
             lEvent.NewRound();
 
             // First Round
@@ -102,7 +103,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Evaluate_3() {
-            var lEvent = new LeagueEvent(new Settings());
+            var lEvent = new LeagueEvent(new Setting());
             lEvent.NewRound();
             lEvent.NewRound();
 
@@ -124,7 +125,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Randomize() {
-            var lEvent = new LeagueEvent(new Settings());
+            var lEvent = new LeagueEvent(new Setting());
             lEvent.NewRound();
 
             //     r  m  t  p  
@@ -141,7 +142,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void RandomizeEmpty() {
-            var lEvent = new LeagueEvent(new Settings());
+            var lEvent = new LeagueEvent(new Setting());
             lEvent.NewRound();
 
             //     r  m  t  p  

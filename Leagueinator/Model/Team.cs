@@ -93,4 +93,12 @@ namespace Leagueinator.Model {
             return t;
         }
     }
+
+    public class TeamBye : Team {
+        public TeamBye(Setting settings)  : base(settings){
+            for (int i = 0; i < settings.TeamSize; i++) {
+                this[i] = new PlayerBye();
+            }
+        }
+    }
 }

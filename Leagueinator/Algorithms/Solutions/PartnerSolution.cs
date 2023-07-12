@@ -14,7 +14,7 @@ namespace Leagueinator.Algorithms.Solutions {
 
         public PartnerSolution(LeagueEvent lEvent, Round round) : base(0) {
             this.LEvent = lEvent;
-            this.Round = round.Clone();
+            this.Round = round.DeepCopy();
         }
 
         public PartnerSolution(PartnerSolution that) : base(0) {

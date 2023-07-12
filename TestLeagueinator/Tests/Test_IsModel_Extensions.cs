@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Leagueinator.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Leagueinator.Utility_Classes;
+using Leagueinator.Model.Settings;
 
 namespace TestLeagueinator
 {
@@ -96,7 +97,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void Team() {
-            var target = new Team(new Settings());
+            var target = new Team(new Setting());
 
             target[0] = new PlayerInfo("Barney");
             target[1] = new PlayerInfo("Charlie");
@@ -109,7 +110,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void Match() {
-            var target = new Match(new Settings());
+            var target = new Match(new Setting());
 
             target[0][0] = new PlayerInfo("Barney");
             target[0][1] = new PlayerInfo("Charlie");
@@ -120,7 +121,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void Round_0() {
-            var target = new Round(new Settings());
+            var target = new Round(new Setting());
 
             target.Matches[0].Teams[0][0] = new PlayerInfo("Albert");
             target.Matches[0].Teams[0][1] = new PlayerInfo("Bert");
@@ -134,7 +135,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void Round_1() {
-            var target = new Round(new Settings());
+            var target = new Round(new Setting());
 
             target.Matches[0].Teams[0][0] = new PlayerInfo("Albert");
             target.Matches[0].Teams[0][1] = new PlayerInfo("Bert");
@@ -148,7 +149,7 @@ namespace TestLeagueinator
 
         [TestMethod]
         public void Event() {
-            var target = new LeagueEvent(new Settings());
+            var target = new LeagueEvent(new Setting());
 
             var r1 = target.NewRound();
             r1.Matches[0].Teams[0][0] = new PlayerInfo("Albert");

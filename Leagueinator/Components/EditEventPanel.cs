@@ -73,14 +73,18 @@ namespace Leagueinator.Components {
 
             switch (setting.MatchType) {
                 case MATCH_TYPE.RoundRobin:
-                    this.LeagueEvent.CopyPlayers(round);
+                    this.LeagueEvent.CopyPlayersTo(round);
                     round = this.LeagueEvent.DoRoundRobin(round);
-                    round = this.LeagueEvent.DoAssignLanes(round);
-                    Debug.WriteLine($"Round Setup Complete {round.GetHashCode("X")}");
+                    //round = this.LeagueEvent.DoAssignLanes(round);
                     break;
                 case MATCH_TYPE.Ranked:
                     break;
                 case MATCH_TYPE.Brackets:
+                    break;
+                case MATCH_TYPE.Penache:
+                    this.LeagueEvent.CopyPlayersTo(round);
+                    round = this.LeagueEvent.DoPenache(round);
+                    //round = this.LeagueEvent.DoAssignLanes(round);
                     break;
             }
 

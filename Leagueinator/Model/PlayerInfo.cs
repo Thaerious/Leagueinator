@@ -1,4 +1,5 @@
 ﻿
+using Leagueinator.Model.Settings;
 using Leagueinator.Utility_Classes;
 using System;
 
@@ -43,5 +44,9 @@ namespace Leagueinator.Model {
             xsb.InlineTag("Player", this.Name, $"hash='{this.GetHashCode().ToString("X")}'");
             return xsb;
         }
+    }
+
+    public class PlayerBye : PlayerInfo {
+        public PlayerBye() : base("-BYE-") { }
     }
 }

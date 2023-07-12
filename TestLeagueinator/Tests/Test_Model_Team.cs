@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using Leagueinator.Model;
+using Leagueinator.Model.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestLeagueinator.Helpers;
 
@@ -14,7 +15,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Empty_Team() {
-            var t1 = new Team(new Settings());
+            var t1 = new Team(new Setting());
             Assert.AreEqual(0, t1.Players.Count);
             Assert.IsFalse(t1.IsFull);
             Assert.AreEqual(2, t1.MaxSize);
@@ -23,7 +24,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Constructor() {
-            var t1 = new Team(new Settings());
+            var t1 = new Team(new Setting());
             t1[0] = adam;
             t1[1] = eve;
 
@@ -36,7 +37,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void SetPlayer() {
-            var t1 = new Team(new Settings());
+            var t1 = new Team(new Setting());
 
             t1[0] = adam;
             Assert.AreEqual(1, t1.Players.Count);
@@ -55,7 +56,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Remove_Player_By_Index() {
-            var t1 = new Team(new Settings());
+            var t1 = new Team(new Setting());
 
             t1[0] = adam;
             t1[1] = eve;
@@ -70,7 +71,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Remove_Unknown_Player_By_Value_Returns_False() {
-            var t1 = new Team(new Settings());
+            var t1 = new Team(new Setting());
 
             t1[0] = adam;
             t1[1] = eve;
@@ -80,7 +81,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void AddPlayer_In_Order() {
-            var t1 = new Team(new Settings());
+            var t1 = new Team(new Setting());
             t1.AddPlayer(adam);
             t1.AddPlayer(eve);
 
@@ -93,7 +94,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void AddPlayer_Fill_Null() {
-            var t1 = new Team(new Settings());
+            var t1 = new Team(new Setting());
 
             t1[1] = eve;
             t1.AddPlayer(adam);
@@ -107,7 +108,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Add_Player_No_Vacanacy() {
-            var t1 = new Team(new Settings());
+            var t1 = new Team(new Setting());
             t1.AddPlayer(adam);
             t1.AddPlayer(eve);
             Assert.IsFalse(t1.AddPlayer(cain));
@@ -115,7 +116,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void HasPlayer() {
-            var t1 = new Team(new Settings());
+            var t1 = new Team(new Setting());
 
             t1[0] = adam;
             Assert.AreEqual(1, t1.Players.Count);
@@ -137,7 +138,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void OutOfBounds_0() {
-            var t1 = new Team(new Settings());
+            var t1 = new Team(new Setting());
             Assert.ThrowsException<IndexOutOfRangeException>(() => {
                 t1[2] = adam;
             });
@@ -145,7 +146,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void OutOfBounds_1() {
-            var t1 = new Team(new Settings());
+            var t1 = new Team(new Setting());
             Assert.ThrowsException<IndexOutOfRangeException>(() => {
                 t1[-1] = adam;
             });
@@ -153,7 +154,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Remove_Player_By_Value() {
-            var t1 = new Team(new Settings());
+            var t1 = new Team(new Setting());
 
             t1[0] = adam;
             t1[1] = eve;
@@ -170,7 +171,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Clear() {
-            var t1 = new Team(new Settings());
+            var t1 = new Team(new Setting());
 
             t1[0] = adam;
             t1[1] = eve;
@@ -184,7 +185,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Players() {
-            var t1 = new Team(new Settings());
+            var t1 = new Team(new Setting());
 
             t1[0] = adam;
             t1[1] = eve;
@@ -197,7 +198,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Players_NonReflective() {
-            var t1 = new Team(new Settings());
+            var t1 = new Team(new Setting());
 
             t1[0] = adam;
             t1[1] = eve;

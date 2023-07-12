@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Leagueinator.Model;
+using System;
 using System.Collections.Generic;
 
 namespace Leagueinator.Utility_Classes {

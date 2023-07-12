@@ -1,5 +1,6 @@
 ﻿using System;
 using Leagueinator.Model;
+using Leagueinator.Model.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestLeagueinator
@@ -34,7 +35,7 @@ namespace TestLeagueinator
         [TestMethod]
         public void Equals_Diff_Objects() {
             var p1 = new PlayerInfo("Adam");
-            var m1 = new Match(new Settings());
+            var m1 = new Match(new Setting());
             Assert.IsFalse(p1.Equals(m1));
         }
     }

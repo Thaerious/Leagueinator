@@ -35,9 +35,9 @@
             this.radRoundRobin = new System.Windows.Forms.RadioButton();
             this.radBracket = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radNone = new System.Windows.Forms.RadioButton();
             this.radRanked = new System.Windows.Forms.RadioButton();
             this.radPenache = new System.Windows.Forms.RadioButton();
-            this.radNone = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.spinLaneCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinTeamSize)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -163,6 +163,7 @@
             // radBracket
             // 
             this.radBracket.AutoSize = true;
+            this.radBracket.Enabled = false;
             this.radBracket.Location = new System.Drawing.Point(6, 55);
             this.radBracket.Name = "radBracket";
             this.radBracket.Size = new System.Drawing.Size(89, 24);
@@ -185,6 +186,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Matchup";
             // 
+            // radNone
+            // 
+            this.radNone.AutoSize = true;
+            this.radNone.Location = new System.Drawing.Point(6, 145);
+            this.radNone.Name = "radNone";
+            this.radNone.Size = new System.Drawing.Size(72, 24);
+            this.radNone.TabIndex = 18;
+            this.radNone.Text = "None";
+            this.radNone.UseVisualStyleBackColor = true;
+            // 
             // radRanked
             // 
             this.radRanked.AutoSize = true;
@@ -205,16 +216,6 @@
             this.radPenache.TabIndex = 16;
             this.radPenache.Text = "Penaché";
             this.radPenache.UseVisualStyleBackColor = true;
-            // 
-            // radNone
-            // 
-            this.radNone.AutoSize = true;
-            this.radNone.Location = new System.Drawing.Point(6, 145);
-            this.radNone.Name = "radNone";
-            this.radNone.Size = new System.Drawing.Size(72, 24);
-            this.radNone.TabIndex = 18;
-            this.radNone.Text = "None";
-            this.radNone.UseVisualStyleBackColor = true;
             // 
             // FormAddEvent
             // 

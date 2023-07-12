@@ -4,12 +4,13 @@ using Leagueinator.Model;
 using Leagueinator.Algorithms.Solutions;
 using Leagueinator.Algorithms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Leagueinator.Model.Settings;
 
 namespace TestLeagueinator {
     [TestClass]
     public class Test_GreedyWalk {
         public static LeagueEvent NewEvent() {
-            var lEvent = new LeagueEvent(new Settings());
+            var lEvent = new LeagueEvent(new Setting());
 
             lEvent.NewRound();
             lEvent.NewRound();
@@ -38,7 +39,7 @@ namespace TestLeagueinator {
 
         [TestMethod]
         public void Basic() {
-            var lEvent = new LeagueEvent(new Settings());
+            var lEvent = new LeagueEvent(new Setting());
 
             lEvent.NewRound();
 

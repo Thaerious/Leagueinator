@@ -21,7 +21,7 @@ namespace Leagueinator.Model {
         } = new List<Round>();
 
         public Round this[int key] {
-            get { return this.Rounds[key]; }            
+            get { return this.Rounds[key]; }
         }
 
         public int Size { get => this.Rounds.Count; }
@@ -59,7 +59,7 @@ namespace Leagueinator.Model {
         public void ReplaceRound(Round replace, Round with) {
             int index = this.Rounds.IndexOf(replace);
 
-            if (index <= 0) {
+            if (index < 0) {
                 throw new ArgumentOutOfRangeException(
                     $"Attempting to replace round that is not a member of League Event"
                 );

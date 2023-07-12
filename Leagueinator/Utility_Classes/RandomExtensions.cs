@@ -10,6 +10,13 @@ namespace Leagueinator.Utility_Classes {
             return list[r];
         }
 
+        public static T RemoveRandom<T>(this List<T> list) {
+            int r = rng.Next(list.Count);
+            T t =  list[r];
+            list.Remove(t);
+            return t;
+        }
+
         public static void Shuffle<T>(this Random rng, T[] array) {
             int n = array.Length;
             while (n > 1) {
