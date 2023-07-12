@@ -86,7 +86,7 @@ namespace Leagueinator.Algorithms {
 
             var list = this.Reference.Teams;
             Team[] before = list.ToArray();
-            Team[] teams = before.ToOpposite();                       
+            Team[] teams = before.ToOpposite();
 
             Shift(teams, count);
             Team[] after = teams.ToAdjacent();

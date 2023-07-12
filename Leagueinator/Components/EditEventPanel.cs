@@ -75,7 +75,7 @@ namespace Leagueinator.Components {
                 case MATCH_TYPE.RoundRobin:
                     this.LeagueEvent.CopyPlayersTo(round);
                     round = this.LeagueEvent.DoRoundRobin(round);
-                    //round = this.LeagueEvent.DoAssignLanes(round);
+                    round = this.LeagueEvent.DoAssignLanes(round);
                     break;
                 case MATCH_TYPE.Ranked:
                     break;
@@ -84,7 +84,7 @@ namespace Leagueinator.Components {
                 case MATCH_TYPE.Penache:
                     this.LeagueEvent.CopyPlayersTo(round);
                     round = this.LeagueEvent.DoPenache(round);
-                    //round = this.LeagueEvent.DoAssignLanes(round);
+                    round = this.LeagueEvent.DoAssignLanes(round);
                     break;
             }
 

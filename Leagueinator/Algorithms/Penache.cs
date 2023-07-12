@@ -23,21 +23,6 @@ namespace Leagueinator.Algorithms {
             return AssignTeams(after);
         }
 
-        private PlayerInfo[] BuildArray() {
-            PlayerInfo[] before = this.Reference.AllPlayers.ToArray();
-            PlayerInfo[] after = new PlayerInfo[before.Length];
-
-            int i = 0;
-            int j = after.Length - 1;
-            int idx = 0;
-            while (idx < before.Length) {
-                after[i++] = before[idx++];
-                if (idx >= before.Length) break;
-                after[j--] = before[idx++];
-            }
-            return after;
-        }
-
         private PlayerInfo[] Shift(PlayerInfo[] players, int count) {
             while (count-- > 0) {
                 PlayerInfo temp = players[1];
@@ -50,7 +35,7 @@ namespace Leagueinator.Algorithms {
         }
 
         private Round AssignTeams(PlayerInfo[] players) {
-            Round round = new Round(this.Reference.Settings);            
+            Round round = new Round(this.Reference.Settings);
 
             int numTeams = (int)Math.Ceiling((double)(players.Length / 2));
             List<Team> teams = new List<Team>();

@@ -64,6 +64,11 @@ namespace Leagueinator.Model {
             Penache penache = new Penache(reference);
             int index = lEvent.IndexOf(target);
             Round newRound = penache.Value(index);
+
+            var idle = reference.AllPlayers;
+            idle.RemoveAll(p => newRound.ActivePlayers.Contains(p));
+            newRound.IdlePlayers.AddRange(idle);
+
             lEvent.ReplaceRound(target, newRound);
             return newRound;
         }
@@ -86,6 +91,7 @@ namespace Leagueinator.Model {
             });
 
             Round newRound = best.Value();
+            newRound.IdlePlayers.AddRange(target.IdlePlayers);
             lEvent.ReplaceRound(target, newRound);
             return newRound;
         }
