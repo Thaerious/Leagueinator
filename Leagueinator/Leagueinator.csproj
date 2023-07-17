@@ -17,7 +17,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -139,6 +139,7 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="SQLitePCLRaw.core, Version=2.1.4.1835, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
       <HintPath>..\packages\SQLitePCLRaw.core.2.1.4\lib\netstandard2.0\SQLitePCLRaw.core.dll</HintPath>
     </Reference>
@@ -178,6 +179,10 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="zoomprint">
+      <HintPath>..\lib\zoomprint\zoomprint.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\Penache.cs" />
@@ -189,6 +194,7 @@
     <Compile Include="Components\FlowPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Components\MatchCardPrinter.cs" />
     <Compile Include="Components\MatchCards\DragDropCard.cs" />
     <Compile Include="Components\MatchCards\MatchCard.4.cs">
       <SubType>UserControl</SubType>
@@ -292,12 +298,19 @@
     <Compile Include="Components\MatchCards\MatchCard.Events.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\FormUpdateScore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormUpdateScore.Designer.cs">
+      <DependentUpon>FormUpdateScore.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\IsSaved.cs" />
     <Compile Include="Model\HasDeepCopy.cs" />
     <Compile Include="Model\ModelAlgoExtensions.cs" />
     <Compile Include="Model\ModelExtensions.cs" />
     <Compile Include="Algorithms\Solutions\PartnerSolution.cs" />
     <Compile Include="Algorithms\Solutions\CountPartners.cs" />
+    <Compile Include="Model\Score.cs" />
     <Compile Include="Model\Setting.cs" />
     <Compile Include="Forms\FormMain.cs">
       <SubType>Form</SubType>
@@ -316,6 +329,7 @@
     <Compile Include="Model\PlayerInfo.cs" />
     <Compile Include="Algorithms\Solutions\LaneSolution.cs" />
     <Compile Include="Utility_Classes\CollectionExtensions.cs" />
+    <Compile Include="Utility_Classes\RectangleExtensions.cs" />
     <Compile Include="Utility_Classes\ScoreCardPrinter.cs" />
     <Compile Include="Utility_Classes\StringExtensions.cs" />
     <Compile Include="Program.cs" />

@@ -1,4 +1,6 @@
-﻿namespace Leagueinator.Forms {
+﻿using System.Diagnostics;
+
+namespace Leagueinator.Forms {
     public class IsSaved {
         public delegate void IsSavedEvent(bool value);
         public event IsSavedEvent Update;

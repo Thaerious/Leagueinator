@@ -216,6 +216,7 @@
             this.radPenache.TabIndex = 16;
             this.radPenache.Text = "Penaché";
             this.radPenache.UseVisualStyleBackColor = true;
+            this.radPenache.CheckedChanged += new System.EventHandler(this.radPenache_CheckedChanged);
             // 
             // FormAddEvent
             // 

@@ -36,6 +36,7 @@ namespace Leagueinator.Components {
                 if (value != null) {
                     this.flowRounds.Controls.Clear();
                     this.playerListBox.Items.Clear();
+                    this.currentRoundButton = null;
 
                     this.leagueEvent = value; 
                     this.PopulateMatches(value.Settings);

@@ -35,5 +35,15 @@ namespace Leagueinator.Components {
         public FormAddEvent() {
             this.InitializeComponent();
         }
+
+        private void radPenache_CheckedChanged(object sender, System.EventArgs e) {
+            if (radPenache.Checked) {
+                this.spinTeamSize.Value = 2;
+                this.spinTeamSize.Enabled = false;
+            }
+            else {
+                this.spinTeamSize.Enabled = true;
+            }
+        }
     }
 }

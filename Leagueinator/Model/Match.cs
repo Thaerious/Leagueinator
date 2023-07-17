@@ -8,12 +8,17 @@ namespace Leagueinator.Model {
     [Serializable]
     public class Match : HasDeepCopy<Match>{
         public readonly Setting Settings;
+        
         private Team[] _teams;
 
         public Team this[int key] {
             get => this._teams[key];
             set => this._teams[key] = value;
         }
+
+        public Score Score {
+            get; set;
+        } = new Score();
 
         [Model] public List<Team> Teams => new List<Team>().AddUnique(this._teams);
 

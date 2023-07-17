@@ -41,12 +41,11 @@ namespace Leagueinator.Algorithms {
             List<Team> teams = new List<Team>();
             
             for (int i = 0; i < numTeams; i++) {
-                Team team = new Team(this.Reference.Settings);
+                Team team = new Team(this.Reference.Settings); 
                 team[0] = players[i * 2];
                 team[1] = players[i * 2 + 1];
                 teams.Add(team);
             }
-
 
             int lane = 0;
             for (int i = 0; i < numTeams; i += 2) {

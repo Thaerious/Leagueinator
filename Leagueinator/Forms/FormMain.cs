@@ -8,6 +8,8 @@ using Leagueinator.Model;
 using Leagueinator.Algorithms.Solutions;
 using Leagueinator.Algorithms;
 using Leagueinator.Utility_Classes;
+using System.Drawing.Printing;
+using MatchPrinter;
 
 namespace Leagueinator.Forms {
     public partial class FormMain : Form {
@@ -43,6 +45,7 @@ namespace Leagueinator.Forms {
 
         public FormMain() {
             this.InitializeComponent();
+            IsSaved.Singleton.Value = true;
 
             IsSaved.Singleton.Update += value => {
                 if (value) this.Text = this.filename;
@@ -66,31 +69,18 @@ namespace Leagueinator.Forms {
             this.Close();
         }
 
-        private void Menu_View_Players(object sender, EventArgs e) {
-            this.editEventPanel.Visible = false;
-        }
-
-        private void Menu_View_Event
-            (object sender, EventArgs e) {
-            if (this.editEventPanel.LeagueEvent == null) return;
-
-            this.editEventPanel.RefreshRound();
-            this.editEventPanel.LeagueEvent = this.editEventPanel.LeagueEvent;
-            this.editEventPanel.Visible = true;
-        }
-
         private void Menu_Events_Add(object _ = null, EventArgs __ = null) {
-            FormAddEvent childForm = new FormAddEvent();
-            DialogResult result = childForm.ShowDialog();
-            if (result == DialogResult.Cancel) return;
+            var childForm = new FormAddEvent();
+            if (childForm.ShowDialog() == DialogResult.Cancel) return;
 
-            this.editEventPanel.Visible = true;
-
-            LeagueEvent lEvent = this.League.AddEvent(
+            var lEvent = this.League.AddEvent(
                 childForm.EventName,
                 childForm.Date,
                 childForm.Settings
             );
+
+            IsSaved.Singleton.Value = false;
+            this.editEventPanel.Visible = true;
             this.editEventPanel.LeagueEvent = lEvent;
         }
 
@@ -194,7 +184,13 @@ namespace Leagueinator.Forms {
         private void Menu_File_Print(object sender, EventArgs e) {
             var round = this.editEventPanel.CurrentRound;
             if (round == null) return;
-            ScoreCardPrinter.Print(round);
+            //ScoreCardPrinter.Print(round);
+            int currentRoundIndex = this.editEventPanel.LeagueEvent.Rounds.IndexOf(this.editEventPanel.CurrentRound);
+            var mcp = new MatchCardPrinter(round, currentRoundIndex);
+            this.printDocument.PrintPage += mcp.HndPrint;
+
+            this.printPreview.Document = this.printDocument;
+            this.printPreview.ShowDialog();
         }
 
         private void Menu_Dev_PrintRound(object sender, EventArgs e) {
