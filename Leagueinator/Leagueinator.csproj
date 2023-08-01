@@ -227,6 +227,9 @@
     <Compile Include="Components\PlayerListBox.Events.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controller\Score.cs" />
+    <Compile Include="Controller\IScoreKeeper.cs" />
+    <Compile Include="Controller\ScoreKeeper.cs" />
     <Compile Include="Forms\FormMain.Events.cs">
       <SubType>Form</SubType>
     </Compile>

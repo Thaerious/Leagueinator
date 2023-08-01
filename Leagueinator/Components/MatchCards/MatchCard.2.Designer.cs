@@ -26,10 +26,10 @@
             this.labelLane = new System.Windows.Forms.Label();
             this.labelP1 = new Leagueinator.Components.MatchLabel();
             this.labelP0 = new Leagueinator.Components.MatchLabel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtScore0 = new System.Windows.Forms.TextBox();
             this.labelP3 = new Leagueinator.Components.MatchLabel();
             this.labelP2 = new Leagueinator.Components.MatchLabel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtScore1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // labelLane
@@ -80,15 +80,15 @@
             this.labelP0.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnEnter);
             this.labelP0.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StartDrag);
             // 
-            // textBox1
+            // txtScore0
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(3, 16);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(50, 35);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.Text = "0";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtScore0.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtScore0.Location = new System.Drawing.Point(3, 16);
+            this.txtScore0.Name = "txtScore0";
+            this.txtScore0.Size = new System.Drawing.Size(50, 35);
+            this.txtScore0.TabIndex = 5;
+            this.txtScore0.Text = "0";
+            this.txtScore0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // labelP3
             // 
@@ -128,25 +128,25 @@
             this.labelP2.DragEnter += new System.Windows.Forms.DragEventHandler(this.OnEnter);
             this.labelP2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.StartDrag);
             // 
-            // textBox2
+            // txtScore1
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(318, 16);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(50, 35);
-            this.textBox2.TabIndex = 8;
-            this.textBox2.Text = "0";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtScore1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtScore1.Location = new System.Drawing.Point(318, 16);
+            this.txtScore1.Name = "txtScore1";
+            this.txtScore1.Size = new System.Drawing.Size(50, 35);
+            this.txtScore1.TabIndex = 8;
+            this.txtScore1.Text = "0";
+            this.txtScore1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // MatchCard_2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtScore1);
             this.Controls.Add(this.labelP3);
             this.Controls.Add(this.labelP2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtScore0);
             this.Controls.Add(this.labelLane);
             this.Controls.Add(this.labelP1);
             this.Controls.Add(this.labelP0);
@@ -163,9 +163,9 @@
         private MatchLabel labelP0;
         private MatchLabel labelP1;
         private new System.Windows.Forms.Label labelLane;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtScore0;
         private MatchLabel labelP3;
         private MatchLabel labelP2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtScore1;
     }
 }

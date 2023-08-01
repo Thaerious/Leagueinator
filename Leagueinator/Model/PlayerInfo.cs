@@ -4,6 +4,10 @@ using Leagueinator.Utility_Classes;
 using System;
 
 namespace Leagueinator.Model {
+    public enum PlayerType {
+        HUMAN, PLACEHOLDER
+    };
+
     [Serializable]
     public class PlayerInfo : IEquatable<PlayerInfo>, HasDeepCopy<PlayerInfo> {
         private string _name;
@@ -16,6 +20,8 @@ namespace Leagueinator.Model {
                 this._name = value.Trim();
             }
         }
+
+        public PlayerType PlayerType { get; set; } = PlayerType.HUMAN;
 
         public PlayerInfo(string name) => this.Name = name;
 
@@ -39,6 +45,7 @@ namespace Leagueinator.Model {
             PlayerInfo that = (PlayerInfo)obj;
             return this.Name.ToLower().Trim() == that.Name.ToLower().Trim();
         }
+
         public XMLStringBuilder ToXML() {
             XMLStringBuilder xsb = new XMLStringBuilder();
             xsb.InlineTag("Player", this.Name, $"hash='{this.GetHashCode().ToString("X")}'");
@@ -47,6 +54,8 @@ namespace Leagueinator.Model {
     }
 
     public class PlayerBye : PlayerInfo {
-        public PlayerBye() : base("-BYE-") { }
+        public PlayerBye() : base("-BYE-") {
+            this.PlayerType = PlayerType.PLACEHOLDER;
+        }
     }
 }

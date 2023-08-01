@@ -9,8 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLeagueinator", "TestLeagueinator\TestLeagueinator.csproj", "{CFE55E50-6C49-4462-B8B8-A2E01A24602E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevPrintDialog", "DevPrintDialog\DevPrintDialog.csproj", "{6A967FB6-5B77-4B99-87F0-CD81BB8ABB46}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zoomprint", "..\zoomprint\zoomprint\zoomprint.csproj", "{87564065-2D7D-47BE-9169-A8E01EE8E17C}"
 EndProject
 Global
@@ -27,10 +25,6 @@ Global
 		{CFE55E50-6C49-4462-B8B8-A2E01A24602E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFE55E50-6C49-4462-B8B8-A2E01A24602E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFE55E50-6C49-4462-B8B8-A2E01A24602E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6A967FB6-5B77-4B99-87F0-CD81BB8ABB46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6A967FB6-5B77-4B99-87F0-CD81BB8ABB46}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6A967FB6-5B77-4B99-87F0-CD81BB8ABB46}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6A967FB6-5B77-4B99-87F0-CD81BB8ABB46}.Release|Any CPU.Build.0 = Release|Any CPU
 		{87564065-2D7D-47BE-9169-A8E01EE8E17C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{87564065-2D7D-47BE-9169-A8E01EE8E17C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87564065-2D7D-47BE-9169-A8E01EE8E17C}.Release|Any CPU.ActiveCfg = Release|Any CPU

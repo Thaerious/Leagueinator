@@ -92,6 +92,11 @@ namespace Leagueinator.Components {
             return round;
         }
 
+        /// <summary>
+        /// This is the "Set Round" control point.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="_"></param>
         private void RoundButtonClick(object source, EventArgs _) {
             RoundButton button = (RoundButton)source;
             this.panelMatchCard.Visible = true;
@@ -124,6 +129,7 @@ namespace Leagueinator.Components {
                     null
                 );
                 this.panelMatchCard.Controls.Add(matchCard);
+                matchCard.UpdateScoreListeners += this.HndScoreUpdate;
             }
             return matchCard;
         }

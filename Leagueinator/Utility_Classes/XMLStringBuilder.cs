@@ -7,12 +7,11 @@ namespace Leagueinator.Utility_Classes {
         private readonly StringBuilder sb = new StringBuilder();
         private int Depth => this.CurrentTag.Count;
         public char Indent = '\t';
-        private readonly List<IndentedString> lines = new List<IndentedString>();
+        private readonly List<IndentedObject> lines = new List<IndentedObject>();
         private readonly Stack<string> CurrentTag = new Stack<string>();
 
         public XMLStringBuilder OpenTag(string name, params string[] attributes) {
             var text = $"<{name} {attributes.DelString(" ")}>";
-
             this.lines.Add(new IndentedString(this.Depth, text));
             this.CurrentTag.Push(name);
             return this;
@@ -82,18 +81,26 @@ namespace Leagueinator.Utility_Classes {
         }
     }
 
-    class IndentedString {
-        public string text = "";
+    class IndentedObject {
+        public object target = "";
         public int indent = 0;
         public char c = '\t';
 
-        public IndentedString(int indent, string text) {
+        public IndentedObject(int indent, object target) {
             this.indent = indent;
-            this.text = text;
+            this.target = target;
         }
 
         public override string ToString() {
-            return $"{new String(this.c, this.indent)}{this.text}";
+            return $"{new String(this.c, this.indent)}{this.target.ToString()}";
         }
+    }
+
+
+    class IndentedString : IndentedObject {
+
+        public string text { get => this.target.ToString(); }
+
+        public IndentedString(int indent, string text) : base(indent, text) { }
     }
 }

@@ -181,16 +181,31 @@ namespace Leagueinator.Forms {
             Debug.WriteLine(this.League);
         }
 
-        private void Menu_File_Print(object sender, EventArgs e) {
+        private void Menu_File_Print_Preview(object sender, EventArgs e) {
             var round = this.editEventPanel.CurrentRound;
             if (round == null) return;
             //ScoreCardPrinter.Print(round);
+
             int currentRoundIndex = this.editEventPanel.LeagueEvent.Rounds.IndexOf(this.editEventPanel.CurrentRound);
             var mcp = new MatchCardPrinter(round, currentRoundIndex);
             this.printDocument.PrintPage += mcp.HndPrint;
 
             this.printPreview.Document = this.printDocument;
             this.printPreview.ShowDialog();
+        }
+
+        private void Menu_File_Print(object sender, EventArgs e) {
+            var round = this.editEventPanel.CurrentRound;
+            if (round == null) return;
+            //ScoreCardPrinter.Print(round);
+
+            int currentRoundIndex = this.editEventPanel.LeagueEvent.Rounds.IndexOf(this.editEventPanel.CurrentRound);
+            var mcp = new MatchCardPrinter(round, currentRoundIndex);
+
+            if (this.printDialog.ShowDialog() == DialogResult.OK) {
+                this.printDocument.PrintPage += mcp.HndPrint;
+                this.printDocument.Print();
+            }
         }
 
         private void Menu_Dev_PrintRound(object sender, EventArgs e) {

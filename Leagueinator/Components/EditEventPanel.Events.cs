@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using Leagueinator.Forms;
 using static Leagueinator.Components.PlayerInfoArgs;
@@ -55,6 +56,16 @@ namespace Leagueinator.Components {
             this.flowRounds.Controls.Remove(this.currentRoundButton);
             this.currentRoundButton = null;
             IsSaved.Singleton.Value = false;
+        }
+
+        /// <summary>
+        /// Triggered when a player updates a match card score.
+        /// </summary>
+        /// <param name="laneIndex"></param>
+        /// <param name="teamIndex"></param>
+        /// <param name="value"></param>
+        private void HndScoreUpdate(int laneIndex, int teamIndex, int value) {
+            this.CurrentRound[laneIndex][teamIndex].Score = value;
         }
     }
 }

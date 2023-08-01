@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace MatchPrinter {
 
+ 
     public class MatchCardPrinter : IDisposable {
         int rowHeight = 40;
         Brush lightGrayBrush = new SolidBrush(Color.LightGray);

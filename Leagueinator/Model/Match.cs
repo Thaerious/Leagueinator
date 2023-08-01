@@ -16,10 +16,6 @@ namespace Leagueinator.Model {
             set => this._teams[key] = value;
         }
 
-        public Score Score {
-            get; set;
-        } = new Score();
-
         [Model] public List<Team> Teams => new List<Team>().AddUnique(this._teams);
 
         public List<PlayerInfo> Players => this.SeekDeep<PlayerInfo>().Unique();
@@ -63,6 +59,16 @@ namespace Leagueinator.Model {
             return new Match(this.Settings) {
                 _teams = this._teams.DeepCopy()
             };
+        }
+
+        public Team WinningTeam() {
+            Team best = this.Teams[0];
+            foreach(var team in this.Teams) {
+                if (team.Score > best.Score) {
+                    best = team;
+                }
+            }
+            return best;
         }
     }
 }

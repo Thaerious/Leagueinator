@@ -9,42 +9,70 @@ using Leagueinator.Model;
 
 namespace Leagueinator.Components {
     public partial class MatchCard : UserControl {
+        public delegate void UpdateScoreEvent(int laneIndex, int teamIndex, int value);
+        public event UpdateScoreEvent UpdateScoreListeners;
 
         public static MatchCard NewMatchCard(int teamSize, int lane, Round round, Match match) {
+
+            MatchCard card = null;
             switch (teamSize) {
                 case 1: {
-                        return new MatchCard_1 {
+                        card = new MatchCard_1 {
                             Name = $"matchCard{lane}",
                             Round = round,
                             Match = match,
                             Lane = lane
                         };
                     }
+                    break;
                 case 2: {
-                        return new MatchCard_2 {
+                        card = new MatchCard_2 {
                             Name = $"matchCard{lane}",
                             Round = round,
                             Match = match,
                             Lane = lane
                         };
                     }
+                    break;
                 case 3: {
-                        return new MatchCard_3 {
+                        card = new MatchCard_3 {
                             Name = $"matchCard{lane}",
                             Round = round,
                             Match = match,
                             Lane = lane
                         };
                     }
+                    break;
                 case 4: {
-                        return new MatchCard_4 {
+                        card = new MatchCard_4 {
                             Name = $"matchCard{lane}",
                             Round = round,
                             Match = match,
                             Lane = lane
                         };
                     }
+                    break;
                 default: throw new ArgumentOutOfRangeException("teamSize");
+            }
+
+            foreach(Control control in card.Controls) {
+                if (control.Name.StartsWith("txtScore")){
+                    var index = control.Name.Substring("txtScore".Length);
+                    control.TextChanged += card.DoUpdateScore;
+                }
+            }
+
+            return card;
+        }
+
+        private void DoUpdateScore(Object sender, EventArgs args) {
+            TextBox textBox = sender as TextBox;
+
+            var index = textBox.Name.Substring("txtScore".Length);
+            var value = textBox.Text;
+
+            if (this.UpdateScoreListeners != null) {
+                this.UpdateScoreListeners(this.Lane, Int32.Parse(index), Int32.Parse(value));
             }
         }
 
@@ -64,7 +92,16 @@ namespace Leagueinator.Components {
 
         public virtual Match Match {
             get => this._match;
-            set => this._match = value;
+            set {
+                var txtScore0 = this.Controls.Find("txtScore0", true)[0];
+                var txtScore1 = this.Controls.Find("txtScore1", true)[0];                
+
+                this._match = value;
+                if (value != null) {
+                    if (txtScore0 != null) txtScore0.Text = value[0].Score.ToString();
+                    if (txtScore1 != null) txtScore1.Text = value[1].Score.ToString();
+                }
+            }
         }
 
         public virtual void InitializeComponent() { }

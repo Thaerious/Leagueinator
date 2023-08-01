@@ -8,6 +8,7 @@ namespace Leagueinator.Model {
     [Serializable]
     public class Team : HasDeepCopy<Team>{
         public readonly Setting settings;
+        public int Score = 0;
 
         private PlayerInfo[] _players;
         public PlayerInfo this[int key] {
@@ -30,7 +31,7 @@ namespace Leagueinator.Model {
 
         public XMLStringBuilder ToXML() {
             XMLStringBuilder xsb = new XMLStringBuilder();
-            xsb.OpenTag("Team", $"hash='{this.GetHashCode().ToString("X")}'");
+            xsb.OpenTag("Team", $"score='{this.Score}' hash='{this.GetHashCode().ToString("X")}'");
             
             foreach ( var player in this.Players ) {
                 xsb.AppendXML( player.ToXML() );

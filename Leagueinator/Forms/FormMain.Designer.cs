@@ -31,6 +31,7 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.printToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,13 +59,14 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableRoot = new System.Windows.Forms.TableLayoutPanel();
             this.panelContents = new System.Windows.Forms.Panel();
-            this.editEventPanel = new Leagueinator.Components.EditEventPanel();
             this.butAddEvent = new System.Windows.Forms.Button();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.printPreview = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.printDialog = new System.Windows.Forms.PrintDialog();
+            this.editEventPanel = new Leagueinator.Components.EditEventPanel();
             this.menuStrip.SuspendLayout();
             this.tableRoot.SuspendLayout();
             this.panelContents.SuspendLayout();
@@ -79,6 +81,7 @@
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
             this.toolStripSeparator1,
+            this.printToolStripMenuItem1,
             this.printToolStripMenuItem,
             this.closeToolStripMenuItem,
             this.exitToolStripMenuItem});
@@ -89,14 +92,14 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.Menu_File_New);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.Menu_File_Load);
             // 
@@ -104,34 +107,42 @@
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.Menu_File_Save);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.saveAsToolStripMenuItem.Text = "Save As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.Menu_File_SaveAs);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(267, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(269, 6);
+            // 
+            // printToolStripMenuItem1
+            // 
+            this.printToolStripMenuItem1.Name = "printToolStripMenuItem1";
+            this.printToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.printToolStripMenuItem1.Size = new System.Drawing.Size(272, 34);
+            this.printToolStripMenuItem1.Text = "&Print";
+            this.printToolStripMenuItem1.Click += new System.EventHandler(this.Menu_File_Print);
             // 
             // printToolStripMenuItem
             // 
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.printToolStripMenuItem.Text = "&Print";
-            this.printToolStripMenuItem.Click += new System.EventHandler(this.Menu_File_Print);
+            this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
+            this.printToolStripMenuItem.Text = "P&rintPreview";
+            this.printToolStripMenuItem.Click += new System.EventHandler(this.Menu_File_Print_Preview);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.Menu_File_Close);
             // 
@@ -139,7 +150,7 @@
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.Menu_File_Exit);
             // 
@@ -349,16 +360,6 @@
             this.panelContents.Size = new System.Drawing.Size(1254, 776);
             this.panelContents.TabIndex = 3;
             // 
-            // editEventPanel
-            // 
-            this.editEventPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.editEventPanel.LeagueEvent = null;
-            this.editEventPanel.Location = new System.Drawing.Point(0, 0);
-            this.editEventPanel.Name = "editEventPanel";
-            this.editEventPanel.Size = new System.Drawing.Size(1254, 776);
-            this.editEventPanel.TabIndex = 0;
-            this.editEventPanel.Visible = false;
-            // 
             // butAddEvent
             // 
             this.butAddEvent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -403,6 +404,20 @@
             this.printPreview.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreview.Icon")));
             this.printPreview.Name = "printPreview";
             this.printPreview.Visible = false;
+            // 
+            // printDialog
+            // 
+            this.printDialog.UseEXDialog = true;
+            // 
+            // editEventPanel
+            // 
+            this.editEventPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.editEventPanel.LeagueEvent = null;
+            this.editEventPanel.Location = new System.Drawing.Point(0, 0);
+            this.editEventPanel.Name = "editEventPanel";
+            this.editEventPanel.Size = new System.Drawing.Size(1254, 776);
+            this.editEventPanel.TabIndex = 0;
+            this.editEventPanel.Visible = false;
             // 
             // FormMain
             // 
@@ -464,5 +479,7 @@
         private System.Windows.Forms.ToolStripMenuItem roundRobinToolStripMenuItem;
         private System.Windows.Forms.PrintPreviewDialog printPreview;
         private System.Drawing.Printing.PrintDocument printDocument;
+        private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem1;
+        private System.Windows.Forms.PrintDialog printDialog;
     }
 }

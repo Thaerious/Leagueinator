@@ -40,6 +40,7 @@ namespace Leagueinator.Model {
 
         /// <summary>
         /// Add a new empty round to this event.
+        /// The new round will contain all players (idle) found in this event.
         /// </summary>
         public Round NewRound() {
             var round = new Round(this.SeekDeep<PlayerInfo>().Unique(), this.Settings);
@@ -47,15 +48,22 @@ namespace Leagueinator.Model {
             return round;
         }
 
+        /// <summary>
+        /// Add an existing round to this event.
+        /// </summary>
+        /// <param name="round"></param>
+        /// <returns></returns>
         public Round AddRound(Round round) {
             this.Rounds.Add(round);
             return round;
         }
 
-        public void AddRounds(IEnumerable<Round> rounds) {
-           foreach (Round r in rounds) this.AddRound(r);
-        }
-
+        /// <summary>
+        /// Replace a round in this event with a specified round.
+        /// </summary>
+        /// <param name="replace"></param>
+        /// <param name="with"></param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public void ReplaceRound(Round replace, Round with) {
             int index = this.Rounds.IndexOf(replace);
 
@@ -71,12 +79,14 @@ namespace Leagueinator.Model {
 
         public XMLStringBuilder ToXML() {
             XMLStringBuilder xsb = new XMLStringBuilder();
-            xsb.OpenTag("Event", $"hash='{this.GetHashCode().ToString("X")}'");
+
+            xsb.OpenTag("Event", $"name='{this.Name}' hash='{this.GetHashCode().ToString("X")}'");
             xsb.InlineTag("Players", this.SeekDeep<PlayerInfo>().DelString());
             foreach (var round in this.Rounds) {
                 xsb.AppendXML(round.ToXML());
             }
             xsb.CloseTag();
+
             return xsb;
         }
         public override string ToString() {
