@@ -335,6 +335,18 @@ namespace Leagueinator.Forms {
             this.editEventPanel.SetCurrentRound(newRound);
             this.editEventPanel.RefreshRound();
         }
+
+        private void Menu_Events_Settings_Click(object sender, EventArgs e) {
+            var childForm = new FormAddEvent();
+            childForm.Text = "Event Settings";
+            childForm.Settings = this.editEventPanel.LeagueEvent.Settings;
+            childForm.Reassign = true;
+
+            if (childForm.ShowDialog() == DialogResult.Cancel) return;
+
+            IsSaved.Singleton.Value = false;
+            this.editEventPanel.Visible = true;            
+        }
     }
 }
 

@@ -22,6 +22,31 @@ namespace Leagueinator.Components {
 
                 return setting;
             }
+
+            set {
+                this.txtName.Text = value.Name;
+                this.dateTimePicker.Text = value.Date;
+                this.spinTeamSize.Value = value.TeamSize;
+                this.spinLaneCount.Value = value.LaneCount;
+
+                switch (value.MatchType) {
+                    case MATCH_TYPE.RoundRobin:
+                        radRoundRobin.Checked = true;
+                        break;
+                        case MATCH_TYPE.Brackets:
+                        radBracket.Checked = true;
+                        break;
+                        case MATCH_TYPE.Ranked:
+                        radRanked.Checked = true;
+                        break;
+                        case MATCH_TYPE.Penache:
+                        radPenache.Checked = true;
+                        break;
+                        default:
+                        radNone.Checked = true;
+                        break;
+                }
+            }
         }
 
         public string EventName {
@@ -30,6 +55,23 @@ namespace Leagueinator.Components {
 
         public string Date {
             get => this.dateTimePicker.Text;
+        }
+
+        private bool _rassign = false;
+        public bool Reassign {
+            get => _rassign;
+            set {
+                _rassign = value;
+                if (value) {
+                    this.spinTeamSize.Enabled = false;
+                    this.spinLaneCount.Enabled = false;
+                    if (Settings.TeamSize != 2) this.radPenache.Enabled = false;
+                }
+                else {
+                    this.spinTeamSize.Enabled = true;
+                    this.spinLaneCount.Enabled = true;
+                }
+            }
         }
 
         public FormAddEvent() {
@@ -42,7 +84,7 @@ namespace Leagueinator.Components {
                 this.spinTeamSize.Enabled = false;
             }
             else {
-                this.spinTeamSize.Enabled = true;
+                if (!_rassign) this.spinTeamSize.Enabled = true;
             }
         }
     }
