@@ -62,10 +62,13 @@ namespace Leagueinator.Model {
         }
 
         public Team WinningTeam() {
-            Team best = this.Teams[0];
+            Team best = null;
+            int bestScore = 0;
+
             foreach(var team in this.Teams) {
-                if (team.Score > best.Score) {
+                if (team.Score > bestScore) {
                     best = team;
+                    bestScore = team.Score;
                 }
             }
             return best;

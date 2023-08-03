@@ -9,5 +9,7 @@ namespace Leagueinator.Controller {
     public interface IScoreKeeper {
         string[] Labels { get; }
         Score this[PlayerInfo pi]{ get; }
+
+        Score this[Team team] { get; }
     }
 }

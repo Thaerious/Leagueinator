@@ -10,6 +10,9 @@ using Leagueinator.Algorithms;
 using Leagueinator.Utility_Classes;
 using System.Drawing.Printing;
 using MatchPrinter;
+using Leagueinator.Controller;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Leagueinator.Forms {
     public partial class FormMain : Form {
@@ -169,6 +172,8 @@ namespace Leagueinator.Forms {
                 }
                 this.filename = filename;
                 IsSaved.Singleton.Value = true;
+
+                Debug.WriteLine(this.League);
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Excepion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -346,6 +351,26 @@ namespace Leagueinator.Forms {
 
             IsSaved.Singleton.Value = false;
             this.editEventPanel.Visible = true;            
+        }
+
+        private void printScoreKeeperToolStripMenuItem_Click(object sender, EventArgs e) {
+            var scoreKeeper = new ScoreKeeper(this.editEventPanel.LeagueEvent);
+            var lables = scoreKeeper.Labels.ToList();
+            lables.Insert(0, "name");
+            Debug.WriteLine(lables.ToArray().DelString(12, "| "));
+
+            //List<PlayerInfo> list = this.editEventPanel.LeagueEvent.SeekDeep<PlayerInfo>();
+            //list.Unique();
+            //list.Sort(new ScoreComparer(scoreKeeper));
+            //list.Reverse();
+
+            List<PlayerInfo> list = new List<PlayerInfo>() { new PlayerInfo("Ab") };
+
+            foreach (PlayerInfo player in list) {
+                var data = scoreKeeper[player].ToArray().Select(i => i.ToString()).ToList();
+                data.Insert(0, player.Name);
+                Debug.WriteLine(data.ToArray().DelString(12, "| "));
+            }
         }
     }
 }

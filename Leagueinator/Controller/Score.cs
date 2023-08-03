@@ -10,13 +10,26 @@ namespace Leagueinator.Controller {
     public class Score : IComparable {
         private double[] score;
 
+        public int Size {  get => this.score.Length; }
+
         public double this[int i] {
             get { return score[i]; }
             set { score[i] = value; }
         }
                 
+        public Score(Score that) {
+            this.score = new double[that.Size];
+            for (int i = 0; i < this.Size; i++) {
+                this[i] = that[i];
+            }
+        }
+
         public Score(int size) {
             this.score = new double[size];
+        }
+
+        public Score(params double[] values) {
+            this.score = (double[])values.Clone();
         }
 
         int IComparable.CompareTo(Object _other) {
@@ -99,8 +112,44 @@ namespace Leagueinator.Controller {
             return !left.Equals(right);
         }
 
+        public static Score operator +(Score left, Score right) {
+            Score result = new Score(left);
+            for (int i = 0; i < result.Size; i++) {
+                result[i] += right[i];
+            }
+            return result;
+        }
+
+        public static Score operator -(Score left, Score right) {
+            Score result = new Score(left);
+            for (int i = 0; i < result.Size; i++) {
+                result[i] -= right[i];
+            }
+            return result;
+        }
+
+        public static Score operator /(Score left, float right) {
+            Score result = new Score(left);
+            for (int i = 0; i < result.Size; i++) {
+                result[i] /= right;
+            }
+            return result;
+        }
+
+        public static Score operator *(Score left, float right) {
+            Score result = new Score(left);
+            for (int i = 0; i < result.Size; i++) {
+                result[i] *= right;
+            }
+            return result;
+        }
+
         public override string ToString() {
             return this.score.DelString();
+        }
+
+        public double[] ToArray() {
+            return (double[])this.score.Clone();
         }
     }
 }

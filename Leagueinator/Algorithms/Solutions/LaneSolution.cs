@@ -55,7 +55,6 @@ namespace Leagueinator.Algorithms.Solutions {
             foreach (Round round in this.LeagueEvent.Rounds) {
                 Match match = round[lane];
                 if (match.Players.Contains(player)) {
-                    Debug.WriteLine($"Player {player.Name} in Lane {lane} sum = {sum + 1}");
                     sum++;
                 }
             }

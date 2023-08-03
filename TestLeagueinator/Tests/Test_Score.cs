@@ -145,5 +145,43 @@ namespace TestLeagueinator.Tests {
 
             Assert.AreEqual(3.5, scores[2][0]);
         }
+
+        [TestMethod]
+        public void Multiply() {
+            Score score1 = new Score(2.0, 3.0, 5.0);
+            Score score2 = score1 * 7;
+            Assert.AreEqual(14.0, score2[0]);
+            Assert.AreEqual(21.0, score2[1]);
+            Assert.AreEqual(35.0, score2[2]);
+        }
+
+        [TestMethod]
+        public void Divide() {
+            Score score1 = new Score(2.0, 3.0, 5.0);
+            Score score2 = score1 / 2;
+            Assert.AreEqual(1.0, score2[0]);
+            Assert.AreEqual(1.5, score2[1]);
+            Assert.AreEqual(2.5, score2[2]);
+        }
+
+        [TestMethod]
+        public void Add() {
+            Score score1 = new Score(2.0, 3.0, 5.0);
+            Score score2 = new Score(1.0, 2.0, 3.0);
+            Score score3 = score1 + score2;
+            Assert.AreEqual(3.0, score3[0]);
+            Assert.AreEqual(5.0, score3[1]);
+            Assert.AreEqual(8.0, score3[2]);
+        }
+
+        [TestMethod]
+        public void Subtract() {
+            Score score1 = new Score(2.0, 3.0, 5.0);
+            Score score2 = new Score(1.0, 2.0, 3.0);
+            Score score3 = score1 - score2;
+            Assert.AreEqual(1.0, score3[0]);
+            Assert.AreEqual(1.0, score3[1]);
+            Assert.AreEqual(2.0, score3[2]);
+        }
     }
 }

@@ -186,8 +186,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\Penache.cs" />
+    <Compile Include="Algorithms\RankedBracket.cs" />
     <Compile Include="Algorithms\RoundRobin.cs" />
-    <Compile Include="Assign_Player_Algos\RoundRobin.cs" />
     <Compile Include="Components\EditEventPanel.Events.cs">
       <SubType>UserControl</SubType>
     </Compile>

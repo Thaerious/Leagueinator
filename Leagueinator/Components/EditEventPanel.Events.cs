@@ -2,7 +2,11 @@
 using System.Diagnostics;
 using System.Linq;
 using Leagueinator.Forms;
+using Leagueinator.Model.Settings;
+using Leagueinator.Model;
 using static Leagueinator.Components.PlayerInfoArgs;
+using Leagueinator.Algorithms;
+using Leagueinator.Controller;
 
 namespace Leagueinator.Components {
 
@@ -37,12 +41,41 @@ namespace Leagueinator.Components {
             }
         }
 
-        private void HndAddRound(object sender, EventArgs e) {
-            var round = this.leagueEvent.NewRound();
-            if (round != this.leagueEvent[0]) {
-                round = this.SetupRound(round);
-            }
+        private Round SetupRound() {
+            Setting setting = this.LeagueEvent.Settings;
 
+            switch (setting.MatchType) {
+                case MATCH_TYPE.RoundRobin: {
+                        var round = this.leagueEvent.NewRound();
+                        this.LeagueEvent.CopyPlayersTo(round);
+                        round = this.LeagueEvent.DoRoundRobin(round);
+                        round = this.LeagueEvent.DoAssignLanes(round);
+                        return round;
+                    }
+                case MATCH_TYPE.Ranked: {
+                        var round = this.DoRankedBracket();
+                        return round;
+                    }
+                case MATCH_TYPE.Penache: {
+                        var round = this.leagueEvent.NewRound();
+                        this.LeagueEvent.CopyPlayersTo(round);
+                        round = this.LeagueEvent.DoPenache(round);
+                        round = this.LeagueEvent.DoAssignLanes(round);
+                        return round;
+                    }
+                default:
+                    return this.leagueEvent.NewRound();
+            }
+        }
+
+        private Round DoRankedBracket() {
+            var scoreKeeper = new ScoreKeeper(this.LeagueEvent);
+            return new RankedBracket(this.LeagueEvent, scoreKeeper).GenerateRound();
+        }
+
+        private void HndAddRound(object sender, EventArgs e) {
+            var round = this.SetupRound();
+            this.leagueEvent.AddRound(round);
             this.AddRound(round);
             this.RefreshRound();
             IsSaved.Singleton.Value = false;

@@ -69,29 +69,6 @@ namespace Leagueinator.Components {
             return button;
         }
 
-        private Round SetupRound(Round round) {
-            Setting setting = this.LeagueEvent.Settings;
-
-            switch (setting.MatchType) {
-                case MATCH_TYPE.RoundRobin:
-                    this.LeagueEvent.CopyPlayersTo(round);
-                    round = this.LeagueEvent.DoRoundRobin(round);
-                    round = this.LeagueEvent.DoAssignLanes(round);
-                    break;
-                case MATCH_TYPE.Ranked:
-                    break;
-                case MATCH_TYPE.Brackets:
-                    break;
-                case MATCH_TYPE.Penache:
-                    this.LeagueEvent.CopyPlayersTo(round);
-                    round = this.LeagueEvent.DoPenache(round);
-                    round = this.LeagueEvent.DoAssignLanes(round);
-                    break;
-            }
-
-            return round;
-        }
-
         /// <summary>
         /// This is the "Set Round" control point.
         /// </summary>

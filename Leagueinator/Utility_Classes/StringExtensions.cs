@@ -8,6 +8,13 @@ namespace Leagueinator.Utility_Classes {
             return string.Join(del, list.Select(t => t?.ToString()).ToArray());
         }
 
+        public static string DelString<T>(this IEnumerable<T> list, int colsize, string del = ", ") {
+            var array = list.Select(t => t?.ToString())
+                .Select(t => t.PadRight(colsize, ' '))
+                .ToArray();
+            return string.Join(del, array);
+        }
+
         public static bool IsEmpty(this string str) {
             if (str == null) return true;
             if (str.Length == 0) return true;

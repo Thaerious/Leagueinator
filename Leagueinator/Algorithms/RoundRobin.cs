@@ -76,7 +76,7 @@ namespace Leagueinator.Algorithms {
         }
 
         /// <summary>
-        /// Create a new Round instance based on the Reference instance.
+        /// Create a new Round instance based on the reference Round.
         /// </summary>
         /// <param name="count">The number of rounds after the reference instance</param>
         /// <returns></returns>

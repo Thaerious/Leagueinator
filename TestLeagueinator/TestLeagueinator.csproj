@@ -63,6 +63,7 @@
     <Compile Include="Tests\Test_Penache.cs" />
     <Compile Include="Tests\Test_RoundRobin.cs" />
     <Compile Include="Tests\Test_Score.cs" />
+    <Compile Include="Tests\Test_ScoreKeeper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
