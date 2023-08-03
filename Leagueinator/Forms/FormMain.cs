@@ -172,8 +172,6 @@ namespace Leagueinator.Forms {
                 }
                 this.filename = filename;
                 IsSaved.Singleton.Value = true;
-
-                Debug.WriteLine(this.League);
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Excepion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -359,12 +357,10 @@ namespace Leagueinator.Forms {
             lables.Insert(0, "name");
             Debug.WriteLine(lables.ToArray().DelString(12, "| "));
 
-            //List<PlayerInfo> list = this.editEventPanel.LeagueEvent.SeekDeep<PlayerInfo>();
-            //list.Unique();
-            //list.Sort(new ScoreComparer(scoreKeeper));
-            //list.Reverse();
-
-            List<PlayerInfo> list = new List<PlayerInfo>() { new PlayerInfo("Ab") };
+            List<PlayerInfo> list = this.editEventPanel.LeagueEvent.SeekDeep<PlayerInfo>();
+            list.Unique();
+            list.Sort(new ScoreComparer(scoreKeeper));
+            list.Reverse();
 
             foreach (PlayerInfo player in list) {
                 var data = scoreKeeper[player].ToArray().Select(i => i.ToString()).ToList();

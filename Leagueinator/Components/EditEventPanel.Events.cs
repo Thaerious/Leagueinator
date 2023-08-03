@@ -46,21 +46,20 @@ namespace Leagueinator.Components {
 
             switch (setting.MatchType) {
                 case MATCH_TYPE.RoundRobin: {
-                        var round = this.leagueEvent.NewRound();
-                        this.LeagueEvent.CopyPlayersTo(round);
-                        round = this.LeagueEvent.DoRoundRobin(round);
-                        round = this.LeagueEvent.DoAssignLanes(round);
+                        var round = this.LeagueEvent.AddRoundRobin();
+                        round = this.LeagueEvent.AssignLanes(round);
                         return round;
                     }
                 case MATCH_TYPE.Ranked: {
-                        var round = this.DoRankedBracket();
+                        var round = this.LeagueEvent.AddRoundRanked();
+                        round = this.LeagueEvent.AssignLanes(round);
                         return round;
                     }
                 case MATCH_TYPE.Penache: {
                         var round = this.leagueEvent.NewRound();
                         this.LeagueEvent.CopyPlayersTo(round);
                         round = this.LeagueEvent.DoPenache(round);
-                        round = this.LeagueEvent.DoAssignLanes(round);
+                        round = this.LeagueEvent.AssignLanes(round);
                         return round;
                     }
                 default:
@@ -68,14 +67,8 @@ namespace Leagueinator.Components {
             }
         }
 
-        private Round DoRankedBracket() {
-            var scoreKeeper = new ScoreKeeper(this.LeagueEvent);
-            return new RankedBracket(this.LeagueEvent, scoreKeeper).GenerateRound();
-        }
-
         private void HndAddRound(object sender, EventArgs e) {
             var round = this.SetupRound();
-            this.leagueEvent.AddRound(round);
             this.AddRound(round);
             this.RefreshRound();
             IsSaved.Singleton.Value = false;

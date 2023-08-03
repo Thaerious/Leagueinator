@@ -1,5 +1,6 @@
 ﻿using Leagueinator.Algorithms;
 using Leagueinator.Algorithms.Solutions;
+using Leagueinator.Controller;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -35,21 +36,40 @@ namespace Leagueinator.Model {
         }
 
         /// <summary>
-        /// Replace the target round with a generated round generated from
-        /// the RoundRobin algorithm.
+        /// Add a new round to the event populated with the round robin algorithm.
         /// </summary>
         /// <param name="lEvent"></param>
         /// <param name="target"></param>
         /// <returns></returns>
-        public static Round DoRoundRobin(this LeagueEvent lEvent, Round target) {
+        public static Round AddRoundRobin(this LeagueEvent lEvent) {
+            if (lEvent.Rounds.Count == 0) throw new Exception("Event must contain one or more rounds.");
+
             Round reference = lEvent[0];
+
             reference.InjectByes();
-            Debug.WriteLine(reference);
             RoundRobin rr = new RoundRobin(reference);
-            int index = lEvent.IndexOf(target);
-            Round newRound = rr.Value(index);
-            lEvent.ReplaceRound(target, newRound);
+
+            int count = lEvent.Rounds.Count;
+            Debug.WriteLine($"count {count}");
+
+            Round newRound = rr.Value(count);
+            lEvent.AddRound(newRound);
+            Debug.WriteLine("new round");
+            Debug.WriteLine(newRound);
             return newRound;
+        }
+
+        /// <summary>
+        /// Add a new round to the event populated with the ranked bracket algorithm.
+        /// </summary>
+        /// <param name="lEvent"></param>
+        /// <param name="target"></param>
+        /// <retu
+        public static Round AddRoundRanked(this LeagueEvent lEvent) {
+            var scoreKeeper = new ScoreKeeper(lEvent);
+            var round = new RankedBracket(lEvent, scoreKeeper).GenerateRound();
+            lEvent.AddRound(round);
+            return round;
         }
 
         /// <summary>
@@ -80,7 +100,7 @@ namespace Leagueinator.Model {
         /// <param name="lEvent"></param>
         /// <param name="target"></param>
         /// <returns></returns>
-        public static Round DoAssignLanes(this LeagueEvent lEvent, Round target) {
+        public static Round AssignLanes(this LeagueEvent lEvent, Round target) {
             var solution = new LaneSolution(lEvent, target);
             var algo = new GreedyWalk();
 

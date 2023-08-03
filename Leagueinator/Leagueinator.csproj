@@ -331,6 +331,7 @@
     <Compile Include="Model\Team.cs" />
     <Compile Include="Model\PlayerInfo.cs" />
     <Compile Include="Algorithms\Solutions\LaneSolution.cs" />
+    <Compile Include="Utility_Classes\ListPos.cs" />
     <Compile Include="Utility_Classes\CollectionExtensions.cs" />
     <Compile Include="Utility_Classes\RectangleExtensions.cs" />
     <Compile Include="Utility_Classes\ScoreCardPrinter.cs" />

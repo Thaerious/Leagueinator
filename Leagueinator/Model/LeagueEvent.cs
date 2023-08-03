@@ -24,6 +24,15 @@ namespace Leagueinator.Model {
             get { return this.Rounds[key]; }
         }
 
+        public Round this[ListPos pos] {
+            get {
+                switch (pos) {
+                    case ListPos.FIRST: return this[0];
+                    default: return this[this.Size - 1];
+                }
+            }
+        }
+
         public int Size { get => this.Rounds.Count; }
 
         public LeagueEvent(string date, String name, Setting settings) {
@@ -73,7 +82,6 @@ namespace Leagueinator.Model {
                 );
             }
 
-            Debug.WriteLine($"Replace {replace.GetHashCode("X")} with {with.GetHashCode("X")}");
             this.Rounds[index] = with;
         }
 

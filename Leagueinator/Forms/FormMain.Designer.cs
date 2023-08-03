@@ -61,7 +61,6 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableRoot = new System.Windows.Forms.TableLayoutPanel();
             this.panelContents = new System.Windows.Forms.Panel();
-            this.editEventPanel = new Leagueinator.Components.EditEventPanel();
             this.butAddEvent = new System.Windows.Forms.Button();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,6 +68,7 @@
             this.printPreview = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.printDialog = new System.Windows.Forms.PrintDialog();
+            this.editEventPanel = new Leagueinator.Components.EditEventPanel();
             this.menuStrip.SuspendLayout();
             this.tableRoot.SuspendLayout();
             this.panelContents.SuspendLayout();
@@ -349,7 +349,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(164, 34);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.Menu_Help_About);
             // 
@@ -377,16 +377,6 @@
             this.panelContents.Name = "panelContents";
             this.panelContents.Size = new System.Drawing.Size(1254, 776);
             this.panelContents.TabIndex = 3;
-            // 
-            // editEventPanel
-            // 
-            this.editEventPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.editEventPanel.LeagueEvent = null;
-            this.editEventPanel.Location = new System.Drawing.Point(0, 0);
-            this.editEventPanel.Name = "editEventPanel";
-            this.editEventPanel.Size = new System.Drawing.Size(1254, 776);
-            this.editEventPanel.TabIndex = 0;
-            this.editEventPanel.Visible = false;
             // 
             // butAddEvent
             // 
@@ -436,6 +426,16 @@
             // printDialog
             // 
             this.printDialog.UseEXDialog = true;
+            // 
+            // editEventPanel
+            // 
+            this.editEventPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.editEventPanel.LeagueEvent = null;
+            this.editEventPanel.Location = new System.Drawing.Point(0, 0);
+            this.editEventPanel.Name = "editEventPanel";
+            this.editEventPanel.Size = new System.Drawing.Size(1254, 776);
+            this.editEventPanel.TabIndex = 0;
+            this.editEventPanel.Visible = false;
             // 
             // FormMain
             // 
