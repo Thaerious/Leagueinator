@@ -1,26 +1,21 @@
 ﻿using Leagueinator.Model;
 using Leagueinator.Utility_Classes;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
-namespace MatchPrinter {
-
- 
+namespace Leagueinator.Printers {
     public class MatchCardPrinter : IDisposable {
-        int rowHeight = 40;
+        int rowHeight = 35;
+        int tableWidth = 300;
+
         Brush lightGrayBrush = new SolidBrush(Color.LightGray);
         Pen blackPen = new Pen(Color.Black, 2);
         Pen grayPen = new Pen(Color.Gray, 2);
-        Font font = new Font("Arial", 12, FontStyle.Bold, GraphicsUnit.Point);
-
-        int lane = 4;
+        Font font = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Point);
 
         int pageWidth = 850;
         int pageHeight = 1100;
@@ -38,9 +33,9 @@ namespace MatchPrinter {
         }
 
         private Match AdvanceMatch() {
-            while (++matchIndex < this.round.Settings.LaneCount) {
-                if (this.round[matchIndex].Players.Count > 0) {
-                    return this.round[matchIndex];
+            while (++this.matchIndex < this.round.Settings.LaneCount) {
+                if (this.round[this.matchIndex].Players.Count > 0) {
+                    return this.round[this.matchIndex];
                 }
             }
             return null;
@@ -58,8 +53,8 @@ namespace MatchPrinter {
 
         private Rectangle DrawTitle(Graphics g, Rectangle loc, int round, int lane) {
             Rectangle[] split = loc.SplitHorz(2);
-            g.DrawString($"Round {round}", font, Brushes.Black, split[0], centered);
-            g.DrawString($"Lane {lane}", font, Brushes.Black, split[1], centered);
+            g.DrawString($"Round {round}", this.font, Brushes.Black, split[0], this.centered);
+            g.DrawString($"Lane {lane}", this.font, Brushes.Black, split[1], this.centered);
             return loc;
         }
 
@@ -67,10 +62,10 @@ namespace MatchPrinter {
             Rectangle[] split = loc.SplitHorz(45, 10, 45);
 
             this.DrawNames(g, split[0], names1);
-            g.DrawString("VS", font, Brushes.Black, split[1], centered);
+            g.DrawString("VS", this.font, Brushes.Black, split[1], this.centered);
             this.DrawNames(g, split[2], names2);
 
-            g.DrawRectangle(blackPen, loc);
+            g.DrawRectangle(this.blackPen, loc);
             return loc;
         }
 
@@ -78,8 +73,8 @@ namespace MatchPrinter {
             Rectangle[] split = loc.SplitVert(names.Length).Shrink(10);
 
             for (int i = 0; i < names.Length; i++) {
-                g.DrawString(names[i], font, Brushes.Black, split[i], centered);
-                g.DrawRectangle(grayPen, split[i]);
+                g.DrawString(names[i], this.font, Brushes.Black, split[i], this.centered);
+                g.DrawRectangle(this.grayPen, split[i]);
             }
 
             return loc;
@@ -90,7 +85,7 @@ namespace MatchPrinter {
             this.DrawHeader(g, split[0]);
 
             for (int i = 0; i < numEnds; i++) {
-                DrawRow(g, split[i + 1], i + 1);
+                this.DrawRow(g, split[i + 1], i + 1);
             }
 
             return loc;
@@ -100,11 +95,11 @@ namespace MatchPrinter {
             string[] strings = new string[5] { "Shots", "Total", "End", "Shots", "Total" };
             Rectangle[] split = loc.SplitHorz(5);
 
-            g.FillRectangle(lightGrayBrush, loc);
+            g.FillRectangle(this.lightGrayBrush, loc);
 
             for (int i = 0; i < strings.Length; i++) {
-                g.DrawString(strings[i], font, Brushes.Black, split[i], centered);
-                g.DrawRectangle(blackPen, split[i]);
+                g.DrawString(strings[i], this.font, Brushes.Black, split[i], this.centered);
+                g.DrawRectangle(this.blackPen, split[i]);
             }
 
             return loc;
@@ -113,31 +108,28 @@ namespace MatchPrinter {
         private Rectangle DrawRow(Graphics g, Rectangle loc, int lane) {
             Rectangle[] split = loc.SplitHorz(5);
 
-            g.FillRectangle(lightGrayBrush, split[2]);
+            g.FillRectangle(this.lightGrayBrush, split[2]);
 
             foreach (Rectangle r in split) {
-                g.DrawRectangle(blackPen, r);
+                g.DrawRectangle(this.blackPen, r);
             }
 
-            g.DrawString(lane.ToString(), font, Brushes.Black, split[2], centered);
+            g.DrawString(lane.ToString(), this.font, Brushes.Black, split[2], this.centered);
 
             return loc;
         }
 
-        private Bitmap DrawTable(Match match, int lane, int roundIDX) {
-            Bitmap bmp = new Bitmap(1100, 850);
-            Graphics g = Graphics.FromImage(bmp);
-
+        private Rectangle DrawTable(Graphics g, Match match, int lane, int roundIDX) {
             string[] n1 = match[0].Players.Select(pi => pi.Name).ToArray();
             string[] n2 = match[1].Players.Select(pi => pi.Name).ToArray();
             int numEnds = match.Settings.NumberOfEnds;
 
-            var rect1 = this.DrawTitle(g, new Rectangle(0, 0, 350, 40), roundIDX, lane);
+            var rect1 = this.DrawTitle(g, new Rectangle(0, 0, this.tableWidth, 40), roundIDX, lane);
             var rect2 = this.DrawInfo(g, rect1.Below(this.rowHeight * match.Settings.TeamSize), n1, n2);
             var rect3 = this.DrawTable(g, rect2.Below(this.rowHeight * (numEnds + 1)).MoveDown(5), numEnds);
             Rectangle area = RectangleExtensions.Merge(rect1, rect2, rect3);
 
-            return bmp.Clone(area, bmp.PixelFormat);
+            return area;
         }
 
         /// <summary>
@@ -148,26 +140,36 @@ namespace MatchPrinter {
         /// <param name="roundIDX"></param>
         /// <returns>True if there are more pages to print, otherwise false</returns>
         private bool DrawNextPage(Graphics g) {
+            Debug.WriteLine($"G Size {g.PageScale} {g.PageUnit}");
+            Debug.WriteLine($"G DPI {g.DpiX} {g.DpiY}");
+
             int y = 50;
 
-            while (match != null) {
-                int x = countCardsPrinted % 2 == 0 ? 50 : 450;
+            //Draw each card on the current page.
+            while (this.match != null) {
+                int x = this.countCardsPrinted % 2 == 0 ? 50 : 450;
 
-                Bitmap bmp = DrawTable(match, this.matchIndex, this.roundIndex);
+                Bitmap bmp = new Bitmap(1100, 650, g);
+                Graphics bmpg = Graphics.FromImage(bmp);
+                var area = this.DrawTable(bmpg, this.match, this.matchIndex, this.roundIndex);
+                //bmp =  bmp.Clone(area, bmp.PixelFormat);
+
+                Debug.WriteLine($"BMP Size {bmpg.PageScale} {bmpg.PageUnit}");
+                Debug.WriteLine($"BMP DPI {bmpg.DpiX} {bmpg.DpiY}");
 
                 if (y + bmp.Height > 1100) {
                     return true;
                 }
                 else {
-                    Debug.WriteLine(countCardsPrinted);
-                    Debug.WriteLine($"{x} {y}");
-                    Debug.WriteLine(match);
+                    Debug.WriteLine($"Card #{ this.countCardsPrinted}");
+                    Debug.WriteLine($"pos(x, y) = ({x},{y})");
+                    Debug.WriteLine(this.match);
                     g.DrawImage(bmp, x, y);
-                    y += countCardsPrinted % 2 == 1 ? bmp.Height + 50 : 0;
+                    y += this.countCardsPrinted % 2 == 1 ? bmp.Height + 50 : 0;
                 }
 
-                countCardsPrinted++;
-                match = this.AdvanceMatch();
+                this.countCardsPrinted++;
+                this.match = this.AdvanceMatch();
             }
 
             return false;

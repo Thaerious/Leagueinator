@@ -1,15 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing.Printing;
-using System.Reflection;
 using System.Windows.Forms;
 using Leagueinator.Components;
 using Leagueinator.Model;
-using MatchPrinter;
 
 namespace Leagueinator.Forms {
     public partial class FormMain : Form {
-        IEnumerator<bool> printEnumerator;
 
         private void HndRenamePlayer(object source, PlayerInfoArgs args) {
             var form = new FormRenamePlayer {

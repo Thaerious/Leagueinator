@@ -80,7 +80,7 @@ namespace Leagueinator.Algorithms {
         /// </summary>
         /// <param name="count">The number of rounds after the reference instance</param>
         /// <returns></returns>
-        public Round Value(int count) {
+        public Round GenerateRound(int count) {
             if (count == 0) return this.Reference.DeepCopy();
             if (this.Reference.Teams.Count == 0) return new Round(this.Reference.Settings);
 

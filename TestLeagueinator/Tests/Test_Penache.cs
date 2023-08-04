@@ -31,7 +31,7 @@ namespace TestLeagueinator {
             r1[2][1][1] = new PlayerInfo("L");
 
             var rr1 = new Penache(r1);
-            var r2 = rr1.Value(1);
+            var r2 = rr1.GenerateRound(1);
 
             Debug.WriteLine(r2);
 

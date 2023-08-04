@@ -50,12 +50,8 @@ namespace Leagueinator.Model {
             RoundRobin rr = new RoundRobin(reference);
 
             int count = lEvent.Rounds.Count;
-            Debug.WriteLine($"count {count}");
-
-            Round newRound = rr.Value(count);
+            Round newRound = rr.GenerateRound(count);
             lEvent.AddRound(newRound);
-            Debug.WriteLine("new round");
-            Debug.WriteLine(newRound);
             return newRound;
         }
 
@@ -79,17 +75,14 @@ namespace Leagueinator.Model {
         /// <param name="lEvent"></param>
         /// <param name="target"></param>
         /// <returns></returns>
-        public static Round DoPenache(this LeagueEvent lEvent, Round target) {
+        public static Round AddRoundPenache(this LeagueEvent lEvent) {
+            if (lEvent.Rounds.Count == 0) throw new Exception("Event must contain one or more rounds.");
             Round reference = lEvent[0];
+
             Penache penache = new Penache(reference);
-            int index = lEvent.IndexOf(target);
-            Round newRound = penache.Value(index);
-
-            var idle = reference.AllPlayers;
-            idle.RemoveAll(p => newRound.ActivePlayers.Contains(p));
-            newRound.IdlePlayers.AddRange(idle);
-
-            lEvent.ReplaceRound(target, newRound);
+            int count = lEvent.Rounds.Count;
+            Round newRound = penache.GenerateRound(count);
+            lEvent.AddRound(newRound);
             return newRound;
         }
 

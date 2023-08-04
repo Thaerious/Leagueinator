@@ -25,7 +25,7 @@ namespace TestLeagueinator {
             r1[2][1][0] = new PlayerInfo("F");
 
             var rr1 = new RoundRobin(r1);
-            var r2 = rr1.Value(1);
+            var r2 = rr1.GenerateRound(1);
 
             Debug.WriteLine(r2);
 
@@ -37,7 +37,7 @@ namespace TestLeagueinator {
             Assert.AreEqual("D", r2[2][1][0].Name);
 
             var rr2 = new RoundRobin(r2);
-            var r3 = rr2.Value(1);
+            var r3 = rr2.GenerateRound(1);
 
             Debug.WriteLine(r3);
 

@@ -194,7 +194,7 @@
     <Compile Include="Components\FlowPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\MatchCardPrinter.cs" />
+    <Compile Include="Components\Printers\MatchCardPrinter.cs" />
     <Compile Include="Components\MatchCards\DragDropCard.cs" />
     <Compile Include="Components\MatchCards\MatchCard.4.cs">
       <SubType>UserControl</SubType>

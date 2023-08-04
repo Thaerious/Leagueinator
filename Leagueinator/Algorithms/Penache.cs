@@ -12,7 +12,7 @@ namespace Leagueinator.Algorithms {
             this.Reference = round;
         }
 
-        public Round Value(int count) {
+        public Round GenerateRound(int count) {
             PlayerInfo[] before = this.Reference.AllPlayers.ToArray();
             if (before.Length == 0) return new Round(this.Reference.Settings);
 

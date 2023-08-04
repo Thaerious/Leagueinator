@@ -9,9 +9,10 @@ namespace Leagueinator.Components {
                 var setting = new Setting {
                     TeamSize = (int)this.spinTeamSize.Value,
                     LaneCount = (int)this.spinLaneCount.Value,
+                    NumberOfEnds = (int)this.spinNumEnds.Value,
                     MatchSize = 2,
                     Date = this.dateTimePicker.Text,
-                    Name = this.txtName.Text
+                    Name = this.txtName.Text,
                 };
 
                 if (radRoundRobin.Checked) setting.MatchType = MATCH_TYPE.RoundRobin;
@@ -28,6 +29,7 @@ namespace Leagueinator.Components {
                 this.dateTimePicker.Text = value.Date;
                 this.spinTeamSize.Value = value.TeamSize;
                 this.spinLaneCount.Value = value.LaneCount;
+                this.spinNumEnds.Value = value.NumberOfEnds;
 
                 switch (value.MatchType) {
                     case MATCH_TYPE.RoundRobin:
@@ -58,6 +60,9 @@ namespace Leagueinator.Components {
         }
 
         private bool _rassign = false;
+        /// <summary>
+        /// Set to true to disable settings that can not be reassigned.
+        /// </summary>
         public bool Reassign {
             get => _rassign;
             set {

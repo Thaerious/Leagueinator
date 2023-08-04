@@ -38,15 +38,18 @@
             this.radNone = new System.Windows.Forms.RadioButton();
             this.radRanked = new System.Windows.Forms.RadioButton();
             this.radPenache = new System.Windows.Forms.RadioButton();
+            this.label4 = new System.Windows.Forms.Label();
+            this.spinNumEnds = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.spinLaneCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinTeamSize)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spinNumEnds)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(125, 127);
+            this.label2.Location = new System.Drawing.Point(126, 116);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(131, 20);
             this.label2.TabIndex = 10;
@@ -55,7 +58,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(144, 68);
+            this.label1.Location = new System.Drawing.Point(145, 64);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(84, 20);
             this.label1.TabIndex = 9;
@@ -64,7 +67,7 @@
             // butOK
             // 
             this.butOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.butOK.Location = new System.Drawing.Point(39, 429);
+            this.butOK.Location = new System.Drawing.Point(38, 471);
             this.butOK.Name = "butOK";
             this.butOK.Size = new System.Drawing.Size(148, 45);
             this.butOK.TabIndex = 8;
@@ -73,7 +76,7 @@
             // 
             // spinLaneCount
             // 
-            this.spinLaneCount.Location = new System.Drawing.Point(164, 150);
+            this.spinLaneCount.Location = new System.Drawing.Point(165, 139);
             this.spinLaneCount.Maximum = new decimal(new int[] {
             32,
             0,
@@ -95,7 +98,7 @@
             // 
             // spinTeamSize
             // 
-            this.spinTeamSize.Location = new System.Drawing.Point(164, 91);
+            this.spinTeamSize.Location = new System.Drawing.Point(165, 87);
             this.spinTeamSize.Maximum = new decimal(new int[] {
             4,
             0,
@@ -133,7 +136,7 @@
             // 
             // dateTimePicker
             // 
-            this.dateTimePicker.Location = new System.Drawing.Point(89, 192);
+            this.dateTimePicker.Location = new System.Drawing.Point(88, 234);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(200, 26);
             this.dateTimePicker.TabIndex = 13;
@@ -141,7 +144,7 @@
             // butCancel
             // 
             this.butCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.butCancel.Location = new System.Drawing.Point(193, 429);
+            this.butCancel.Location = new System.Drawing.Point(192, 471);
             this.butCancel.Name = "butCancel";
             this.butCancel.Size = new System.Drawing.Size(152, 46);
             this.butCancel.TabIndex = 14;
@@ -179,7 +182,7 @@
             this.groupBox1.Controls.Add(this.radPenache);
             this.groupBox1.Controls.Add(this.radRoundRobin);
             this.groupBox1.Controls.Add(this.radBracket);
-            this.groupBox1.Location = new System.Drawing.Point(89, 244);
+            this.groupBox1.Location = new System.Drawing.Point(88, 286);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 179);
             this.groupBox1.TabIndex = 17;
@@ -218,11 +221,44 @@
             this.radPenache.UseVisualStyleBackColor = true;
             this.radPenache.CheckedChanged += new System.EventHandler(this.radPenache_CheckedChanged);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(126, 169);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(124, 20);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "Number of Ends";
+            // 
+            // spinNumEnds
+            // 
+            this.spinNumEnds.Location = new System.Drawing.Point(165, 192);
+            this.spinNumEnds.Maximum = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.spinNumEnds.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.spinNumEnds.Name = "spinNumEnds";
+            this.spinNumEnds.Size = new System.Drawing.Size(46, 26);
+            this.spinNumEnds.TabIndex = 18;
+            this.spinNumEnds.Value = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            // 
             // FormAddEvent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(383, 479);
+            this.ClientSize = new System.Drawing.Size(383, 529);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.spinNumEnds);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.butCancel);
             this.Controls.Add(this.dateTimePicker);
@@ -239,6 +275,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.spinTeamSize)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spinNumEnds)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -261,5 +298,7 @@
         private System.Windows.Forms.RadioButton radRanked;
         private System.Windows.Forms.RadioButton radPenache;
         private System.Windows.Forms.RadioButton radNone;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown spinNumEnds;
     }
 }

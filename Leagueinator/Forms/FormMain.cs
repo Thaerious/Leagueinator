@@ -9,7 +9,7 @@ using Leagueinator.Algorithms.Solutions;
 using Leagueinator.Algorithms;
 using Leagueinator.Utility_Classes;
 using System.Drawing.Printing;
-using MatchPrinter;
+using Leagueinator.Printers;
 using Leagueinator.Controller;
 using System.Collections.Generic;
 using System.Linq;
@@ -333,7 +333,7 @@ namespace Leagueinator.Forms {
             Round reference = lEvent[0];
             RoundRobin rr = new RoundRobin(reference);
             int index = lEvent.IndexOf(current);
-            Round newRound = rr.Value(index);
+            Round newRound = rr.GenerateRound(index);
             lEvent.ReplaceRound(current, newRound);
             this.editEventPanel.SetCurrentRound(newRound);
             this.editEventPanel.RefreshRound();
@@ -348,7 +348,7 @@ namespace Leagueinator.Forms {
             if (childForm.ShowDialog() == DialogResult.Cancel) return;
 
             IsSaved.Singleton.Value = false;
-            this.editEventPanel.Visible = true;            
+            this.editEventPanel.Visible = true;
         }
 
         private void printScoreKeeperToolStripMenuItem_Click(object sender, EventArgs e) {

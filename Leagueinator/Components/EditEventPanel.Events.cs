@@ -56,9 +56,7 @@ namespace Leagueinator.Components {
                         return round;
                     }
                 case MATCH_TYPE.Penache: {
-                        var round = this.leagueEvent.NewRound();
-                        this.LeagueEvent.CopyPlayersTo(round);
-                        round = this.LeagueEvent.DoPenache(round);
+                        var round = this.LeagueEvent.AddRoundPenache();
                         round = this.LeagueEvent.AssignLanes(round);
                         return round;
                     }
